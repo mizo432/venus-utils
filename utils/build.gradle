@@ -1,3 +1,4 @@
+archivesBaseName = 'venus-utils'
 description = "venus-utils"
 
 dependencies {
