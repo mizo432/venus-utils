@@ -1,0 +1,3 @@
+rootProject.name = 'venus-utils'
+include ':utils'
+project(':utils').projectDir = file('./utils')
