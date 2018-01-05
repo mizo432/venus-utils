@@ -120,14 +120,18 @@ pipeline {
         }
     }
 }
+
+if (env.BRANCH_NAME == 'develop') {
+    stage('配備staging') {
+        echo "deploy to staging snapshot"
+
+    }
+}
+
 if (env.BRANCH_NAME == 'master') {
     stage('配備production') {
         echo "deploy to production"
-    }
-}
-if (env.BRANCH_NAME == 'develop') {
-    stage('配備staging') {
-        echo "deploy to staging"
+        // tagを作成する
     }
 }
 
