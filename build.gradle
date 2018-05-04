@@ -1,9 +1,4 @@
-import java.util.regex.Pattern
-
 buildscript {
-    ext {
-        springBootVersion = '1.5.7.RELEASE+'
-    }
     repositories {
         maven {
             url 'https://plugins.gradle.org/m2/'
@@ -16,9 +11,7 @@ buildscript {
 
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.13"
-        classpath "org.ajoberstar:grgit:1.7.2"
     }
 }
 
@@ -158,22 +151,5 @@ subprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.0'
-}
-
-task incrementVersionCode {
-    doLast {
-        println(":incrementVersionCode - Incrementing Version Code...")
-        def buildGradleFile = file("build.gradle")
-        def patternVersionCode = Pattern.compile("versionCode (\\d+)")
-        def buildGradleFileText = buildGradleFile.getText()
-        def matcherVersionCode = patternVersionCode.matcher(buildGradleFileText)
-        matcherVersionCode.find()
-        def mVersionCode = Integer.parseInt(matcherVersionCode.group(1))
-        def mNextVersionCode = mVersionCode + 1
-        def manifestContent = matcherVersionCode.replaceAll("versionCode " + mNextVersionCode)
-        println(":incrementVersionCode - current versionCode=" + mVersionCode);
-        println(":incrementVersionCode - next versionCode=" + mNextVersionCode);
-        buildGradleFile.write(manifestContent)
-    }
+    gradleVersion = '4.7'
 }
