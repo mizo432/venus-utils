@@ -3,25 +3,22 @@ buildscript {
         maven {
             url 'https://plugins.gradle.org/m2/'
         }
-        mavenCentral artifactUrls: [
-                'http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/'
-        ]
+        maven { url 'http://kamatama41.github.com/maven-repository/repository' }
         mavenCentral()
         jcenter()
 
     }
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.13"
+        classpath("com.github.kamatama41:gradle-git-release-plugin:+")
     }
 }
 
 apply plugin: 'base'
 apply plugin: 'idea'
+apply plugin: "com.github.kamatama41.git-release"
 
 repositories {
-    mavenCentral artifactUrls: [
-            'http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/'
-    ]
     jcenter()
 }
 
@@ -45,9 +42,6 @@ subprojects {
         // build paramaters
         defaultEncoding = 'UTF-8'
     }
-    //buildDir = 'out'
-    //tasks.withType(AbstractCompile)*.options*.encoding = defaultEncoding
-    //tasks.withType(GroovyCompile)*.groovyOptions*.encoding = defaultEncoding
     idea.module.outputDir = compileJava.destinationDir
     idea.module.inheritOutputDirs = true
 
@@ -148,6 +142,12 @@ subprojects {
         }
     }
 
+}
+
+gitRelease {
+    groupId = "org.venuspj"
+    artifactId = "venus-utils"
+    repoUri = "git@github.com/mizo432/maven-repository.git"
 }
 
 task wrapper(type: Wrapper) {
