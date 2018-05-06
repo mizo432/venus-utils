@@ -147,7 +147,7 @@ subprojects {
 gitRelease {
     groupId = "org.venuspj"
     artifactId = "venus-utils"
-    repoUri = "git@github.com/mizo432/maven-repository.git"
+    repoUri = "https://github.com/mizo432/maven-repository.git"
 }
 
 task wrapper(type: Wrapper) {
