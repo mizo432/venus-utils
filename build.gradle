@@ -1,4 +1,15 @@
 buildscript {
+    ext {
+        //Library versions
+        assertJVersion = '3.6.2'
+        logbackVersion = '1.1.11'
+        slf4jVersion = '1.7.25'
+        junitVersion = "4.12"
+        findbugsAnnotationsVersion = '3.0.1'
+        guavaVasion = '23.4-jre'
+        // build paramaters
+        defaultEncoding = 'UTF-8'
+    }
     repositories {
         maven {
             url 'https://plugins.gradle.org/m2/'
@@ -17,131 +28,109 @@ buildscript {
 apply plugin: 'base'
 apply plugin: 'idea'
 apply plugin: "com.github.kamatama41.git-release"
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: "findbugs"
+apply plugin: "maven"
+apply plugin: 'pmd'
 
 repositories {
     jcenter()
 }
 
-subprojects {
-    group = 'org.venuspj'
-    version = '0.9.0-SNAPSHOT'
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'jacoco'
-    apply plugin: "findbugs"
-    apply plugin: "maven"
-    apply plugin: 'pmd'
-    ext {
-        //Library versions
-        assertJVersion = '3.6.2'
-        logbackVersion = '1.1.11'
-        slf4jVersion = '1.7.25'
-        junitVersion = "4.12"
-        findbugsAnnotationsVersion = '3.0.1'
-        guavaVasion = '23.4-jre'
-        // build paramaters
-        defaultEncoding = 'UTF-8'
-    }
-    idea.module.outputDir = compileJava.destinationDir
-    idea.module.inheritOutputDirs = true
+group = 'org.venuspj'
+version = '0.9.0-SNAPSHOT'
+idea.module.outputDir = compileJava.destinationDir
+idea.module.inheritOutputDirs = true
 
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
-    repositories {
-        mavenCentral artifactUrls: [
-                'http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/'
-        ]
-        maven {
-            url 'http://repo.opennms.org/maven2/'
-        }
-        jcenter()
-    }
-
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-        }
-    }
-
+gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {
-        options.incremental = true
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
+}
 
-    dependencies {
-        compileOnly group: 'com.google.code.findbugs', name: 'annotations', version: "${findbugsAnnotationsVersion}"
-        testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
-        testCompile(group: 'junit', name: 'junit', version: "${junitVersion}")
-    }
+tasks.withType(JavaCompile) {
+    options.incremental = true
+}
 
-    findbugs {
-        // 失敗しても後続の処理を継続させる
-        ignoreFailures = true
-        sourceSets = [sourceSets.main]
-        toolVersion = "3.0.1"
-    }
+dependencies {
+    compileOnly group: 'com.google.code.findbugs', name: 'annotations', version: "${findbugsAnnotationsVersion}"
+    testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
+    testCompile(group: 'junit', name: 'junit', version: "${junitVersion}")
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+    testRuntime group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
+    testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
+}
 
-    pmd {
-        // 失敗しても後続の処理を継続させる
-        ignoreFailures = true
-        sourceSets = [sourceSets.main]
-    }
+findbugs {
+    // 失敗しても後続の処理を継続させる
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    toolVersion = "3.0.1"
+}
 
-    tasks.withType(Pmd) {
-        reports {
-            xml.enabled = true
-        }
+pmd {
+    // 失敗しても後続の処理を継続させる
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+}
+
+tasks.withType(Pmd) {
+    reports {
+        xml.enabled = true
     }
+}
 
 // CPD（重複コードチェック処理）をCheckタスクに追加
-    check.doLast {
-        File outputDir = new File("$reportsDir/cpd/")
-        outputDir.mkdirs()
+check.doLast {
+    File outputDir = new File("$reportsDir/cpd/")
+    outputDir.mkdirs()
 
-        ant.taskdef(
-                name: 'cpd',
-                classname: 'net.sourceforge.pmd.cpd.CPDTask',
-                classpath: configurations.pmd.asPath)
+    ant.taskdef(
+            name: 'cpd',
+            classname: 'net.sourceforge.pmd.cpd.CPDTask',
+            classpath: configurations.pmd.asPath)
 
-        ant.cpd(
-                minimumTokenCount: '100',
-                format: 'xml',
-                encoding: defaultEncoding,
-                outputFile: new File(outputDir, 'cpd.xml')
-        ) {
-            fileset(dir: "src/main/java") {
-                include(name: '**/*.java')
-                exclude(name: '**/*Mock.java')
-                exclude(name: '**/mybatis/**/*.java')
-            }
+    ant.cpd(
+            minimumTokenCount: '100',
+            format: 'xml',
+            encoding: defaultEncoding,
+            outputFile: new File(outputDir, 'cpd.xml')
+    ) {
+        fileset(dir: "src/main/java") {
+            include(name: '**/*.java')
+            exclude(name: '**/*Mock.java')
+            exclude(name: '**/mybatis/**/*.java')
         }
     }
+}
 
-    test {
-        // 失敗しても後続の処理を継続させる
-        ignoreFailures = true
-        reports {
-            junitXml.enabled = true
-        }
+test {
+    // 失敗しても後続の処理を継続させる
+    ignoreFailures = true
+    reports {
+        junitXml.enabled = true
+    }
+}
+
+jacoco {
+    toolVersion = '0.7.5.201505241946'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
     }
 
-    jacoco {
-        toolVersion = '0.7.5.201505241946'
+    // カバレッジレポートからテストクラスを除外
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/ *Test.class ', '**/*Mock.class', '**/mybatis/**/*.class '])
+        })
     }
-
-    jacocoTestReport {
-        reports {
-            xml.enabled = true
-        }
-
-        // カバレッジレポートからテストクラスを除外
-        afterEvaluate {
-            classDirectories = files(classDirectories.files.collect {
-                fileTree(dir: it, exclude: ['**/ *Test.class ', '**/*Mock.class', '**/mybatis/**/*.class '])
-            })
-        }
-    }
-
 }
 
 gitRelease {

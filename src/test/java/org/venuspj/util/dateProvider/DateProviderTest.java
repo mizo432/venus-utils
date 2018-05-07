@@ -19,28 +19,28 @@ public class DateProviderTest {
     @Test
     public void currentDateTime() throws Exception {
         LocalDateTime actual = DateProvider.currentDateTime();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
 
     @Test
     public void currentDate() throws Exception {
         LocalDate actual = DateProvider.currentDate();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
 
     @Test
     public void currentTime() throws Exception {
         LocalTime actual = DateProvider.currentTime();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
 
     @Test
     public void currentYearMonth() throws Exception {
         YearMonth actual = DateProvider.currentYearMonth();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
 

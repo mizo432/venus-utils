@@ -1,8 +1,0 @@
-archivesBaseName = 'venus-utils'
-description = "venus-utils"
-
-dependencies {
-    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
-    testRuntime group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
-    testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
-}

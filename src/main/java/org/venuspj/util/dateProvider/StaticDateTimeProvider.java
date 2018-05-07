@@ -15,7 +15,7 @@ public class StaticDateTimeProvider extends DateProvider {
     public static void initialize(LocalDateTime aLocalDateTime) {
         StaticDateTimeProvider instance = new StaticDateTimeProvider();
         instance.setLocalDateTime(aLocalDateTime);
-        DateProvider.setDateProvider(instance);
+        setDateProvider(instance);
 
 
     }

@@ -16,7 +16,7 @@ public class ToStringHelperTest {
         TargetChildClass child = new TargetChildClass();
         TargetClass targetClass = new TargetClass(child);
         String actual = toStringHelper(targetClass).addAllFields().toString();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
 
@@ -28,7 +28,7 @@ public class ToStringHelperTest {
         child.anyDateTime = new AnyDateTimeClass(LocalDateTime.now());
         TargetClass targetClass = new TargetClass(child);
         String actual = toStringHelper(targetClass).addAllDeclaredFields().multiLine().toString();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
 
@@ -39,7 +39,7 @@ public class ToStringHelperTest {
         child.anyDateTime = new AnyDateTimeClass(LocalDateTime.now());
         TargetClass targetClass = new TargetClass(child);
         String actual = toStringHelper(targetClass).addAllFields().omitNullValues().toString();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
 
@@ -51,7 +51,7 @@ public class ToStringHelperTest {
         child.anyDateTime = new AnyDateTimeClass(LocalDateTime.now());
         TargetClass targetClass = new TargetClass(child);
         String actual = toStringHelper(targetClass).addAllDeclaredFields().toString();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
 
@@ -64,7 +64,7 @@ public class ToStringHelperTest {
         ListClass targetClass = new ListClass();
         targetClass.list.addAll(newArrayList(child));
         String actual = toStringHelper(targetClass).addAllDeclaredFields().multiLine().toString();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
 
@@ -79,7 +79,7 @@ public class ToStringHelperTest {
                 .add("stringField", targetClass.stringField)
                 .add("anyDateTime", targetClass.anyDateTime)
                 .multiLine().toString();
-        assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
 

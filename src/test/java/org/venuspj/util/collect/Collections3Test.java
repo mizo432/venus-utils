@@ -14,8 +14,8 @@ public class Collections3Test {
     public void cast() throws Exception {
         List<Integer> arg = Lists2.newArrayList();
         Collection<Integer> actual = Collections3.cast(arg);
-        assertThat(actual).isNotNull();
-        assertThat(actual.isEmpty()).isTrue();
+        Java6Assertions.assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual.isEmpty()).isTrue();
 
     }
 
@@ -31,11 +31,11 @@ public class Collections3Test {
                 return o1-o2;
             }
         });
-        assertThat(actual).isNotNull();
-        assertThat(actual.size()).isEqualTo(3);
-        assertThat(actual.get(0)).isEqualTo(1);
-        assertThat(actual.get(1)).isEqualTo(2);
-        assertThat(actual.get(2)).isEqualTo(3);
+        Java6Assertions.assertThat(actual).isNotNull();
+        Java6Assertions.assertThat(actual.size()).isEqualTo(3);
+        Java6Assertions.assertThat(actual.get(0)).isEqualTo(1);
+        Java6Assertions.assertThat(actual.get(1)).isEqualTo(2);
+        Java6Assertions.assertThat(actual.get(2)).isEqualTo(3);
 
     }
 

@@ -18,7 +18,7 @@ public class Maps2Test {
         public void test01() throws Exception {
             Map<Integer, Integer> target = Maps2.newHashMap();
 
-            assertThat(target)
+            Java6Assertions.assertThat(target)
                     .isNotNull()
                     .isInstanceOf(HashMap.class);
         }
@@ -30,7 +30,7 @@ public class Maps2Test {
         public void test01() throws Exception {
             Map<Integer, Integer> target = Maps2.newHashMapWithExpectedSize(1);
 
-            assertThat(target)
+            Java6Assertions.assertThat(target)
                     .isNotNull()
                     .isInstanceOf(HashMap.class);
         }
@@ -42,7 +42,7 @@ public class Maps2Test {
         public void test01() throws Exception {
             Map<Integer, Integer> target = Maps2.newLinkedHashMap();
 
-            assertThat(target)
+            Java6Assertions.assertThat(target)
                     .isNotNull()
                     .isInstanceOf(LinkedHashMap.class);
         }
