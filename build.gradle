@@ -39,7 +39,6 @@ repositories {
 }
 
 group = 'org.venuspj'
-version = '0.9.0-SNAPSHOT'
 idea.module.outputDir = compileJava.destinationDir
 idea.module.inheritOutputDirs = true
 
