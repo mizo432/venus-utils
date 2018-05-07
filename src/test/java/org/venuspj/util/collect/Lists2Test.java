@@ -1,10 +1,9 @@
 package org.venuspj.util.collect;
 
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
 import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
 /**

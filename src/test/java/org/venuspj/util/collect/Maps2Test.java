@@ -1,12 +1,11 @@
 package org.venuspj.util.collect;
 
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
 /**

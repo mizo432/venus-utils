@@ -1,8 +1,7 @@
 package org.venuspj.util.strings2;
 
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class Strings2Test {
     public static class IsEmptyTest {

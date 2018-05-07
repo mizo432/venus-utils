@@ -1,11 +1,11 @@
 package org.venuspj.util.objects2;
 
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.objects2.Objects2.toStringHelper;
 

@@ -1,5 +1,6 @@
 package org.venuspj.util.dateProvider;
 
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  */
