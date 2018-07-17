@@ -13,6 +13,7 @@ import java.util.*;
 
 import static org.venuspj.util.base.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Lists2.newArrayList;
+import static org.venuspj.util.collect.Lists2.removeNothing;
 import static org.venuspj.util.collect.Maps2.newHashMap;
 import static org.venuspj.util.collect.Sets2.newHashSet;
 
@@ -125,11 +126,17 @@ public class Objects2 {
 
         @Override
         public String toString() {
+
             if (!ToStringContext.INSTANCE.startProcessing(instance)) {
                 return toSimpleReferenceString(instance);
             }
+
             try {
                 IndentationAwareStringBuilder builder = new IndentationAwareStringBuilder();
+                if (isIterable(instance)) {
+                    internalToString(instance, builder);
+                    return builder.toString();
+                }
                 builder.append(className);
                 builder.append("{");
                 String nextSeparator = "";
@@ -158,6 +165,20 @@ public class Objects2 {
             } finally {
                 ToStringContext.INSTANCE.endProcessing(instance);
             }
+        }
+
+        private boolean isIterable(Object object) {
+            return (object instanceof Iterable<?>) ||
+                    (object instanceof Map<?, ?>) ||
+                    (object instanceof Object[]) ||
+                    (object instanceof byte[]) ||
+                    (object instanceof char[]) ||
+                    (object instanceof int[]) ||
+                    (object instanceof boolean[]) ||
+                    (object instanceof long[]) ||
+                    (object instanceof float[]) ||
+                    (object instanceof double[]);
+
         }
 
         private void convertToString(IndentationAwareStringBuilder builder) {
@@ -282,6 +303,8 @@ public class Objects2 {
             if (prettyPrint) {
                 if (object instanceof Iterable<?>) {
                     serializeIterable((Iterable) object, sb);
+                } else if (object instanceof Map<?, ?>) {
+                    serializeMap((Map) object, sb);
                 } else if (object instanceof Object[]) {
                     sb.append(Arrays.toString((Object[]) object));
                 } else if (object instanceof byte[]) {
@@ -312,6 +335,10 @@ public class Objects2 {
             } else {
                 toStringHelper(object).addAllDeclaredFields().configFrom(this).convertToString(sb);
             }
+        }
+
+        private void serializeMap(Map object, IndentationAwareStringBuilder sb) {
+            serializeIterable(object.entrySet(), sb);
         }
 
         private ToStringHelper configFrom(ToStringHelper toStringHelper) {

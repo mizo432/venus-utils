@@ -5,8 +5,10 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.venuspj.util.collect.Lists2.newArrayList;
+import static org.venuspj.util.collect.Maps2.newHashMap;
 import static org.venuspj.util.objects2.Objects2.toStringHelper;
 
 public class ToStringHelperTest {
@@ -70,6 +72,16 @@ public class ToStringHelperTest {
     @Test
     public void listDirect() {
         List<String> given = newArrayList("A","B");
+        String actual = toStringHelper(given).defaultConfig().toString();
+        Java6Assertions.assertThat(actual).isNotNull();
+        System.out.println(actual);
+    }
+
+    @Test
+    public void mapDirect() {
+        Map<String,Integer> given = newHashMap();
+        given.put("A",1);
+        given.put("B",2);
         String actual = toStringHelper(given).defaultConfig().toString();
         Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
