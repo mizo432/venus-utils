@@ -33,7 +33,7 @@ pipeline {
                     }
                 }
                 gradlew 'clean'
-                gradlew 'dependencies'
+//                gradlew 'dependencies'
             }
         }
 
