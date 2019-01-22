@@ -1,12 +1,12 @@
 buildscript {
     ext {
         //Library versions
-        assertJVersion = '3.6.2'
+        assertJVersion = '3.11.1'
         logbackVersion = '1.1.11'
         slf4jVersion = '1.7.25'
         junitVersion = "4.12"
         findbugsAnnotationsVersion = '3.0.1'
-        guavaVasion = '23.4-jre'
+        guavaVasion = '27.0.1-jre'
         // build paramaters
         defaultEncoding = 'UTF-8'
     }
@@ -22,6 +22,7 @@ buildscript {
     dependencies {
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.13"
         classpath("com.github.kamatama41:gradle-git-release-plugin:0.2.0")
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.5"
     }
 }
 
@@ -30,9 +31,9 @@ apply plugin: 'idea'
 apply plugin: "com.github.kamatama41.git-release"
 apply plugin: 'java'
 apply plugin: 'jacoco'
-apply plugin: "findbugs"
 apply plugin: "maven"
 apply plugin: 'pmd'
+apply plugin: "com.github.spotbugs"
 
 repositories {
     jcenter()
@@ -42,8 +43,8 @@ group = 'org.venuspj'
 idea.module.outputDir = compileJava.destinationDir
 idea.module.inheritOutputDirs = true
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = 10
+targetCompatibility = 10
 
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {
@@ -62,13 +63,18 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
     testRuntime group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
     testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
-}
+    compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
 
-findbugs {
+}
+spotbugs {
     // 失敗しても後続の処理を継続させる
     ignoreFailures = true
     sourceSets = [sourceSets.main]
-    toolVersion = "3.0.1"
+    toolVersion = '3.1.9'
+}
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
 pmd {
@@ -115,10 +121,6 @@ test {
     }
 }
 
-jacoco {
-    toolVersion = '0.7.5.201505241946'
-}
-
 jacocoTestReport {
     reports {
         xml.enabled = true
@@ -138,6 +140,6 @@ gitRelease {
     repoUri = "https://github.com/mizo432/maven-repository.git"
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.9'
-}
+//task wrapper(type: Wrapper) {
+//    gradleVersion = '5.1.1'
+//}

@@ -3,8 +3,21 @@ package org.venuspj.util.strings2;
 import org.venuspj.util.base.Joiner;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import static org.venuspj.util.collect.Lists2.newArrayList;
 
 public final class Strings2 {
+    /**
+     * 空文字<code>""</code>です。
+     */
+    public static final String EMPTY = "";
+
+    /**
+     * 文字列型の空の配列です。
+     */
+    public static final String[] EMPTY_STRINGS = new String[0];
 
     public static boolean isEmpty(final CharSequence cs) {
         return cs == null || cs.length() == 0;
@@ -144,5 +157,62 @@ public final class Strings2 {
 
     public static String surround(String aValue, String s) {
         return new StringBuilder().append(s).append(aValue).append(s).toString();
+    }
+
+    /**
+     * 文字列を置き換えます。
+     *
+     * @param text
+     *            テキスト
+     * @param fromText
+     *            置き換え対象のテキスト
+     * @param toText
+     *            置き換えるテキスト
+     * @return 結果
+     */
+    public static final String replace(final String text,
+                                       final String fromText, final String toText) {
+
+        if (text == null || fromText == null || toText == null) {
+            return null;
+        }
+        StringBuffer buf = new StringBuffer(100);
+        int pos = 0;
+        int pos2 = 0;
+        while (true) {
+            pos = text.indexOf(fromText, pos2);
+            if (pos == 0) {
+                buf.append(toText);
+                pos2 = fromText.length();
+            } else if (pos > 0) {
+                buf.append(text.substring(pos2, pos));
+                buf.append(toText);
+                pos2 = pos + fromText.length();
+            } else {
+                buf.append(text.substring(pos2));
+                break;
+            }
+        }
+        return buf.toString();
+    }
+    /**
+     * 文字列を分割します。
+     *
+     * @param str
+     *            文字列
+     * @param delim
+     *            分割するためのデリミタ
+     * @return 分割された文字列の配列
+     */
+    public static String[] split(final String str, final String delim) {
+        if (isEmpty(str)) {
+            return EMPTY_STRINGS;
+        }
+        final List<String> list = newArrayList();
+        final StringTokenizer st = new StringTokenizer(str, delim);
+        while (st.hasMoreElements()) {
+            list.add(st.nextElement().toString());
+        }
+        return list.toArray(new String[list.size()]);
     }
 }

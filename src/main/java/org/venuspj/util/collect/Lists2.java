@@ -1,5 +1,6 @@
 package org.venuspj.util.collect;
 
+import org.venuspj.util.misc.Disposable;
 import org.venuspj.util.objects2.Objects2;
 
 import java.util.*;
@@ -171,6 +172,10 @@ public class Lists2 {
 
     public static boolean isNotEmpty(List<?> anyList) {
         return !anyList.isEmpty();
+    }
+
+    public static <E> LinkedList<E> newLinkedList() {
+        return new LinkedList<>();
     }
 }
 
