@@ -1,6 +1,5 @@
 package org.venuspj.util.beans;
 
-import org.seasar.util.lang.StringUtil;
 import org.venuspj.util.strings2.Strings2;
 
 import java.util.Date;
@@ -30,7 +29,7 @@ public class SqlDateConverter implements Converter {
     }
 
     public Object getAsObject(String value) {
-        if (StringUtil.isEmpty(value)) {
+        if (Strings2.isEmpty(value)) {
             return null;
         }
         return SqlDateConversionUtil.toDate(value, pattern);

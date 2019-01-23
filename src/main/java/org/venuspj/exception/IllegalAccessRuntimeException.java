@@ -15,37 +15,40 @@
  */
 package org.venuspj.exception;
 
-import java.text.ParseException;
-
 import static org.seasar.util.collection.ArrayUtil.asArray;
 
 /**
- * 解析できなかった場合にスローされる例外です。
+ * {@link IllegalAccessException}をラップする例外です。
  * 
  * @author higa
  */
-public class ParseRuntimeException extends VRuntimeException {
+public class IllegalAccessRuntimeException extends VRuntimeException {
 
-    private static final long serialVersionUID = -5237329676597387063L;
+    private static final long serialVersionUID = -3649900343028907465L;
+
+    private final Class<?> targetClass;
 
     /**
-     * {@link ParseRuntimeException}を作成します。
+     * {@link IllegalAccessRuntimeException}を作成します。
      * 
+     * @param targetClass
+     *            ターゲットクラス
      * @param cause
      *            原因となった例外
      */
-    public ParseRuntimeException(final ParseException cause) {
-        super("EUTL0050", asArray(cause), cause);
+    public IllegalAccessRuntimeException(final Class<?> targetClass,
+                                         final IllegalAccessException cause) {
+        super("EUTL0042", asArray(targetClass.getName(), cause), cause);
+        this.targetClass = targetClass;
     }
 
     /**
-     * {@link ParseRuntimeException}を作成します。
+     * ターゲットクラスを返します。
      * 
-     * @param s
-     *            解析できなかった文字列
+     * @return ターゲットクラス
      */
-    public ParseRuntimeException(final String s) {
-        super("EUTL0051", asArray(s));
+    public Class<?> getTargetClass() {
+        return targetClass;
     }
 
 }
