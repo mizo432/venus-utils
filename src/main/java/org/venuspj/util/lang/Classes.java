@@ -10,14 +10,14 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import static org.venuspj.util.collect.Maps2.newHashMap;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotEmpty;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotEmpty;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Class}用のユーティリティクラスです。
  *
  */
-public abstract class ClassUtil {
+public abstract class Classes {
 
     /**
      * ラッパー型からプリミティブ型へのマップ

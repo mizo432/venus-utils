@@ -1,6 +1,6 @@
 package org.venuspj.util.convert;
 
-import org.venuspj.util.misc.Base64Util;
+import org.venuspj.util.misc.Base64Us;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -59,7 +59,7 @@ public class StringConversionUtil {
         } else if (value instanceof Number) {
             return toString((Number) value, pattern);
         } else if (value instanceof byte[]) {
-            return Base64Util.encode((byte[]) value);
+            return Base64Us.encode((byte[]) value);
         } else {
             return value.toString();
         }

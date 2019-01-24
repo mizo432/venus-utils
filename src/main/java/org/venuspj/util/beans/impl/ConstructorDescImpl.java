@@ -4,7 +4,7 @@ import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.ConstructorDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
-import org.venuspj.util.lang.ConstructorUtil;
+import org.venuspj.util.lang.Constructors;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Type;
@@ -12,8 +12,8 @@ import java.lang.reflect.TypeVariable;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentArrayIndex;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link ConstructorDesc}の実装クラスです。
@@ -81,7 +81,7 @@ public class ConstructorDescImpl implements ConstructorDesc {
 
     @Override
     public boolean isPublic() {
-        return ConstructorUtil.isPublic(constructor);
+        return Constructors.isPublic(constructor);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class ConstructorDescImpl implements ConstructorDesc {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T newInstance(final Object... args) {
-        return (T) ConstructorUtil.newInstance(constructor, args);
+        return (T) Constructors.newInstance(constructor, args);
     }
 
 }

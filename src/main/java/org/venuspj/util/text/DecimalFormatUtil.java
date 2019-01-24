@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link DecimalFormat}用のユーティリティクラスです。

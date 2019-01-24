@@ -10,8 +10,8 @@ import java.io.ObjectOutput;
 import java.lang.reflect.Array;
 import java.util.*;
 
-import static org.venuspj.util.misc.AssertionUtil.assertIndex;
-import static org.venuspj.util.misc.AssertionUtil.assertState;
+import static org.venuspj.util.misc.Assertions.assertIndex;
+import static org.venuspj.util.misc.Assertions.assertState;
 
 /**
  * 配列の性質を併せ持つ {@link Map}です。

@@ -26,8 +26,8 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentArrayIndex;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link MethodDesc}の実装クラスです。

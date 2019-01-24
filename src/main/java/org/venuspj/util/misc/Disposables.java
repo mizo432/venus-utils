@@ -5,7 +5,7 @@ import org.venuspj.util.collect.Lists2;
 import java.beans.Introspector;
 import java.util.Deque;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * アプリケーションの終了時にリソースを破棄するためのユーティリティクラスです。
@@ -13,10 +13,8 @@ import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
  * アプリケーションの終了時に破棄しなければならないリソースがある場合は、 {@link Disposable}を実装したクラスを作成し、
  * このクラスに登録します。
  * </p>
- *
- * @author koichik
  */
-public abstract class DisposableUtil {
+public abstract class Disposables {
 
     /** 登録済みの{@link Disposable} */
     protected static final Deque<Disposable> disposables = Lists2.newLinkedList();

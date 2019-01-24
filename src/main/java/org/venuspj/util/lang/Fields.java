@@ -8,12 +8,12 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Field}用のユーティリティクラスです。
  */
-public abstract class FieldUtil {
+public abstract class Fields {
 
     /**
      * {@link Field}によって表される{@code static}フィールドの値を返します。
@@ -259,7 +259,7 @@ public abstract class FieldUtil {
         assertArgumentNotNull("field", field);
 
         final Type type = field.getGenericType();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getElementTypeOfCollection(type));
     }
 
@@ -274,7 +274,7 @@ public abstract class FieldUtil {
         assertArgumentNotNull("field", field);
 
         final Type type = field.getGenericType();
-        return GenericsUtil.getRawClass(GenericsUtil.getKeyTypeOfMap(type));
+        return Genericses.getRawClass(Genericses.getKeyTypeOfMap(type));
     }
 
     /**
@@ -288,7 +288,7 @@ public abstract class FieldUtil {
         assertArgumentNotNull("field", field);
 
         final Type type = field.getGenericType();
-        return GenericsUtil.getRawClass(GenericsUtil.getValueTypeOfMap(type));
+        return Genericses.getRawClass(Genericses.getValueTypeOfMap(type));
     }
 
 }

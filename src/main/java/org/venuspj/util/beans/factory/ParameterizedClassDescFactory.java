@@ -9,9 +9,9 @@ import java.util.Map;
 
 import static org.venuspj.util.collect.ArrayIterator.iterable;
 import static org.venuspj.util.collect.IndexedIterator.indexed;
-import static org.venuspj.util.lang.GenericsUtil.*;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentArrayIndex;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.lang.Genericses.*;
+import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * フィールの型やメソッドの引数型、戻り値型を表現する{@link ParameterizedClassDesc}を作成するファクトリです。

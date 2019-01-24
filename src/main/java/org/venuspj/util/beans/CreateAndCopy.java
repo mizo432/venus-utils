@@ -1,7 +1,7 @@
 package org.venuspj.util.beans;
 
-import org.venuspj.util.lang.ClassUtil;
-import org.venuspj.util.lang.ModifierUtil;
+import org.venuspj.util.lang.Classes;
+import org.venuspj.util.lang.Modifiers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,10 +54,10 @@ public class CreateAndCopy<T> extends AbstractCopy<CreateAndCopy<T>> {
     public T execute() {
         if (Map.class.isAssignableFrom(destClass)) {
             Map dest = null;
-            if (ModifierUtil.isAbstract(destClass)) {
+            if (Modifiers.isAbstract(destClass)) {
                 dest = new HashMap();
             } else {
-                dest = (Map) ClassUtil.newInstance(destClass);
+                dest = (Map) Classes.newInstance(destClass);
             }
             if (src instanceof Map) {
                 copyMapToMap((Map) src, dest);
@@ -66,7 +66,7 @@ public class CreateAndCopy<T> extends AbstractCopy<CreateAndCopy<T>> {
             }
             return (T) dest;
         }
-        T dest = (T) ClassUtil.newInstance(destClass);
+        T dest = (T) Classes.newInstance(destClass);
         if (src instanceof Map) {
             copyMapToBean((Map) src, dest);
         } else {

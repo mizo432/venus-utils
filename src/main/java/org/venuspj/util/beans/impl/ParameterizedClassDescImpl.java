@@ -17,7 +17,7 @@ package org.venuspj.util.beans.impl;
 
 import org.venuspj.util.beans.ParameterizedClassDesc;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link ParameterizedClassDesc}の実装クラスです。

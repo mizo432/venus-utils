@@ -6,7 +6,7 @@ import org.venuspj.util.strings2.Strings2;
 /**
  * Base64を扱うためのユーティリティクラスです。
  */
-public abstract class Base64Util {
+public abstract class Base64Us {
 
     private static final char[] ENCODE_TABLE = { 'A', 'B', 'C', 'D', 'E', 'F',
             'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',

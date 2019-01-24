@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static org.venuspj.util.collect.CollectionsUtil.newConcurrentHashMap;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link DecimalFormatSymbols}用のユーティリティクラスです。

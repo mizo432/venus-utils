@@ -8,8 +8,8 @@ import org.venuspj.util.beans.*;
 import org.venuspj.util.collect.ArrayMap;
 import org.venuspj.util.collect.CaseInsensitiveMap;
 import org.venuspj.util.convert.*;
-import org.venuspj.util.lang.ClassUtil;
-import org.venuspj.util.lang.FieldUtil;
+import org.venuspj.util.lang.Classes;
+import org.venuspj.util.lang.Fields;
 import org.venuspj.util.strings2.Strings2;
 
 import java.lang.reflect.*;
@@ -22,8 +22,8 @@ import static java.util.Collections.unmodifiableCollection;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
 import static org.venuspj.util.collect.Sets2.newHashSet;
-import static org.venuspj.util.lang.GenericsUtil.*;
-import static org.venuspj.util.misc.AssertionUtil.*;
+import static org.venuspj.util.lang.Genericses.*;
+import static org.venuspj.util.misc.Assertions.*;
 
 /**
  * {@link BeanDesc}の実装クラスです。
@@ -394,7 +394,7 @@ public class BeanDescImpl implements BeanDesc {
             if (args[i] == null) {
                 continue;
             }
-            if (ClassUtil.isAssignableFrom(paramTypes[i], args[i].getClass())) {
+            if (Classes.isAssignableFrom(paramTypes[i], args[i].getClass())) {
                 continue;
             }
             if (adjustNumber && adjustNumber(paramTypes, args, i)) {
@@ -669,7 +669,7 @@ public class BeanDescImpl implements BeanDesc {
             field.setAccessible(true);
             final FieldDescImpl fieldDesc = new FieldDescImpl(this, field);
             fieldDescCache.put(fname, fieldDesc);
-            if (!FieldUtil.isInstanceField(field)) {
+            if (!Fields.isInstanceField(field)) {
                 continue;
             }
             if (hasPropertyDesc(fname)) {
@@ -678,7 +678,7 @@ public class BeanDescImpl implements BeanDesc {
                 pd.setField(field);
                 continue;
             }
-            if (FieldUtil.isPublicField(field)) {
+            if (Fields.isPublicField(field)) {
                 final PropertyDescImpl pd =
                         new PropertyDescImpl(
                                 field.getName(),

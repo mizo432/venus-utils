@@ -25,10 +25,8 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * 表明についてのユーティリティクラスです。
- * 
- * @author shot
  */
-public abstract class AssertionUtil {
+public abstract class Assertions {
 
     /**
      * 引数が<code>null</code>でないことを表明します。

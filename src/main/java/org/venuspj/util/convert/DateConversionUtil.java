@@ -32,7 +32,7 @@ import static java.text.DateFormat.*;
 import static org.venuspj.util.collect.MultiIterator.iterable;
 import static org.venuspj.util.strings2.Strings2.isEmpty;
 import static org.venuspj.util.strings2.Strings2.isNotEmpty;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * 日付だけを表現するオブジェクトから{@link Date}、{@link Calendar}、{@link java.sql.Date}

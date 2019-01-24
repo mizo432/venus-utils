@@ -18,8 +18,8 @@ package org.venuspj.util.io;
 import java.util.*;
 
 import static org.venuspj.util.collect.Maps2.newHashMap;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotEmpty;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotEmpty;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link ResourceBundle}用のユーティリティクラスです。

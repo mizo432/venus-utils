@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 import static org.venuspj.util.strings2.Strings2.isEmpty;
 import static org.venuspj.util.strings2.Strings2.isNotEmpty;
 

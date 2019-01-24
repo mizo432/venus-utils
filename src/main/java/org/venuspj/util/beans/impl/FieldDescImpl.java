@@ -20,13 +20,13 @@ import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.FieldDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
-import org.venuspj.util.lang.FieldUtil;
+import org.venuspj.util.lang.Fields;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link FieldDesc}の実装クラスです。
@@ -95,17 +95,17 @@ public class FieldDescImpl implements FieldDesc {
 
     @Override
     public boolean isPublic() {
-        return FieldUtil.isPublicField(field);
+        return Fields.isPublicField(field);
     }
 
     @Override
     public boolean isStatic() {
-        return !FieldUtil.isInstanceField(field);
+        return !Fields.isInstanceField(field);
     }
 
     @Override
     public boolean isFinal() {
-        return FieldUtil.isFinalField(field);
+        return Fields.isFinalField(field);
     }
 
     @Override
@@ -163,7 +163,7 @@ public class FieldDescImpl implements FieldDesc {
     public <T> T getFieldValue(final Object target) {
         assertArgumentNotNull("target", target);
 
-        return (T) FieldUtil.get(field, target);
+        return (T) Fields.get(field, target);
     }
 
     @SuppressWarnings("unchecked")
@@ -174,14 +174,14 @@ public class FieldDescImpl implements FieldDesc {
                 beanDesc.getBeanClass(),
                 fieldName);
         }
-        return (T) FieldUtil.get(field);
+        return (T) Fields.get(field);
     }
 
     @Override
     public void setFieldValue(final Object target, final Object value) {
         assertArgumentNotNull("target", target);
 
-        FieldUtil.set(field, target, value);
+        Fields.set(field, target, value);
     }
 
     @Override
@@ -191,7 +191,7 @@ public class FieldDescImpl implements FieldDesc {
                 beanDesc.getBeanClass(),
                 fieldName);
         }
-        FieldUtil.set(field, value);
+        Fields.set(field, value);
     }
 
 }

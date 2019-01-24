@@ -8,8 +8,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotEmpty;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotEmpty;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Method}用のユーティリティクラスです。
@@ -249,7 +249,7 @@ public abstract class MethodUtil {
         assertArgumentNotNull("method", method);
 
         final Type[] parameterTypes = method.getGenericParameterTypes();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getElementTypeOfCollection(parameterTypes[position]));
     }
 
@@ -265,7 +265,7 @@ public abstract class MethodUtil {
         assertArgumentNotNull("method", method);
 
         final Type returnType = method.getGenericReturnType();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getElementTypeOfCollection(returnType));
     }
 
@@ -283,7 +283,7 @@ public abstract class MethodUtil {
         assertArgumentNotNull("method", method);
 
         final Type[] parameterTypes = method.getGenericParameterTypes();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getKeyTypeOfMap(parameterTypes[position]));
     }
 
@@ -298,7 +298,7 @@ public abstract class MethodUtil {
         assertArgumentNotNull("method", method);
 
         final Type returnType = method.getGenericReturnType();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getKeyTypeOfMap(returnType));
     }
 
@@ -316,7 +316,7 @@ public abstract class MethodUtil {
         assertArgumentNotNull("method", method);
 
         final Type[] parameterTypes = method.getGenericParameterTypes();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getValueTypeOfMap(parameterTypes[position]));
     }
 
@@ -331,7 +331,7 @@ public abstract class MethodUtil {
         assertArgumentNotNull("method", method);
 
         final Type returnType = method.getGenericReturnType();
-        return GenericsUtil.getRawClass(GenericsUtil
+        return Genericses.getRawClass(Genericses
                 .getValueTypeOfMap(returnType));
     }
 

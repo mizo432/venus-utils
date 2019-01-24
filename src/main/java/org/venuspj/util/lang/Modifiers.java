@@ -4,14 +4,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Modifier}用のユーティリティクラスです。
- *
- * @author shot
  */
-public abstract class ModifierUtil {
+public abstract class Modifiers {
 
     /**
      * <code>public</code>かどうか返します。

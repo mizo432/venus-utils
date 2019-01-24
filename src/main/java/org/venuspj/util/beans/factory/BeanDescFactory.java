@@ -3,13 +3,13 @@ package org.venuspj.util.beans.factory;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.impl.BeanDescImpl;
 import org.venuspj.util.misc.Disposable;
-import org.venuspj.util.misc.DisposableUtil;
+import org.venuspj.util.misc.Disposables;
 
 import java.util.concurrent.ConcurrentMap;
 
 import static org.venuspj.util.collect.CollectionsUtil.newConcurrentHashMap;
 import static org.venuspj.util.collect.CollectionsUtil.putIfAbsent;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link BeanDesc}を生成するクラスです。
@@ -21,12 +21,12 @@ import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
  * BeanDesc beanDesc = BeanDescFactory.getBeanDesc(Foo.class);
  * </pre>
  * <p>
- * {@link BeanDesc}はキャッシュされます。 キャッシュをクリアするには{@link DisposableUtil#dispose()}
+ * {@link BeanDesc}はキャッシュされます。 キャッシュをクリアするには{@link Disposables#dispose()}
  * を呼び出してください。
  * </p>
  *
  * @see BeanDesc
- * @see DisposableUtil
+ * @see Disposables
  */
 public abstract class BeanDescFactory {
 
@@ -68,7 +68,7 @@ public abstract class BeanDescFactory {
     public static void initialize() {
         synchronized (BeanDescFactory.class) {
             if (!initialized) {
-                DisposableUtil.add(new Disposable() {
+                Disposables.add(new Disposable() {
                     @Override
                     public void dispose() {
                         clear();

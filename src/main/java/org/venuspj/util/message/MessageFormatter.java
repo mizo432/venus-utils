@@ -2,7 +2,7 @@ package org.venuspj.util.message;
 
 import org.venuspj.util.io.ResourceBundleUtil;
 import org.venuspj.util.misc.Disposable;
-import org.venuspj.util.misc.DisposableUtil;
+import org.venuspj.util.misc.Disposables;
 import org.venuspj.util.strings2.Strings2;
 
 import java.text.MessageFormat;
@@ -152,7 +152,7 @@ public abstract class MessageFormatter {
      */
     protected static synchronized void initialize() {
         if (!initialized) {
-            DisposableUtil.add(new Disposable() {
+            Disposables.add(new Disposable() {
                 @Override
                 public void dispose() {
                     ResourceBundle.clearCache();

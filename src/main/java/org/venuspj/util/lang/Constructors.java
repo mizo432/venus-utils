@@ -8,14 +8,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Constructor}用のユーティリティクラスです。
- *
- * @author higa
  */
-public abstract class ConstructorUtil {
+public abstract class Constructors {
 
     /**
      * 指定された初期化パラメータで、コンストラクタの宣言クラスの新しいインスタンスを作成および初期化します。

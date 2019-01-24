@@ -21,7 +21,7 @@ import org.venuspj.exception.VUnsupportedOperationException;
 
 import java.util.Iterator;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 
 /**

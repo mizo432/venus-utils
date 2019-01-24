@@ -6,10 +6,10 @@ import org.venuspj.exception.VIllegalArgumentException;
 import org.venuspj.util.beans.*;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
 import org.venuspj.util.convert.*;
-import org.venuspj.util.lang.ConstructorUtil;
-import org.venuspj.util.lang.FieldUtil;
+import org.venuspj.util.lang.Constructors;
+import org.venuspj.util.lang.Fields;
 import org.venuspj.util.lang.MethodUtil;
-import org.venuspj.util.lang.ModifierUtil;
+import org.venuspj.util.lang.Modifiers;
 
 import java.lang.reflect.*;
 import java.sql.Time;
@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Map;
 
-import static org.venuspj.util.misc.AssertionUtil.*;
+import static org.venuspj.util.misc.Assertions.*;
 
 /**
  * {@link PropertyDesc}の実装クラスです。
@@ -125,7 +125,7 @@ public class PropertyDescImpl implements PropertyDesc {
             if (method.isBridge() || method.isSynthetic()) {
                 continue;
             }
-            if (ModifierUtil.isStatic(method.getModifiers())
+            if (Modifiers.isStatic(method.getModifiers())
                     && method.getName().equals("valueOf")
                     && method.getParameterTypes().length == 1
                     && method.getParameterTypes()[0].equals(String.class)) {
@@ -229,7 +229,7 @@ public class PropertyDescImpl implements PropertyDesc {
      */
     public void setField(final Field field) {
         this.field = field;
-        if (field != null && ModifierUtil.isPublic(field)) {
+        if (field != null && Modifiers.isPublic(field)) {
             readable = true;
             writable = true;
         }
@@ -255,7 +255,7 @@ public class PropertyDescImpl implements PropertyDesc {
             if (hasReadMethod()) {
                 return (T) MethodUtil.invoke(readMethod, target, EMPTY_ARGS);
             }
-            return (T) FieldUtil.get(field, target);
+            return (T) Fields.get(field, target);
         } catch (final Throwable t) {
             throw new IllegalPropertyRuntimeException(
                     beanDesc.getBeanClass(),
@@ -302,7 +302,7 @@ public class PropertyDescImpl implements PropertyDesc {
                                             : targetClass.getClassLoader() }).initCause(t);
                 }
             } else {
-                FieldUtil.set(field, target, convertedValue);
+                Fields.set(field, target, convertedValue);
             }
         } catch (final Throwable t) {
             throw new IllegalPropertyRuntimeException(
@@ -385,7 +385,7 @@ public class PropertyDescImpl implements PropertyDesc {
 
     private Object convertWithString(final Object arg) {
         if (stringConstructor != null) {
-            return ConstructorUtil.newInstance(
+            return Constructors.newInstance(
                     stringConstructor,
                     arg);
         }

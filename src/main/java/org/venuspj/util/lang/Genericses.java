@@ -8,15 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentArrayIndex;
-import static org.venuspj.util.misc.AssertionUtil.assertArgumentNotNull;
+import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * genericsを扱うためのユーティリティ・クラスです。
- *
- * @author koichik
  */
-public abstract class GenericsUtil {
+public abstract class Genericses {
 
     /**
      * <code>type</code>の原型が<code>clazz</code>に代入可能であれば<code>true</code>を、
