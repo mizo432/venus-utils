@@ -10,10 +10,12 @@ import static org.venuspj.util.collect.Lists2.newArrayList;
 
 public class Arrays2<T> {
     private List<T> list = newArrayList();
+
     private Arrays2(Collection<T> argValue) {
         list.addAll(argValue);
     }
 
+    @SafeVarargs
     public static <T> Arrays2 of(T... argValue) {
         return new Arrays2(Arrays.asList(argValue));
     }

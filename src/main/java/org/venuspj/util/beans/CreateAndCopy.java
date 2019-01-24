@@ -1,7 +1,7 @@
 package org.venuspj.util.beans;
 
-import org.seasar.util.lang.ClassUtil;
-import org.seasar.util.lang.ModifierUtil;
+import org.venuspj.util.lang.ClassUtil;
+import org.venuspj.util.lang.ModifierUtil;
 
 import java.util.HashMap;
 import java.util.Map;

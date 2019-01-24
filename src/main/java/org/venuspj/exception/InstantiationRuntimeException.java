@@ -15,12 +15,11 @@
  */
 package org.venuspj.exception;
 
-import static org.seasar.util.collection.ArrayUtil.asArray;
+
+import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link InstantiationException}をラップする例外です。
- * 
- * @author higa
  */
 public class InstantiationRuntimeException extends VRuntimeException {
 

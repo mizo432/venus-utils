@@ -15,11 +15,11 @@
  */
 package org.venuspj.exception;
 
-import org.seasar.util.lang.MethodUtil;
+import org.venuspj.util.lang.MethodUtil;
 
 import java.lang.reflect.Constructor;
 
-import static org.seasar.util.collection.ArrayUtil.asArray;
+import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link Constructor}が見つからない場合にスローされる{@link NoSuchMethodException}をラップする例外です。

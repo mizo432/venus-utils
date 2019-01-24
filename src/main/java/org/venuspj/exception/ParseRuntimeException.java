@@ -17,12 +17,10 @@ package org.venuspj.exception;
 
 import java.text.ParseException;
 
-import static org.seasar.util.collection.ArrayUtil.asArray;
+import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * 解析できなかった場合にスローされる例外です。
- * 
- * @author higa
  */
 public class ParseRuntimeException extends VRuntimeException {
 
@@ -45,7 +43,7 @@ public class ParseRuntimeException extends VRuntimeException {
      *            解析できなかった文字列
      */
     public ParseRuntimeException(final String s) {
-        super("EUTL0051", asArray(s));
+        super("EUTL0050", asArray(s));
     }
 
 }

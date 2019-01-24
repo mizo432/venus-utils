@@ -1,8 +1,11 @@
 package org.venuspj.util.beans;
 
-import org.seasar.util.beans.BeanDesc;
-import org.seasar.util.beans.PropertyDesc;
-import org.seasar.util.beans.factory.BeanDescFactory;
+
+import org.venuspj.util.convert.DateConversionUtil;
+import org.venuspj.util.beans.converter.*;
+import org.venuspj.util.beans.factory.BeanDescFactory;
+import org.venuspj.util.convert.TimeConversionUtil;
+import org.venuspj.util.convert.TimestampConversionUtil;
 
 import java.sql.Time;
 import java.util.*;

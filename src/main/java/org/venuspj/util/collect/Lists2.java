@@ -1,14 +1,14 @@
 package org.venuspj.util.collect;
 
-import com.google.common.base.Preconditions;
 import com.google.common.math.IntMath;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.objects2.Objects2;
 
 import java.io.Serializable;
 import java.util.*;
 
-import static com.google.common.base.Preconditions.checkElementIndex;
+import static org.venuspj.util.base.Preconditions.checkElementIndex;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 

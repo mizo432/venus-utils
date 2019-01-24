@@ -215,4 +215,57 @@ public final class Strings2 {
         }
         return list.toArray(new String[list.size()]);
     }
+
+    /**
+     * JavaBeansの仕様にしたがってデキャピタライズを行ないます。大文字が2つ以上続く場合は、小文字にならないので注意してください。
+     * <p>
+     * 次のように使います．
+     * </p>
+     *
+     * <pre>
+     * StringUtil.capitalize("UserId")  = "userId"
+     * StringUtil.capitalize("ABC")  = "ABC"
+     * </pre>
+     *
+     * @param name
+     *            名前
+     * @return 結果の文字列
+     */
+    public static String decapitalize(final String name) {
+        if (isEmpty(name)) {
+            return name;
+        }
+        final char[] chars = name.toCharArray();
+        if (chars.length >= 2 && Character.isUpperCase(chars[0])
+                && Character.isUpperCase(chars[1])) {
+            return name;
+        }
+        chars[0] = Character.toLowerCase(chars[0]);
+        return new String(chars);
+    }
+
+    /**
+     * JavaBeansの仕様にしたがってキャピタライズを行ないます。大文字が2つ以上続く場合は、小文字にならないので注意してください。
+     * <p>
+     * 次のように使います．
+     * </p>
+     *
+     * <pre>
+     * StringUtil.capitalize("userId")  = "UserId"
+     * StringUtil.capitalize("ABC")  = "ABC"
+     * </pre>
+     *
+     * @param name
+     *            名前
+     * @return 結果の文字列
+     */
+    public static String capitalize(final String name) {
+        if (isEmpty(name)) {
+            return name;
+        }
+        final char[] chars = name.toCharArray();
+        chars[0] = Character.toUpperCase(chars[0]);
+        return new String(chars);
+    }
+
 }

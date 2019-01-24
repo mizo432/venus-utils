@@ -17,7 +17,8 @@ package org.venuspj.exception;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static org.seasar.util.collection.ArrayUtil.asArray;
+import static org.venuspj.util.collect.Arrays2.asArray;
+
 
 /**
  * {@link InvocationTargetException}をラップする例外です。

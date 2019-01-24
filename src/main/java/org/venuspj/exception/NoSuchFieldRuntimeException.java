@@ -15,7 +15,7 @@
  */
 package org.venuspj.exception;
 
-import static org.seasar.util.collection.ArrayUtil.asArray;
+import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link NoSuchFieldException}をラップする例外です。

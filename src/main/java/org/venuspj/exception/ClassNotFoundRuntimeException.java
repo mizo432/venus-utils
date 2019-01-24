@@ -15,7 +15,8 @@
  */
 package org.venuspj.exception;
 
-import static org.seasar.util.collection.ArrayUtil.asArray;
+
+import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * クラスが見つからないときにスローされる例外です。

@@ -15,7 +15,7 @@
  */
 package org.venuspj.exception;
 
-import org.seasar.util.lang.MethodUtil;
+import org.venuspj.util.lang.MethodUtil;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
