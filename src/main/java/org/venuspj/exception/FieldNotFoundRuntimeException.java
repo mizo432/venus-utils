@@ -6,9 +6,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link Field}が見つからない場合にスローされる例外です。
- *
- * @author higa
- *
  */
 public class FieldNotFoundRuntimeException extends VRuntimeException {
 

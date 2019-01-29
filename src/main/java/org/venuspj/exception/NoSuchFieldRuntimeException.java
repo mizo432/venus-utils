@@ -19,8 +19,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link NoSuchFieldException}をラップする例外です。
- * 
- * @author higa
  */
 public class NoSuchFieldRuntimeException extends VRuntimeException {
 

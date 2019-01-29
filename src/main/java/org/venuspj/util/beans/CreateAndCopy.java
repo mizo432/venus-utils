@@ -6,6 +6,8 @@ import org.venuspj.util.lang.Modifiers;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.venuspj.util.objects2.Objects2.isNull;
+
 /**
  * JavaBeansやMapを作成し、プロパティをコピーするクラスです。
  *
@@ -35,10 +37,10 @@ public class CreateAndCopy<T> extends AbstractCopy<CreateAndCopy<T>> {
      */
     public CreateAndCopy(Class<T> destClass, Object src)
             throws NullPointerException {
-        if (destClass == null) {
+        if (isNull(destClass)) {
             throw new NullPointerException("destClass");
         }
-        if (src == null) {
+        if (isNull(src)) {
             throw new NullPointerException("src");
         }
         this.destClass = destClass;

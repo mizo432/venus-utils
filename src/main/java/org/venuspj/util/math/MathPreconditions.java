@@ -14,9 +14,9 @@
 
 package org.venuspj.util.math;
 
-import com.google.common.annotations.GwtCompatible;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.venuspj.util.annotations.GwtCompatible;
 
 import java.math.BigInteger;
 

@@ -24,8 +24,6 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link DecimalFormatSymbols}用のユーティリティクラスです。
- * 
- * @author higa
  */
 public abstract class DecimalFormatSymbolsUtil {
 

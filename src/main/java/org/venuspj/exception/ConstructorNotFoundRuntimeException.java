@@ -6,8 +6,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link Constructor}が見つからなかったときにスローされる例外Vです。
- *
- * @author higa
  */
 public class ConstructorNotFoundRuntimeException extends VRuntimeException {
 

@@ -18,8 +18,6 @@ package org.venuspj.exception;
 
 /**
  * 空の場合にスローされる例外です。
- * 
- * @author higa
  */
 public class EmptyArgumentException extends VIllegalArgumentException {
 

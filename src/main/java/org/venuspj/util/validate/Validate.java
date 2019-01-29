@@ -1,12 +1,13 @@
 package org.venuspj.util.validate;
 
-import org.venuspj.util.objects2.Objects2;
+import static org.venuspj.util.objects2.Objects2.isNull;
 
 /**
+ *
  */
 public final class Validate {
     public static void notNull(Object obj) {
-        if (Objects2.isNull(obj))
+        if (isNull(obj))
             throw new ValidateRuntimeException("obj is null");
     }
 }

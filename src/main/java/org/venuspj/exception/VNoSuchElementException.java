@@ -19,8 +19,6 @@ import java.util.NoSuchElementException;
 
 /**
  * {@link NoSuchElementException}をラップする例外です。
- * 
- * @author wyukawa
  */
 public class VNoSuchElementException extends NoSuchElementException {
 

@@ -23,8 +23,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link Constructor}が見つからない場合にスローされる{@link NoSuchMethodException}をラップする例外です。
- * 
- * @author higa
  */
 public class NoSuchConstructorRuntimeException extends VRuntimeException {
 

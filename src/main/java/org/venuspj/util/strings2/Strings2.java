@@ -223,8 +223,8 @@ public final class Strings2 {
      * </p>
      *
      * <pre>
-     * StringUtil.capitalize("UserId")  = "userId"
-     * StringUtil.capitalize("ABC")  = "ABC"
+     * Strings2.capitalize("UserId")  = "userId"
+     * Strings2.capitalize("ABC")  = "ABC"
      * </pre>
      *
      * @param name
@@ -251,8 +251,8 @@ public final class Strings2 {
      * </p>
      *
      * <pre>
-     * StringUtil.capitalize("userId")  = "UserId"
-     * StringUtil.capitalize("ABC")  = "ABC"
+     * Strings2.capitalize("userId")  = "UserId"
+     * Strings2.capitalize("ABC")  = "ABC"
      * </pre>
      *
      * @param name

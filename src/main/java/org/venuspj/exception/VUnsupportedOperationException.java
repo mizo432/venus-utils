@@ -17,8 +17,6 @@ package org.venuspj.exception;
 
 /**
  * {@link UnsupportedOperationException}をラップする例外です。
- * 
- * @author wyukawa
  */
 public class VUnsupportedOperationException extends
         UnsupportedOperationException {

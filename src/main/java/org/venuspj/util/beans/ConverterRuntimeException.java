@@ -4,8 +4,6 @@ import org.venuspj.exception.VRuntimeException;
 
 /**
  * {@link Converter}でエラーが起きた場合にスローされる例外です。
- *
- * @author higa
  */
 public class ConverterRuntimeException extends VRuntimeException {
 

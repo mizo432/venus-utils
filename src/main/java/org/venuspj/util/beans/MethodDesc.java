@@ -21,8 +21,6 @@ import java.util.Map;
 
 /**
  * メソッドを扱うためのインターフェースです。
- *
- * @author koichik
  */
 public interface MethodDesc {
 

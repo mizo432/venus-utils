@@ -1,5 +1,7 @@
 package org.venuspj.util.beans;
 
+import org.venuspj.util.beans.factory.BeanDescFactory;
+
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Map;
@@ -37,7 +39,6 @@ import java.util.Map;
  * }
  * </pre>
  *
- * @author higa
  * @see BeanDescFactory
  */
 public interface BeanDesc {

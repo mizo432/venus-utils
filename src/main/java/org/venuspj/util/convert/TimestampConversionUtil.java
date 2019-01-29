@@ -95,8 +95,6 @@ import static org.venuspj.util.strings2.Strings2.isNotEmpty;
  * <td>{@literal yyyy-MM-dd HH:mm:ss[.SSS...]}</td>
  * </tr>
  * </table>
- *
- * @author higa
  * @see DateConversionUtil
  * @see TimeConversionUtil
  */

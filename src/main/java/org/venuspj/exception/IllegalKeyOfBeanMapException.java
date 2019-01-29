@@ -21,8 +21,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@literal BeanMap}に含まれていないキーを使用した場合にスローされる例外です。
- *
- * @author koichik
  */
 public class IllegalKeyOfBeanMapException extends VIllegalArgumentException {
 

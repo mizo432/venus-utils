@@ -9,9 +9,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link Method}が見つからなかったときにスローされる例外です。
- *
- * @author higa
- *
  */
 public class MethodNotFoundRuntimeException extends VRuntimeException {
 

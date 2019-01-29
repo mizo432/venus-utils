@@ -7,8 +7,6 @@ import java.util.Map;
 
 /**
  * プロパティを扱うためのインターフェースです。
- *
- * @author higa
  */
 public interface PropertyDesc {
 

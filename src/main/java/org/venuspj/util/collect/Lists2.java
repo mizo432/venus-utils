@@ -1,8 +1,8 @@
 package org.venuspj.util.collect;
 
-import com.google.common.math.IntMath;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.math.IntMath;
 import org.venuspj.util.objects2.Objects2;
 
 import java.io.Serializable;

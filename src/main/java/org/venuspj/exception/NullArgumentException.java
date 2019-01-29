@@ -22,8 +22,6 @@ import java.util.Arrays;
  * 引数がnullだった場合にthrowする例外です。
  * 
  * {@link NullPointerException}をthrowする代わりに使うことを想定しています。
- * 
- * @author wyukawa
  */
 public class NullArgumentException extends VIllegalArgumentException {
 

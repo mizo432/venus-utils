@@ -4,7 +4,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * プロパティが見つからなかった場合にスローされる例外です。
- *
  */
 public class PropertyNotFoundRuntimeException extends VRuntimeException {
 

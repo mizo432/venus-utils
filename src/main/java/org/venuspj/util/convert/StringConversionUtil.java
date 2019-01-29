@@ -7,9 +7,6 @@ import java.text.SimpleDateFormat;
 
 /**
  * {@link String}用の変換ユーティリティです。
- *
- * @author higa
- *
  */
 public class StringConversionUtil {
 

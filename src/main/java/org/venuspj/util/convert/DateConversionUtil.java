@@ -96,7 +96,6 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
  * </tr>
  * </table>
  *
- * @author higa
  * @see TimeConversionUtil
  * @see TimestampConversionUtil
  */

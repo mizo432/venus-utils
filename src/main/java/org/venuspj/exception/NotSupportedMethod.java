@@ -2,7 +2,7 @@ package org.venuspj.exception;
 
 /**
  * サポートされていないメソッドを呼び出した.
- * しようすべきでないメソッドをしようした場合にthrowされます.
+ * 使用すべきでないメソッドを使用した場合にthrowされます.
  */
 public class NotSupportedMethod extends RuntimeException {
 

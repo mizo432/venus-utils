@@ -21,8 +21,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link NoSuchMethodException}をラップする例外です。
- * 
- * @author higa
  */
 public class NoSuchMethodRuntimeException extends VRuntimeException {
 

@@ -18,7 +18,6 @@ package org.venuspj.exception;
 
 /**
  * {@link IllegalStateException}をラップする例外です。
- * 
  */
 public class VIllegalStateException extends IllegalStateException {
 

@@ -21,8 +21,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * オブジェクトを指定せずに非{@literal static}な{@link Method}にアクセスした場合にスローされる例外です。
- * 
- * @author koichik
  */
 public class MethodNotStaticRuntimeException extends VRuntimeException {
 

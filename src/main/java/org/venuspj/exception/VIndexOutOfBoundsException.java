@@ -17,7 +17,6 @@ package org.venuspj.exception;
 
 /**
  * {@link IndexOutOfBoundsException}をラップする例外です。
- * 
  */
 public class VIndexOutOfBoundsException extends IndexOutOfBoundsException {
 

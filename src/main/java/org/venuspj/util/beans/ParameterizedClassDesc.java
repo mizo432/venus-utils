@@ -4,8 +4,6 @@ import java.lang.reflect.ParameterizedType;
 
 /**
  * パラメタ化されたクラスを扱うためのインターフェースです。
- *
- * @author koichik
  */
 public interface ParameterizedClassDesc {
 

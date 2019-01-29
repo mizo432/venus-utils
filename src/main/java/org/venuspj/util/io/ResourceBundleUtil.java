@@ -23,8 +23,6 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link ResourceBundle}用のユーティリティクラスです。
- * 
- * @author higa
  */
 public abstract class ResourceBundleUtil {
 

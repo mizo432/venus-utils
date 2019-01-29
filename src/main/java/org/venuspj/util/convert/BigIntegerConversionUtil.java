@@ -19,8 +19,6 @@ import java.math.BigInteger;
 
 /**
  * {@link BigInteger}用の変換ユーティリティです。
- * 
- * @author higa
  */
 public abstract class BigIntegerConversionUtil {
 

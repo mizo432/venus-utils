@@ -14,13 +14,11 @@
 
 package org.venuspj.util.math;
 
-import com.google.common.annotations.Beta;
-import com.google.common.annotations.GwtCompatible;
-import com.google.common.annotations.GwtIncompatible;
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.math.BigIntegerMath;
-import com.google.common.math.LongMath;
-import com.google.common.primitives.Ints;
+import org.venuspj.util.annotations.Beta;
+import org.venuspj.util.annotations.GwtCompatible;
+import org.venuspj.util.annotations.GwtIncompatible;
+import org.venuspj.util.annotations.VisibleForTesting;
+import org.venuspj.util.primitives.Ints;
 
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -51,7 +49,8 @@ import static org.venuspj.util.math.MathPreconditions.*;
 public final class IntMath {
   // NOTE: Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
 
-  @VisibleForTesting static final int MAX_SIGNED_POWER_OF_TWO = 1 << (Integer.SIZE - 2);
+  @VisibleForTesting
+  static final int MAX_SIGNED_POWER_OF_TWO = 1 << (Integer.SIZE - 2);
 
   /**
    * Returns the smallest power of two greater than or equal to {@code x}. This is equivalent to

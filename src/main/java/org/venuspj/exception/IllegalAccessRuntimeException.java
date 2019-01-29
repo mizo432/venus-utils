@@ -20,8 +20,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link IllegalAccessException}をラップする例外です。
- * 
- * @author higa
  */
 public class IllegalAccessRuntimeException extends VRuntimeException {
 

@@ -22,8 +22,6 @@ import java.text.SimpleDateFormat;
 
 /**
  * {@link Float}用の変換ユーティリティです。
- * 
- * @author higa
  */
 public abstract class FloatConversionUtil {
 

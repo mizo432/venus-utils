@@ -22,8 +22,6 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
  * {@link InvocationTargetException}をラップする例外です。
- * 
- * @author higa
  */
 public class InvocationTargetRuntimeException extends VRuntimeException {
 

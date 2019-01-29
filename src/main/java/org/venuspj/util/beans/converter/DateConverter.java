@@ -10,9 +10,6 @@ import java.util.Date;
 
 /**
  * 日付用のコンバータです。
- *
- * @author higa
- *
  */
 public class DateConverter implements Converter {
 
