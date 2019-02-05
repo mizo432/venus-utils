@@ -99,7 +99,6 @@ public final class IntMath {
    *     is not a power of two
    */
   @SuppressWarnings("fallthrough")
-  // TODO(kevinb): remove after this warning is disabled globally
   public static int log2(int x, RoundingMode mode) {
     checkPositive("x", x);
     switch (mode) {
@@ -703,7 +702,7 @@ public final class IntMath {
    * @throws IllegalArgumentException if {@code n} is negative
    * @since 20.0
    */
-  @GwtIncompatible // TODO
+  @GwtIncompatible
   @Beta
   public static boolean isPrime(int n) {
     return LongMath.isPrime(n);

@@ -43,7 +43,6 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 public final class Predicates {
     private Predicates() {}
 
-    // TODO(kevinb): considering having these implement a VisitablePredicate
     // interface which specifies an accept(PredicateVisitor) method.
 
     /** Returns a predicate that always evaluates to {@code true}. */
@@ -613,7 +612,6 @@ public final class Predicates {
 
         @Override
         public String toString() {
-            // TODO(cpovirk): maybe make this look like the method call does ("Predicates.compose(...)")
             return p + "(" + f + ")";
         }
 
@@ -686,7 +684,6 @@ public final class Predicates {
 
     private static <T> List<Predicate<? super T>> asList(
             Predicate<? super T> first, Predicate<? super T> second) {
-        // TODO(kevinb): understand why we still get a warning despite @SafeVarargs!
         return Arrays.<Predicate<? super T>>asList(first, second);
     }
 

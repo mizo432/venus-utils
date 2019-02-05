@@ -172,7 +172,6 @@ public abstract class Converter<A, B> implements Function<A, B> {
     @Nullable
     B correctedDoForward(@Nullable A a) {
         if (handleNullAutomatically) {
-            // TODO(kevinb): we shouldn't be checking for a null result at runtime. Assert?
             return a == null ? null : checkNotNull(doForward(a));
         } else {
             return doForward(a);
@@ -182,7 +181,6 @@ public abstract class Converter<A, B> implements Function<A, B> {
     @Nullable
     A correctedDoBackward(@Nullable B b) {
         if (handleNullAutomatically) {
-            // TODO(kevinb): we shouldn't be checking for a null result at runtime. Assert?
             return b == null ? null : checkNotNull(doBackward(b));
         } else {
             return doBackward(b);

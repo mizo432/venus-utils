@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2017 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.primitives;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -125,8 +111,6 @@ public final class ImmutableIntArray implements Serializable {
     public static ImmutableIntArray of(int e0, int e1, int e2, int e3, int e4, int e5) {
         return new ImmutableIntArray(new int[] {e0, e1, e2, e3, e4, e5});
     }
-
-    // TODO(kevinb): go up to 11?
 
     /**
      * Returns an immutable array containing the given values, in order.
@@ -290,7 +274,7 @@ public final class ImmutableIntArray implements Serializable {
         }
 
         private void ensureRoomFor(int numberToAdd) {
-            int newCount = count + numberToAdd; // TODO(kevinb): check overflow now?
+            int newCount = count + numberToAdd;
             if (newCount > array.length) {
                 int[] newArray = new int[expandedCapacity(array.length, newCount)];
                 System.arraycopy(array, 0, newArray, 0, count);
@@ -334,12 +318,6 @@ public final class ImmutableIntArray implements Serializable {
     // it doesn't escape this class
     @SuppressWarnings("Immutable")
     private final int[] array;
-
-    /*
-     * TODO(kevinb): evaluate the trade-offs of going bimorphic to save these two fields from most
-     * instances. Note that the instances that would get smaller are the right set to care about
-     * optimizing, because the rest have the option of calling `trimmed`.
-     */
 
     private final transient int start; // it happens that we only serialize instances where this is 0
     private final int end; // exclusive

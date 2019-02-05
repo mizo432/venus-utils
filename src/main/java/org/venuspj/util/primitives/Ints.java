@@ -135,7 +135,6 @@ public final class Ints {
         return indexOf(array, target, 0, array.length);
     }
 
-    // TODO(kevinb): consider making this public
     private static int indexOf(int[] array, int target, int start, int end) {
         for (int i = start; i < end; i++) {
             if (array[i] == target) {
@@ -186,7 +185,6 @@ public final class Ints {
         return lastIndexOf(array, target, 0, array.length);
     }
 
-    // TODO(kevinb): consider making this public
     private static int lastIndexOf(int[] array, int target, int start, int end) {
         for (int i = end - 1; i >= start; i--) {
             if (array[i] == target) {

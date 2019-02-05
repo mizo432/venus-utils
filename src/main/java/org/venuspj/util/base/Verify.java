@@ -487,7 +487,6 @@ public final class Verify {
         return reference;
     }
 
-    // TODO(kevinb): consider <T> T verifySingleton(Iterable<T>) to take over for
     // Iterables.getOnlyElement()
 
     private Verify() {}

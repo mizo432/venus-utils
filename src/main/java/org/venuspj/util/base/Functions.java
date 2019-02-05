@@ -200,7 +200,6 @@ public final class Functions {
 
         @Override
         public String toString() {
-            // TODO(cpovirk): maybe remove "defaultValue=" to make this look like the method call does
             return "Functions.forMap(" + map + ", defaultValue=" + defaultValue + ")";
         }
 
@@ -253,7 +252,6 @@ public final class Functions {
 
         @Override
         public String toString() {
-            // TODO(cpovirk): maybe make this look like the method call does ("Functions.compose(...)")
             return g + "(" + f + ")";
         }
 

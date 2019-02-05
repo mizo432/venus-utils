@@ -43,7 +43,7 @@ import org.venuspj.util.annotations.GwtCompatible;
 @FunctionalInterface
 public interface Function<F, T> extends java.util.function.Function<F, T> {
     @Override
-    @CanIgnoreReturnValue // TODO(kevinb): remove this
+    @CanIgnoreReturnValue
     @Nullable
     T apply(@Nullable F input);
 
