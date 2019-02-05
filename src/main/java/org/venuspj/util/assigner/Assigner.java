@@ -1,7 +1,11 @@
 package org.venuspj.util.assigner;
 
 
+import org.venuspj.exception.NoSuchConstructorRuntimeException;
+import org.venuspj.util.lang.Classes;
+
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +13,7 @@ import java.util.Optional;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 
 /**
+ *
  */
 public class Assigner {
     /**
@@ -24,11 +29,13 @@ public class Assigner {
     @SuppressWarnings("unchecked")
     public static <T> T assign(T sender) {
         try {
-            T destination = (T) sender.getClass().newInstance();
+            T destination = (T) sender.getClass().getConstructor().newInstance();
             assignTo(sender, destination);
             return destination;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
+        } catch (NoSuchMethodException | InvocationTargetException e) {
+            throw new NoSuchConstructorRuntimeException(sender.getClass(), Classes.empty(), e);
         }
 
     }
@@ -86,9 +93,7 @@ public class Assigner {
      * @param <T>            相性のクラス
      */
     public static <T> void assignTo(Optional<T> senderOptional, T destination) {
-        if (senderOptional.isPresent()) {
-            assignTo(senderOptional.get(), destination);
-        }
+        senderOptional.ifPresent(t -> assignTo(t, destination));
     }
 
     /**
@@ -104,7 +109,7 @@ public class Assigner {
             try {
                 Field[] fields = clazz.getDeclaredFields();
                 results.addAll(Arrays.asList(fields));
-            } catch (SecurityException ex) {
+            } catch (SecurityException ignored) {
             }
         }
 

@@ -576,4 +576,7 @@ public abstract class Classes {
         return s1 + '.' + s2;
     }
 
+    public static Class<?>[] empty(){
+        return new Class[0];
+    }
 }
