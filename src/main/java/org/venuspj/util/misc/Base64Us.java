@@ -8,16 +8,17 @@ import org.venuspj.util.strings2.Strings2;
  */
 public abstract class Base64Us {
 
-    private static final char[] ENCODE_TABLE = { 'A', 'B', 'C', 'D', 'E', 'F',
+    private static final char[] ENCODE_TABLE = {'A', 'B', 'C', 'D', 'E', 'F',
             'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
             'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
             'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
             'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            '+', '/' };
+            '+', '/'};
 
     private static final char PAD = '=';
 
     private static final byte[] DECODE_TABLE = new byte[128];
+
     static {
         for (int i = 0; i < DECODE_TABLE.length; i++) {
             DECODE_TABLE[i] = Byte.MAX_VALUE;
@@ -30,8 +31,7 @@ public abstract class Base64Us {
     /**
      * Base64でエンコードします。
      *
-     * @param inData
-     *            エンコードするデータ
+     * @param inData エンコードするデータ
      * @return エンコードされたデータ
      */
     public static String encode(final byte[] inData) {
@@ -60,8 +60,7 @@ public abstract class Base64Us {
     /**
      * Base64でエンコードされたデータをデコードします。
      *
-     * @param inData
-     *            デコードするデータ
+     * @param inData デコードするデータ
      * @return デコードされたデータ
      */
     public static byte[] decode(final String inData) {

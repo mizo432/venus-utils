@@ -15,7 +15,6 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Class}用のユーティリティクラスです。
- *
  */
 public abstract class Classes {
 
@@ -576,7 +575,7 @@ public abstract class Classes {
         return s1 + '.' + s2;
     }
 
-    public static Class<?>[] empty(){
+    public static Class<?>[] empty() {
         return new Class[0];
     }
 }

@@ -50,6 +50,7 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
         final boolean isReusable() {
             return false;
         }
+
         private static final long serialVersionUID = 0;
 
 
@@ -72,6 +73,7 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
         ImmutableMapEntry<K, V> getNextInValueBucket() {
             return nextInValueBucket;
         }
+
         private static final long serialVersionUID = 0;
 
     }

@@ -16,37 +16,47 @@ import static org.venuspj.util.misc.Assertions.assertState;
 /**
  * 配列の性質を併せ持つ {@link Map}です。
  *
- * @author higa
- * @param <K>
- *            キーの型
- * @param <V>
- *            値の型
- *
+ * @param <K> キーの型
+ * @param <V> 値の型
  */
 public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
         Cloneable, Externalizable {
 
     private static final long serialVersionUID = 1L;
 
-    /** 初期容量のデフォルト値 */
+    /**
+     * 初期容量のデフォルト値
+     */
     public static final int INITIAL_CAPACITY = 17;
 
-    /** 負荷係数のデフォルト値 */
+    /**
+     * 負荷係数のデフォルト値
+     */
     public static final float LOAD_FACTOR = 0.75f;
 
-    /** 負荷係数 */
+    /**
+     * 負荷係数
+     */
     protected transient int threshold;
 
-    /** マップとしてのエントリ */
+    /**
+     * マップとしてのエントリ
+     */
     protected transient Entry<K, V>[] mapTable;
 
-    /** 配列としてのエントリ */
+    /**
+     * 配列としてのエントリ
+     */
     protected transient Entry<K, V>[] listTable;
 
-    /** 要素数 */
+    /**
+     * 要素数
+     */
     protected transient int size = 0;
 
-    /** {@link Set}としてのビュー */
+    /**
+     * {@link Set}としてのビュー
+     */
     protected transient Set<? extends Map.Entry<K, V>> entrySet = null;
 
     /**
@@ -59,8 +69,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * 指定された初期容量を持つインスタンスを構築します。
      *
-     * @param initialCapacity
-     *            初期容量
+     * @param initialCapacity 初期容量
      */
     @SuppressWarnings("unchecked")
     public ArrayMap(int initialCapacity) {
@@ -75,8 +84,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * 指定された{@link Map}と同じマッピングでインスタンスを構築します。
      *
-     * @param map
-     *            マッピングがこのマップに配置されるマップ
+     * @param map マッピングがこのマップに配置されるマップ
      */
     public ArrayMap(final Map<? extends K, ? extends V> map) {
         this((int) (map.size() / LOAD_FACTOR) + 1);
@@ -101,8 +109,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * 値に対するインデックスを返します。
      *
-     * @param value
-     *            値
+     * @param value 値
      * @return 値に対するインデックス。値が含まれていない場合は{@literal -1}
      */
     public int indexOf(final Object value) {
@@ -167,8 +174,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * インデックスで指定された位置の値を返します。
      *
-     * @param index
-     *            インデックス
+     * @param index インデックス
      * @return インデックスで指定された位置の値
      */
     public V getAt(final int index) {
@@ -178,8 +184,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * インデックスで指定された位置のキーを返します。
      *
-     * @param index
-     *            インデックス
+     * @param index インデックス
      * @return インデックスで指定された位置のキー
      */
     public K getKeyAt(final int index) {
@@ -189,8 +194,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * インデックスで指定された位置の{@link Map.Entry}を返します。
      *
-     * @param index
-     *            インデックス
+     * @param index インデックス
      * @return インデックスで指定された位置の{@link java.util.Map.Entry}
      */
     public Map.Entry<K, V> getEntryAt(final int index) {
@@ -230,10 +234,8 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * インデックスで指定された位置に値を設定します。
      *
-     * @param index
-     *            インデックス
-     * @param value
-     *            値
+     * @param index インデックス
+     * @param value 値
      */
     public void setAt(final int index, final V value) {
         getEntryAt(index).setValue(value);
@@ -254,8 +256,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * インデックスで指定された位置のエントリを削除します。
      *
-     * @param index
-     *            インデックス
+     * @param index インデックス
      * @return インデックスで指定された位置にあったエントリの値
      */
     public V removeAt(final int index) {
@@ -300,13 +301,11 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * 配列に変換します。
      *
-     * @param proto
-     *            要素の格納先の配列。配列のサイズが十分でない場合は、同じ実行時の型で新しい配列が格納用として割り当てられる
+     * @param proto 要素の格納先の配列。配列のサイズが十分でない場合は、同じ実行時の型で新しい配列が格納用として割り当てられる
      * @return 配列
      */
     public V[] toArray(final V[] proto) {
-        @SuppressWarnings("unchecked")
-        final V[] array =
+        @SuppressWarnings("unchecked") final V[] array =
                 proto.length >= size ? proto : (V[]) Array.newInstance(proto
                         .getClass()
                         .getComponentType(), size);
@@ -327,8 +326,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
         if (!(o instanceof ArrayMap)) {
             return false;
         }
-        @SuppressWarnings("unchecked")
-        final ArrayMap<K, V> e = (ArrayMap<K, V>) o;
+        @SuppressWarnings("unchecked") final ArrayMap<K, V> e = (ArrayMap<K, V>) o;
         if (size != e.size) {
             return false;
         }
@@ -434,8 +432,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * エントリのインデックスを返します。
      *
-     * @param entry
-     *            エントリ
+     * @param entry エントリ
      * @return エントリのインデックス
      */
     protected int entryIndexOf(final Entry<K, V> entry) {
@@ -450,8 +447,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * キーで指定されたエントリをマップのエントリから削除します。
      *
-     * @param key
-     *            キー
+     * @param key キー
      * @return 削除されたエントリ。キーに対応するエントリがなかった場合は{@literal null}
      */
     protected Entry<K, V> removeMap(final Object key) {
@@ -491,8 +487,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * インデックスで指定されたエントリをリストのエントリから削除します。
      *
-     * @param index
-     *            削除するエントリのインデックス
+     * @param index 削除するエントリのインデックス
      * @return 削除されたエントリ
      */
     protected Entry<K, V> removeList(final int index) {
@@ -512,10 +507,8 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
         if (size >= threshold) {
             final Entry<K, V>[] oldTable = listTable;
             final int newCapacity = oldTable.length * 2 + 1;
-            @SuppressWarnings("unchecked")
-            final Entry<K, V>[] newMapTable = new Entry[newCapacity];
-            @SuppressWarnings("unchecked")
-            final Entry<K, V>[] newListTable = new Entry[newCapacity];
+            @SuppressWarnings("unchecked") final Entry<K, V>[] newMapTable = new Entry[newCapacity];
+            @SuppressWarnings("unchecked") final Entry<K, V>[] newListTable = new Entry[newCapacity];
             threshold = (int) (newCapacity * LOAD_FACTOR);
             System.arraycopy(oldTable, 0, newListTable, 0, size);
             for (int i = 0; i < size; i++) {
@@ -534,10 +527,8 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * エントリの値を新しい値で置き換えます。
      *
-     * @param entry
-     *            エントリ
-     * @param value
-     *            エントリの新しい値
+     * @param entry エントリ
+     * @param value エントリの新しい値
      * @return エントリの置き換えられる前の値
      */
     protected V swapValue(final Entry<K, V> entry, final V value) {
@@ -551,10 +542,14 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
      */
     protected class ArrayMapIterator implements Iterator<Entry<K, V>> {
 
-        /** 現在のインデックス */
+        /**
+         * 現在のインデックス
+         */
         protected int current = 0;
 
-        /** 最後にアクセスした要素のインデックス */
+        /**
+         * 最後にアクセスした要素のインデックス
+         */
         protected int last = -1;
 
         @Override
@@ -587,26 +582,32 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
     /**
      * {@link ArrayMap}の{@link Map.Entry}です。
      *
-     * @param <K>
-     *            キーの型
-     * @param <V>
-     *            キーの値
+     * @param <K> キーの型
+     * @param <V> キーの値
      */
     protected static class Entry<K, V> implements Map.Entry<K, V>,
             Externalizable {
 
         private static final long serialVersionUID = -6625980241350717177L;
 
-        /** ハッシュ値 */
+        /**
+         * ハッシュ値
+         */
         protected transient int hashCode;
 
-        /** キー */
+        /**
+         * キー
+         */
         protected transient K key;
 
-        /** 値 */
+        /**
+         * 値
+         */
         protected transient V value;
 
-        /** 次のエントリ */
+        /**
+         * 次のエントリ
+         */
         protected transient Entry<K, V> next;
 
         /**
@@ -618,14 +619,10 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
         /**
          * インスタンスを構築します。
          *
-         * @param hashCode
-         *            ハッシュ値
-         * @param key
-         *            キー
-         * @param value
-         *            値
-         * @param next
-         *            次のエントリ
+         * @param hashCode ハッシュ値
+         * @param key      キー
+         * @param value    値
+         * @param next     次のエントリ
          */
         public Entry(final int hashCode, final K key, final V value,
                      final Entry<K, V> next) {
@@ -669,8 +666,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
             if (!(o instanceof Entry)) {
                 return false;
             }
-            @SuppressWarnings("unchecked")
-            final Entry<K, V> e = (Entry<K, V>) o;
+            @SuppressWarnings("unchecked") final Entry<K, V> e = (Entry<K, V>) o;
             return (key != null ? key.equals(e.key) : e.key == null)
                     && (value != null ? value.equals(e.value) : e.value == null);
         }

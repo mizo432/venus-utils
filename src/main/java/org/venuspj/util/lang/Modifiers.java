@@ -14,8 +14,7 @@ public abstract class Modifiers {
     /**
      * <code>public</code>かどうか返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return パブリックかどうか
      */
     public static boolean isPublic(final Method method) {
@@ -27,8 +26,7 @@ public abstract class Modifiers {
     /**
      * <code>public</code>かどうか返します。
      *
-     * @param field
-     *            フィールド。{@literal null}であってはいけません
+     * @param field フィールド。{@literal null}であってはいけません
      * @return パブリックかどうか
      */
     public static boolean isPublic(final Field field) {
@@ -40,8 +38,7 @@ public abstract class Modifiers {
     /**
      * <code>public</code>,<code>static</code>,<code>final</code>かどうか返します。
      *
-     * @param field
-     *            フィールド。{@literal null}であってはいけません
+     * @param field フィールド。{@literal null}であってはいけません
      * @return <code>public</code>,<code>static</code>,<code>final</code>かどうか
      */
     public static boolean isPublicStaticFinalField(final Field field) {
@@ -53,8 +50,7 @@ public abstract class Modifiers {
     /**
      * <code>public</code>,<code>static</code>,<code>final</code>かどうか返します。
      *
-     * @param modifier
-     *            モディファイヤ
+     * @param modifier モディファイヤ
      * @return <code>public</code>,<code>static</code>,<code>final</code>かどうか
      */
     public static boolean isPublicStaticFinal(final int modifier) {
@@ -64,8 +60,7 @@ public abstract class Modifiers {
     /**
      * <code>public</code>かどうか返します。
      *
-     * @param modifier
-     *            モディファイヤ
+     * @param modifier モディファイヤ
      * @return <code>public</code>かどうか
      */
     public static boolean isPublic(final int modifier) {
@@ -75,8 +70,7 @@ public abstract class Modifiers {
     /**
      * <code>abstract</code>かどうか返します。
      *
-     * @param clazz
-     *            クラス。{@literal null}であってはいけません
+     * @param clazz クラス。{@literal null}であってはいけません
      * @return <code>abstract</code>なら{@literal true}
      */
     public static boolean isAbstract(final Class<?> clazz) {
@@ -88,8 +82,7 @@ public abstract class Modifiers {
     /**
      * <code>abstract</code>かどうか返します。
      *
-     * @param modifier
-     *            モディファイヤ
+     * @param modifier モディファイヤ
      * @return <code>abstract</code>なら{@literal true}
      */
     public static boolean isAbstract(final int modifier) {
@@ -99,8 +92,7 @@ public abstract class Modifiers {
     /**
      * <code>static</code>かどうか返します。
      *
-     * @param modifier
-     *            モディファイヤ
+     * @param modifier モディファイヤ
      * @return <code>static</code>なら{@literal true}
      */
     public static boolean isStatic(final int modifier) {
@@ -110,8 +102,7 @@ public abstract class Modifiers {
     /**
      * <code>final</code>かどうか返します。
      *
-     * @param modifier
-     *            モディファイヤ
+     * @param modifier モディファイヤ
      * @return <code>final</code>なら{@literal true}
      */
     public static boolean isFinal(final int modifier) {
@@ -121,8 +112,7 @@ public abstract class Modifiers {
     /**
      * <code>final</code>かどうか返します。
      *
-     * @param method
-     *            メソッド
+     * @param method メソッド
      * @return <code>final</code>なら{@literal true}
      */
     public static boolean isFinal(final Method method) {
@@ -132,8 +122,7 @@ public abstract class Modifiers {
     /**
      * <code>transient</code>かどうか返します。
      *
-     * @param field
-     *            フィールド
+     * @param field フィールド
      * @return <code>transient</code>なら{@literal true}
      * @see #isTransient(int)
      */
@@ -144,8 +133,7 @@ public abstract class Modifiers {
     /**
      * <code>transient</code>かどうか返します。
      *
-     * @param modifier
-     *            モディファイヤ
+     * @param modifier モディファイヤ
      * @return <code>transient</code>なら{@literal true}
      */
     public static boolean isTransient(final int modifier) {
@@ -155,8 +143,7 @@ public abstract class Modifiers {
     /**
      * インスタンスフィールドかどうかを返します。
      *
-     * @param field
-     *            フィールド。{@literal null}であってはいけません
+     * @param field フィールド。{@literal null}であってはいけません
      * @return インスタンスフィールドなら{@literal true}
      */
     public static boolean isInstanceField(final Field field) {

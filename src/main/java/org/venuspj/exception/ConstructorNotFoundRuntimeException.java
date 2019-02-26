@@ -20,10 +20,8 @@ public class ConstructorNotFoundRuntimeException extends VRuntimeException {
     /**
      * {@link ConstructorNotFoundRuntimeException}を作成します。
      *
-     * @param targetClass
-     *            ターゲットクラス
-     * @param methodArgs
-     *            引数の並び
+     * @param targetClass ターゲットクラス
+     * @param methodArgs  引数の並び
      */
     public ConstructorNotFoundRuntimeException(final Class<?> targetClass,
                                                final Object[] methodArgs) {
@@ -38,10 +36,8 @@ public class ConstructorNotFoundRuntimeException extends VRuntimeException {
     /**
      * {@link ConstructorNotFoundRuntimeException}を作成します。
      *
-     * @param targetClass
-     *            ターゲットクラス
-     * @param paramTypes
-     *            引数型の並び
+     * @param targetClass ターゲットクラス
+     * @param paramTypes  引数型の並び
      */
     public ConstructorNotFoundRuntimeException(final Class<?> targetClass,
                                                final Class<?>[] paramTypes) {

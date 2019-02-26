@@ -43,6 +43,7 @@ public final class Iterators {
             }
         };
     }
+
     @SafeVarargs
     public static <T> UnmodifiableIterator<T> forArray(final T... array) {
         return forArray(array, 0, array.length, 0);
@@ -60,6 +61,7 @@ public final class Iterators {
         }
         return new ArrayItr<T>(array, offset, length, index);
     }
+
     public static boolean elementsEqual(Iterator<?> iterator1, Iterator<?> iterator2) {
         while (iterator1.hasNext()) {
             if (!iterator2.hasNext()) {

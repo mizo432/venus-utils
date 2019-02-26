@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2009 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.annotations;
 
 import java.lang.annotation.Documented;
@@ -53,10 +39,6 @@ import java.lang.annotation.Target;
  * to return a value with a GWT serializable type.
  *
  * <p>Note that a {@code GwtCompatible} type may have some {@link GwtIncompatible} methods.
- *
- *
- * @author Charles Fry
- * @author Hayward Chan
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.TYPE, ElementType.METHOD})
@@ -69,8 +51,8 @@ public @interface GwtCompatible {
      * serializable.
      *
      * @see <a href=
-     *     "http://code.google.com/webtoolkit/doc/latest/DevGuideServerCommunication.html#DevGuideSerializableTypes">
-     *     Documentation about GWT serialization</a>
+     * "http://code.google.com/webtoolkit/doc/latest/DevGuideServerCommunication.html#DevGuideSerializableTypes">
+     * Documentation about GWT serialization</a>
      */
     boolean serializable() default false;
 
@@ -79,8 +61,8 @@ public @interface GwtCompatible {
      * super-source) is different from the implementation used by the JVM.
      *
      * @see <a href=
-     *     "http://code.google.com/webtoolkit/doc/latest/DevGuideOrganizingProjects.html#DevGuideModules">
-     *     Documentation about GWT emulated source</a>
+     * "http://code.google.com/webtoolkit/doc/latest/DevGuideOrganizingProjects.html#DevGuideModules">
+     * Documentation about GWT emulated source</a>
      */
     boolean emulated() default false;
 }

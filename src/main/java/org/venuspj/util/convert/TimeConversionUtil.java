@@ -18,7 +18,6 @@ import static org.venuspj.util.strings2.Strings2.isNotEmpty;
 
 /**
  * タイム用の変換ユーティリティです。
- *
  */
 public class TimeConversionUtil {
 
@@ -31,8 +30,7 @@ public class TimeConversionUtil {
     /**
      * タイムに変換します。
      *
-     * @param o
-     *            変換したいオブジェクト
+     * @param o 変換したいオブジェクト
      * @return タイム
      */
     public static Time toTime(Object o) {
@@ -42,10 +40,8 @@ public class TimeConversionUtil {
     /**
      * タイムに変換します。
      *
-     * @param o
-     *            変換したいオブジェクト
-     * @param pattern
-     *            パターン
+     * @param o       変換したいオブジェクト
+     * @param pattern パターン
      * @return タイム
      */
     public static Time toTime(Object o, String pattern) {
@@ -65,10 +61,8 @@ public class TimeConversionUtil {
     /**
      * タイムに変換します。
      *
-     * @param s
-     *            文字列で表現した値
-     * @param pattern
-     *            パターン
+     * @param s       文字列で表現した値
+     * @param pattern パターン
      * @return 変換した値
      */
     public static Time toTime(String s, String pattern) {
@@ -78,12 +72,9 @@ public class TimeConversionUtil {
     /**
      * タイムに変換します。
      *
-     * @param s
-     *            文字列で表現した値
-     * @param pattern
-     *            パターン
-     * @param locale
-     *            ロケール
+     * @param s       文字列で表現した値
+     * @param pattern パターン
+     * @param locale  ロケール
      * @return 変換した値
      */
     public static Time toTime(String s, String pattern, Locale locale) {
@@ -101,12 +92,9 @@ public class TimeConversionUtil {
     /**
      * 日付フォーマットを返します。
      *
-     * @param s
-     *            文字列で表現した値
-     * @param pattern
-     *            パターン
-     * @param locale
-     *            ロケール
+     * @param s       文字列で表現した値
+     * @param pattern パターン
+     * @param locale  ロケール
      * @return 日付フォーマット
      */
     public static SimpleDateFormat getDateFormat(String s, String pattern,
@@ -120,10 +108,8 @@ public class TimeConversionUtil {
     /**
      * 日付フォーマットを返します。
      *
-     * @param s
-     *            文字列で表現した値
-     * @param locale
-     *            ロケール
+     * @param s      文字列で表現した値
+     * @param locale ロケール
      * @return 日付フォーマット
      */
     public static SimpleDateFormat getDateFormat(String s, Locale locale) {
@@ -151,8 +137,7 @@ public class TimeConversionUtil {
     /**
      * 短いパターンに変換します。
      *
-     * @param pattern
-     *            パターン
+     * @param pattern パターン
      * @return 短いパターン
      */
     public static String convertShortPattern(String pattern) {
@@ -169,22 +154,19 @@ public class TimeConversionUtil {
     /**
      * オブジェクトを{@link Time}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
+     * @param src 変換元のオブジェクト
      * @return 変換された{@link Time}
      */
     public static Time toSqlTime(final Object src) {
         return toSqlTime(src, null, Locale.getDefault());
     }
+
     /**
      * オブジェクトを{@link Time}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
-     * @param locale
-     *            ロケール
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
+     * @param locale  ロケール
      * @return 変換された{@link Time}
      */
     protected static Time toSqlTime(final Object src, final String pattern,
@@ -223,11 +205,11 @@ public class TimeConversionUtil {
         }
         throw new ParseRuntimeException(str);
     }
+
     /**
      * 文字列を{@link Time}に変換します。
      *
-     * @param str
-     *            文字列
+     * @param str 文字列
      * @return 変換された{@link Time}
      */
     protected static Time toSqlTimeJdbcEscape(final String str) {
@@ -237,13 +219,12 @@ public class TimeConversionUtil {
             return null;
         }
     }
+
     /**
      * オブジェクトを{@link Time}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@link Time}
      */
     public static Time toSqlTime(final Object src, final String pattern) {
@@ -253,10 +234,8 @@ public class TimeConversionUtil {
     /**
      * 文字列を{@link Date}に変換します。
      *
-     * @param str
-     *            文字列
-     * @param locale
-     *            ロケール
+     * @param str    文字列
+     * @param locale ロケール
      * @return 変換された{@link Date}
      */
     @SuppressWarnings("unchecked")
@@ -274,13 +253,12 @@ public class TimeConversionUtil {
         }
         return null;
     }
+
     /**
      * 文字列を{@link Date}に変換します。
      *
-     * @param str
-     *            文字列
-     * @param format
-     *            {@link DateFormat}
+     * @param str    文字列
+     * @param format {@link DateFormat}
      * @return 変換された{@link Date}
      */
     protected static Date toDate(final String str, final DateFormat format) {
@@ -302,47 +280,42 @@ public class TimeConversionUtil {
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
+     * @param src 変換元のオブジェクト
      * @return 変換された{@link Date}
      */
     public static Date toDate(final Object src) {
         return toDate(src, null, Locale.getDefault());
     }
+
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@link Date}
      */
     public static Date toDate(final Object src, final String pattern) {
         return toDate(src, pattern, Locale.getDefault());
     }
+
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param src    変換元のオブジェクト
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return 変換された{@link Date}
      */
     public static Date toDate(final Object src, final Locale locale) {
         assertArgumentNotNull("locale", locale);
         return toDate(src, null, locale);
     }
+
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
-     * @param locale
-     *            ロケール
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
+     * @param locale  ロケール
      * @return 変換された{@link Date}
      */
     protected static Date toDate(final Object src, final String pattern,

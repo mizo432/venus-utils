@@ -20,10 +20,8 @@ public abstract class Genericses {
      * <code>type</code>の原型が<code>clazz</code>に代入可能であれば<code>true</code>を、
      * それ以外の場合は<code>false</code>を返します。
      *
-     * @param type
-     *            タイプ。{@literal null}であってはいけません
-     * @param clazz
-     *            クラス。{@literal null}であってはいけません
+     * @param type  タイプ。{@literal null}であってはいけません
+     * @param clazz クラス。{@literal null}であってはいけません
      * @return <code>type</code>の原型が<code>clazz</code>に代入可能であれば<code>true</code>
      */
     public static boolean isTypeOf(final Type type, final Class<?> clazz) {
@@ -51,8 +49,7 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            タイプ
+     * @param type タイプ
      * @return <code>type</code>の原型
      */
     public static Class<?> getRawClass(final Type type) {
@@ -92,8 +89,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された型でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            タイプ
+     * @param type タイプ
      * @return <code>type</code>の型引数の配列
      * @see ParameterizedType#getActualTypeArguments()
      */
@@ -115,10 +111,8 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された型でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            タイプ
-     * @param index
-     *            位置
+     * @param type  タイプ
+     * @param index 位置
      * @return 指定された位置の<code>type</code>の型引数
      */
     public static Type getGenericParameter(final Type type, final int index) {
@@ -139,8 +133,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された型の配列でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            パラメータ化された型を要素とする配列
+     * @param type パラメータ化された型を要素とする配列
      * @return パラメータ化された型を要素とする配列の要素型
      */
     public static Type getElementTypeOfArray(final Type type) {
@@ -156,8 +149,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された{@link List}でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            パラメータ化された{@link List}
+     * @param type パラメータ化された{@link List}
      * @return パラメータ化された{@link List}の要素型
      */
     public static Type getElementTypeOfCollection(final Type type) {
@@ -173,8 +165,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された{@link List}でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            パラメータ化された{@link List}
+     * @param type パラメータ化された{@link List}
      * @return パラメータ化された{@link List}の要素型
      */
     public static Type getElementTypeOfList(final Type type) {
@@ -190,8 +181,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された{@link Set}でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            パラメータ化された{@link Set}
+     * @param type パラメータ化された{@link Set}
      * @return パラメータ化された{@link Set}の要素型
      */
     public static Type getElementTypeOfSet(final Type type) {
@@ -207,8 +197,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された{@link Map}でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            パラメータ化された{@link Map}
+     * @param type パラメータ化された{@link Map}
      * @return パラメータ化された{@link Map}のキーの型
      */
     public static Type getKeyTypeOfMap(final Type type) {
@@ -224,8 +213,7 @@ public abstract class Genericses {
      * <code>type</code>がパラメータ化された{@link Map}でない場合は<code>null</code>を返します。
      * </p>
      *
-     * @param type
-     *            パラメータ化された{@link Map}
+     * @param type パラメータ化された{@link Map}
      * @return パラメータ化された{@link Map}の値の型
      */
     public static Type getValueTypeOfMap(final Type type) {
@@ -238,8 +226,7 @@ public abstract class Genericses {
     /**
      * パラメータ化された型(クラスまたはインタフェース)が持つ型変数をキー、型引数を値とする{@link Map}を返します。
      *
-     * @param clazz
-     *            パラメータ化された型(クラスまたはインタフェース)。{@literal null}であってはいけません
+     * @param clazz パラメータ化された型(クラスまたはインタフェース)。{@literal null}であってはいけません
      * @return パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      */
     public static Map<TypeVariable<?>, Type> getTypeVariableMap(
@@ -274,12 +261,9 @@ public abstract class Genericses {
     /**
      * パラメータ化された型(クラスまたはインタフェース)が持つ型変数および型引数を集めて<code>map</code>に追加します。
      *
-     * @param clazz
-     *            クラス
-     * @param type
-     *            型
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param clazz クラス
+     * @param type  型
+     * @param map   パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      */
     protected static void gatherTypeVariables(final Class<?> clazz,
                                               final Type type, final Map<TypeVariable<?>, Type> map) {
@@ -304,10 +288,8 @@ public abstract class Genericses {
     /**
      * パラメータ化された型(クラスまたはインタフェース)が持つ型変数および型引数を集めて<code>map</code>に追加します。
      *
-     * @param type
-     *            型
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type 型
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      */
     protected static void gatherTypeVariables(final Type type,
                                               final Map<TypeVariable<?>, Type> map) {
@@ -338,10 +320,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            タイプ
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type タイプ
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return <code>type</code>の実際の型
      */
     public static Class<?> getActualClass(final Type type,
@@ -388,10 +368,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            パラメータ化された型を要素とする配列
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type パラメータ化された型を要素とする配列
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return パラメータ化された型を要素とする配列の実際の要素型
      */
     public static Class<?> getActualElementClassOfArray(final Type type,
@@ -417,10 +395,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            パラメータ化された{@link Collection}
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type パラメータ化された{@link Collection}
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return パラメータ化された{@link Collection}の実際の要素型
      */
     public static Class<?> getActualElementClassOfCollection(final Type type,
@@ -443,10 +419,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            パラメータ化された{@link List}
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type パラメータ化された{@link List}
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return パラメータ化された{@link List}の実際の要素型
      */
     public static Class<?> getActualElementClassOfList(final Type type,
@@ -469,10 +443,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            パラメータ化された{@link Set}
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type パラメータ化された{@link Set}
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return パラメータ化された{@link Set}の実際の要素型
      */
     public static Class<?> getActualElementClassOfSet(final Type type,
@@ -495,10 +467,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            パラメータ化された{@link Map}
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type パラメータ化された{@link Map}
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return パラメータ化された{@link Map}のキーの実際の型
      */
     public static Class<?> getActualKeyClassOfMap(final Type type,
@@ -521,10 +491,8 @@ public abstract class Genericses {
      * <li>その他の場合は<code>null</code>を返します。</li>
      * </ul>
      *
-     * @param type
-     *            パラメータ化された{@link Map}
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type パラメータ化された{@link Map}
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return パラメータ化された{@link Map}の値の実際の型
      */
     public static Class<?> getActualValueClassOfMap(final Type type,

@@ -16,14 +16,15 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
  */
 public abstract class Disposables {
 
-    /** 登録済みの{@link Disposable} */
+    /**
+     * 登録済みの{@link Disposable}
+     */
     protected static final Deque<Disposable> disposables = Lists2.newLinkedList();
 
     /**
      * 破棄可能なリソースを登録します。
      *
-     * @param disposable
-     *            破棄可能なリソース。{@literal null}であってはいけません
+     * @param disposable 破棄可能なリソース。{@literal null}であってはいけません
      */
     public static synchronized void add(final Disposable disposable) {
         assertArgumentNotNull("disposable", disposable);
@@ -36,8 +37,7 @@ public abstract class Disposables {
      * リソースは登録された逆順に破棄されるため、先頭に登録されたリソースは最後に破棄されることになります。
      * </p>
      *
-     * @param disposable
-     *            破棄可能なリソース。{@literal null}であってはいけません
+     * @param disposable 破棄可能なリソース。{@literal null}であってはいけません
      */
     public static synchronized void addFirst(final Disposable disposable) {
         assertArgumentNotNull("disposable", disposable);
@@ -47,8 +47,7 @@ public abstract class Disposables {
     /**
      * 破棄可能なリソースを登録解除します。
      *
-     * @param disposable
-     *            破棄可能なリソース。{@literal null}であってはいけません
+     * @param disposable 破棄可能なリソース。{@literal null}であってはいけません
      */
     public static synchronized void remove(final Disposable disposable) {
         assertArgumentNotNull("disposable", disposable);

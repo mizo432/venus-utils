@@ -18,10 +18,8 @@ public class FieldNotFoundRuntimeException extends VRuntimeException {
     /**
      * {@link FieldNotFoundRuntimeException}を作成します。
      *
-     * @param targetClass
-     *            ターゲットクラス
-     * @param fieldName
-     *            フィールド名
+     * @param targetClass ターゲットクラス
+     * @param fieldName   フィールド名
      */
     public FieldNotFoundRuntimeException(final Class<?> targetClass,
                                          final String fieldName) {

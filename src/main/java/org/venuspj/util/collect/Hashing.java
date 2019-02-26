@@ -3,7 +3,8 @@ package org.venuspj.util.collect;
 import org.venuspj.util.primitives.Ints;
 
 final class Hashing {
-    private Hashing() {}
+    private Hashing() {
+    }
 
     /*
      * These should be ints, but we need to use longs to force GWT to do the multiplications with
@@ -15,16 +16,12 @@ final class Hashing {
     /*
      * This method was rewritten in Java from an intermediate step of the Murmur hash function in
      * http://code.google.com/p/smhasher/source/browse/trunk/MurmurHash3.cpp, which contained the
-     * following header:
-     *
-     * MurmurHash3 was written by Austin Appleby, and is placed in the public domain. The author
-     * hereby disclaims copyright to this source code.
      */
     static int smear(int hashCode) {
         return (int) (C2 * Integer.rotateLeft((int) (hashCode * C1), 15));
     }
 
-    static int smearedHash( Object o) {
+    static int smearedHash(Object o) {
         return smear((o == null) ? 0 : o.hashCode());
     }
 

@@ -21,9 +21,6 @@ import java.util.Iterator;
 
 /**
  * A class for arithmetic on doubles that is not covered by {@link java.lang.Math}.
- *
- * @author Louis Wasserman
- * @since 11.0
  */
 @GwtCompatible(emulated = true)
 public final class DoubleMath {
@@ -68,8 +65,7 @@ public final class DoubleMath {
             case HALF_EVEN:
                 return rint(x);
 
-            case HALF_UP:
-            {
+            case HALF_UP: {
                 double z = rint(x);
                 if (abs(x - z) == 0.5) {
                     return x + copySign(0.5, x);
@@ -78,8 +74,7 @@ public final class DoubleMath {
                 }
             }
 
-            case HALF_DOWN:
-            {
+            case HALF_DOWN: {
                 double z = rint(x);
                 if (abs(x - z) == 0.5) {
                     return x;
@@ -98,14 +93,14 @@ public final class DoubleMath {
      * mode, if possible.
      *
      * @throws ArithmeticException if
-     *     <ul>
-     *       <li>{@code x} is infinite or NaN
-     *       <li>{@code x}, after being rounded to a mathematical integer using the specified rounding
-     *           mode, is either less than {@code Integer.MIN_VALUE} or greater than {@code
-     *           Integer.MAX_VALUE}
-     *       <li>{@code x} is not a mathematical integer and {@code mode} is {@link
-     *           RoundingMode#UNNECESSARY}
-     *     </ul>
+     *                             <ul>
+     *                             <li>{@code x} is infinite or NaN
+     *                             <li>{@code x}, after being rounded to a mathematical integer using the specified rounding
+     *                             mode, is either less than {@code Integer.MIN_VALUE} or greater than {@code
+     *                             Integer.MAX_VALUE}
+     *                             <li>{@code x} is not a mathematical integer and {@code mode} is {@link
+     *                             RoundingMode#UNNECESSARY}
+     *                             </ul>
      */
     @GwtIncompatible // #roundIntermediate
     public static int roundToInt(double x, RoundingMode mode) {
@@ -122,14 +117,14 @@ public final class DoubleMath {
      * mode, if possible.
      *
      * @throws ArithmeticException if
-     *     <ul>
-     *       <li>{@code x} is infinite or NaN
-     *       <li>{@code x}, after being rounded to a mathematical integer using the specified rounding
-     *           mode, is either less than {@code Long.MIN_VALUE} or greater than {@code
-     *           Long.MAX_VALUE}
-     *       <li>{@code x} is not a mathematical integer and {@code mode} is {@link
-     *           RoundingMode#UNNECESSARY}
-     *     </ul>
+     *                             <ul>
+     *                             <li>{@code x} is infinite or NaN
+     *                             <li>{@code x}, after being rounded to a mathematical integer using the specified rounding
+     *                             mode, is either less than {@code Long.MIN_VALUE} or greater than {@code
+     *                             Long.MAX_VALUE}
+     *                             <li>{@code x} is not a mathematical integer and {@code mode} is {@link
+     *                             RoundingMode#UNNECESSARY}
+     *                             </ul>
      */
     @GwtIncompatible // #roundIntermediate
     public static long roundToLong(double x, RoundingMode mode) {
@@ -150,11 +145,11 @@ public final class DoubleMath {
      * rounding mode, if possible.
      *
      * @throws ArithmeticException if
-     *     <ul>
-     *       <li>{@code x} is infinite or NaN
-     *       <li>{@code x} is not a mathematical integer and {@code mode} is {@link
-     *           RoundingMode#UNNECESSARY}
-     *     </ul>
+     *                             <ul>
+     *                             <li>{@code x} is infinite or NaN
+     *                             <li>{@code x} is not a mathematical integer and {@code mode} is {@link
+     *                             RoundingMode#UNNECESSARY}
+     *                             </ul>
      */
     // #roundIntermediate, java.lang.Math.getExponent, com.google.common.math.DoubleUtils
     @GwtIncompatible
@@ -188,9 +183,9 @@ public final class DoubleMath {
      * <p>Special cases:
      *
      * <ul>
-     *   <li>If {@code x} is NaN or less than zero, the result is NaN.
-     *   <li>If {@code x} is positive infinity, the result is positive infinity.
-     *   <li>If {@code x} is positive or negative zero, the result is negative infinity.
+     * <li>If {@code x} is NaN or less than zero, the result is NaN.
+     * <li>If {@code x} is positive infinity, the result is positive infinity.
+     * <li>If {@code x} is positive or negative zero, the result is negative infinity.
      * </ul>
      *
      * <p>The computed result is within 1 ulp of the exact result.
@@ -209,7 +204,7 @@ public final class DoubleMath {
      * <p>Regardless of the rounding mode, this is faster than {@code (int) log2(x)}.
      *
      * @throws IllegalArgumentException if {@code x <= 0.0}, {@code x} is NaN, or {@code x} is
-     *     infinite
+     *                                  infinite
      */
     @GwtIncompatible // java.lang.Math.getExponent, com.google.common.math.DoubleUtils
     @SuppressWarnings("fallthrough")
@@ -291,7 +286,8 @@ public final class DoubleMath {
         }
     }
 
-    @VisibleForTesting static final int MAX_FACTORIAL = 170;
+    @VisibleForTesting
+    static final int MAX_FACTORIAL = 170;
 
     @VisibleForTesting
     static final double[] everySixteenthFactorial = {
@@ -317,14 +313,14 @@ public final class DoubleMath {
      * <p>Notable special cases include:
      *
      * <ul>
-     *   <li>All NaNs are fuzzily equal.
-     *   <li>If {@code a == b}, then {@code a} and {@code b} are always fuzzily equal.
-     *   <li>Positive and negative zero are always fuzzily equal.
-     *   <li>If {@code tolerance} is zero, and neither {@code a} nor {@code b} is NaN, then {@code a}
-     *       and {@code b} are fuzzily equal if and only if {@code a == b}.
-     *   <li>With {@link Double#POSITIVE_INFINITY} tolerance, all non-NaN values are fuzzily equal.
-     *   <li>With finite tolerance, {@code Double.POSITIVE_INFINITY} and {@code
-     *       Double.NEGATIVE_INFINITY} are fuzzily equal only to themselves.
+     * <li>All NaNs are fuzzily equal.
+     * <li>If {@code a == b}, then {@code a} and {@code b} are always fuzzily equal.
+     * <li>Positive and negative zero are always fuzzily equal.
+     * <li>If {@code tolerance} is zero, and neither {@code a} nor {@code b} is NaN, then {@code a}
+     * and {@code b} are fuzzily equal if and only if {@code a == b}.
+     * <li>With {@link Double#POSITIVE_INFINITY} tolerance, all non-NaN values are fuzzily equal.
+     * <li>With finite tolerance, {@code Double.POSITIVE_INFINITY} and {@code
+     * Double.NEGATIVE_INFINITY} are fuzzily equal only to themselves.
      * </ul>
      *
      * <p>This is reflexive and symmetric, but <em>not</em> transitive, so it is <em>not</em> an
@@ -377,7 +373,7 @@ public final class DoubleMath {
      * @param values a nonempty series of values
      * @throws IllegalArgumentException if {@code values} is empty or contains any non-finite value
      * @deprecated Use {@link Stats#meanOf} instead, noting the less strict handling of non-finite
-     *     values.
+     * values.
      */
     @Deprecated
     // com.google.common.math.DoubleUtils
@@ -405,7 +401,7 @@ public final class DoubleMath {
      * @param values a nonempty series of values
      * @throws IllegalArgumentException if {@code values} is empty
      * @deprecated Use {@link Stats#meanOf} instead, noting the less strict handling of non-finite
-     *     values.
+     * values.
      */
     @Deprecated
     public static double mean(int... values) {
@@ -428,10 +424,10 @@ public final class DoubleMath {
      * the arithmetic mean of the population.
      *
      * @param values a nonempty series of values, which will be converted to {@code double} values
-     *     (this may cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
+     *               (this may cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
      * @throws IllegalArgumentException if {@code values} is empty
      * @deprecated Use {@link Stats#meanOf} instead, noting the less strict handling of non-finite
-     *     values.
+     * values.
      */
     @Deprecated
     public static double mean(long... values) {
@@ -454,10 +450,10 @@ public final class DoubleMath {
      * the arithmetic mean of the population.
      *
      * @param values a nonempty series of values, which will be converted to {@code double} values
-     *     (this may cause loss of precision)
+     *               (this may cause loss of precision)
      * @throws IllegalArgumentException if {@code values} is empty or contains any non-finite value
      * @deprecated Use {@link Stats#meanOf} instead, noting the less strict handling of non-finite
-     *     values.
+     * values.
      */
     @Deprecated
     // com.google.common.math.DoubleUtils
@@ -474,10 +470,10 @@ public final class DoubleMath {
      * the arithmetic mean of the population.
      *
      * @param values a nonempty series of values, which will be converted to {@code double} values
-     *     (this may cause loss of precision)
+     *               (this may cause loss of precision)
      * @throws IllegalArgumentException if {@code values} is empty or contains any non-finite value
      * @deprecated Use {@link Stats#meanOf} instead, noting the less strict handling of non-finite
-     *     values.
+     * values.
      */
     @Deprecated
     // com.google.common.math.DoubleUtils
@@ -502,5 +498,6 @@ public final class DoubleMath {
         return argument;
     }
 
-    private DoubleMath() {}
+    private DoubleMath() {
+    }
 }

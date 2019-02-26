@@ -16,12 +16,11 @@ import java.math.BigInteger;
 
 /**
  * Utilities for {@code double} primitives.
- *
- * @author Louis Wasserman
  */
 @GwtIncompatible
 final class DoubleUtils {
-    private DoubleUtils() {}
+    private DoubleUtils() {
+    }
 
     static double nextDown(double d) {
         return -Math.nextUp(-d);
@@ -43,7 +42,9 @@ final class DoubleUtils {
 
     static final int EXPONENT_BIAS = 1023;
 
-    /** The implicit 1 bit that is omitted in significands of normal doubles. */
+    /**
+     * The implicit 1 bit that is omitted in significands of normal doubles.
+     */
     static final long IMPLICIT_BIT = SIGNIFICAND_MASK + 1;
 
     static long getSignificand(double d) {
@@ -115,7 +116,9 @@ final class DoubleUtils {
         return longBitsToDouble(bits);
     }
 
-    /** Returns its argument if it is non-negative, zero if it is negative. */
+    /**
+     * Returns its argument if it is non-negative, zero if it is negative.
+     */
     static double ensureNonNegative(double value) {
         checkArgument(!isNaN(value));
         if (value > 0.0) {

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ *
  */
 public final class Collections3 {
 

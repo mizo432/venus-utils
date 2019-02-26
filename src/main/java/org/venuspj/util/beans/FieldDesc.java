@@ -33,8 +33,7 @@ public interface FieldDesc {
     /**
      * フィールドの型を返します。
      *
-     * @param <T>
-     *            フィールドの型
+     * @param <T> フィールドの型
      * @return フィールドの型
      */
     <T> Class<T> getFieldType();
@@ -78,7 +77,7 @@ public interface FieldDesc {
      * このフィールドがパラメタ化された{@link Collection}の場合、その要素型を返します。
      *
      * @return このフィールドがパラメタ化された{@link Collection}の場合はその要素型、そうでない場合は
-     *         {@literal null}
+     * {@literal null}
      */
     Class<?> getElementClassOfCollection();
 
@@ -99,10 +98,8 @@ public interface FieldDesc {
     /**
      * {@link Field}の値を返します。
      *
-     * @param <T>
-     *            フィールドの型
-     * @param target
-     *            対象のオブジェクト。{@literal null}であってはいけません
+     * @param <T>    フィールドの型
+     * @param target 対象のオブジェクト。{@literal null}であってはいけません
      * @return {@link Field}の値
      */
     <T> T getFieldValue(Object target);
@@ -110,8 +107,7 @@ public interface FieldDesc {
     /**
      * staticな{@link Field}の値を返します。
      *
-     * @param <T>
-     *            フィールドの型
+     * @param <T> フィールドの型
      * @return {@link Field}の値
      */
     <T> T getStaticFieldValue();
@@ -119,18 +115,15 @@ public interface FieldDesc {
     /**
      * {@link Field}の値を設定します。
      *
-     * @param target
-     *            対象のオブジェクト。{@literal null}であってはいけません
-     * @param value
-     *            {@link Field}の値
+     * @param target 対象のオブジェクト。{@literal null}であってはいけません
+     * @param value  {@link Field}の値
      */
     void setFieldValue(Object target, Object value);
 
     /**
      * staticな{@link Field}の値を設定します。
      *
-     * @param value
-     *            {@link Field}の値
+     * @param value {@link Field}の値
      */
     void setStaticFieldValue(Object value);
 

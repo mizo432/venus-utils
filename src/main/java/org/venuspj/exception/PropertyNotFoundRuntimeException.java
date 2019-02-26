@@ -16,10 +16,8 @@ public class PropertyNotFoundRuntimeException extends VRuntimeException {
     /**
      * {@link PropertyNotFoundRuntimeException}を返します。
      *
-     * @param targetClass
-     *            ターゲットクラス
-     * @param propertyName
-     *            プロパティ名
+     * @param targetClass  ターゲットクラス
+     * @param propertyName プロパティ名
      */
     public PropertyNotFoundRuntimeException(final Class<?> targetClass,
                                             final String propertyName) {

@@ -10,7 +10,7 @@ import java.text.ParseException;
 
 /**
  * 数値用のコンバータです。
-*/
+ */
 public class NumberConverter implements Converter {
 
     /**
@@ -21,8 +21,7 @@ public class NumberConverter implements Converter {
     /**
      * インスタンスを構築します。
      *
-     * @param pattern
-     *            数値のパターン
+     * @param pattern 数値のパターン
      */
     public NumberConverter(String pattern) {
         if (Strings2.isEmpty(pattern)) {

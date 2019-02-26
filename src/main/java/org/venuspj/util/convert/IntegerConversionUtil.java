@@ -1,18 +1,3 @@
-/*
- * Copyright 2004-2012 the Seasar Foundation and the Others.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
@@ -27,9 +12,8 @@ public abstract class IntegerConversionUtil {
 
     /**
      * {@link Integer}に変換します。
-     * 
-     * @param o
-     *            変換元のオブジェクト
+     *
+     * @param o 変換元のオブジェクト
      * @return 変換された{@link Integer}
      */
     public static Integer toInteger(final Object o) {
@@ -38,11 +22,9 @@ public abstract class IntegerConversionUtil {
 
     /**
      * {@link Integer}に変換します。
-     * 
-     * @param o
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     *
+     * @param o       変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@link Integer}
      */
     public static Integer toInteger(final Object o, final String pattern) {
@@ -61,7 +43,7 @@ public abstract class IntegerConversionUtil {
             return (int) ((java.util.Date) o).getTime();
         } else if (o instanceof Boolean) {
             return (Boolean) o ? Integer.valueOf(1) : Integer
-                .valueOf(0);
+                    .valueOf(0);
         } else {
             return toInteger(o.toString());
         }
@@ -76,9 +58,8 @@ public abstract class IntegerConversionUtil {
 
     /**
      * {@literal int}に変換します。
-     * 
-     * @param o
-     *            変換元のオブジェクト
+     *
+     * @param o 変換元のオブジェクト
      * @return 変換された{@literal int}
      */
     public static int toPrimitiveInt(final Object o) {
@@ -87,11 +68,9 @@ public abstract class IntegerConversionUtil {
 
     /**
      * {@literal int}に変換します。
-     * 
-     * @param o
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     *
+     * @param o       変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@literal int}
      */
     public static int toPrimitiveInt(final Object o, final String pattern) {
@@ -104,7 +83,7 @@ public abstract class IntegerConversionUtil {
         } else if (o instanceof java.util.Date) {
             if (pattern != null) {
                 return Integer
-                    .parseInt(new SimpleDateFormat(pattern).format(o));
+                        .parseInt(new SimpleDateFormat(pattern).format(o));
             }
             return (int) ((java.util.Date) o).getTime();
         } else if (o instanceof Boolean) {

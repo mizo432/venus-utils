@@ -27,8 +27,7 @@ public class Arrays2<T> {
     /**
      * {@literal Object}の配列を返します。
      *
-     * @param elements
-     *            配列の要素
+     * @param elements 配列の要素
      * @return 配列
      */
     public static Object[] asArray(final Object... elements) {

@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2010 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.base;
 
 import static java.util.logging.Level.WARNING;
@@ -19,19 +5,18 @@ import static org.venuspj.util.base.Preconditions.checkArgument;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 import java.util.logging.Logger;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.annotations.VisibleForTesting;
 
 /**
  * Static utility methods pertaining to {@code String} or {@code CharSequence} instances.
- *
- * @author Kevin Bourrillion
- * @since 3.0
  */
 @GwtCompatible
 public final class Strings {
-    private Strings() {}
+    private Strings() {
+    }
 
     /**
      * Returns the given string if it is non-null; the empty string otherwise.
@@ -73,17 +58,17 @@ public final class Strings {
      * with as many copies of {@code padChar} as are necessary to reach that length. For example,
      *
      * <ul>
-     *   <li>{@code padStart("7", 3, '0')} returns {@code "007"}
-     *   <li>{@code padStart("2010", 3, '0')} returns {@code "2010"}
+     * <li>{@code padStart("7", 3, '0')} returns {@code "007"}
+     * <li>{@code padStart("2010", 3, '0')} returns {@code "2010"}
      * </ul>
      *
      * <p>See {@link java.util.Formatter} for a richer set of formatting capabilities.
      *
-     * @param string the string which should appear at the end of the result
+     * @param string    the string which should appear at the end of the result
      * @param minLength the minimum length the resulting string must have. Can be zero or negative, in
-     *     which case the input string is always returned.
-     * @param padChar the character to insert at the beginning of the result until the minimum length
-     *     is reached
+     *                  which case the input string is always returned.
+     * @param padChar   the character to insert at the beginning of the result until the minimum length
+     *                  is reached
      * @return the padded string
      */
     public static String padStart(String string, int minLength, char padChar) {
@@ -104,17 +89,17 @@ public final class Strings {
      * with as many copies of {@code padChar} as are necessary to reach that length. For example,
      *
      * <ul>
-     *   <li>{@code padEnd("4.", 5, '0')} returns {@code "4.000"}
-     *   <li>{@code padEnd("2010", 3, '!')} returns {@code "2010"}
+     * <li>{@code padEnd("4.", 5, '0')} returns {@code "4.000"}
+     * <li>{@code padEnd("2010", 3, '!')} returns {@code "2010"}
      * </ul>
      *
      * <p>See {@link java.util.Formatter} for a richer set of formatting capabilities.
      *
-     * @param string the string which should appear at the beginning of the result
+     * @param string    the string which should appear at the beginning of the result
      * @param minLength the minimum length the resulting string must have. Can be zero or negative, in
-     *     which case the input string is always returned.
-     * @param padChar the character to append to the end of the result until the minimum length is
-     *     reached
+     *                  which case the input string is always returned.
+     * @param padChar   the character to append to the end of the result until the minimum length is
+     *                  reached
      * @return the padded string
      */
     public static String padEnd(String string, int minLength, char padChar) {
@@ -135,9 +120,9 @@ public final class Strings {
      * example, {@code repeat("hey", 3)} returns the string {@code "heyheyhey"}.
      *
      * @param string any non-null string
-     * @param count the number of times to repeat it; a nonnegative integer
+     * @param count  the number of times to repeat it; a nonnegative integer
      * @return a string containing {@code string} repeated {@code count} times (the empty string if
-     *     {@code count} is zero)
+     * {@code count} is zero)
      * @throws IllegalArgumentException if {@code count} is negative
      */
     public static String repeat(String string, int count) {
@@ -248,19 +233,19 @@ public final class Strings {
      * recognized.
      *
      * @param template a string containing zero or more {@code "%s"} placeholder sequences. {@code
-     *     null} is treated as the four-character string {@code "null"}.
-     * @param args the arguments to be substituted into the message template. The first argument
-     *     specified is substituted for the first occurrence of {@code "%s"} in the template, and so
-     *     forth. A {@code null} argument is converted to the four-character string {@code "null"};
-     *     non-null values are converted to strings using {@link Object#toString()}.
+     *                 null} is treated as the four-character string {@code "null"}.
+     * @param args     the arguments to be substituted into the message template. The first argument
+     *                 specified is substituted for the first occurrence of {@code "%s"} in the template, and so
+     *                 forth. A {@code null} argument is converted to the four-character string {@code "null"};
+     *                 non-null values are converted to strings using {@link Object#toString()}.
      * @since 25.1
      */
     public static String lenientFormat(
-            @Nullable String template, @Nullable Object @Nullable... args) {
+            @Nullable String template, @Nullable Object @Nullable ... args) {
         template = String.valueOf(template); // null -> "null"
 
         if (args == null) {
-            args = new Object[] {"(Object[])null"};
+            args = new Object[]{"(Object[])null"};
         } else {
             for (int i = 0; i < args.length; i++) {
                 args[i] = lenientToString(args[i]);

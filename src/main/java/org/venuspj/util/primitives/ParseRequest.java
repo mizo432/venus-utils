@@ -3,7 +3,9 @@ package org.venuspj.util.primitives;
 
 import org.venuspj.util.annotations.GwtCompatible;
 
-/** A string to be parsed as a number and the radix to interpret it in. */
+/**
+ * A string to be parsed as a number and the radix to interpret it in.
+ */
 @GwtCompatible
 final class ParseRequest {
     final String rawValue;

@@ -28,12 +28,9 @@ public class CreateAndCopy<T> extends AbstractCopy<CreateAndCopy<T>> {
     /**
      * インスタンスを構築します。
      *
-     * @param destClass
-     *            作成対象クラス
-     * @param src
-     *            コピー元
-     * @throws NullPointerException
-     *             引数が<code>null</code>だった場合
+     * @param destClass 作成対象クラス
+     * @param src       コピー元
+     * @throws NullPointerException 引数が<code>null</code>だった場合
      */
     public CreateAndCopy(Class<T> destClass, Object src)
             throws NullPointerException {

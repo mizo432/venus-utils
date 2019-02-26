@@ -27,45 +27,60 @@ import static org.venuspj.util.misc.Assertions.*;
 
 /**
  * {@link BeanDesc}の実装クラスです。
- *
- * @author higa
  */
 public class BeanDescImpl implements BeanDesc {
 
-    /** 空のオブジェクト配列 */
+    /**
+     * 空のオブジェクト配列
+     */
     protected static final Object[] EMPTY_ARGS = new Object[0];
 
-    /** 空のクラス配列 */
+    /**
+     * 空のクラス配列
+     */
     protected static final Class<?>[] EMPTY_PARAM_TYPES = new Class<?>[0];
 
-    /** Beanのクラス */
+    /**
+     * Beanのクラス
+     */
     protected final Class<?> beanClass;
 
-    /** 型引数と型変数のマップ */
+    /**
+     * 型引数と型変数のマップ
+     */
     protected final Map<TypeVariable<?>, Type> typeVariables;
 
-    /** プロパティ名から{@link PropertyDesc}へのマップ */
+    /**
+     * プロパティ名から{@link PropertyDesc}へのマップ
+     */
     protected final CaseInsensitiveMap<PropertyDesc> propertyDescCache =
             new CaseInsensitiveMap<PropertyDesc>();
 
-    /** フィールド名から{@link FieldDescImpl}へのマップ */
+    /**
+     * フィールド名から{@link FieldDescImpl}へのマップ
+     */
     protected final ArrayMap<String, FieldDesc> fieldDescCache =
             new ArrayMap<String, FieldDesc>();
 
-    /** {@link ConstructorDesc}の配列 */
+    /**
+     * {@link ConstructorDesc}の配列
+     */
     protected final List<ConstructorDesc> constructorDescs = newArrayList();
 
-    /** メソッド名から{@link MethodDesc}配列へのマップ */
+    /**
+     * メソッド名から{@link MethodDesc}配列へのマップ
+     */
     protected final Map<String, MethodDesc[]> methodDescsCache = newHashMap();
 
-    /** 不正なプロパティ名のセット */
+    /**
+     * 不正なプロパティ名のセット
+     */
     protected final Set<String> invalidPropertyNames = newHashSet();
 
     /**
      * {@link BeanDescImpl}を作成します。
      *
-     * @param beanClass
-     *            ビーンのクラス。{@literal null}であってはいけません
+     * @param beanClass ビーンのクラス。{@literal null}であってはいけません
      */
     public BeanDescImpl(final Class<?> beanClass) {
         assertArgumentNotNull("beanClass", beanClass);
@@ -286,8 +301,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * {@link PropertyDesc}を返します。
      *
-     * @param propertyName
-     *            プロパティ名
+     * @param propertyName プロパティ名
      * @return {@link PropertyDesc}。プロパティが存在しない場合は{@literal null}
      */
     protected PropertyDesc getPropertyDescNoException(final String propertyName) {
@@ -297,8 +311,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * 引数に適合する{@link ConstructorDesc}を返します。
      *
-     * @param args
-     *            コンストラクタ引数の並び
+     * @param args コンストラクタ引数の並び
      * @return 引数に適合する{@link ConstructorDesc}。存在しない場合は{@literal null}
      */
     protected ConstructorDesc findSuitableConstructorDesc(final Object... args) {
@@ -316,8 +329,7 @@ public class BeanDescImpl implements BeanDesc {
      * 引数の型が数値の場合、引数を数値に変換することが出来れば適合するとみなします。
      * </p>
      *
-     * @param args
-     *            コンストラクタ引数の並び
+     * @param args コンストラクタ引数の並び
      * @return 引数に適合する{@link ConstructorDesc}。存在しない場合は{@literal null}
      */
     protected ConstructorDesc findSuitableConstructorDescAdjustNumber(
@@ -333,10 +345,8 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * 引数に適合する{@link MethodDesc}を返します。
      *
-     * @param methodDescs
-     *            メソッドの配列
-     * @param args
-     *            メソッド引数の並び
+     * @param methodDescs メソッドの配列
+     * @param args        メソッド引数の並び
      * @return 引数に適合する{@link MethodDesc}。存在しない場合は{@literal null}
      */
     protected MethodDesc findSuitableMethod(final MethodDesc[] methodDescs,
@@ -355,10 +365,8 @@ public class BeanDescImpl implements BeanDesc {
      * 引数の型が数値の場合、引数を数値に変換することが出来れば適合するとみなします。
      * </p>
      *
-     * @param methodDescs
-     *            メソッドの配列
-     * @param args
-     *            メソッド引数の並び
+     * @param methodDescs メソッドの配列
+     * @param args        メソッド引数の並び
      * @return 引数に適合する{@link MethodDesc}。存在しない場合は{@literal null}
      */
     protected MethodDesc findSuitableMethodDescAdjustNumber(
@@ -374,12 +382,9 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * 引数が引数型に適合するかチェックします。
      *
-     * @param paramTypes
-     *            引数型の並び
-     * @param args
-     *            引数の並び
-     * @param adjustNumber
-     *            引数型が数値型の場合に引数を適合するように変換する場合は{@literal true}
+     * @param paramTypes   引数型の並び
+     * @param args         引数の並び
+     * @param adjustNumber 引数型が数値型の場合に引数を適合するように変換する場合は{@literal true}
      * @return 引数が引数型に適合する場合は{@literal true}
      */
     protected boolean isSuitable(final Class<?>[] paramTypes,
@@ -408,12 +413,9 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * 指定された位置の引数型が数値の場合、引数を適合するように変換します。
      *
-     * @param paramTypes
-     *            引数型の並び
-     * @param args
-     *            引数の並び
-     * @param index
-     *            操作対象となる引数のインデックス
+     * @param paramTypes 引数型の並び
+     * @param args       引数の並び
+     * @param index      操作対象となる引数のインデックス
      * @return 引数を適合するように変換した場合は{@literal true}
      */
     protected static boolean adjustNumber(final Class<?>[] paramTypes,
@@ -509,10 +511,8 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * getterメソッドを準備します。
      *
-     * @param readMethod
-     *            getterメソッド
-     * @param propertyName
-     *            プロパティ名
+     * @param readMethod   getterメソッド
+     * @param propertyName プロパティ名
      */
     protected void setupReadMethod(final Method readMethod,
                                    final String propertyName) {
@@ -539,10 +539,8 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * setterメソッドを準備します。
      *
-     * @param writeMethod
-     *            setterメソッド
-     * @param propertyName
-     *            プロパティ名
+     * @param writeMethod  setterメソッド
+     * @param propertyName プロパティ名
      */
     protected void setupWriteMethod(final Method writeMethod,
                                     final String propertyName) {
@@ -569,8 +567,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * {@link PropertyDesc}を追加します．
      *
-     * @param propertyDesc
-     *            {@link PropertyDesc}
+     * @param propertyDesc {@link PropertyDesc}
      */
     protected void addPropertyDesc(final PropertyDescImpl propertyDesc) {
         assertArgumentNotNull("propertyDesc", propertyDesc);
@@ -626,8 +623,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * インターフェースに定義されたフィールドを準備します。
      *
-     * @param interfaceClass
-     *            対象のインターフェース
+     * @param interfaceClass 対象のインターフェース
      */
     protected void setupFieldDescsByInterface(final Class<?> interfaceClass) {
         addFieldDescs(interfaceClass);
@@ -640,8 +636,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * クラスに定義されたフィールドを準備します。
      *
-     * @param targetClass
-     *            対象のクラス
+     * @param targetClass 対象のクラス
      */
     private void setupFieldDescsByClass(final Class<?> targetClass) {
         addFieldDescs(targetClass);
@@ -657,8 +652,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * クラスまたはインターフェースに定義されたフィールドを追加します。
      *
-     * @param clazz
-     *            対象のクラスまたはインターフェース
+     * @param clazz 対象のクラスまたはインターフェース
      */
     protected void addFieldDescs(final Class<?> clazz) {
         for (final Field field : clazz.getDeclaredFields()) {
@@ -695,10 +689,8 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * {@link Type}を表現する{@link ParameterizedClassDesc}を作成して返します。
      *
-     * @param type
-     *            型
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type 型
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return 型を表現する{@link ParameterizedClassDesc}
      */
     protected static ParameterizedClassDesc createParameterizedClassDesc(

@@ -23,12 +23,9 @@ public class MethodNotFoundRuntimeException extends VRuntimeException {
     /**
      * {@link MethodNotFoundRuntimeException}を作成します。
      *
-     * @param targetClass
-     *            ターゲットクラス
-     * @param methodName
-     *            メソッド名
-     * @param methodArgs
-     *            引数の並び
+     * @param targetClass ターゲットクラス
+     * @param methodName  メソッド名
+     * @param methodArgs  引数の並び
      */
     public MethodNotFoundRuntimeException(final Class<?> targetClass,
                                           final String methodName, final Object[] methodArgs) {
@@ -38,12 +35,9 @@ public class MethodNotFoundRuntimeException extends VRuntimeException {
     /**
      * {@link MethodNotFoundRuntimeException}を作成します。
      *
-     * @param targetClass
-     *            ターゲットクラス
-     * @param methodName
-     *            メソッド名
-     * @param methodArgClasses
-     *            引数型の並び
+     * @param targetClass      ターゲットクラス
+     * @param methodName       メソッド名
+     * @param methodArgClasses 引数型の並び
      */
     public MethodNotFoundRuntimeException(final Class<?> targetClass,
                                           final String methodName, final Class<?>[] methodArgClasses) {

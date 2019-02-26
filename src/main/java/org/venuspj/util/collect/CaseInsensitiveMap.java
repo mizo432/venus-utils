@@ -5,9 +5,7 @@ import java.util.Map;
 /**
  * キーで大文字小文字を気にしない {@link ArrayMap}です。
  *
- * @author higa 値の型
- * @param <V>
- *            値の型
+ * @param <V> 値の型
  */
 public class CaseInsensitiveMap<V> extends ArrayMap<String, V> {
 
@@ -22,8 +20,7 @@ public class CaseInsensitiveMap<V> extends ArrayMap<String, V> {
     /**
      * {@link CaseInsensitiveMap}を作成します。
      *
-     * @param capacity
-     *            初期容量
+     * @param capacity 初期容量
      */
     public CaseInsensitiveMap(final int capacity) {
         super(capacity);
@@ -32,8 +29,7 @@ public class CaseInsensitiveMap<V> extends ArrayMap<String, V> {
     /**
      * キーが含まれているかどうかを返します。
      *
-     * @param key
-     *            キー
+     * @param key キー
      * @return キーが含まれているかどうか
      */
     public boolean containsKey(final String key) {

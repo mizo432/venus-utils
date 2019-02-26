@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2007 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.base;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -36,9 +22,6 @@ import org.venuspj.util.annotations.GwtCompatible;
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/FunctionalExplained">the use of {@code Predicate}</a>.
- *
- * @author Kevin Bourrillion
- * @since 2.0
  */
 @FunctionalInterface
 @GwtCompatible
@@ -49,14 +32,14 @@ public interface Predicate<T> extends java.util.function.Predicate<T> {
      * required, to have the following properties:
      *
      * <ul>
-     *   <li>Its execution does not cause any observable side effects.
-     *   <li>The computation is <i>consistent with equals</i>; that is, {@link Objects#equal
-     *       Objects.equal}{@code (a, b)} implies that {@code predicate.apply(a) ==
-     *       predicate.apply(b))}.
+     * <li>Its execution does not cause any observable side effects.
+     * <li>The computation is <i>consistent with equals</i>; that is, {@link Objects#equal
+     * Objects.equal}{@code (a, b)} implies that {@code predicate.apply(a) ==
+     * predicate.apply(b))}.
      * </ul>
      *
      * @throws NullPointerException if {@code input} is null and this predicate does not accept null
-     *     arguments
+     *                              arguments
      */
     @CanIgnoreReturnValue
     boolean apply(@Nullable T input);

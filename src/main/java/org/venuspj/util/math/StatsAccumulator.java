@@ -14,10 +14,6 @@ import java.util.Iterator;
 /**
  * A mutable object which accumulates double values and tracks some basic statistics over all the
  * values added so far. The values may be added singly or in groups. This class is not thread safe.
- *
- * @author Pete Gillin
- * @author Kevin Bourrillion
- * @since 20.0
  */
 @Beta
 @GwtIncompatible
@@ -31,7 +27,9 @@ public final class StatsAccumulator {
     private double min = NaN; // any value will do
     private double max = NaN; // any value will do
 
-    /** Adds the given value to the dataset. */
+    /**
+     * Adds the given value to the dataset.
+     */
     public void add(double value) {
         if (count == 0) {
             count = 1;
@@ -61,7 +59,7 @@ public final class StatsAccumulator {
      * Adds the given values to the dataset.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision)
+     *               cause loss of precision)
      */
     public void addAll(Iterable<? extends Number> values) {
         for (Number value : values) {
@@ -73,7 +71,7 @@ public final class StatsAccumulator {
      * Adds the given values to the dataset.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision)
+     *               cause loss of precision)
      */
     public void addAll(Iterator<? extends Number> values) {
         while (values.hasNext()) {
@@ -107,7 +105,7 @@ public final class StatsAccumulator {
      * Adds the given values to the dataset.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
+     *               cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
      */
     public void addAll(long... values) {
         for (long value : values) {
@@ -147,12 +145,16 @@ public final class StatsAccumulator {
         }
     }
 
-    /** Returns an immutable snapshot of the current statistics. */
+    /**
+     * Returns an immutable snapshot of the current statistics.
+     */
     public Stats snapshot() {
         return new Stats(count, mean, sumOfSquaresOfDeltas, min, max);
     }
 
-    /** Returns the number of values. */
+    /**
+     * Returns the number of values.
+     */
     public long count() {
         return count;
     }

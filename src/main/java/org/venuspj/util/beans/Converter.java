@@ -2,15 +2,13 @@ package org.venuspj.util.beans;
 
 /**
  * 文字列とオブジェクトの変換を行なうインターフェースです。
- *
  */
 public interface Converter {
 
     /**
      * 値を文字列として返します。
      *
-     * @param value
-     *            値
+     * @param value 値
      * @return 文字列としての値
      */
     String getAsString(Object value);
@@ -18,8 +16,7 @@ public interface Converter {
     /**
      * 値をオブジェクトとして返します。
      *
-     * @param value
-     *            値
+     * @param value 値
      * @return オブジェクトとしての値
      */
     Object getAsObject(String value);

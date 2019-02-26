@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2007 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.base;
 
 import java.io.Serializable;
@@ -20,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtCompatible;
@@ -35,23 +22,25 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/FunctionalExplained">the use of {@code Predicate}</a>.
- *
- * @author Kevin Bourrillion
- * @since 2.0
  */
 @GwtCompatible(emulated = true)
 public final class Predicates {
-    private Predicates() {}
+    private Predicates() {
+    }
 
     // interface which specifies an accept(PredicateVisitor) method.
 
-    /** Returns a predicate that always evaluates to {@code true}. */
+    /**
+     * Returns a predicate that always evaluates to {@code true}.
+     */
     @GwtCompatible(serializable = true)
     public static <T> Predicate<T> alwaysTrue() {
         return ObjectPredicate.ALWAYS_TRUE.withNarrowedType();
     }
 
-    /** Returns a predicate that always evaluates to {@code false}. */
+    /**
+     * Returns a predicate that always evaluates to {@code false}.
+     */
     @GwtCompatible(serializable = true)
     public static <T> Predicate<T> alwaysFalse() {
         return ObjectPredicate.ALWAYS_FALSE.withNarrowedType();
@@ -182,7 +171,7 @@ public final class Predicates {
      *     Object.class, String.class, Number.class, Long.class);
      * return Iterables.filter(classes, subtypeOf(Number.class));
      * }</pre>
-     *
+     * <p>
      * The code above returns an iterable containing {@code Number.class} and {@code Long.class}.
      *
      * @since 20.0 (since 10.0 under the incorrect name {@code assignableFrom})
@@ -248,7 +237,9 @@ public final class Predicates {
 
     // Package private for GWT serialization.
     enum ObjectPredicate implements Predicate<Object> {
-        /** @see Predicates#alwaysTrue() */
+        /**
+         * @see Predicates#alwaysTrue()
+         */
         ALWAYS_TRUE {
             @Override
             public boolean apply(@Nullable Object o) {
@@ -260,7 +251,9 @@ public final class Predicates {
                 return "Predicates.alwaysTrue()";
             }
         },
-        /** @see Predicates#alwaysFalse() */
+        /**
+         * @see Predicates#alwaysFalse()
+         */
         ALWAYS_FALSE {
             @Override
             public boolean apply(@Nullable Object o) {
@@ -272,7 +265,9 @@ public final class Predicates {
                 return "Predicates.alwaysFalse()";
             }
         },
-        /** @see Predicates#isNull() */
+        /**
+         * @see Predicates#isNull()
+         */
         IS_NULL {
             @Override
             public boolean apply(@Nullable Object o) {
@@ -284,7 +279,9 @@ public final class Predicates {
                 return "Predicates.isNull()";
             }
         },
-        /** @see Predicates#notNull() */
+        /**
+         * @see Predicates#notNull()
+         */
         NOT_NULL {
             @Override
             public boolean apply(@Nullable Object o) {
@@ -297,13 +294,16 @@ public final class Predicates {
             }
         };
 
-        @SuppressWarnings("unchecked") // safe contravariant cast
+        @SuppressWarnings("unchecked")
+            // safe contravariant cast
         <T> Predicate<T> withNarrowedType() {
             return (Predicate<T>) this;
         }
     }
 
-    /** @see Predicates#not(Predicate) */
+    /**
+     * @see Predicates#not(Predicate)
+     */
     private static class NotPredicate<T> implements Predicate<T>, Serializable {
         final Predicate<T> predicate;
 
@@ -338,7 +338,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#and(Iterable) */
+    /**
+     * @see Predicates#and(Iterable)
+     */
     private static class AndPredicate<T> implements Predicate<T>, Serializable {
         private final List<? extends Predicate<? super T>> components;
 
@@ -380,7 +382,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#or(Iterable) */
+    /**
+     * @see Predicates#or(Iterable)
+     */
     private static class OrPredicate<T> implements Predicate<T>, Serializable {
         private final List<? extends Predicate<? super T>> components;
 
@@ -435,7 +439,9 @@ public final class Predicates {
         return builder.append(')').toString();
     }
 
-    /** @see Predicates#equalTo(Object) */
+    /**
+     * @see Predicates#equalTo(Object)
+     */
     private static class IsEqualToPredicate<T> implements Predicate<T>, Serializable {
         private final T target;
 
@@ -470,7 +476,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#instanceOf(Class) */
+    /**
+     * @see Predicates#instanceOf(Class)
+     */
     @GwtIncompatible // Class.isInstance
     private static class InstanceOfPredicate implements Predicate<Object>, Serializable {
         private final Class<?> clazz;
@@ -506,7 +514,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#subtypeOf(Class) */
+    /**
+     * @see Predicates#subtypeOf(Class)
+     */
     @GwtIncompatible // Class.isAssignableFrom
     private static class SubtypeOfPredicate implements Predicate<Class<?>>, Serializable {
         private final Class<?> clazz;
@@ -542,7 +552,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#in(Collection) */
+    /**
+     * @see Predicates#in(Collection)
+     */
     private static class InPredicate<T> implements Predicate<T>, Serializable {
         private final Collection<?> target;
 
@@ -581,7 +593,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#compose(Predicate, Function) */
+    /**
+     * @see Predicates#compose(Predicate, Function)
+     */
     private static class CompositionPredicate<A, B> implements Predicate<A>, Serializable {
         final Predicate<B> p;
         final Function<A, ? extends B> f;
@@ -618,7 +632,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#contains(Pattern) */
+    /**
+     * @see Predicates#contains(Pattern)
+     */
     @GwtIncompatible // Only used by other GWT-incompatible code.
     private static class ContainsPatternPredicate implements Predicate<CharSequence>, Serializable {
         final CommonPattern pattern;
@@ -666,7 +682,9 @@ public final class Predicates {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Predicates#containsPattern(String) */
+    /**
+     * @see Predicates#containsPattern(String)
+     */
     @GwtIncompatible // Only used by other GWT-incompatible code.
     private static class ContainsPatternFromStringPredicate extends ContainsPatternPredicate {
 

@@ -19,8 +19,7 @@ public interface ConstructorDesc {
     /**
      * コンストラクタを返します。
      *
-     * @param <T>
-     *            Beanの型
+     * @param <T> Beanの型
      * @return コンストラクタ
      */
     <T> Constructor<T> getConstructor();
@@ -42,8 +41,7 @@ public interface ConstructorDesc {
     /**
      * コンストラクタの引数型がパラメタ化された型の場合は{@literal true}を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return 引数型がパラメタ化された型の場合は{@literal true}
      */
     boolean isParameterized(int index);
@@ -58,18 +56,16 @@ public interface ConstructorDesc {
     /**
      * メソッドの引数型がパラメタ化された{@link Collection}の場合、その要素型を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return メソッドの引数型がパラメタ化された{@link Collection}の場合はその要素型、そうでない場合は
-     *         {@literal null}
+     * {@literal null}
      */
     Class<?> getElementClassOfCollection(int index);
 
     /**
      * メソッドの引数型がパラメタ化された{@link Map}の場合、そのキー型を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return メソッドの引数がパラメタ化された{@link Map}の場合はそのキー型、そうでない場合は{@literal null}
      */
     Class<?> getKeyClassOfMap(int index);
@@ -77,8 +73,7 @@ public interface ConstructorDesc {
     /**
      * メソッドの引数型がパラメタ化された{@link Map}の場合、その値型を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return メソッドの引数型がパラメタ化された{@link Map}の場合はその値型、そうでない場合は{@literal null}
      */
     Class<?> getValueClassOfMap(int index);
@@ -86,10 +81,8 @@ public interface ConstructorDesc {
     /**
      * コンストラクタを呼び出して生成したインスタンスを返します。
      *
-     * @param <T>
-     *            生成するBeanの型
-     * @param args
-     *            メソッドの引数
+     * @param <T>  生成するBeanの型
+     * @param args メソッドの引数
      * @return コンストラクタを呼び出して生成したインスタンス
      */
     <T> T newInstance(Object... args);

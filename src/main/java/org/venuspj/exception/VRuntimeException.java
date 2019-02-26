@@ -20,10 +20,8 @@ public class VRuntimeException extends RuntimeException {
     /**
      * {@link VRuntimeException}を作成します。
      *
-     * @param messageCode
-     *            メッセージコード
-     * @param args
-     *            引数
+     * @param messageCode メッセージコード
+     * @param args        引数
      */
     public VRuntimeException(final String messageCode, final Object[] args) {
         this(messageCode, args, null);
@@ -33,12 +31,9 @@ public class VRuntimeException extends RuntimeException {
     /**
      * {@link VRuntimeException}を作成します。
      *
-     * @param messageCode
-     *            メッセージコード
-     * @param args
-     *            引数
-     * @param cause
-     *            原因となった例外
+     * @param messageCode メッセージコード
+     * @param args        引数
+     * @param cause       原因となった例外
      */
     public VRuntimeException(final String messageCode, final Object[] args,
                              final Throwable cause) {
@@ -82,4 +77,5 @@ public class VRuntimeException extends RuntimeException {
      */
     public final String getSimpleMessage() {
         return simpleMessage;
-    }}
+    }
+}

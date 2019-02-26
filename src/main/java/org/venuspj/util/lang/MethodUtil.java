@@ -13,27 +13,19 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link Method}用のユーティリティクラスです。
- *
- * @author higa
  */
 public abstract class MethodUtil {
 
     /**
      * {@link Method}オブジェクトによって表される基本となるメソッドを、指定したオブジェクトに対して指定したパラメータで呼び出します。
      *
-     * @param <T>
-     *            メソッドの戻り値の型
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param target
-     *            基本となるメソッドの呼び出し元のオブジェクト。{@literal static}メソッドの場合は{@literal null}
-     * @param args
-     *            メソッド呼び出しに使用される引数
+     * @param <T>    メソッドの戻り値の型
+     * @param method メソッド。{@literal null}であってはいけません
+     * @param target 基本となるメソッドの呼び出し元のオブジェクト。{@literal static}メソッドの場合は{@literal null}
+     * @param args   メソッド呼び出しに使用される引数
      * @return このオブジェクトが表すメソッドを、パラメータ{@code args}を使用して{@code obj}にディスパッチした結果
-     * @throws IllegalAccessRuntimeException
-     *             この{@link Method}オブジェクトがJava言語アクセス制御を実施し、 基本となるメソッドにアクセスできない場合
-     * @throws InvocationTargetRuntimeException
-     *             基本となるメソッドが例外をスローする場合
+     * @throws IllegalAccessRuntimeException    この{@link Method}オブジェクトがJava言語アクセス制御を実施し、 基本となるメソッドにアクセスできない場合
+     * @throws InvocationTargetRuntimeException 基本となるメソッドが例外をスローする場合
      * @see Method#invoke(Object, Object[])
      */
     @SuppressWarnings("unchecked")
@@ -65,17 +57,12 @@ public abstract class MethodUtil {
     /**
      * {@link Method}オブジェクトによって表される基本となる{@code static}メソッドを、指定したパラメータで呼び出します。
      *
-     * @param <T>
-     *            メソッドの戻り値の型
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param args
-     *            メソッド呼び出しに使用される引数
+     * @param <T>    メソッドの戻り値の型
+     * @param method メソッド。{@literal null}であってはいけません
+     * @param args   メソッド呼び出しに使用される引数
      * @return このオブジェクトが表す{@code static}メソッドを、パラメータ{@code args}を使用してディスパッチした結果
-     * @throws IllegalAccessRuntimeException
-     *             この{@link Method}オブジェクトがJava言語アクセス制御を実施し、 基本となるメソッドにアクセスできない場合
-     * @throws InvocationTargetRuntimeException
-     *             基本となるメソッドが例外をスローする場合
+     * @throws IllegalAccessRuntimeException    この{@link Method}オブジェクトがJava言語アクセス制御を実施し、 基本となるメソッドにアクセスできない場合
+     * @throws InvocationTargetRuntimeException 基本となるメソッドが例外をスローする場合
      * @see Method#invoke(Object, Object[])
      */
     @SuppressWarnings("unchecked")
@@ -90,8 +77,7 @@ public abstract class MethodUtil {
     /**
      * <code>abstract</code>かどうかを返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return <code>abstract</code>かどうか
      */
     public static boolean isAbstract(final Method method) {
@@ -101,8 +87,7 @@ public abstract class MethodUtil {
     /**
      * <code>public</code>かどうかを返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return <code>public</code>なら{@literal true}
      */
     public static boolean isPublic(final Method method) {
@@ -114,8 +99,7 @@ public abstract class MethodUtil {
     /**
      * <code>static</code>かどうかを返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return <code>static</code>かどうか
      */
     public static boolean isStatic(final Method method) {
@@ -127,8 +111,7 @@ public abstract class MethodUtil {
     /**
      * <code>final</code>かどうかを返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return <code>final </code>かどうか
      */
     public static boolean isFinal(final Method method) {
@@ -140,10 +123,8 @@ public abstract class MethodUtil {
     /**
      * シグニチャの文字列表現を返します。
      *
-     * @param methodName
-     *            メソッド名。{@literal null}や空文字列であってはいけません
-     * @param argTypes
-     *            引数型のな並び
+     * @param methodName メソッド名。{@literal null}や空文字列であってはいけません
+     * @param argTypes   引数型のな並び
      * @return シグニチャの文字列表現
      */
     public static String getSignature(final String methodName,
@@ -165,10 +146,8 @@ public abstract class MethodUtil {
     /**
      * シグニチャの文字列表現を返します。
      *
-     * @param methodName
-     *            メソッド名。{@literal null}や空文字列であってはいけません
-     * @param methodArgs
-     *            引数の並び
+     * @param methodName メソッド名。{@literal null}や空文字列であってはいけません
+     * @param methodArgs 引数の並び
      * @return シグニチャの文字列表現
      */
     public static String getSignature(final String methodName,
@@ -192,8 +171,7 @@ public abstract class MethodUtil {
     /**
      * {@literal equals(Object)}メソッドかどうかを返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return {@literal equals(Object)}メソッドなら{@literal true}
      */
     public static boolean isEqualsMethod(final Method method) {
@@ -208,8 +186,7 @@ public abstract class MethodUtil {
     /**
      * {@literal hashCode()}メソッドかどうか返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return {@literal hashCode()}メソッドなら{@literal true}
      */
     public static boolean isHashCodeMethod(final Method method) {
@@ -223,8 +200,7 @@ public abstract class MethodUtil {
     /**
      * {@literal toString()}メソッドかどうか返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return {@literal toString()}メソッドなら{@literal true}
      */
     public static boolean isToStringMethod(final Method method) {
@@ -238,10 +214,8 @@ public abstract class MethodUtil {
     /**
      * メソッドの引数型 (パラメタ化されたコレクション) の要素型を返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param position
-     *            パラメタ化されたコレクションが宣言されているメソッド引数の位置
+     * @param method   メソッド。{@literal null}であってはいけません
+     * @param position パラメタ化されたコレクションが宣言されているメソッド引数の位置
      * @return 指定されたメソッドの引数型として宣言されているパラメタ化されたコレクションの要素型
      */
     public static Class<?> getElementTypeOfCollectionFromParameterType(
@@ -256,8 +230,7 @@ public abstract class MethodUtil {
     /**
      * 指定されたメソッドの戻り値型として宣言されているパラメタ化されたコレクションの要素型を返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return 指定されたメソッドの戻り値型として宣言されているパラメタ化されたコレクションの要素型
      */
     public static Class<?> getElementTypeOfCollectionFromReturnType(
@@ -272,10 +245,8 @@ public abstract class MethodUtil {
     /**
      * メソッドの引数型 (パラメタ化されたマップ) のキー型を返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param position
-     *            パラメタ化されたマップが宣言されているメソッド引数の位置
+     * @param method   メソッド。{@literal null}であってはいけません
+     * @param position パラメタ化されたマップが宣言されているメソッド引数の位置
      * @return 指定されたメソッドの引数型として宣言されているパラメタ化されたマップのキー型
      */
     public static Class<?> getKeyTypeOfMapFromParameterType(
@@ -290,8 +261,7 @@ public abstract class MethodUtil {
     /**
      * 指定されたメソッドの戻り値型として宣言されているパラメタ化されたマップのキー型を返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return 指定されたメソッドの戻り値型として宣言されているパラメタ化されたマップのキー型
      */
     public static Class<?> getKeyTypeOfMapFromReturnType(final Method method) {
@@ -305,10 +275,8 @@ public abstract class MethodUtil {
     /**
      * メソッドの引数型 (パラメタ化されたマップ) の値型を返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param position
-     *            パラメタ化されたマップが宣言されているメソッド引数の位置
+     * @param method   メソッド。{@literal null}であってはいけません
+     * @param position パラメタ化されたマップが宣言されているメソッド引数の位置
      * @return 指定されたメソッドの引数型として宣言されているパラメタ化されたマップの値型
      */
     public static Class<?> getValueTypeOfMapFromParameterType(
@@ -323,8 +291,7 @@ public abstract class MethodUtil {
     /**
      * 指定されたメソッドの戻り値型として宣言されているパラメタ化されたマップの値型を返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
      * @return 指定されたメソッドの戻り値型として宣言されているパラメタ化されたマップの値型
      */
     public static Class<?> getValueTypeOfMapFromReturnType(final Method method) {

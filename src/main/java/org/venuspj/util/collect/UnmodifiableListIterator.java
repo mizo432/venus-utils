@@ -4,7 +4,8 @@ import java.util.ListIterator;
 
 public abstract class UnmodifiableListIterator<E> extends UnmodifiableIterator<E>
         implements ListIterator<E> {
-    protected UnmodifiableListIterator() {}
+    protected UnmodifiableListIterator() {
+    }
 
     @Deprecated
     @Override

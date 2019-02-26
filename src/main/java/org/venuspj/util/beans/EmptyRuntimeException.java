@@ -4,7 +4,6 @@ import org.venuspj.exception.VRuntimeException;
 
 /**
  * 空の場合にスローされる例外です。
- *
  */
 public class EmptyRuntimeException extends VRuntimeException {
 

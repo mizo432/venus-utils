@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ *
  */
 public class StaticDateTimeProvider extends DateProvider {
     private static AtomicReference<LocalDateTime> localDateTime = new AtomicReference<LocalDateTime>();

@@ -17,8 +17,7 @@ public interface ParameterizedClassDesc {
     /**
      * 原型となるクラスを返します。
      *
-     * @param <T>
-     *            原型となるクラスの型
+     * @param <T> 原型となるクラスの型
      * @return 原型となるクラス
      * @see ParameterizedType#getRawType()
      */

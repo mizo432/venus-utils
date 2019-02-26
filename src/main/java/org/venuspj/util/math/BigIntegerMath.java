@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.math;
 
 import org.venuspj.util.annotations.Beta;
@@ -40,9 +26,6 @@ import java.util.List;
  *
  * <p>Similar functionality for {@code int} and for {@code long} can be found in {@link IntMath} and
  * {@link LongMath} respectively.
- *
- * @author Louis Wasserman
- * @since 11.0
  */
 @GwtCompatible(emulated = true)
 public final class BigIntegerMath {
@@ -70,7 +53,9 @@ public final class BigIntegerMath {
         return BigInteger.ZERO.setBit(log2(x, RoundingMode.FLOOR));
     }
 
-    /** Returns {@code true} if {@code x} represents a power of two. */
+    /**
+     * Returns {@code true} if {@code x} represents a power of two.
+     */
     public static boolean isPowerOfTwo(BigInteger x) {
         checkNotNull(x);
         return x.signum() > 0 && x.getLowestSetBit() == x.bitLength() - 1;
@@ -80,8 +65,8 @@ public final class BigIntegerMath {
      * Returns the base-2 logarithm of {@code x}, rounded according to the specified rounding mode.
      *
      * @throws IllegalArgumentException if {@code x <= 0}
-     * @throws ArithmeticException if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
-     *     is not a power of two
+     * @throws ArithmeticException      if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
+     *                                  is not a power of two
      */
     @SuppressWarnings("fallthrough")
     public static int log2(BigInteger x, RoundingMode mode) {
@@ -128,7 +113,8 @@ public final class BigIntegerMath {
      * of two. This can be any value, but higher values incur more class load time and linearly
      * increasing memory consumption.
      */
-    @VisibleForTesting static final int SQRT2_PRECOMPUTE_THRESHOLD = 256;
+    @VisibleForTesting
+    static final int SQRT2_PRECOMPUTE_THRESHOLD = 256;
 
     @VisibleForTesting
     static final BigInteger SQRT2_PRECOMPUTED_BITS =
@@ -138,8 +124,8 @@ public final class BigIntegerMath {
      * Returns the base-10 logarithm of {@code x}, rounded according to the specified rounding mode.
      *
      * @throws IllegalArgumentException if {@code x <= 0}
-     * @throws ArithmeticException if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
-     *     is not a power of ten
+     * @throws ArithmeticException      if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
+     *                                  is not a power of ten
      */
     @GwtIncompatible
     @SuppressWarnings("fallthrough")
@@ -216,8 +202,8 @@ public final class BigIntegerMath {
      * Returns the square root of {@code x}, rounded with the specified rounding mode.
      *
      * @throws IllegalArgumentException if {@code x < 0}
-     * @throws ArithmeticException if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code
-     *     sqrt(x)} is not an integer
+     * @throws ArithmeticException      if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code
+     *                                  sqrt(x)} is not an integer
      */
     @GwtIncompatible
     @SuppressWarnings("fallthrough")
@@ -309,7 +295,7 @@ public final class BigIntegerMath {
      * RoundingMode}.
      *
      * @throws ArithmeticException if {@code q == 0}, or if {@code mode == UNNECESSARY} and {@code a}
-     *     is not an integer multiple of {@code b}
+     *                             is not an integer multiple of {@code b}
      */
     @GwtIncompatible
     public static BigInteger divide(BigInteger p, BigInteger q, RoundingMode mode) {
@@ -468,5 +454,6 @@ public final class BigIntegerMath {
         return x.bitLength() <= Long.SIZE - 1;
     }
 
-    private BigIntegerMath() {}
+    private BigIntegerMath() {
+    }
 }

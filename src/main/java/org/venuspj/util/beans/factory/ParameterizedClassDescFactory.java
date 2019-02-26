@@ -35,8 +35,7 @@ public abstract class ParameterizedClassDescFactory {
      * 型がパラメタ化されていない場合は空の{@link Map}を返します。
      * </p>
      *
-     * @param beanClass
-     *            パラメータ化された型(クラスまたはインタフェース)。{@literal null}であってはいけません
+     * @param beanClass パラメータ化された型(クラスまたはインタフェース)。{@literal null}であってはいけません
      * @return パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      */
     public static Map<TypeVariable<?>, Type> getTypeVariables(
@@ -49,11 +48,9 @@ public abstract class ParameterizedClassDescFactory {
     /**
      * フィールドの型を表現する{@link ParameterizedClassDesc}を作成して返します。
      *
-     * @param field
-     *            フィールド。{@literal null}であってはいけません
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
-     *            であってはいけません
+     * @param field フィールド。{@literal null}であってはいけません
+     * @param map   パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
+     *              であってはいけません
      * @return フィールドの型を表現する{@link ParameterizedClassDesc}
      */
     public static ParameterizedClassDesc createParameterizedClassDesc(
@@ -67,13 +64,10 @@ public abstract class ParameterizedClassDescFactory {
     /**
      * コンストラクタの引数型を表現する{@link ParameterizedClassDesc}を作成して返します。
      *
-     * @param constructor
-     *            コンストラクタ。{@literal null}であってはいけません
-     * @param index
-     *            引数の位置
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
-     *            であってはいけません
+     * @param constructor コンストラクタ。{@literal null}であってはいけません
+     * @param index       引数の位置
+     * @param map         パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
+     *                    であってはいけません
      * @return メソッドの引数型を表現する{@link ParameterizedClassDesc}
      */
     public static ParameterizedClassDesc createParameterizedClassDesc(
@@ -90,13 +84,10 @@ public abstract class ParameterizedClassDescFactory {
     /**
      * メソッドの引数型を表現する{@link ParameterizedClassDesc}を作成して返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param index
-     *            引数の位置
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
-     *            であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
+     * @param index  引数の位置
+     * @param map    パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
+     *               であってはいけません
      * @return メソッドの引数型を表現する{@link ParameterizedClassDesc}
      */
     public static ParameterizedClassDesc createParameterizedClassDesc(
@@ -117,11 +108,9 @@ public abstract class ParameterizedClassDescFactory {
     /**
      * メソッドの戻り値型を表現する{@link ParameterizedClassDesc}を作成して返します。
      *
-     * @param method
-     *            メソッド。{@literal null}であってはいけません
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
-     *            であってはいけません
+     * @param method メソッド。{@literal null}であってはいけません
+     * @param map    パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}。{@literal null}
+     *               であってはいけません
      * @return メソッドの戻り値型を表現する{@link ParameterizedClassDesc}
      */
     public static ParameterizedClassDesc createParameterizedClassDesc(
@@ -135,10 +124,8 @@ public abstract class ParameterizedClassDescFactory {
     /**
      * {@link Type}を表現する{@link ParameterizedClassDesc}を作成して返します。
      *
-     * @param type
-     *            型
-     * @param map
-     *            パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
+     * @param type 型
+     * @param map  パラメータ化された型が持つ型変数をキー、型引数を値とする{@link Map}
      * @return 型を表現する{@link ParameterizedClassDesc}
      */
     protected static ParameterizedClassDesc createParameterizedClassDesc(

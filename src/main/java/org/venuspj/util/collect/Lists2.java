@@ -13,6 +13,7 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 
 /**
+ *
  */
 public class Lists2 {
 
@@ -181,6 +182,7 @@ public class Lists2 {
     public static <E> LinkedList<E> newLinkedList() {
         return new LinkedList<>();
     }
+
     /**
      * Returns an unmodifiable list containing the specified first element and backed by the specified
      * array of additional elements. Changes to the {@code rest} array will be reflected in the
@@ -192,7 +194,7 @@ public class Lists2 {
      * <p>The returned list is serializable and implements {@link RandomAccess}.
      *
      * @param first the first element
-     * @param rest an array of additional elements, possibly empty
+     * @param rest  an array of additional elements, possibly empty
      * @return an unmodifiable list containing the specified elements
      */
     public static <E> List<E> asList(@Nullable E first, E[] rest) {
@@ -210,16 +212,18 @@ public class Lists2 {
      *
      * <p>The returned list is serializable and implements {@link RandomAccess}.
      *
-     * @param first the first element
+     * @param first  the first element
      * @param second the second element
-     * @param rest an array of additional elements, possibly empty
+     * @param rest   an array of additional elements, possibly empty
      * @return an unmodifiable list containing the specified elements
      */
     public static <E> List<E> asList(@Nullable E first, @Nullable E second, E[] rest) {
         return new TwoPlusArrayList<>(first, second, rest);
     }
 
-    /** @see Lists2#asList(Object, Object[]) */
+    /**
+     * @see Lists2#asList(Object, Object[])
+     */
     private static class OnePlusArrayList<E> extends AbstractList<E>
             implements Serializable, RandomAccess {
         final @Nullable E first;
@@ -245,7 +249,9 @@ public class Lists2 {
         private static final long serialVersionUID = 0;
     }
 
-    /** @see Lists2#asList(Object, Object, Object[]) */
+    /**
+     * @see Lists2#asList(Object, Object, Object[])
+     */
     private static class TwoPlusArrayList<E> extends AbstractList<E>
             implements Serializable, RandomAccess {
         final @Nullable E first;

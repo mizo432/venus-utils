@@ -24,13 +24,11 @@ import static org.venuspj.util.base.Preconditions.*;
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/PrimitivesExplained">primitive utilities</a>.
- *
- * @author Kevin Bourrillion
- * @since 1.0
  */
 @GwtCompatible
 public final class Ints {
-    private Ints() {}
+    private Ints() {
+    }
 
     /**
      * The number of bytes required to represent a primitive {@code int} value.
@@ -65,7 +63,7 @@ public final class Ints {
      * @param value any value in the range of the {@code int} type
      * @return the {@code int} value that equals {@code value}
      * @throws IllegalArgumentException if {@code value} is greater than {@link Integer#MAX_VALUE} or
-     *     less than {@link Integer#MIN_VALUE}
+     *                                  less than {@link Integer#MIN_VALUE}
      */
     public static int checkedCast(long value) {
         int result = (int) value;
@@ -78,8 +76,8 @@ public final class Ints {
      *
      * @param value any {@code long} value
      * @return the same value cast to {@code int} if it is in the range of the {@code int} type,
-     *     {@link Integer#MAX_VALUE} if it is too large, or {@link Integer#MIN_VALUE} if it is too
-     *     small
+     * {@link Integer#MAX_VALUE} if it is too large, or {@link Integer#MIN_VALUE} if it is too
+     * small
      */
     public static int saturatedCast(long value) {
         if (value > Integer.MAX_VALUE) {
@@ -101,7 +99,7 @@ public final class Ints {
      * @param a the first {@code int} to compare
      * @param b the second {@code int} to compare
      * @return a negative value if {@code a} is less than {@code b}; a positive value if {@code a} is
-     *     greater than {@code b}; or zero if they are equal
+     * greater than {@code b}; or zero if they are equal
      */
     public static int compare(int a, int b) {
         return (a < b) ? -1 : ((a > b) ? 1 : 0);
@@ -110,7 +108,7 @@ public final class Ints {
     /**
      * Returns {@code true} if {@code target} is present as an element anywhere in {@code array}.
      *
-     * @param array an array of {@code int} values, possibly empty
+     * @param array  an array of {@code int} values, possibly empty
      * @param target a primitive {@code int} value
      * @return {@code true} if {@code array[i] == target} for some value of {@code i}
      */
@@ -126,10 +124,10 @@ public final class Ints {
     /**
      * Returns the index of the first appearance of the value {@code target} in {@code array}.
      *
-     * @param array an array of {@code int} values, possibly empty
+     * @param array  an array of {@code int} values, possibly empty
      * @param target a primitive {@code int} value
      * @return the least index {@code i} for which {@code array[i] == target}, or {@code -1} if no
-     *     such index exists.
+     * such index exists.
      */
     public static int indexOf(int[] array, int target) {
         return indexOf(array, target, 0, array.length);
@@ -151,7 +149,7 @@ public final class Ints {
      * <p>More formally, returns the lowest index {@code i} such that {@code Arrays.copyOfRange(array,
      * i, i + target.length)} contains exactly the same elements as {@code target}.
      *
-     * @param array the array to search for the sequence {@code target}
+     * @param array  the array to search for the sequence {@code target}
      * @param target the array to search for as a sub-sequence of {@code array}
      */
     public static int indexOf(int[] array, int[] target) {
@@ -176,10 +174,10 @@ public final class Ints {
     /**
      * Returns the index of the last appearance of the value {@code target} in {@code array}.
      *
-     * @param array an array of {@code int} values, possibly empty
+     * @param array  an array of {@code int} values, possibly empty
      * @param target a primitive {@code int} value
      * @return the greatest index {@code i} for which {@code array[i] == target}, or {@code -1} if no
-     *     such index exists.
+     * such index exists.
      */
     public static int lastIndexOf(int[] array, int target) {
         return lastIndexOf(array, target, 0, array.length);
@@ -199,7 +197,7 @@ public final class Ints {
      *
      * @param array a <i>nonempty</i> array of {@code int} values
      * @return the value present in {@code array} that is less than or equal to every other value in
-     *     the array
+     * the array
      * @throws IllegalArgumentException if {@code array} is empty
      */
     public static int min(int... array) {
@@ -218,7 +216,7 @@ public final class Ints {
      *
      * @param array a <i>nonempty</i> array of {@code int} values
      * @return the value present in {@code array} that is greater than or equal to every other value
-     *     in the array
+     * in the array
      * @throws IllegalArgumentException if {@code array} is empty
      */
     public static int max(int... array) {
@@ -240,8 +238,8 @@ public final class Ints {
      * value} is greater than {@code max}, {@code max} is returned.
      *
      * @param value the {@code int} value to constrain
-     * @param min the lower bound (inclusive) of the range to constrain {@code value} to
-     * @param max the upper bound (inclusive) of the range to constrain {@code value} to
+     * @param min   the lower bound (inclusive) of the range to constrain {@code value} to
+     * @param max   the upper bound (inclusive) of the range to constrain {@code value} to
      * @throws IllegalArgumentException if {@code min > max}
      * @since 21.0
      */
@@ -282,7 +280,7 @@ public final class Ints {
      * com.google.common.io.ByteStreams#newDataOutput()} to get a growable buffer.
      */
     public static byte[] toByteArray(int value) {
-        return new byte[] {
+        return new byte[]{
                 (byte) (value >> 24), (byte) (value >> 16), (byte) (value >> 8), (byte) value
         };
     }
@@ -361,12 +359,12 @@ public final class Ints {
      * it is returned directly. Otherwise, a new array of size {@code minLength + padding} is
      * returned, containing the values of {@code array}, and zeroes in the remaining places.
      *
-     * @param array the source array
+     * @param array     the source array
      * @param minLength the minimum length the returned array must guarantee
-     * @param padding an extra amount to "grow" the array by if growth is necessary
-     * @throws IllegalArgumentException if {@code minLength} or {@code padding} is negative
+     * @param padding   an extra amount to "grow" the array by if growth is necessary
      * @return an array containing the values of {@code array}, with guaranteed minimum length {@code
-     *     minLength}
+     * minLength}
+     * @throws IllegalArgumentException if {@code minLength} or {@code padding} is negative
      */
     public static int[] ensureCapacity(int[] array, int minLength, int padding) {
         checkArgument(minLength >= 0, "Invalid minLength: %s", minLength);
@@ -379,8 +377,8 @@ public final class Ints {
      * example, {@code join("-", 1, 2, 3)} returns the string {@code "1-2-3"}.
      *
      * @param separator the text that should appear between consecutive values in the resulting string
-     *     (but not at the start or end)
-     * @param array an array of {@code int} values, possibly empty
+     *                  (but not at the start or end)
+     * @param array     an array of {@code int} values, possibly empty
      */
     public static String join(String separator, int... array) {
         checkNotNull(separator);
@@ -475,7 +473,7 @@ public final class Ints {
      * efficient.
      *
      * @throws IndexOutOfBoundsException if {@code fromIndex < 0}, {@code toIndex > array.length}, or
-     *     {@code toIndex > fromIndex}
+     *                                   {@code toIndex > fromIndex}
      * @since 23.1
      */
     public static void reverse(int[] array, int fromIndex, int toIndex) {
@@ -497,7 +495,7 @@ public final class Ints {
      *
      * @param collection a collection of {@code Number} instances
      * @return an array containing the same values as {@code collection}, in the same order, converted
-     *     to primitives
+     * to primitives
      * @throws NullPointerException if {@code collection} or any of its elements is null
      * @since 1.0 (parameter was {@code Collection<Integer>} before 12.0)
      */
@@ -685,7 +683,7 @@ public final class Ints {
      *
      * @param string the string representation of an integer value
      * @return the integer value represented by {@code string}, or {@code null} if {@code string} has
-     *     a length of zero or cannot be parsed as an integer value
+     * a length of zero or cannot be parsed as an integer value
      * @since 11.0
      */
     @Beta
@@ -705,11 +703,11 @@ public final class Ints {
      * the change to {@link Integer#parseInt(String, int)} for that version.
      *
      * @param string the string representation of an integer value
-     * @param radix the radix to use when parsing
+     * @param radix  the radix to use when parsing
      * @return the integer value represented by {@code string} using {@code radix}, or {@code null} if
-     *     {@code string} has a length of zero or cannot be parsed as an integer value
+     * {@code string} has a length of zero or cannot be parsed as an integer value
      * @throws IllegalArgumentException if {@code radix < Character.MIN_RADIX} or {@code radix >
-     *     Character.MAX_RADIX}
+     *                                  Character.MAX_RADIX}
      * @since 19.0
      */
     @Beta

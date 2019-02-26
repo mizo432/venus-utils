@@ -10,7 +10,6 @@ import java.util.Date;
 
 /**
  * SQLの日付用のコンバータです。
- *
  */
 public class SqlDateConverter implements Converter {
 
@@ -22,8 +21,7 @@ public class SqlDateConverter implements Converter {
     /**
      * インスタンスを構築します。
      *
-     * @param pattern
-     *            日付のパターン
+     * @param pattern 日付のパターン
      */
     public SqlDateConverter(String pattern) {
         if (Strings2.isEmpty(pattern)) {

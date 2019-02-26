@@ -16,9 +16,7 @@ import static org.venuspj.util.collect.Maps2.newHashMap;
 /**
  * JavaBeansやMapに対して操作を行う抽象クラスです。
  *
- * @param <S>
- *            JavaBeansに対して操作を行うサブタイプです。
- *
+ * @param <S> JavaBeansに対して操作を行うサブタイプです。
  */
 public abstract class AbstractCopy<S extends AbstractCopy<S>> {
 

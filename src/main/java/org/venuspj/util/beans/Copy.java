@@ -20,12 +20,9 @@ public class Copy extends AbstractCopy<Copy> {
     /**
      * インスタンスを構築します。
      *
-     * @param src
-     *            コピー元
-     * @param dest
-     *            コピー先
-     * @throws NullPointerException
-     *             引数が<code>null</code>だった場合
+     * @param src  コピー元
+     * @param dest コピー先
+     * @throws NullPointerException 引数が<code>null</code>だった場合
      */
     public Copy(Object src, Object dest) throws NullPointerException {
         if (src == null) {

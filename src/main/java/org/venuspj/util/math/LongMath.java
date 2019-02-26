@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.math;
 
 import org.venuspj.util.annotations.Beta;
@@ -41,9 +27,6 @@ import java.math.RoundingMode;
  * <p>Similar functionality for {@code int} and for {@link BigInteger} can be found in {@link
  * IntMath} and {@link BigIntegerMath} respectively. For other common operations on {@code long}
  * values, see {@link com.google.common.primitives.Longs}.
- *
- * @author Louis Wasserman
- * @since 11.0
  */
 @GwtCompatible(emulated = true)
 public final class LongMath {
@@ -57,8 +40,8 @@ public final class LongMath {
      * {@code checkedPow(2, log2(x, CEILING))}.
      *
      * @throws IllegalArgumentException if {@code x <= 0}
-     * @throws ArithmeticException of the next-higher power of two is not representable as a {@code
-     *     long}, i.e. when {@code x > 2^62}
+     * @throws ArithmeticException      of the next-higher power of two is not representable as a {@code
+     *                                  long}, i.e. when {@code x > 2^62}
      * @since 20.0
      */
     @Beta
@@ -111,8 +94,8 @@ public final class LongMath {
      * Returns the base-2 logarithm of {@code x}, rounded according to the specified rounding mode.
      *
      * @throws IllegalArgumentException if {@code x <= 0}
-     * @throws ArithmeticException if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
-     *     is not a power of two
+     * @throws ArithmeticException      if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
+     *                                  is not a power of two
      */
     @SuppressWarnings("fallthrough")
     public static int log2(long x, RoundingMode mode) {
@@ -144,15 +127,18 @@ public final class LongMath {
         }
     }
 
-    /** The biggest half power of two that fits into an unsigned long */
-    @VisibleForTesting static final long MAX_POWER_OF_SQRT2_UNSIGNED = 0xB504F333F9DE6484L;
+    /**
+     * The biggest half power of two that fits into an unsigned long
+     */
+    @VisibleForTesting
+    static final long MAX_POWER_OF_SQRT2_UNSIGNED = 0xB504F333F9DE6484L;
 
     /**
      * Returns the base-10 logarithm of {@code x}, rounded according to the specified rounding mode.
      *
      * @throws IllegalArgumentException if {@code x <= 0}
-     * @throws ArithmeticException if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
-     *     is not a power of ten
+     * @throws ArithmeticException      if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code x}
+     *                                  is not a power of ten
      */
     @GwtIncompatible
     @SuppressWarnings("fallthrough")
@@ -301,8 +287,8 @@ public final class LongMath {
      * Returns the square root of {@code x}, rounded with the specified rounding mode.
      *
      * @throws IllegalArgumentException if {@code x < 0}
-     * @throws ArithmeticException if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code
-     *     sqrt(x)} is not an integer
+     * @throws ArithmeticException      if {@code mode} is {@link RoundingMode#UNNECESSARY} and {@code
+     *                                  sqrt(x)} is not an integer
      */
     @GwtIncompatible
     @SuppressWarnings("fallthrough")
@@ -374,7 +360,7 @@ public final class LongMath {
      * RoundingMode}.
      *
      * @throws ArithmeticException if {@code q == 0}, or if {@code mode == UNNECESSARY} and {@code a}
-     *     is not an integer multiple of {@code b}
+     *                             is not an integer multiple of {@code b}
      */
     @GwtIncompatible
     @SuppressWarnings("fallthrough")
@@ -447,7 +433,7 @@ public final class LongMath {
      *
      * @throws ArithmeticException if {@code m <= 0}
      * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3">
-     *     Remainder Operator</a>
+     * Remainder Operator</a>
      */
     @GwtIncompatible
     public static int mod(long x, int m) {
@@ -471,7 +457,7 @@ public final class LongMath {
      *
      * @throws ArithmeticException if {@code m <= 0}
      * @see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3">
-     *     Remainder Operator</a>
+     * Remainder Operator</a>
      */
     @GwtIncompatible
     public static long mod(long x, long m) {
@@ -593,7 +579,7 @@ public final class LongMath {
      * Returns the {@code b} to the {@code k}th power, provided it does not overflow.
      *
      * @throws ArithmeticException if {@code b} to the {@code k}th power overflows in signed {@code
-     *     long} arithmetic
+     *                             long} arithmetic
      */
     @GwtIncompatible
     public static long checkedPow(long b, int k) {
@@ -758,7 +744,8 @@ public final class LongMath {
         }
     }
 
-    @VisibleForTesting static final long FLOOR_SQRT_MAX_LONG = 3037000499L;
+    @VisibleForTesting
+    static final long FLOOR_SQRT_MAX_LONG = 3037000499L;
 
     /**
      * Returns {@code n!}, that is, the product of the first {@code n} positive integers, {@code 1} if
@@ -862,7 +849,9 @@ public final class LongMath {
         }
     }
 
-    /** Returns (x * numerator / denominator), which is assumed to come out to an integral value. */
+    /**
+     * Returns (x * numerator / denominator), which is assumed to come out to an integral value.
+     */
     static long multiplyFraction(long x, long numerator, long denominator) {
         if (x == 1) {
             return numerator / denominator;
@@ -1061,7 +1050,9 @@ public final class LongMath {
     };
 
     private enum MillerRabinTester {
-        /** Works for inputs ≤ FLOOR_SQRT_MAX_LONG. */
+        /**
+         * Works for inputs ≤ FLOOR_SQRT_MAX_LONG.
+         */
         SMALL {
             @Override
             long mulMod(long a, long b, long m) {
@@ -1079,7 +1070,9 @@ public final class LongMath {
                 return (a * a) % m;
             }
         },
-        /** Works for all nonnegative signed longs. */
+        /**
+         * Works for all nonnegative signed longs.
+         */
         LARGE {
             /** Returns (a + b) mod m. Precondition: {@code 0 <= a}, {@code b < m < 2^63}. */
             private long plusMod(long a, long b, long m) {
@@ -1155,13 +1148,19 @@ public final class LongMath {
             return ((n <= FLOOR_SQRT_MAX_LONG) ? SMALL : LARGE).testWitness(base, n);
         }
 
-        /** Returns a * b mod m. */
+        /**
+         * Returns a * b mod m.
+         */
         abstract long mulMod(long a, long b, long m);
 
-        /** Returns a^2 mod m. */
+        /**
+         * Returns a^2 mod m.
+         */
         abstract long squareMod(long a, long m);
 
-        /** Returns a^p mod m. */
+        /**
+         * Returns a^p mod m.
+         */
         private long powMod(long a, long p, long m) {
             long res = 1;
             for (; p != 0; p >>= 1) {
@@ -1173,7 +1172,9 @@ public final class LongMath {
             return res;
         }
 
-        /** Returns true if n is a strong probable prime relative to the specified base. */
+        /**
+         * Returns true if n is a strong probable prime relative to the specified base.
+         */
         private boolean testWitness(long base, long n) {
             int r = Long.numberOfTrailingZeros(n - 1);
             long d = (n - 1) >> r;
@@ -1200,5 +1201,6 @@ public final class LongMath {
         }
     }
 
-    private LongMath() {}
+    private LongMath() {
+    }
 }

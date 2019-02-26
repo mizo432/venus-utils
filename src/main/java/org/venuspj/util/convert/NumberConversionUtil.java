@@ -1,18 +1,3 @@
-/*
- * Copyright 2004-2012 the Seasar Foundation and the Others.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
@@ -30,11 +15,9 @@ public abstract class NumberConversionUtil {
 
     /**
      * 適切な {@link Number}に変換します。
-     * 
-     * @param type
-     *            変換先の型
-     * @param o
-     *            変換元のオブジェクト
+     *
+     * @param type 変換先の型
+     * @param o    変換元のオブジェクト
      * @return {@literal type}に変換された{@link Number}
      */
     public static Object convertNumber(final Class<?> type, final Object o) {
@@ -60,15 +43,13 @@ public abstract class NumberConversionUtil {
 
     /**
      * 指定されたプリミティブ型に対応するラッパー型に変換して返します。
-     * 
-     * @param type
-     *            プリミティブ型
-     * @param o
-     *            変換元のオブジェクト
+     *
+     * @param type プリミティブ型
+     * @param o    変換元のオブジェクト
      * @return 指定されたプリミティブ型に対応するラッパー型に変換されたオブジェクト
      */
     public static Object convertPrimitiveWrapper(final Class<?> type,
-            final Object o) {
+                                                 final Object o) {
         if (type == int.class) {
             final Integer i = IntegerConversionUtil.toInteger(o);
             if (i != null) {
@@ -117,11 +98,9 @@ public abstract class NumberConversionUtil {
 
     /**
      * デリミタを削除します。
-     * 
-     * @param value
-     *            文字列の値
-     * @param locale
-     *            ロケール
+     *
+     * @param value  文字列の値
+     * @param locale ロケール
      * @return デリミタを削除した結果の文字列
      */
     public static String removeDelimeter(String value, final Locale locale) {
@@ -134,9 +113,8 @@ public abstract class NumberConversionUtil {
 
     /**
      * グルーピング用のセパレータを探します。
-     * 
-     * @param locale
-     *            ロケール
+     *
+     * @param locale ロケール
      * @return グルーピング用のセパレータ
      */
     public static String findGroupingSeparator(final Locale locale) {
@@ -146,9 +124,8 @@ public abstract class NumberConversionUtil {
 
     /**
      * 数値のセパレータを返します。
-     * 
-     * @param locale
-     *            ロケール
+     *
+     * @param locale ロケール
      * @return 数値のセパレータ
      */
     public static String findDecimalSeparator(final Locale locale) {

@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2008 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.primitives;
 
 import java.io.Serializable;
@@ -24,6 +10,7 @@ import java.util.List;
 import java.util.RandomAccess;
 import java.util.Spliterator;
 import java.util.Spliterators;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtCompatible;
@@ -37,13 +24,11 @@ import static org.venuspj.util.base.Preconditions.*;
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/PrimitivesExplained">primitive utilities</a>.
- *
- * @author Kevin Bourrillion
- * @since 1.0
  */
 @GwtCompatible
 public final class Longs {
-    private Longs() {}
+    private Longs() {
+    }
 
     /**
      * The number of bytes required to represent a primitive {@code long} value.
@@ -86,7 +71,7 @@ public final class Longs {
      * @param a the first {@code long} to compare
      * @param b the second {@code long} to compare
      * @return a negative value if {@code a} is less than {@code b}; a positive value if {@code a} is
-     *     greater than {@code b}; or zero if they are equal
+     * greater than {@code b}; or zero if they are equal
      */
     public static int compare(long a, long b) {
         return (a < b) ? -1 : ((a > b) ? 1 : 0);
@@ -95,7 +80,7 @@ public final class Longs {
     /**
      * Returns {@code true} if {@code target} is present as an element anywhere in {@code array}.
      *
-     * @param array an array of {@code long} values, possibly empty
+     * @param array  an array of {@code long} values, possibly empty
      * @param target a primitive {@code long} value
      * @return {@code true} if {@code array[i] == target} for some value of {@code i}
      */
@@ -111,10 +96,10 @@ public final class Longs {
     /**
      * Returns the index of the first appearance of the value {@code target} in {@code array}.
      *
-     * @param array an array of {@code long} values, possibly empty
+     * @param array  an array of {@code long} values, possibly empty
      * @param target a primitive {@code long} value
      * @return the least index {@code i} for which {@code array[i] == target}, or {@code -1} if no
-     *     such index exists.
+     * such index exists.
      */
     public static int indexOf(long[] array, long target) {
         return indexOf(array, target, 0, array.length);
@@ -136,7 +121,7 @@ public final class Longs {
      * <p>More formally, returns the lowest index {@code i} such that {@code Arrays.copyOfRange(array,
      * i, i + target.length)} contains exactly the same elements as {@code target}.
      *
-     * @param array the array to search for the sequence {@code target}
+     * @param array  the array to search for the sequence {@code target}
      * @param target the array to search for as a sub-sequence of {@code array}
      */
     public static int indexOf(long[] array, long[] target) {
@@ -161,10 +146,10 @@ public final class Longs {
     /**
      * Returns the index of the last appearance of the value {@code target} in {@code array}.
      *
-     * @param array an array of {@code long} values, possibly empty
+     * @param array  an array of {@code long} values, possibly empty
      * @param target a primitive {@code long} value
      * @return the greatest index {@code i} for which {@code array[i] == target}, or {@code -1} if no
-     *     such index exists.
+     * such index exists.
      */
     public static int lastIndexOf(long[] array, long target) {
         return lastIndexOf(array, target, 0, array.length);
@@ -184,7 +169,7 @@ public final class Longs {
      *
      * @param array a <i>nonempty</i> array of {@code long} values
      * @return the value present in {@code array} that is less than or equal to every other value in
-     *     the array
+     * the array
      * @throws IllegalArgumentException if {@code array} is empty
      */
     public static long min(long... array) {
@@ -203,7 +188,7 @@ public final class Longs {
      *
      * @param array a <i>nonempty</i> array of {@code long} values
      * @return the value present in {@code array} that is greater than or equal to every other value
-     *     in the array
+     * in the array
      * @throws IllegalArgumentException if {@code array} is empty
      */
     public static long max(long... array) {
@@ -225,8 +210,8 @@ public final class Longs {
      * value} is greater than {@code max}, {@code max} is returned.
      *
      * @param value the {@code long} value to constrain
-     * @param min the lower bound (inclusive) of the range to constrain {@code value} to
-     * @param max the upper bound (inclusive) of the range to constrain {@code value} to
+     * @param min   the lower bound (inclusive) of the range to constrain {@code value} to
+     * @param max   the upper bound (inclusive) of the range to constrain {@code value} to
      * @throws IllegalArgumentException if {@code min > max}
      * @since 21.0
      */
@@ -318,7 +303,8 @@ public final class Longs {
      * class.
      */
     static final class AsciiDigits {
-        private AsciiDigits() {}
+        private AsciiDigits() {
+        }
 
         private static final byte[] asciiDigits;
 
@@ -353,7 +339,7 @@ public final class Longs {
      *
      * @param string the string representation of a long value
      * @return the long value represented by {@code string}, or {@code null} if {@code string} has a
-     *     length of zero or cannot be parsed as a long value
+     * length of zero or cannot be parsed as a long value
      * @since 14.0
      */
     @Beta
@@ -373,11 +359,11 @@ public final class Longs {
      * the change to {@link Long#parseLong(String, int)} for that version.
      *
      * @param string the string representation of an long value
-     * @param radix the radix to use when parsing
+     * @param radix  the radix to use when parsing
      * @return the long value represented by {@code string} using {@code radix}, or {@code null} if
-     *     {@code string} has a length of zero or cannot be parsed as a long value
+     * {@code string} has a length of zero or cannot be parsed as a long value
      * @throws IllegalArgumentException if {@code radix < Character.MIN_RADIX} or {@code radix >
-     *     Character.MAX_RADIX}
+     *                                  Character.MAX_RADIX}
      * @since 19.0
      */
     @Beta
@@ -470,12 +456,12 @@ public final class Longs {
      * it is returned directly. Otherwise, a new array of size {@code minLength + padding} is
      * returned, containing the values of {@code array}, and zeroes in the remaining places.
      *
-     * @param array the source array
+     * @param array     the source array
      * @param minLength the minimum length the returned array must guarantee
-     * @param padding an extra amount to "grow" the array by if growth is necessary
-     * @throws IllegalArgumentException if {@code minLength} or {@code padding} is negative
+     * @param padding   an extra amount to "grow" the array by if growth is necessary
      * @return an array containing the values of {@code array}, with guaranteed minimum length {@code
-     *     minLength}
+     * minLength}
+     * @throws IllegalArgumentException if {@code minLength} or {@code padding} is negative
      */
     public static long[] ensureCapacity(long[] array, int minLength, int padding) {
         checkArgument(minLength >= 0, "Invalid minLength: %s", minLength);
@@ -488,8 +474,8 @@ public final class Longs {
      * For example, {@code join("-", 1L, 2L, 3L)} returns the string {@code "1-2-3"}.
      *
      * @param separator the text that should appear between consecutive values in the resulting string
-     *     (but not at the start or end)
-     * @param array an array of {@code long} values, possibly empty
+     *                  (but not at the start or end)
+     * @param array     an array of {@code long} values, possibly empty
      */
     public static String join(String separator, long... array) {
         checkNotNull(separator);
@@ -585,7 +571,7 @@ public final class Longs {
      * efficient.
      *
      * @throws IndexOutOfBoundsException if {@code fromIndex < 0}, {@code toIndex > array.length}, or
-     *     {@code toIndex > fromIndex}
+     *                                   {@code toIndex > fromIndex}
      * @since 23.1
      */
     public static void reverse(long[] array, int fromIndex, int toIndex) {
@@ -607,7 +593,7 @@ public final class Longs {
      *
      * @param collection a collection of {@code Number} instances
      * @return an array containing the same values as {@code collection}, in the same order, converted
-     *     to primitives
+     * to primitives
      * @throws NullPointerException if {@code collection} or any of its elements is null
      * @since 1.0 (parameter was {@code Collection<Long>} before 12.0)
      */

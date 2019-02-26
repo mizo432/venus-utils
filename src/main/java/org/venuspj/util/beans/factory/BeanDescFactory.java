@@ -30,10 +30,14 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
  */
 public abstract class BeanDescFactory {
 
-    /** 初期化済みなら{@literal true} */
+    /**
+     * 初期化済みなら{@literal true}
+     */
     private static volatile boolean initialized;
 
-    /** {@link BeanDesc}のキャッシュ */
+    /**
+     * {@link BeanDesc}のキャッシュ
+     */
     private static final ConcurrentMap<Class<?>, BeanDesc> beanDescCache =
             newConcurrentHashMap(1024);
 
@@ -44,8 +48,7 @@ public abstract class BeanDescFactory {
     /**
      * {@link BeanDesc}を返します。
      *
-     * @param clazz
-     *            Beanクラス。{@literal null}であってはいけません
+     * @param clazz Beanクラス。{@literal null}であってはいけません
      * @return {@link BeanDesc}
      */
     public static BeanDesc getBeanDesc(final Class<?> clazz) {

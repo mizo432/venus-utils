@@ -25,11 +25,11 @@ import org.venuspj.util.objects2.Objects2;
  * <p>There are two ways to obtain a {@code Stats} instance:
  *
  * <ul>
- *   <li>If all the values you want to summarize are already known, use the appropriate {@code
- *       Stats.of} factory method below. Primitive arrays, iterables and iterators of any kind of
- *       {@code Number}, and primitive varargs are supported.
- *   <li>Or, to avoid storing up all the data first, create a {@link StatsAccumulator} instance,
- *       feed values to it as you get them, then call {@link StatsAccumulator#snapshot}.
+ * <li>If all the values you want to summarize are already known, use the appropriate {@code
+ * Stats.of} factory method below. Primitive arrays, iterables and iterators of any kind of
+ * {@code Number}, and primitive varargs are supported.
+ * <li>Or, to avoid storing up all the data first, create a {@link StatsAccumulator} instance,
+ * feed values to it as you get them, then call {@link StatsAccumulator#snapshot}.
  * </ul>
  *
  * <p>Static convenience methods called {@code meanOf} are also provided for users who wish to
@@ -37,10 +37,6 @@ import org.venuspj.util.objects2.Objects2;
  *
  * <p><b>Java 8 users:</b> If you are not using any of the variance statistics, you may wish to use
  * built-in JDK libraries instead of this class.
- *
- * @author Pete Gillin
- * @author Kevin Bourrillion
- * @since 20.0
  */
 @Beta
 @GwtIncompatible
@@ -59,11 +55,11 @@ public final class Stats implements Serializable {
      * following constraints. This is the callers responsibility and is not enforced here.
      *
      * <ul>
-     *   <li>If {@code count} is 0, {@code mean} may have any finite value (its only usage will be to
-     *       get multiplied by 0 to calculate the sum), and the other parameters may have any values
-     *       (they will not be used).
-     *   <li>If {@code count} is 1, {@code sumOfSquaresOfDeltas} must be exactly 0.0 or {@link
-     *       Double#NaN}.
+     * <li>If {@code count} is 0, {@code mean} may have any finite value (its only usage will be to
+     * get multiplied by 0 to calculate the sum), and the other parameters may have any values
+     * (they will not be used).
+     * <li>If {@code count} is 1, {@code sumOfSquaresOfDeltas} must be exactly 0.0 or {@link
+     * Double#NaN}.
      * </ul>
      */
     Stats(long count, double mean, double sumOfSquaresOfDeltas, double min, double max) {
@@ -78,7 +74,7 @@ public final class Stats implements Serializable {
      * Returns statistics over a dataset containing the given values.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision)
+     *               cause loss of precision)
      */
     public static Stats of(Iterable<? extends Number> values) {
         StatsAccumulator accumulator = new StatsAccumulator();
@@ -90,7 +86,7 @@ public final class Stats implements Serializable {
      * Returns statistics over a dataset containing the given values.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision)
+     *               cause loss of precision)
      */
     public static Stats of(Iterator<? extends Number> values) {
         StatsAccumulator accumulator = new StatsAccumulator();
@@ -124,7 +120,7 @@ public final class Stats implements Serializable {
      * Returns statistics over a dataset containing the given values.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
+     *               cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
      */
     public static Stats of(long... values) {
         StatsAccumulator acummulator = new StatsAccumulator();
@@ -132,7 +128,9 @@ public final class Stats implements Serializable {
         return acummulator.snapshot();
     }
 
-    /** Returns the number of values. */
+    /**
+     * Returns the number of values.
+     */
     public long count() {
         return count;
     }
@@ -375,7 +373,7 @@ public final class Stats implements Serializable {
      * <p>The definition of the mean is the same as {@link Stats#mean}.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision)
+     *               cause loss of precision)
      * @throws IllegalArgumentException if the dataset is empty
      */
     public static double meanOf(Iterable<? extends Number> values) {
@@ -389,7 +387,7 @@ public final class Stats implements Serializable {
      * <p>The definition of the mean is the same as {@link Stats#mean}.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision)
+     *               cause loss of precision)
      * @throws IllegalArgumentException if the dataset is empty
      */
     public static double meanOf(Iterator<? extends Number> values) {
@@ -464,7 +462,7 @@ public final class Stats implements Serializable {
      * <p>The definition of the mean is the same as {@link Stats#mean}.
      *
      * @param values a series of values, which will be converted to {@code double} values (this may
-     *     cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
+     *               cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
      * @throws IllegalArgumentException if the dataset is empty
      */
     public static double meanOf(long... values) {
@@ -484,7 +482,9 @@ public final class Stats implements Serializable {
 
     // Serialization helpers
 
-    /** The size of byte array representation in bytes. */
+    /**
+     * The size of byte array representation in bytes.
+     */
     static final int BYTES = (Long.SIZE + Double.SIZE * 4) / Byte.SIZE;
 
     /**
@@ -506,8 +506,8 @@ public final class Stats implements Serializable {
      * versions.
      *
      * @param buffer A {@link ByteBuffer} with at least BYTES {@link ByteBuffer#remaining}, ordered as
-     *     {@link ByteOrder#LITTLE_ENDIAN}, to which a BYTES-long byte representation of this instance
-     *     is written. In the process increases the position of {@link ByteBuffer} by BYTES.
+     *               {@link ByteOrder#LITTLE_ENDIAN}, to which a BYTES-long byte representation of this instance
+     *               is written. In the process increases the position of {@link ByteBuffer} by BYTES.
      */
     void writeTo(ByteBuffer buffer) {
         checkNotNull(buffer);
@@ -548,8 +548,8 @@ public final class Stats implements Serializable {
      * versions.
      *
      * @param buffer A {@link ByteBuffer} with at least BYTES {@link ByteBuffer#remaining}, ordered as
-     *     {@link ByteOrder#LITTLE_ENDIAN}, from which a BYTES-long byte representation of this
-     *     instance is read. In the process increases the position of {@link ByteBuffer} by BYTES.
+     *               {@link ByteOrder#LITTLE_ENDIAN}, from which a BYTES-long byte representation of this
+     *               instance is read. In the process increases the position of {@link ByteBuffer} by BYTES.
      */
     static Stats readFrom(ByteBuffer buffer) {
         checkNotNull(buffer);

@@ -1,18 +1,3 @@
-/*
- * Copyright 2004-2012 the Seasar Foundation and the Others.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 package org.venuspj.util.convert;
 
 import org.venuspj.exception.ParseRuntimeException;
@@ -95,14 +80,17 @@ import static org.venuspj.util.strings2.Strings2.isNotEmpty;
  * <td>{@literal yyyy-MM-dd HH:mm:ss[.SSS...]}</td>
  * </tr>
  * </table>
+ *
  * @see DateConversionUtil
  * @see TimeConversionUtil
  */
 public abstract class TimestampConversionUtil {
 
-    /** {@link DateFormat}が持つスタイルの配列 */
+    /**
+     * {@link DateFormat}が持つスタイルの配列
+     */
     protected static final int[] STYLES =
-            new int[] { SHORT, MEDIUM, LONG, FULL };
+            new int[]{SHORT, MEDIUM, LONG, FULL};
 
     /**
      * デフォルロケールで{@link DateFormat#SHORT}スタイルのパターン文字列を返します。
@@ -116,8 +104,7 @@ public abstract class TimestampConversionUtil {
     /**
      * 指定されたロケールで{@link DateFormat#SHORT}スタイルのパターン文字列を返します。
      *
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return {@link DateFormat#SHORT}スタイルのパターン文字列
      */
     public static String getShortPattern(final Locale locale) {
@@ -138,8 +125,7 @@ public abstract class TimestampConversionUtil {
     /**
      * 指定されたロケールで{@link DateFormat#MEDIUM}スタイルのパターン文字列を返します。
      *
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return {@link DateFormat#MEDIUM}スタイルのパターン文字列
      */
     public static String getMediumPattern(final Locale locale) {
@@ -160,8 +146,7 @@ public abstract class TimestampConversionUtil {
     /**
      * 指定されたロケールで{@link DateFormat#LONG}スタイルのパターン文字列を返します。
      *
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return {@link DateFormat#LONG}スタイルのパターン文字列
      */
     public static String getLongPattern(final Locale locale) {
@@ -181,8 +166,7 @@ public abstract class TimestampConversionUtil {
     /**
      * 指定されたロケールで{@link DateFormat#FULL}スタイルのパターン文字列を返します。
      *
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return {@link DateFormat#FULL}スタイルのパターン文字列
      */
     public static String getFullPattern(final Locale locale) {
@@ -194,8 +178,7 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
+     * @param src 変換元のオブジェクト
      * @return 変換された{@link Date}
      */
     public static Date toDate(final Object src) {
@@ -205,10 +188,8 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@link Date}
      */
     public static Date toDate(final Object src, final String pattern) {
@@ -218,10 +199,8 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param src    変換元のオブジェクト
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return 変換された{@link Date}
      */
     public static Date toDate(final Object src, final Locale locale) {
@@ -232,12 +211,9 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Date}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
-     * @param locale
-     *            ロケール
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
+     * @param locale  ロケール
      * @return 変換された{@link Date}
      */
     protected static Date toDate(final Object src, final String pattern,
@@ -280,8 +256,7 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Calendar}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
+     * @param src 変換元のオブジェクト
      * @return 変換された{@link Date}
      */
     public static Calendar toCalendar(final Object src) {
@@ -291,10 +266,8 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Calendar}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@link Date}
      */
     public static Calendar toCalendar(final Object src, final String pattern) {
@@ -304,10 +277,8 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Calendar}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param src    変換元のオブジェクト
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return 変換された{@link Date}
      */
     public static Calendar toCalendar(final Object src, final Locale locale) {
@@ -318,12 +289,9 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Calendar}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
-     * @param locale
-     *            ロケール
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
+     * @param locale  ロケール
      * @return 変換された{@link Date}
      */
     protected static Calendar toCalendar(final Object src,
@@ -362,8 +330,7 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Timestamp}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
+     * @param src 変換元のオブジェクト
      * @return 変換された{@link Timestamp}
      */
     public static Timestamp toSqlTimestamp(final Object src) {
@@ -373,10 +340,8 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Timestamp}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
      * @return 変換された{@link Timestamp}
      */
     public static Timestamp toSqlTimestamp(final Object src,
@@ -387,10 +352,8 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Timestamp}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param locale
-     *            ロケール。{@literal null}であってはいけません
+     * @param src    変換元のオブジェクト
+     * @param locale ロケール。{@literal null}であってはいけません
      * @return 変換された{@link Timestamp}
      */
     public static Timestamp toSqlTimestamp(final Object src, final Locale locale) {
@@ -401,12 +364,9 @@ public abstract class TimestampConversionUtil {
     /**
      * オブジェクトを{@link Timestamp}に変換します。
      *
-     * @param src
-     *            変換元のオブジェクト
-     * @param pattern
-     *            パターン文字列
-     * @param locale
-     *            ロケール
+     * @param src     変換元のオブジェクト
+     * @param pattern パターン文字列
+     * @param locale  ロケール
      * @return 変換された{@link Timestamp}
      */
     protected static Timestamp toSqlTimestamp(final Object src,
@@ -449,10 +409,8 @@ public abstract class TimestampConversionUtil {
     /**
      * 文字列を{@link Date}に変換します。
      *
-     * @param str
-     *            文字列
-     * @param locale
-     *            ロケール
+     * @param str    文字列
+     * @param locale ロケール
      * @return 変換された{@link Date}
      */
     @SuppressWarnings("unchecked")
@@ -474,10 +432,8 @@ public abstract class TimestampConversionUtil {
     /**
      * 文字列を{@link Date}に変換します。
      *
-     * @param str
-     *            文字列
-     * @param format
-     *            {@link DateFormat}
+     * @param str    文字列
+     * @param format {@link DateFormat}
      * @return 変換された{@link Date}
      */
     protected static Date toDate(final String str, final DateFormat format) {
@@ -499,10 +455,8 @@ public abstract class TimestampConversionUtil {
     /**
      * {@link Date}を{@link Calendar}に変換します。
      *
-     * @param date
-     *            {@link Date}
-     * @param locale
-     *            ロケール
+     * @param date   {@link Date}
+     * @param locale ロケール
      * @return 変換された{@link Calendar}
      */
     protected static Calendar toCalendar(final Date date, final Locale locale) {
@@ -519,8 +473,7 @@ public abstract class TimestampConversionUtil {
     /**
      * 文字列を{@link Timestamp}に変換します。
      *
-     * @param str
-     *            文字列
+     * @param str 文字列
      * @return 変換された{@link Timestamp}
      */
     protected static Timestamp toSqlTimestampJdbcEscape(final String str) {
@@ -534,8 +487,7 @@ public abstract class TimestampConversionUtil {
     /**
      * パターン文字列を区切り文字を含まないプレーンなパターン文字列に変換して返します。
      *
-     * @param pattern
-     *            パターン文字列
+     * @param pattern パターン文字列
      * @return 区切り文字を含まないプレーンなパターン文字列
      */
     protected static String toPlainPattern(final String pattern) {
@@ -613,24 +565,26 @@ public abstract class TimestampConversionUtil {
         }
         return null;
     }
+
     /**
      * ロケールが持つスタイルに対応する{@link DateFormat}を反復する{@link Iterator}です。
-     *
-     * @author koichik
      */
     protected static class DateFormatIterator implements Iterator<DateFormat> {
 
-        /** ロケール */
+        /**
+         * ロケール
+         */
         protected final Locale locale;
 
-        /** 現在のスタイルを示すインデックス */
+        /**
+         * 現在のスタイルを示すインデックス
+         */
         protected int index;
 
         /**
          * インスタンスを構築します。
          *
-         * @param locale
-         *            ロケール
+         * @param locale ロケール
          */
         public DateFormatIterator(final Locale locale) {
             this.locale = locale;
@@ -659,28 +613,30 @@ public abstract class TimestampConversionUtil {
 
     /**
      * ロケールが持つスタイルに対応する{@link DateFormat}を反復する{@link Iterator}です。
-     *
-     * @author koichik
      */
     protected static class PlainDateFormatIterator implements
             Iterator<DateFormat> {
 
-        /** 変換元の文字列 */
+        /**
+         * 変換元の文字列
+         */
         protected final String src;
 
-        /** ロケール */
+        /**
+         * ロケール
+         */
         protected final Locale locale;
 
-        /** 現在のスタイルを示すインデックス */
+        /**
+         * 現在のスタイルを示すインデックス
+         */
         protected int index;
 
         /**
          * インスタンスを構築します。
          *
-         * @param src
-         *            変換後の文字列
-         * @param locale
-         *            ロケール
+         * @param src    変換後の文字列
+         * @param locale ロケール
          */
         public PlainDateFormatIterator(final String src, final Locale locale) {
             this.src = src;

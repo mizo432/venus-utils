@@ -11,7 +11,6 @@ import java.util.Date;
 
 /**
  * 時間用のコンバータです。
- *
  */
 public class TimeConverter implements Converter {
 
@@ -23,8 +22,7 @@ public class TimeConverter implements Converter {
     /**
      * インスタンスを構築します。
      *
-     * @param pattern
-     *            時間のパターン
+     * @param pattern 時間のパターン
      */
     public TimeConverter(String pattern) {
         if (Strings2.isEmpty(pattern)) {

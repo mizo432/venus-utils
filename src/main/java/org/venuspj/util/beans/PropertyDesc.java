@@ -20,8 +20,7 @@ public interface PropertyDesc {
     /**
      * プロパティの型を返します。
      *
-     * @param <T>
-     *            プロパティの型
+     * @param <T> プロパティの型
      * @return プロパティの型
      */
     <T> Class<T> getPropertyType();
@@ -78,10 +77,8 @@ public interface PropertyDesc {
     /**
      * プロパティの値を返します。
      *
-     * @param <T>
-     *            プロパティの型
-     * @param target
-     *            ターゲットオブジェクト。{@literal null}であってはいけません
+     * @param <T>    プロパティの型
+     * @param target ターゲットオブジェクト。{@literal null}であってはいけません
      * @return プロパティの値
      */
     <T> T getValue(Object target);
@@ -89,20 +86,16 @@ public interface PropertyDesc {
     /**
      * プロパティに値を設定します。
      *
-     * @param target
-     *            ターゲットオブジェクト。{@literal null}であってはいけません
-     * @param value
-     *            プロパティに設定する値
+     * @param target ターゲットオブジェクト。{@literal null}であってはいけません
+     * @param value  プロパティに設定する値
      */
     void setValue(Object target, Object value);
 
     /**
      * プロパティの型に応じて必要なら適切に変換します。
      *
-     * @param <T>
-     *            変換された型
-     * @param value
-     *            値
+     * @param <T>   変換された型
+     * @param value 値
      * @return 変換された値
      */
     <T> T convertIfNeed(Object value);
@@ -132,7 +125,7 @@ public interface PropertyDesc {
      * このプロパティがパラメタ化された{@link Collection}の場合、その要素型を返します。
      *
      * @return このプロパティがパラメタ化された{@link Collection}の場合はその要素型、そうでない場合は
-     *         {@literal null}
+     * {@literal null}
      */
     Class<?> getElementClassOfCollection();
 

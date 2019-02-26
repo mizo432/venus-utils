@@ -1,8 +1,10 @@
 package org.venuspj.util.primitives;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import java.io.Serializable;
 import java.math.BigInteger;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 
@@ -18,10 +20,6 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/PrimitivesExplained#unsigned-support">unsigned
  * primitive utilities</a>.
- *
- * @author Louis Wasserman
- * @author Colin Evans
- * @since 11.0
  */
 @GwtCompatible(serializable = true)
 public final class UnsignedLong extends Number implements Comparable<UnsignedLong>, Serializable {
@@ -89,7 +87,7 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
      * unsigned {@code long} value.
      *
      * @throws NumberFormatException if the string does not contain a parsable unsigned {@code long}
-     *     value
+     *                               value
      */
     @CanIgnoreReturnValue
     public static UnsignedLong valueOf(String string) {
@@ -101,8 +99,8 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
      * unsigned {@code long} value in the specified radix.
      *
      * @throws NumberFormatException if the string does not contain a parsable unsigned {@code long}
-     *     value, or {@code radix} is not between {@link Character#MIN_RADIX} and {@link
-     *     Character#MAX_RADIX}
+     *                               value, or {@code radix} is not between {@link Character#MIN_RADIX} and {@link
+     *                               Character#MAX_RADIX}
      */
     @CanIgnoreReturnValue
     public static UnsignedLong valueOf(String string, int radix) {
@@ -157,7 +155,9 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
         return fromLongBits(UnsignedLongs.remainder(value, checkNotNull(val).value));
     }
 
-    /** Returns the value of this {@code UnsignedLong} as an {@code int}. */
+    /**
+     * Returns the value of this {@code UnsignedLong} as an {@code int}.
+     */
     @Override
     public int intValue() {
         return (int) value;
@@ -203,7 +203,9 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
         return dValue;
     }
 
-    /** Returns the value of this {@code UnsignedLong} as a {@link BigInteger}. */
+    /**
+     * Returns the value of this {@code UnsignedLong} as a {@link BigInteger}.
+     */
     public BigInteger bigIntegerValue() {
         BigInteger bigInt = BigInteger.valueOf(value & UNSIGNED_MASK);
         if (value < 0) {
@@ -232,7 +234,9 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
         return false;
     }
 
-    /** Returns a string representation of the {@code UnsignedLong} value, in base 10. */
+    /**
+     * Returns a string representation of the {@code UnsignedLong} value, in base 10.
+     */
     @Override
     public String toString() {
         return UnsignedLongs.toString(value);

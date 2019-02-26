@@ -67,7 +67,7 @@ public final class Strings2 {
             if (
                     (chars[start + 1] == 'x') ||
                             (chars[start + 1] == 'X')
-                    ) {
+            ) {
                 int i = start + 2;
                 if (i == sz) {
                     return false;
@@ -162,12 +162,9 @@ public final class Strings2 {
     /**
      * 文字列を置き換えます。
      *
-     * @param text
-     *            テキスト
-     * @param fromText
-     *            置き換え対象のテキスト
-     * @param toText
-     *            置き換えるテキスト
+     * @param text     テキスト
+     * @param fromText 置き換え対象のテキスト
+     * @param toText   置き換えるテキスト
      * @return 結果
      */
     public static final String replace(final String text,
@@ -195,13 +192,12 @@ public final class Strings2 {
         }
         return buf.toString();
     }
+
     /**
      * 文字列を分割します。
      *
-     * @param str
-     *            文字列
-     * @param delim
-     *            分割するためのデリミタ
+     * @param str   文字列
+     * @param delim 分割するためのデリミタ
      * @return 分割された文字列の配列
      */
     public static String[] split(final String str, final String delim) {
@@ -227,8 +223,7 @@ public final class Strings2 {
      * Strings2.capitalize("ABC")  = "ABC"
      * </pre>
      *
-     * @param name
-     *            名前
+     * @param name 名前
      * @return 結果の文字列
      */
     public static String decapitalize(final String name) {
@@ -255,8 +250,7 @@ public final class Strings2 {
      * Strings2.capitalize("ABC")  = "ABC"
      * </pre>
      *
-     * @param name
-     *            名前
+     * @param name 名前
      * @return 結果の文字列
      */
     public static String capitalize(final String name) {

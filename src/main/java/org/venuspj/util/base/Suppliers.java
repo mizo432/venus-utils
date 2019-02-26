@@ -1,21 +1,8 @@
-/*
- * Copyright (C) 2007 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.base;
 
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.annotations.VisibleForTesting;
@@ -28,14 +15,11 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  * Useful suppliers.
  *
  * <p>All methods return serializable suppliers as long as they're given serializable parameters.
- *
- * @author Laurence Gonsalves
- * @author Harry Heymann
- * @since 2.0
  */
 @GwtCompatible
 public final class Suppliers {
-    private Suppliers() {}
+    private Suppliers() {
+    }
 
     /**
      * Returns a new supplier which is the composition of the provided function and supplier. In other
@@ -202,8 +186,8 @@ public final class Suppliers {
      * delegating calls until it returns valid data.
      *
      * @param duration the length of time after a value is created that it should stop being returned
-     *     by subsequent {@code get()} calls
-     * @param unit the unit that {@code duration} is expressed in
+     *                 by subsequent {@code get()} calls
+     * @param unit     the unit that {@code duration} is expressed in
      * @throws IllegalArgumentException if {@code duration} is not positive
      * @since 2.0
      */
@@ -262,7 +246,9 @@ public final class Suppliers {
         private static final long serialVersionUID = 0;
     }
 
-    /** Returns a supplier that always supplies {@code instance}. */
+    /**
+     * Returns a supplier that always supplies {@code instance}.
+     */
     public static <T> Supplier<T> ofInstance(@Nullable T instance) {
         return new SupplierOfInstance<T>(instance);
     }
@@ -345,7 +331,8 @@ public final class Suppliers {
         return sf;
     }
 
-    private interface SupplierFunction<T> extends Function<Supplier<T>, T> {}
+    private interface SupplierFunction<T> extends Function<Supplier<T>, T> {
+    }
 
     private enum SupplierFunctionImpl implements SupplierFunction<Object> {
         INSTANCE;

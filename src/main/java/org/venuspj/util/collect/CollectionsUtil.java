@@ -5,18 +5,14 @@ import java.util.concurrent.*;
 
 /**
  * コレクションのためのユーティリティです。
- *
- * @author koichik
  */
 public abstract class CollectionsUtil {
 
     /**
      * {@link ArrayBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayBlockingQueue}の要素型
-     * @param capacity
-     *            キューの容量
+     * @param <E>      {@link ArrayBlockingQueue}の要素型
+     * @param capacity キューの容量
      * @return {@link ArrayBlockingQueue}の新しいインスタンス
      * @see ArrayBlockingQueue#ArrayBlockingQueue(int)
      */
@@ -28,12 +24,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayBlockingQueue}の要素型
-     * @param capacity
-     *            キューの容量
-     * @param fair
-     *            {@code true}の場合、挿入または削除時にブロックされたスレッドに対するキューアクセス
+     * @param <E>      {@link ArrayBlockingQueue}の要素型
+     * @param capacity キューの容量
+     * @param fair     {@code true}の場合、挿入または削除時にブロックされたスレッドに対するキューアクセス
      * @return {@link ArrayBlockingQueue}の新しいインスタンス
      * @see ArrayBlockingQueue#ArrayBlockingQueue(int, boolean)
      */
@@ -45,14 +38,10 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayBlockingQueue}の要素型
-     * @param capacity
-     *            キューの容量
-     * @param fair
-     *            {@code true}の場合、挿入または削除時にブロックされたスレッドに対するキューアクセス
-     * @param c
-     *            最初に含む要素のコレクション
+     * @param <E>      {@link ArrayBlockingQueue}の要素型
+     * @param capacity キューの容量
+     * @param fair     {@code true}の場合、挿入または削除時にブロックされたスレッドに対するキューアクセス
+     * @param c        最初に含む要素のコレクション
      * @return {@link ArrayBlockingQueue}の新しいインスタンス
      * @see ArrayBlockingQueue#ArrayBlockingQueue(int, boolean, Collection)
      */
@@ -65,8 +54,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayDeque}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayDeque}の要素型
+     * @param <E> {@link ArrayDeque}の要素型
      * @return {@link ArrayDeque}の新しいインスタンス
      * @see ArrayDeque#ArrayDeque()
      */
@@ -77,10 +65,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayDeque}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayDeque}の要素型
-     * @param c
-     *            要素が両端キューに配置されるコレクション
+     * @param <E> {@link ArrayDeque}の要素型
+     * @param c   要素が両端キューに配置されるコレクション
      * @return {@link ArrayDeque}の新しいインスタンス
      * @see ArrayDeque#ArrayDeque(Collection)
      */
@@ -92,10 +78,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayDeque}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayDeque}の要素型
-     * @param numElements
-     *            両端キューの初期容量の範囲の下限
+     * @param <E>         {@link ArrayDeque}の要素型
+     * @param numElements 両端キューの初期容量の範囲の下限
      * @return {@link ArrayDeque}の新しいインスタンス
      * @see ArrayDeque#ArrayDeque(int)
      */
@@ -106,8 +90,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayList}の要素型
+     * @param <E> {@link ArrayList}の要素型
      * @return {@link ArrayList}の新しいインスタンス
      * @see ArrayList#ArrayList()
      */
@@ -118,10 +101,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayList}の要素型
-     * @param c
-     *            要素がリストに配置されるコレクション
+     * @param <E> {@link ArrayList}の要素型
+     * @param c   要素がリストに配置されるコレクション
      * @return {@link ArrayList}の新しいインスタンス
      * @see ArrayList#ArrayList(Collection)
      */
@@ -132,10 +113,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ArrayList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ArrayList}の要素型
-     * @param initialCapacity
-     *            リストの初期容量
+     * @param <E>             {@link ArrayList}の要素型
+     * @param initialCapacity リストの初期容量
      * @return {@link ArrayList}の新しいインスタンス
      * @see ArrayList#ArrayList(int)
      */
@@ -146,10 +125,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentHashMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentHashMap}の値の型
+     * @param <K> {@link ConcurrentHashMap}のキーの型
+     * @param <V> {@link ConcurrentHashMap}の値の型
      * @return {@link ConcurrentHashMap}の新しいインスタンス
      * @see ConcurrentHashMap#ConcurrentHashMap()
      */
@@ -160,12 +137,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentHashMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentHashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
+     * @param <K>             {@link ConcurrentHashMap}のキーの型
+     * @param <V>             {@link ConcurrentHashMap}の値の型
+     * @param initialCapacity 初期容量
      * @return {@link ConcurrentHashMap}の新しいインスタンス
      * @see ConcurrentHashMap#ConcurrentHashMap(int)
      */
@@ -177,16 +151,11 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentHashMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentHashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
-     * @param loadFactor
-     *            サイズ変更の制御に使用される負荷係数のしきい値
-     * @param concurrencyLevel
-     *            同時更新を行うスレッドの推定数
+     * @param <K>              {@link ConcurrentHashMap}のキーの型
+     * @param <V>              {@link ConcurrentHashMap}の値の型
+     * @param initialCapacity  初期容量
+     * @param loadFactor       サイズ変更の制御に使用される負荷係数のしきい値
+     * @param concurrencyLevel 同時更新を行うスレッドの推定数
      * @return {@link ConcurrentHashMap}の新しいインスタンス
      * @see ConcurrentHashMap#ConcurrentHashMap(int, float, int)
      */
@@ -202,12 +171,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentHashMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentHashMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link ConcurrentHashMap}のキーの型
+     * @param <V> {@link ConcurrentHashMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link ConcurrentHashMap}の新しいインスタンス
      * @see ConcurrentHashMap#ConcurrentHashMap(Map)
      */
@@ -219,8 +185,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentLinkedQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ConcurrentLinkedQueue}の要素型
+     * @param <E> {@link ConcurrentLinkedQueue}の要素型
      * @return {@link ConcurrentLinkedQueue}の新しいインスタンス
      * @see ConcurrentLinkedQueue#ConcurrentLinkedQueue()
      */
@@ -231,10 +196,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentLinkedQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ConcurrentLinkedQueue}の要素型
-     * @param c
-     *            最初に含む要素のコレクション
+     * @param <E> {@link ConcurrentLinkedQueue}の要素型
+     * @param c   最初に含む要素のコレクション
      * @return {@link ConcurrentLinkedQueue}の新しいインスタンス
      * @see ConcurrentLinkedQueue#ConcurrentLinkedQueue(Collection)
      */
@@ -246,10 +209,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentSkipListMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentSkipListMap}の値の型
+     * @param <K> {@link ConcurrentSkipListMap}のキーの型
+     * @param <V> {@link ConcurrentSkipListMap}の値の型
      * @return {@link ConcurrentSkipListMap}の新しいインスタンス
      * @see ConcurrentSkipListMap#ConcurrentSkipListMap()
      */
@@ -260,12 +221,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentSkipListMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentSkipListMap}の値の型
-     * @param c
-     *            {@link Comparator}
+     * @param <K> {@link ConcurrentSkipListMap}のキーの型
+     * @param <V> {@link ConcurrentSkipListMap}の値の型
+     * @param c   {@link Comparator}
      * @return {@link ConcurrentSkipListMap}の新しいインスタンス
      * @see ConcurrentSkipListMap#ConcurrentSkipListMap(Comparator)
      */
@@ -277,12 +235,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentSkipListMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentSkipListMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link ConcurrentSkipListMap}のキーの型
+     * @param <V> {@link ConcurrentSkipListMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link ConcurrentSkipListMap}の新しいインスタンス
      * @see ConcurrentSkipListMap#ConcurrentSkipListMap(Map)
      */
@@ -294,12 +249,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link ConcurrentSkipListMap}のキーの型
-     * @param <V>
-     *            {@link ConcurrentSkipListMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link ConcurrentSkipListMap}のキーの型
+     * @param <V> {@link ConcurrentSkipListMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link ConcurrentSkipListMap}の新しいインスタンス
      * @see ConcurrentSkipListMap#ConcurrentSkipListMap(SortedMap)
      */
@@ -311,8 +263,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ConcurrentSkipListSet}の要素型
+     * @param <E> {@link ConcurrentSkipListSet}の要素型
      * @return {@link ConcurrentSkipListSet}の新しいインスタンス
      * @see ConcurrentSkipListSet#ConcurrentSkipListSet()
      */
@@ -323,10 +274,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ConcurrentSkipListSet}の要素型
-     * @param c
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link ConcurrentSkipListSet}の要素型
+     * @param c   要素がセットに配置されるコレクション
      * @return {@link ConcurrentSkipListSet}の新しいインスタンス
      * @see ConcurrentSkipListSet#ConcurrentSkipListSet(Collection)
      */
@@ -338,10 +287,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ConcurrentSkipListSet}の要素型
-     * @param c
-     *            このセットをソートするために使用されるコンパレータ
+     * @param <E> {@link ConcurrentSkipListSet}の要素型
+     * @param c   このセットをソートするために使用されるコンパレータ
      * @return {@link ConcurrentSkipListSet}の新しいインスタンス
      * @see ConcurrentSkipListSet#ConcurrentSkipListSet(Comparator)
      */
@@ -353,10 +300,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link ConcurrentSkipListSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link ConcurrentSkipListSet}の要素型
-     * @param s
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link ConcurrentSkipListSet}の要素型
+     * @param s   要素がセットに配置されるコレクション
      * @return {@link ConcurrentSkipListSet}の新しいインスタンス
      * @see ConcurrentSkipListSet#ConcurrentSkipListSet(SortedSet)
      */
@@ -368,8 +313,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link CopyOnWriteArrayList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArrayList}の要素型
+     * @param <E> {@link CopyOnWriteArrayList}の要素型
      * @return {@link CopyOnWriteArrayList}の新しいインスタンス
      * @see CopyOnWriteArrayList#CopyOnWriteArrayList()
      */
@@ -380,10 +324,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link CopyOnWriteArrayList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArrayList}の要素型
-     * @param c
-     *            最初に保持していた要素のコレクション
+     * @param <E> {@link CopyOnWriteArrayList}の要素型
+     * @param c   最初に保持していた要素のコレクション
      * @return {@link CopyOnWriteArrayList}の新しいインスタンス
      * @see CopyOnWriteArrayList#CopyOnWriteArrayList(Collection)
      */
@@ -395,10 +337,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link CopyOnWriteArrayList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArrayList}の要素型
-     * @param toCopyIn
-     *            配列 (この配列のコピーは内部配列として使用される)
+     * @param <E>      {@link CopyOnWriteArrayList}の要素型
+     * @param toCopyIn 配列 (この配列のコピーは内部配列として使用される)
      * @return {@link CopyOnWriteArrayList}の新しいインスタンス
      * @see CopyOnWriteArrayList#CopyOnWriteArrayList(Object[])
      */
@@ -410,8 +350,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link CopyOnWriteArraySet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArraySet}の要素型
+     * @param <E> {@link CopyOnWriteArraySet}の要素型
      * @return {@link CopyOnWriteArraySet}の新しいインスタンス
      * @see CopyOnWriteArraySet#CopyOnWriteArraySet()
      */
@@ -422,10 +361,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link CopyOnWriteArraySet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArraySet}の要素型
-     * @param c
-     *            コレクション
+     * @param <E> {@link CopyOnWriteArraySet}の要素型
+     * @param c   コレクション
      * @return {@link CopyOnWriteArraySet}の新しいインスタンス
      * @see CopyOnWriteArraySet#CopyOnWriteArraySet(Collection)
      */
@@ -437,8 +374,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link DelayQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArraySet}の要素型
+     * @param <E> {@link CopyOnWriteArraySet}の要素型
      * @return {@link DelayQueue}の新しいインスタンス
      * @see DelayQueue#DelayQueue()
      */
@@ -449,10 +385,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link DelayQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link CopyOnWriteArraySet}の要素型
-     * @param c
-     *            コレクション
+     * @param <E> {@link CopyOnWriteArraySet}の要素型
+     * @param c   コレクション
      * @return {@link DelayQueue}の新しいインスタンス
      * @see DelayQueue#DelayQueue(Collection)
      */
@@ -464,12 +398,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link EnumMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link EnumMap}のキーの型
-     * @param <V>
-     *            {@link EnumMap}の値の型
-     * @param keyType
-     *            この {@literal enum} マップ用のキー型のクラスオブジェクト
+     * @param <K>     {@link EnumMap}のキーの型
+     * @param <V>     {@link EnumMap}の値の型
+     * @param keyType この {@literal enum} マップ用のキー型のクラスオブジェクト
      * @return {@link EnumMap}の新しいインスタンス
      * @see EnumMap#EnumMap(Class)
      */
@@ -481,12 +412,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link EnumMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link EnumMap}のキーの型
-     * @param <V>
-     *            {@link EnumMap}の値の型
-     * @param m
-     *            この {@literal enum} マップの初期化元の {@literal enum} マップ
+     * @param <K> {@link EnumMap}のキーの型
+     * @param <V> {@link EnumMap}の値の型
+     * @param m   この {@literal enum} マップの初期化元の {@literal enum} マップ
      * @return {@link EnumMap}の新しいインスタンス
      * @see EnumMap#EnumMap(EnumMap)
      */
@@ -498,12 +426,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link EnumMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link EnumMap}のキーの型
-     * @param <V>
-     *            {@link EnumMap}の値の型
-     * @param m
-     *            この {@literal enum} マップの初期化元のマップ
+     * @param <K> {@link EnumMap}のキーの型
+     * @param <V> {@link EnumMap}の値の型
+     * @param m   この {@literal enum} マップの初期化元のマップ
      * @return {@link EnumMap}の新しいインスタンス
      * @see EnumMap#EnumMap(Map)
      */
@@ -515,10 +440,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link HashMap}のキーの型
-     * @param <V>
-     *            {@link HashMap}の値の型
+     * @param <K> {@link HashMap}のキーの型
+     * @param <V> {@link HashMap}の値の型
      * @return {@link HashMap}の新しいインスタンス
      * @see HashMap#HashMap()
      */
@@ -529,12 +452,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link HashMap}のキーの型
-     * @param <V>
-     *            {@link HashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
+     * @param <K>             {@link HashMap}のキーの型
+     * @param <V>             {@link HashMap}の値の型
+     * @param initialCapacity 初期容量
      * @return {@link HashMap}の新しいインスタンス
      * @see HashMap#HashMap(int)
      */
@@ -545,14 +465,10 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link HashMap}のキーの型
-     * @param <V>
-     *            {@link HashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
-     * @param loadFactor
-     *            サイズ変更の制御に使用される負荷係数のしきい値
+     * @param <K>             {@link HashMap}のキーの型
+     * @param <V>             {@link HashMap}の値の型
+     * @param initialCapacity 初期容量
+     * @param loadFactor      サイズ変更の制御に使用される負荷係数のしきい値
      * @return {@link HashMap}の新しいインスタンス
      * @see HashMap#HashMap(int, float)
      */
@@ -564,12 +480,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link HashMap}のキーの型
-     * @param <V>
-     *            {@link HashMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link HashMap}のキーの型
+     * @param <V> {@link HashMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link HashMap}の新しいインスタンス
      * @see HashMap#HashMap(int, float)
      */
@@ -581,8 +494,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link HashSet}の要素型
+     * @param <E> {@link HashSet}の要素型
      * @return {@link HashSet}の新しいインスタンス
      * @see HashSet#HashSet()
      */
@@ -593,10 +505,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link HashSet}の要素型
-     * @param c
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link HashSet}の要素型
+     * @param c   要素がセットに配置されるコレクション
      * @return {@link HashSet}の新しいインスタンス
      * @see HashSet#HashSet()
      */
@@ -607,10 +517,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link HashSet}の要素型
-     * @param initialCapacity
-     *            初期容量
+     * @param <E>             {@link HashSet}の要素型
+     * @param initialCapacity 初期容量
      * @return {@link HashSet}の新しいインスタンス
      * @see HashSet#HashSet()
      */
@@ -621,12 +529,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link HashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link HashSet}の要素型
-     * @param initialCapacity
-     *            初期容量
-     * @param loadFactor
-     *            負荷係数
+     * @param <E>             {@link HashSet}の要素型
+     * @param initialCapacity 初期容量
+     * @param loadFactor      負荷係数
      * @return {@link HashSet}の新しいインスタンス
      * @see HashSet#HashSet()
      */
@@ -638,10 +543,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link Hashtable}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link Hashtable}のキーの型
-     * @param <V>
-     *            {@link Hashtable}の値の型
+     * @param <K> {@link Hashtable}のキーの型
+     * @param <V> {@link Hashtable}の値の型
      * @return {@link Hashtable}の新しいインスタンス
      * @see Hashtable#Hashtable()
      */
@@ -652,12 +555,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link Hashtable}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link Hashtable}のキーの型
-     * @param <V>
-     *            {@link Hashtable}の値の型
-     * @param initialCapacity
-     *            ハッシュテーブルの初期容量
+     * @param <K>             {@link Hashtable}のキーの型
+     * @param <V>             {@link Hashtable}の値の型
+     * @param initialCapacity ハッシュテーブルの初期容量
      * @return {@link Hashtable}の新しいインスタンス
      * @see Hashtable#Hashtable(int)
      */
@@ -668,14 +568,10 @@ public abstract class CollectionsUtil {
     /**
      * {@link Hashtable}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link Hashtable}のキーの型
-     * @param <V>
-     *            {@link Hashtable}の値の型
-     * @param initialCapacity
-     *            ハッシュテーブルの初期容量
-     * @param loadFactor
-     *            ハッシュテーブルの負荷係数
+     * @param <K>             {@link Hashtable}のキーの型
+     * @param <V>             {@link Hashtable}の値の型
+     * @param initialCapacity ハッシュテーブルの初期容量
+     * @param loadFactor      ハッシュテーブルの負荷係数
      * @return {@link Hashtable}の新しいインスタンス
      * @see Hashtable#Hashtable(int, float)
      */
@@ -687,12 +583,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link Hashtable}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link Hashtable}のキーの型
-     * @param <V>
-     *            {@link Hashtable}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link Hashtable}のキーの型
+     * @param <V> {@link Hashtable}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link Hashtable}の新しいインスタンス
      * @see Hashtable#Hashtable(Map)
      */
@@ -704,10 +597,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link IdentityHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link IdentityHashMap}のキーの型
-     * @param <V>
-     *            {@link IdentityHashMap}の値の型
+     * @param <K> {@link IdentityHashMap}のキーの型
+     * @param <V> {@link IdentityHashMap}の値の型
      * @return {@link IdentityHashMap}の新しいインスタンス
      * @see IdentityHashMap#IdentityHashMap()
      */
@@ -718,12 +609,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link IdentityHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link IdentityHashMap}のキーの型
-     * @param <V>
-     *            {@link IdentityHashMap}の値の型
-     * @param expectedMaxSize
-     *            マップの予想最大サイズ
+     * @param <K>             {@link IdentityHashMap}のキーの型
+     * @param <V>             {@link IdentityHashMap}の値の型
+     * @param expectedMaxSize マップの予想最大サイズ
      * @return {@link IdentityHashMap}の新しいインスタンス
      * @see IdentityHashMap#IdentityHashMap(int)
      */
@@ -735,12 +623,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link IdentityHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link IdentityHashMap}のキーの型
-     * @param <V>
-     *            {@link IdentityHashMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link IdentityHashMap}のキーの型
+     * @param <V> {@link IdentityHashMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link IdentityHashMap}の新しいインスタンス
      * @see IdentityHashMap#IdentityHashMap(Map)
      */
@@ -752,8 +637,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedBlockingDeque}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedBlockingDeque}の要素型
+     * @param <E> {@link LinkedBlockingDeque}の要素型
      * @return {@link LinkedBlockingDeque}の新しいインスタンス
      * @see LinkedBlockingDeque#LinkedBlockingDeque()
      */
@@ -764,10 +648,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedBlockingDeque}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedBlockingDeque}の要素型
-     * @param c
-     *            要素がリストに配置されるコレクション
+     * @param <E> {@link LinkedBlockingDeque}の要素型
+     * @param c   要素がリストに配置されるコレクション
      * @return {@link LinkedBlockingDeque}の新しいインスタンス
      * @see LinkedBlockingDeque#LinkedBlockingDeque(Collection)
      */
@@ -779,10 +661,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedBlockingDeque}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedBlockingDeque}の要素型
-     * @param initialCapacity
-     *            リストの初期容量
+     * @param <E>             {@link LinkedBlockingDeque}の要素型
+     * @param initialCapacity リストの初期容量
      * @return {@link LinkedBlockingDeque}の新しいインスタンス
      * @see LinkedBlockingDeque#LinkedBlockingDeque(int)
      */
@@ -794,8 +674,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedBlockingQueue}の要素型
+     * @param <E> {@link LinkedBlockingQueue}の要素型
      * @return {@link LinkedBlockingQueue}の新しいインスタンス
      * @see LinkedBlockingQueue#LinkedBlockingQueue()
      */
@@ -806,10 +685,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedBlockingQueue}の要素型
-     * @param c
-     *            最初に含む要素のコレクション
+     * @param <E> {@link LinkedBlockingQueue}の要素型
+     * @param c   最初に含む要素のコレクション
      * @return {@link LinkedBlockingQueue}の新しいインスタンス
      * @see LinkedBlockingQueue#LinkedBlockingQueue(Collection)
      */
@@ -821,10 +698,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedBlockingQueue}の要素型
-     * @param initialCapacity
-     *            このキューの容量
+     * @param <E>             {@link LinkedBlockingQueue}の要素型
+     * @param initialCapacity このキューの容量
      * @return {@link LinkedBlockingQueue}の新しいインスタンス
      * @see LinkedBlockingQueue#LinkedBlockingQueue(int)
      */
@@ -836,10 +711,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link LinkedHashMap}のキーの型
-     * @param <V>
-     *            {@link LinkedHashMap}の値の型
+     * @param <K> {@link LinkedHashMap}のキーの型
+     * @param <V> {@link LinkedHashMap}の値の型
      * @return {@link LinkedHashMap}の新しいインスタンス
      * @see LinkedHashMap#LinkedHashMap()
      */
@@ -850,12 +723,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link LinkedHashMap}のキーの型
-     * @param <V>
-     *            {@link LinkedHashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
+     * @param <K>             {@link LinkedHashMap}のキーの型
+     * @param <V>             {@link LinkedHashMap}の値の型
+     * @param initialCapacity 初期容量
      * @return {@link LinkedHashMap}の新しいインスタンス
      * @see LinkedHashMap#LinkedHashMap(int)
      */
@@ -867,14 +737,10 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link LinkedHashMap}のキーの型
-     * @param <V>
-     *            {@link LinkedHashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
-     * @param loadFactor
-     *            負荷係数
+     * @param <K>             {@link LinkedHashMap}のキーの型
+     * @param <V>             {@link LinkedHashMap}の値の型
+     * @param initialCapacity 初期容量
+     * @param loadFactor      負荷係数
      * @return {@link LinkedHashMap}の新しいインスタンス
      * @see LinkedHashMap#LinkedHashMap(int, float)
      */
@@ -886,12 +752,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link LinkedHashMap}のキーの型
-     * @param <V>
-     *            {@link LinkedHashMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link LinkedHashMap}のキーの型
+     * @param <V> {@link LinkedHashMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link LinkedHashMap}の新しいインスタンス
      * @see LinkedHashMap#LinkedHashMap(Map)
      */
@@ -903,8 +766,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedHashSet}の要素型
+     * @param <E> {@link LinkedHashSet}の要素型
      * @return {@link LinkedHashSet}の新しいインスタンス
      * @see LinkedHashSet#LinkedHashSet()
      */
@@ -915,10 +777,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedHashSet}の要素型
-     * @param c
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link LinkedHashSet}の要素型
+     * @param c   要素がセットに配置されるコレクション
      * @return {@link LinkedHashSet}の新しいインスタンス
      * @see LinkedHashSet#LinkedHashSet(Collection)
      */
@@ -930,10 +790,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedHashSet}の要素型
-     * @param initialCapacity
-     *            初期容量
+     * @param <E>             {@link LinkedHashSet}の要素型
+     * @param initialCapacity 初期容量
      * @return {@link LinkedHashSet}の新しいインスタンス
      * @see LinkedHashSet#LinkedHashSet(int)
      */
@@ -945,12 +803,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedHashSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedHashSet}の要素型
-     * @param initialCapacity
-     *            初期容量
-     * @param loadFactor
-     *            負荷係数
+     * @param <E>             {@link LinkedHashSet}の要素型
+     * @param initialCapacity 初期容量
+     * @param loadFactor      負荷係数
      * @return {@link LinkedHashSet}の新しいインスタンス
      * @see LinkedHashSet#LinkedHashSet(int, float)
      */
@@ -962,8 +817,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedList}の要素型
+     * @param <E> {@link LinkedList}の要素型
      * @return {@link LinkedList}の新しいインスタンス
      * @see LinkedList#LinkedList()
      */
@@ -974,10 +828,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link LinkedList}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link LinkedList}の要素型
-     * @param c
-     *            要素がリストに配置されるコレクション
+     * @param <E> {@link LinkedList}の要素型
+     * @param c   要素がリストに配置されるコレクション
      * @return {@link LinkedList}の新しいインスタンス
      * @see LinkedList#LinkedList(Collection)
      */
@@ -989,8 +841,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityBlockingQueue}の要素型
+     * @param <E> {@link PriorityBlockingQueue}の要素型
      * @return {@link PriorityBlockingQueue}の新しいインスタンス
      * @see PriorityBlockingQueue#PriorityBlockingQueue()
      */
@@ -1001,10 +852,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityBlockingQueue}の要素型
-     * @param c
-     *            最初に含む要素のコレクション
+     * @param <E> {@link PriorityBlockingQueue}の要素型
+     * @param c   最初に含む要素のコレクション
      * @return {@link PriorityBlockingQueue}の新しいインスタンス
      * @see PriorityBlockingQueue#PriorityBlockingQueue(Collection)
      */
@@ -1016,10 +865,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityBlockingQueue}の要素型
-     * @param initialCapacity
-     *            この優先度キューの初期容量
+     * @param <E>             {@link PriorityBlockingQueue}の要素型
+     * @param initialCapacity この優先度キューの初期容量
      * @return {@link PriorityBlockingQueue}の新しいインスタンス
      * @see PriorityBlockingQueue#PriorityBlockingQueue(int)
      */
@@ -1031,12 +878,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityBlockingQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityBlockingQueue}の要素型
-     * @param initialCapacity
-     *            この優先度キューの初期容量
-     * @param comparator
-     *            この優先度キューの順序付けに使用するコンパレータ
+     * @param <E>             {@link PriorityBlockingQueue}の要素型
+     * @param initialCapacity この優先度キューの初期容量
+     * @param comparator      この優先度キューの順序付けに使用するコンパレータ
      * @return {@link PriorityBlockingQueue}の新しいインスタンス
      * @see PriorityBlockingQueue#PriorityBlockingQueue(int, Comparator)
      */
@@ -1048,8 +892,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityQueue}の要素型
+     * @param <E> {@link PriorityQueue}の要素型
      * @return {@link PriorityQueue}の新しいインスタンス
      * @see PriorityQueue#PriorityQueue()
      */
@@ -1060,10 +903,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityQueue}の要素型
-     * @param c
-     *            要素が優先度キューに配置されるコレクション
+     * @param <E> {@link PriorityQueue}の要素型
+     * @param c   要素が優先度キューに配置されるコレクション
      * @return {@link PriorityQueue}の新しいインスタンス
      * @see PriorityQueue#PriorityQueue(Collection)
      */
@@ -1075,10 +916,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityQueue}の要素型
-     * @param initialCapacity
-     *            この優先度キューの初期容量
+     * @param <E>             {@link PriorityQueue}の要素型
+     * @param initialCapacity この優先度キューの初期容量
      * @return {@link PriorityQueue}の新しいインスタンス
      * @see PriorityQueue#PriorityQueue(int)
      */
@@ -1090,12 +929,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityQueue}の要素型
-     * @param initialCapacity
-     *            この優先度キューの初期容量
-     * @param comparator
-     *            この優先度キューの順序付けに使用するコンパレータ
+     * @param <E>             {@link PriorityQueue}の要素型
+     * @param initialCapacity この優先度キューの初期容量
+     * @param comparator      この優先度キューの順序付けに使用するコンパレータ
      * @return {@link PriorityQueue}の新しいインスタンス
      * @see PriorityQueue#PriorityQueue(int, Comparator)
      */
@@ -1107,10 +943,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityQueue}の要素型
-     * @param c
-     *            要素が優先度キューに配置されるコレクション
+     * @param <E> {@link PriorityQueue}の要素型
+     * @param c   要素が優先度キューに配置されるコレクション
      * @return {@link PriorityQueue}の新しいインスタンス
      * @see PriorityQueue#PriorityQueue(PriorityQueue)
      */
@@ -1122,10 +956,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link PriorityQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link PriorityQueue}の要素型
-     * @param c
-     *            要素が優先度キューに配置されるコレクション
+     * @param <E> {@link PriorityQueue}の要素型
+     * @param c   要素が優先度キューに配置されるコレクション
      * @return {@link PriorityQueue}の新しいインスタンス
      * @see PriorityQueue#PriorityQueue(SortedSet)
      */
@@ -1137,8 +969,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link Stack}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link Stack}の要素型
+     * @param <E> {@link Stack}の要素型
      * @return {@link Stack}の新しいインスタンス
      * @see Stack#Stack()
      */
@@ -1149,8 +980,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link SynchronousQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link SynchronousQueue}の要素型
+     * @param <E> {@link SynchronousQueue}の要素型
      * @return {@link SynchronousQueue}の新しいインスタンス
      * @see SynchronousQueue#SynchronousQueue()
      */
@@ -1161,11 +991,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link SynchronousQueue}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link SynchronousQueue}の要素型
-     * @param fair
-     *            {@literal true} の場合、待機中のスレッドは FIFO
-     *            の順序でアクセスが決定される。そうでない場合、順序は未指定
+     * @param <E>  {@link SynchronousQueue}の要素型
+     * @param fair {@literal true} の場合、待機中のスレッドは FIFO
+     *             の順序でアクセスが決定される。そうでない場合、順序は未指定
      * @return {@link SynchronousQueue}の新しいインスタンス
      * @see SynchronousQueue#SynchronousQueue()
      */
@@ -1176,10 +1004,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link TreeMap}のキーの型
-     * @param <V>
-     *            {@link TreeMap}の値の型
+     * @param <K> {@link TreeMap}のキーの型
+     * @param <V> {@link TreeMap}の値の型
      * @return {@link TreeMap}の新しいインスタンス
      * @see TreeMap#TreeMap()
      */
@@ -1190,12 +1016,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link TreeMap}のキーの型
-     * @param <V>
-     *            {@link TreeMap}の値の型
-     * @param c
-     *            {@link Comparator}
+     * @param <K> {@link TreeMap}のキーの型
+     * @param <V> {@link TreeMap}の値の型
+     * @param c   {@link Comparator}
      * @return {@link TreeMap}の新しいインスタンス
      * @see TreeMap#TreeMap(Comparator)
      */
@@ -1206,12 +1029,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link TreeMap}のキーの型
-     * @param <V>
-     *            {@link TreeMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link TreeMap}のキーの型
+     * @param <V> {@link TreeMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link TreeMap}の新しいインスタンス
      * @see TreeMap#TreeMap(Map)
      */
@@ -1223,12 +1043,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link TreeMap}のキーの型
-     * @param <V>
-     *            {@link TreeMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link TreeMap}のキーの型
+     * @param <V> {@link TreeMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link TreeMap}の新しいインスタンス
      * @see TreeMap#TreeMap(SortedMap)
      */
@@ -1240,8 +1057,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link TreeSet}の要素型
+     * @param <E> {@link TreeSet}の要素型
      * @return {@link TreeSet}の新しいインスタンス
      * @see TreeSet#TreeSet()
      */
@@ -1252,10 +1068,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link TreeSet}の要素型
-     * @param c
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link TreeSet}の要素型
+     * @param c   要素がセットに配置されるコレクション
      * @return {@link TreeSet}の新しいインスタンス
      * @see TreeSet#TreeSet(Collection)
      */
@@ -1266,10 +1080,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link TreeSet}の要素型
-     * @param c
-     *            このセットをソートするために使用されるコンパレータ
+     * @param <E> {@link TreeSet}の要素型
+     * @param c   このセットをソートするために使用されるコンパレータ
      * @return {@link TreeSet}の新しいインスタンス
      * @see TreeSet#TreeSet(Comparator)
      */
@@ -1280,10 +1092,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link TreeSet}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link TreeSet}の要素型
-     * @param s
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link TreeSet}の要素型
+     * @param s   要素がセットに配置されるコレクション
      * @return {@link TreeSet}の新しいインスタンス
      * @see TreeSet#TreeSet(SortedSet)
      */
@@ -1294,8 +1104,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link Vector}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link Vector}の要素型
+     * @param <E> {@link Vector}の要素型
      * @return {@link Vector}の新しいインスタンス
      * @see Vector#Vector()
      */
@@ -1306,10 +1115,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link Vector}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link Vector}の要素型
-     * @param c
-     *            要素がセットに配置されるコレクション
+     * @param <E> {@link Vector}の要素型
+     * @param c   要素がセットに配置されるコレクション
      * @return {@link Vector}の新しいインスタンス
      * @see Vector#Vector(Collection)
      */
@@ -1320,10 +1127,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link Vector}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link Vector}の要素型
-     * @param initialCapacity
-     *            {@link Vector}の初期容量
+     * @param <E>             {@link Vector}の要素型
+     * @param initialCapacity {@link Vector}の初期容量
      * @return {@link Vector}の新しいインスタンス
      * @see Vector#Vector(int)
      */
@@ -1334,12 +1139,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link Vector}の新しいインスタンスを作成して返します。
      *
-     * @param <E>
-     *            {@link Vector}の要素型
-     * @param initialCapacity
-     *            {@link Vector}の初期容量
-     * @param capacityIncrement
-     *            {@link Vector}があふれたときに増加される容量
+     * @param <E>               {@link Vector}の要素型
+     * @param initialCapacity   {@link Vector}の初期容量
+     * @param capacityIncrement {@link Vector}があふれたときに増加される容量
      * @return {@link Vector}の新しいインスタンス
      * @see Vector#Vector(int, int)
      */
@@ -1351,10 +1153,8 @@ public abstract class CollectionsUtil {
     /**
      * {@link WeakHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link WeakHashMap}のキーの型
-     * @param <V>
-     *            {@link WeakHashMap}の値の型
+     * @param <K> {@link WeakHashMap}のキーの型
+     * @param <V> {@link WeakHashMap}の値の型
      * @return {@link WeakHashMap}の新しいインスタンス
      * @see WeakHashMap#WeakHashMap()
      */
@@ -1365,12 +1165,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link WeakHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link WeakHashMap}のキーの型
-     * @param <V>
-     *            {@link WeakHashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
+     * @param <K>             {@link WeakHashMap}のキーの型
+     * @param <V>             {@link WeakHashMap}の値の型
+     * @param initialCapacity 初期容量
      * @return {@link WeakHashMap}の新しいインスタンス
      * @see WeakHashMap#WeakHashMap(int)
      */
@@ -1382,14 +1179,10 @@ public abstract class CollectionsUtil {
     /**
      * {@link WeakHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link WeakHashMap}のキーの型
-     * @param <V>
-     *            {@link WeakHashMap}の値の型
-     * @param initialCapacity
-     *            初期容量
-     * @param loadFactor
-     *            サイズ変更の制御に使用される負荷係数のしきい値
+     * @param <K>             {@link WeakHashMap}のキーの型
+     * @param <V>             {@link WeakHashMap}の値の型
+     * @param initialCapacity 初期容量
+     * @param loadFactor      サイズ変更の制御に使用される負荷係数のしきい値
      * @return {@link WeakHashMap}の新しいインスタンス
      * @see WeakHashMap#WeakHashMap(int, float)
      */
@@ -1401,12 +1194,9 @@ public abstract class CollectionsUtil {
     /**
      * {@link WeakHashMap}の新しいインスタンスを作成して返します。
      *
-     * @param <K>
-     *            {@link WeakHashMap}のキーの型
-     * @param <V>
-     *            {@link WeakHashMap}の値の型
-     * @param m
-     *            作成されるマップに配置されるマップ
+     * @param <K> {@link WeakHashMap}のキーの型
+     * @param <V> {@link WeakHashMap}の値の型
+     * @param m   作成されるマップに配置されるマップ
      * @return {@link WeakHashMap}の新しいインスタンス
      * @see WeakHashMap#WeakHashMap(Map)
      */
@@ -1423,16 +1213,11 @@ public abstract class CollectionsUtil {
      * いずれの場合も、返される値はマップがその時点でキーと関連づけている値です。
      * </p>
      *
-     * @param <K>
-     *            {@link HashMap}のキーの型
-     * @param <V>
-     *            {@link HashMap}の値の型
-     * @param map
-     *            マップ
-     * @param key
-     *            指定される値が関連付けられるキー
-     * @param value
-     *            指定されるキーに関連付けられる値
+     * @param <K>   {@link HashMap}のキーの型
+     * @param <V>   {@link HashMap}の値の型
+     * @param map   マップ
+     * @param key   指定される値が関連付けられるキー
+     * @param value 指定されるキーに関連付けられる値
      * @return 指定されたキーと関連付けられていた以前の値または、キーに関連付けられる値
      * @see ConcurrentHashMap#putIfAbsent(Object, Object)
      */
@@ -1448,8 +1233,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link Collection}が{@literal null}または要素が無い場合は{@literal true}を返します。
      *
-     * @param collection
-     *            コレクション
+     * @param collection コレクション
      * @return コレクションが{@literal null}または要素が無い場合は{@literal true}
      */
     public static boolean isEmpty(final Collection<?> collection) {
@@ -1459,8 +1243,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link Collection}が{@literal null}でも要素が無いわけでもない場合は{@literal true}を返します。
      *
-     * @param collection
-     *            コレクション
+     * @param collection コレクション
      * @return コレクションが{@literal null}でも要素が無いわけでもない場合は{@literal true}
      */
     public static boolean isNotEmpty(final Collection<?> collection) {
@@ -1470,8 +1253,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link Map}が{@literal null}または要素が無い場合は{@literal true}を返します。
      *
-     * @param map
-     *            マップ
+     * @param map マップ
      * @return マップが{@literal null}または要素が無い場合は{@literal true}
      */
     public static boolean isEmpty(final Map<?, ?> map) {
@@ -1481,8 +1263,7 @@ public abstract class CollectionsUtil {
     /**
      * {@link Map}が{@literal null}でも要素が無いわけでもない場合は{@literal true}を返します。
      *
-     * @param map
-     *            マップ
+     * @param map マップ
      * @return マップが{@literal null}でも要素が無いわけでもない場合は{@literal true}
      */
     public static boolean isNotEmpty(final Map<?, ?> map) {

@@ -22,6 +22,7 @@ public class ObjectArrays {
         }
         return array;
     }
+
     static Object checkElementNotNull(Object element, int index) {
         if (element == null) {
             throw new NullPointerException("at index " + index);

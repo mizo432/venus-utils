@@ -27,19 +27,19 @@ import static org.venuspj.util.base.Strings.lenientFormat;
  * reasonable and it will be fine.
  *
  * <ul>
- *   <li>If checking whether the <i>caller</i> has violated your method or constructor's contract
- *       (such as by passing an invalid argument), use the utilities of the {@link Preconditions}
- *       class instead.
- *   <li>If checking an <i>impossible</i> condition (which <i>cannot</i> happen unless your own
- *       class or its <i>trusted</i> dependencies is badly broken), this is what ordinary Java
- *       assertions are for. Note that assertions are not enabled by default; they are essentially
- *       considered "compiled comments."
- *   <li>An explicit {@code if/throw} (as illustrated below) is always acceptable; we still
- *       recommend using our {@link VerifyException} exception type. Throwing a plain {@link
- *       RuntimeException} is frowned upon.
- *   <li>Use of {@link java.util.Objects#requireNonNull(Object)} is generally discouraged, since
- *       {@link #verifyNotNull(Object)} and {@link Preconditions#checkNotNull(Object)} perform the
- *       same function with more clarity.
+ * <li>If checking whether the <i>caller</i> has violated your method or constructor's contract
+ * (such as by passing an invalid argument), use the utilities of the {@link Preconditions}
+ * class instead.
+ * <li>If checking an <i>impossible</i> condition (which <i>cannot</i> happen unless your own
+ * class or its <i>trusted</i> dependencies is badly broken), this is what ordinary Java
+ * assertions are for. Note that assertions are not enabled by default; they are essentially
+ * considered "compiled comments."
+ * <li>An explicit {@code if/throw} (as illustrated below) is always acceptable; we still
+ * recommend using our {@link VerifyException} exception type. Throwing a plain {@link
+ * RuntimeException} is frowned upon.
+ * <li>Use of {@link java.util.Objects#requireNonNull(Object)} is generally discouraged, since
+ * {@link #verifyNotNull(Object)} and {@link Preconditions#checkNotNull(Object)} perform the
+ * same function with more clarity.
  * </ul>
  *
  * <h3>Warning about performance</h3>
@@ -66,7 +66,7 @@ import static org.venuspj.util.base.Strings.lenientFormat;
  * will simply not be formatted exactly as intended.
  *
  * <h3>More information</h3>
- *
+ * <p>
  * See <a href="https://github.com/google/guava/wiki/ConditionalFailuresExplained">Conditional
  * failures explained</a> in the Guava User Guide for advice on when this class should be used.
  *
@@ -91,21 +91,21 @@ public final class Verify {
      * Ensures that {@code expression} is {@code true}, throwing a {@code VerifyException} with a
      * custom message otherwise.
      *
-     * @param expression a boolean expression
+     * @param expression           a boolean expression
      * @param errorMessageTemplate a template for the exception message should the check fail. The
-     *     message is formed by replacing each {@code %s} placeholder in the template with an
-     *     argument. These are matched by position - the first {@code %s} gets {@code
-     *     errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
-     *     square braces. Unmatched placeholders will be left as-is.
-     * @param errorMessageArgs the arguments to be substituted into the message template. Arguments
-     *     are converted to strings using {@link String#valueOf(Object)}.
+     *                             message is formed by replacing each {@code %s} placeholder in the template with an
+     *                             argument. These are matched by position - the first {@code %s} gets {@code
+     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
+     *                             square braces. Unmatched placeholders will be left as-is.
+     * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
+     *                             are converted to strings using {@link String#valueOf(Object)}.
      * @throws VerifyException if {@code expression} is {@code false}
      * @see Preconditions#checkState Preconditions.checkState()
      */
     public static void verify(
             boolean expression,
             @Nullable String errorMessageTemplate,
-            @Nullable Object @Nullable... errorMessageArgs) {
+            @Nullable Object @Nullable ... errorMessageArgs) {
         if (!expression) {
             throw new VerifyException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         }
@@ -468,12 +468,12 @@ public final class Verify {
      * message otherwise.
      *
      * @param errorMessageTemplate a template for the exception message should the check fail. The
-     *     message is formed by replacing each {@code %s} placeholder in the template with an
-     *     argument. These are matched by position - the first {@code %s} gets {@code
-     *     errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
-     *     square braces. Unmatched placeholders will be left as-is.
-     * @param errorMessageArgs the arguments to be substituted into the message template. Arguments
-     *     are converted to strings using {@link String#valueOf(Object)}.
+     *                             message is formed by replacing each {@code %s} placeholder in the template with an
+     *                             argument. These are matched by position - the first {@code %s} gets {@code
+     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
+     *                             square braces. Unmatched placeholders will be left as-is.
+     * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
+     *                             are converted to strings using {@link String#valueOf(Object)}.
      * @return {@code reference}, guaranteed to be non-null, for convenience
      * @throws VerifyException if {@code reference} is {@code null}
      * @see Preconditions#checkNotNull Preconditions.checkNotNull()
@@ -482,12 +482,13 @@ public final class Verify {
     public static <T> T verifyNotNull(
             @Nullable T reference,
             @Nullable String errorMessageTemplate,
-            @Nullable Object @Nullable... errorMessageArgs) {
+            @Nullable Object @Nullable ... errorMessageArgs) {
         verify(reference != null, errorMessageTemplate, errorMessageArgs);
         return reference;
     }
 
     // Iterables.getOnlyElement()
 
-    private Verify() {}
+    private Verify() {
+    }
 }

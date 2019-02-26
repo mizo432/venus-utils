@@ -206,10 +206,10 @@ public final class Throwables {
         } catch (ThreadDeath death) {
             throw death;
         } catch (Throwable t) {
-      /*
-       * Either the JavaLangAccess class itself is not found, or the method is not supported on the
-       * JVM.
-       */
+            /*
+             * Either the JavaLangAccess class itself is not found, or the method is not supported on the
+             * JVM.
+             */
             return null;
         }
     }

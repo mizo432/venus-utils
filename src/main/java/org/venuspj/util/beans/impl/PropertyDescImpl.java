@@ -21,8 +21,6 @@ import static org.venuspj.util.misc.Assertions.*;
 
 /**
  * {@link PropertyDesc}の実装クラスです。
- *
- * @author higa
  */
 public class PropertyDescImpl implements PropertyDesc {
 
@@ -53,16 +51,11 @@ public class PropertyDescImpl implements PropertyDesc {
     /**
      * {@link PropertyDescImpl}を作成します。
      *
-     * @param propertyName
-     *            プロパティ名。{@literal null}や空文字列であってはいけません
-     * @param propertyType
-     *            プロパティの型。{@literal null}であってはいけません
-     * @param readMethod
-     *            getterメソッド
-     * @param writeMethod
-     *            setterメソッド
-     * @param beanDesc
-     *            {@link BeanDesc}。{@literal null}であってはいけません
+     * @param propertyName プロパティ名。{@literal null}や空文字列であってはいけません
+     * @param propertyType プロパティの型。{@literal null}であってはいけません
+     * @param readMethod   getterメソッド
+     * @param writeMethod  setterメソッド
+     * @param beanDesc     {@link BeanDesc}。{@literal null}であってはいけません
      */
     public PropertyDescImpl(final String propertyName,
                             final Class<?> propertyType, final Method readMethod,
@@ -79,18 +72,12 @@ public class PropertyDescImpl implements PropertyDesc {
     /**
      * {@link PropertyDescImpl}を作成します。
      *
-     * @param propertyName
-     *            プロパティ名。{@literal null}や空文字列であってはいけません
-     * @param propertyType
-     *            プロパティの型。{@literal null}であってはいけません
-     * @param readMethod
-     *            getterメソッド
-     * @param writeMethod
-     *            setterメソッド
-     * @param field
-     *            フィールド
-     * @param beanDesc
-     *            {@link BeanDesc}。{@literal null}であってはいけません
+     * @param propertyName プロパティ名。{@literal null}や空文字列であってはいけません
+     * @param propertyType プロパティの型。{@literal null}であってはいけません
+     * @param readMethod   getterメソッド
+     * @param writeMethod  setterメソッド
+     * @param field        フィールド
+     * @param beanDesc     {@link BeanDesc}。{@literal null}であってはいけません
      */
     public PropertyDescImpl(final String propertyName,
                             final Class<?> propertyType, final Method readMethod,
@@ -176,8 +163,7 @@ public class PropertyDescImpl implements PropertyDesc {
     /**
      * getterメソッドを設定します。
      *
-     * @param readMethod
-     *            getterメソッド
+     * @param readMethod getterメソッド
      */
     protected final void setReadMethod(final Method readMethod) {
         this.readMethod = readMethod;
@@ -200,8 +186,7 @@ public class PropertyDescImpl implements PropertyDesc {
     /**
      * setterメソッドを設定します。
      *
-     * @param writeMethod
-     *            setterメソッド
+     * @param writeMethod setterメソッド
      */
     protected final void setWriteMethod(final Method writeMethod) {
         this.writeMethod = writeMethod;
@@ -224,8 +209,7 @@ public class PropertyDescImpl implements PropertyDesc {
     /**
      * プロパティとして認識しているpublicフィールドを設定します。
      *
-     * @param field
-     *            プロパティとして認識するpublicフィールド
+     * @param field プロパティとして認識するpublicフィールド
      */
     public void setField(final Field field) {
         this.field = field;
@@ -276,7 +260,7 @@ public class PropertyDescImpl implements PropertyDesc {
                     MethodUtil.invoke(
                             writeMethod,
                             target,
-                            new Object[] { convertedValue });
+                            new Object[]{convertedValue});
                 } catch (final Throwable t) {
                     final Class<?> clazz = writeMethod.getDeclaringClass();
                     final Class<?> valueClass =
@@ -287,7 +271,7 @@ public class PropertyDescImpl implements PropertyDesc {
                     throw new VIllegalArgumentException(
                             "target",
                             "EUTL0098",
-                            new Object[] {
+                            new Object[]{
                                     clazz.getName(),
                                     clazz.getClassLoader(),
                                     propertyType.getName(),
@@ -299,7 +283,7 @@ public class PropertyDescImpl implements PropertyDesc {
                                     convertedValue,
                                     targetClass == null ? null : targetClass.getName(),
                                     targetClass == null ? null
-                                            : targetClass.getClassLoader() }).initCause(t);
+                                            : targetClass.getClassLoader()}).initCause(t);
                 }
             } else {
                 Fields.set(field, target, convertedValue);

@@ -1,21 +1,8 @@
-/*
- * Copyright (C) 2007 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.base;
 
 import java.io.Serializable;
 import java.util.Map;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.objects2.Objects2;
@@ -31,14 +18,11 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  *
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/FunctionalExplained">the use of {@code Function}</a>.
- *
- * @author Mike Bostock
- * @author Jared Levy
- * @since 2.0
  */
 @GwtCompatible
 public final class Functions {
-    private Functions() {}
+    private Functions() {
+    }
 
     /**
      * A function equivalent to the method reference {@code Object::toString}, for users not yet using
@@ -77,7 +61,9 @@ public final class Functions {
         }
     }
 
-    /** Returns the identity function. */
+    /**
+     * Returns the identity function.
+     */
     // implementation is "fully variant"; E has become a "pass-through" type
     @SuppressWarnings("unchecked")
     public static <E> Function<E, E> identity() {
@@ -124,10 +110,10 @@ public final class Functions {
      * <p><b>Java 8 users:</b> you can just write the lambda expression {@code k ->
      * map.getWithDefault(k, defaultValue)} instead.
      *
-     * @param map source map that determines the function behavior
+     * @param map          source map that determines the function behavior
      * @param defaultValue the value to return for inputs that aren't map keys
      * @return function that returns {@code map.get(a)} when {@code a} is a key, or {@code
-     *     defaultValue} otherwise
+     * defaultValue} otherwise
      */
     public static <K, V> Function<K, V> forMap(Map<K, ? extends V> map, @Nullable V defaultValue) {
         return new ForMapWithDefault<>(map, defaultValue);
@@ -270,7 +256,9 @@ public final class Functions {
         return new PredicateFunction<T>(predicate);
     }
 
-    /** @see Functions#forPredicate */
+    /**
+     * @see Functions#forPredicate
+     */
     private static class PredicateFunction<T> implements Function<T, Boolean>, Serializable {
         private final Predicate<T> predicate;
 
@@ -362,7 +350,9 @@ public final class Functions {
         return new SupplierFunction<T>(supplier);
     }
 
-    /** @see Functions#forSupplier */
+    /**
+     * @see Functions#forSupplier
+     */
     private static class SupplierFunction<T> implements Function<Object, T>, Serializable {
 
         private final Supplier<T> supplier;

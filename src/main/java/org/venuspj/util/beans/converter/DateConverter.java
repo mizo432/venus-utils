@@ -21,8 +21,7 @@ public class DateConverter implements Converter {
     /**
      * インスタンスを構築します。
      *
-     * @param pattern
-     *            日付のパターン
+     * @param pattern 日付のパターン
      */
     public DateConverter(String pattern) {
         if (Strings2.isEmpty(pattern)) {

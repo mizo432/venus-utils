@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 The Guava Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package org.venuspj.util.primitives;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
@@ -41,16 +27,12 @@ import static org.venuspj.util.base.Preconditions.*;
  * <p>See the Guava User Guide article on <a
  * href="https://github.com/google/guava/wiki/PrimitivesExplained#unsigned-support">unsigned
  * primitive utilities</a>.
- *
- * @author Louis Wasserman
- * @author Brian Milch
- * @author Colin Evans
- * @since 10.0
  */
 @Beta
 @GwtCompatible
 public final class UnsignedLongs {
-    private UnsignedLongs() {}
+    private UnsignedLongs() {
+    }
 
     public static final long MAX_VALUE = -1L; // Equivalent to 2^64 - 1
 
@@ -72,7 +54,7 @@ public final class UnsignedLongs {
      * @param a the first unsigned {@code long} to compare
      * @param b the second unsigned {@code long} to compare
      * @return a negative value if {@code a} is less than {@code b}; a positive value if {@code a} is
-     *     greater than {@code b}; or zero if they are equal
+     * greater than {@code b}; or zero if they are equal
      */
     public static int compare(long a, long b) {
         return Longs.compare(flip(a), flip(b));
@@ -83,7 +65,7 @@ public final class UnsignedLongs {
      *
      * @param array a <i>nonempty</i> array of unsigned {@code long} values
      * @return the value present in {@code array} that is less than or equal to every other value in
-     *     the array according to {@link #compare}
+     * the array according to {@link #compare}
      * @throws IllegalArgumentException if {@code array} is empty
      */
     public static long min(long... array) {
@@ -103,7 +85,7 @@ public final class UnsignedLongs {
      *
      * @param array a <i>nonempty</i> array of unsigned {@code long} values
      * @return the value present in {@code array} that is greater than or equal to every other value
-     *     in the array according to {@link #compare}
+     * in the array according to {@link #compare}
      * @throws IllegalArgumentException if {@code array} is empty
      */
     public static long max(long... array) {
@@ -123,8 +105,8 @@ public final class UnsignedLongs {
      * separator}. For example, {@code join("-", 1, 2, 3)} returns the string {@code "1-2-3"}.
      *
      * @param separator the text that should appear between consecutive values in the resulting string
-     *     (but not at the start or end)
-     * @param array an array of unsigned {@code long} values, possibly empty
+     *                  (but not at the start or end)
+     * @param array     an array of unsigned {@code long} values, possibly empty
      */
     public static String join(String separator, long... array) {
         checkNotNull(separator);
@@ -240,7 +222,7 @@ public final class UnsignedLongs {
      * <p><b>Java 8 users:</b> use {@link Long#divideUnsigned(long, long)} instead.
      *
      * @param dividend the dividend (numerator)
-     * @param divisor the divisor (denominator)
+     * @param divisor  the divisor (denominator)
      * @throws ArithmeticException if divisor is 0
      */
     public static long divide(long dividend, long divisor) {
@@ -275,7 +257,7 @@ public final class UnsignedLongs {
      * <p><b>Java 8 users:</b> use {@link Long#remainderUnsigned(long, long)} instead.
      *
      * @param dividend the dividend (numerator)
-     * @param divisor the divisor (denominator)
+     * @param divisor  the divisor (denominator)
      * @throws ArithmeticException if divisor is 0
      * @since 11.0
      */
@@ -310,9 +292,9 @@ public final class UnsignedLongs {
      * <p><b>Java 8 users:</b> use {@link Long#parseUnsignedLong(String)} instead.
      *
      * @throws NumberFormatException if the string does not contain a valid unsigned {@code long}
-     *     value
-     * @throws NullPointerException if {@code string} is null (in contrast to {@link
-     *     Long#parseLong(String)})
+     *                               value
+     * @throws NullPointerException  if {@code string} is null (in contrast to {@link
+     *                               Long#parseLong(String)})
      */
     @CanIgnoreReturnValue
     public static long parseUnsignedLong(String string) {
@@ -325,12 +307,12 @@ public final class UnsignedLongs {
      * <p><b>Java 8 users:</b> use {@link Long#parseUnsignedLong(String, int)} instead.
      *
      * @param string the string containing the unsigned {@code long} representation to be parsed.
-     * @param radix the radix to use while parsing {@code string}
+     * @param radix  the radix to use while parsing {@code string}
      * @throws NumberFormatException if the string does not contain a valid unsigned {@code long} with
-     *     the given radix, or if {@code radix} is not between {@link Character#MIN_RADIX} and {@link
-     *     Character#MAX_RADIX}.
-     * @throws NullPointerException if {@code string} is null (in contrast to {@link
-     *     Long#parseLong(String)})
+     *                               the given radix, or if {@code radix} is not between {@link Character#MIN_RADIX} and {@link
+     *                               Character#MAX_RADIX}.
+     * @throws NullPointerException  if {@code string} is null (in contrast to {@link
+     *                               Long#parseLong(String)})
      */
     @CanIgnoreReturnValue
     public static long parseUnsignedLong(String string, int radix) {
@@ -364,14 +346,14 @@ public final class UnsignedLongs {
      * <p>Accepts a decimal, hexadecimal, or octal number given by specifying the following prefix:
      *
      * <ul>
-     *   <li>{@code 0x}<i>HexDigits</i>
-     *   <li>{@code 0X}<i>HexDigits</i>
-     *   <li>{@code #}<i>HexDigits</i>
-     *   <li>{@code 0}<i>OctalDigits</i>
+     * <li>{@code 0x}<i>HexDigits</i>
+     * <li>{@code 0X}<i>HexDigits</i>
+     * <li>{@code #}<i>HexDigits</i>
+     * <li>{@code 0}<i>OctalDigits</i>
      * </ul>
      *
      * @throws NumberFormatException if the string does not contain a valid unsigned {@code long}
-     *     value
+     *                               value
      * @since 13.0
      */
     @CanIgnoreReturnValue
@@ -393,7 +375,8 @@ public final class UnsignedLongs {
      * unless the user is actually calling a parse method.
      */
     private static final class ParseOverflowDetection {
-        private ParseOverflowDetection() {}
+        private ParseOverflowDetection() {
+        }
 
         // calculated as 0xffffffffffffffff / radix
         static final long[] maxValueDivs = new long[Character.MAX_RADIX + 1];
@@ -447,10 +430,10 @@ public final class UnsignedLongs {
      *
      * <p><b>Java 8 users:</b> use {@link Long#toUnsignedString(long, int)} instead.
      *
-     * @param x the value to convert to a string.
+     * @param x     the value to convert to a string.
      * @param radix the radix to use while working with {@code x}
      * @throws IllegalArgumentException if {@code radix} is not between {@link Character#MIN_RADIX}
-     *     and {@link Character#MAX_RADIX}.
+     *                                  and {@link Character#MAX_RADIX}.
      */
     public static String toString(long x, int radix) {
         checkArgument(

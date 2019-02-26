@@ -24,8 +24,10 @@ public class Iterables {
     static Object[] toArray(Iterable<?> iterable) {
         return castOrCopyToCollection(iterable).toArray();
     }
+
     private static <E> Collection<E> castOrCopyToCollection(Iterable<E> iterable) {
         return (iterable instanceof Collection)
                 ? (Collection<E>) iterable
                 : newArrayList(iterable.iterator());
-    }}
+    }
+}

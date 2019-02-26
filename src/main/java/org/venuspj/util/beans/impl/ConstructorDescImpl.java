@@ -17,30 +17,34 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link ConstructorDesc}の実装クラスです。
- *
- * @author koichik
  */
 public class ConstructorDescImpl implements ConstructorDesc {
 
-    /** このメソッドを所有するクラスの{@link BeanDesc} */
+    /**
+     * このメソッドを所有するクラスの{@link BeanDesc}
+     */
     protected final BeanDesc beanDesc;
 
-    /** コンストラクタ */
+    /**
+     * コンストラクタ
+     */
     protected final Constructor<?> constructor;
 
-    /** コンストラクタの引数型の配列 */
+    /**
+     * コンストラクタの引数型の配列
+     */
     protected final Class<?>[] parameterTypes;
 
-    /** パラメータ化された引数型の情報 */
+    /**
+     * パラメータ化された引数型の情報
+     */
     protected final ParameterizedClassDesc[] parameterizedClassDescs;
 
     /**
      * インスタンスを構築します。
      *
-     * @param beanDesc
-     *            このメソッドを所有するクラスの{@link BeanDesc}。{@literal null}であってはいけません
-     * @param constructor
-     *            コンストラクタ。{@literal null}であってはいけません
+     * @param beanDesc    このメソッドを所有するクラスの{@link BeanDesc}。{@literal null}であってはいけません
+     * @param constructor コンストラクタ。{@literal null}であってはいけません
      */
     public ConstructorDescImpl(final BeanDesc beanDesc,
                                final Constructor<?> constructor) {

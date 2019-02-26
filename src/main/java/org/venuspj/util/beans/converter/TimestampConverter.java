@@ -21,8 +21,7 @@ public class TimestampConverter implements Converter {
     /**
      * インスタンスを構築します。
      *
-     * @param pattern
-     *            日時のパターン
+     * @param pattern 日時のパターン
      */
     public TimestampConverter(String pattern) {
         if (Strings2.isEmpty(pattern)) {

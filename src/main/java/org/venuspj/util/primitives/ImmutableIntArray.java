@@ -3,6 +3,7 @@ package org.venuspj.util.primitives;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.errorprone.annotations.CheckReturnValue;
 import com.google.errorprone.annotations.Immutable;
+
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtCompatible;
@@ -27,46 +29,46 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  * <p>Advantages compared to {@code int[]}:
  *
  * <ul>
- *   <li>All the many well-known advantages of immutability (read <i>Effective Java</i>, second
- *       edition, Item 15).
- *   <li>Has the value-based (not identity-based) {@link #equals}, {@link #hashCode}, and {@link
- *       #toString} behavior you expect.
- *   <li>Offers useful operations beyond just {@code get} and {@code length}, so you don't have to
- *       hunt through classes like {@link Arrays} and {@link Ints} for them.
- *   <li>Supports a copy-free {@link #subArray} view, so methods that accept this type don't need to
- *       add overloads that accept start and end indexes.
- *   <li>Can be streamed without "breaking the chain": {@code foo.getBarInts().stream()...}.
- *   <li>Access to all collection-based utilities via {@link #asList} (though at the cost of
- *       allocating garbage).
+ * <li>All the many well-known advantages of immutability (read <i>Effective Java</i>, second
+ * edition, Item 15).
+ * <li>Has the value-based (not identity-based) {@link #equals}, {@link #hashCode}, and {@link
+ * #toString} behavior you expect.
+ * <li>Offers useful operations beyond just {@code get} and {@code length}, so you don't have to
+ * hunt through classes like {@link Arrays} and {@link Ints} for them.
+ * <li>Supports a copy-free {@link #subArray} view, so methods that accept this type don't need to
+ * add overloads that accept start and end indexes.
+ * <li>Can be streamed without "breaking the chain": {@code foo.getBarInts().stream()...}.
+ * <li>Access to all collection-based utilities via {@link #asList} (though at the cost of
+ * allocating garbage).
  * </ul>
  *
  * <p>Disadvantages compared to {@code int[]}:
  *
  * <ul>
- *   <li>Memory footprint has a fixed overhead (about 24 bytes per instance).
- *   <li><i>Some</i> construction use cases force the data to be copied (though several construction
- *       APIs are offered that don't).
- *   <li>Can't be passed directly to methods that expect {@code int[]} (though the most common
- *       utilities do have replacements here).
- *   <li>Dependency on {@code com.google.common} / Guava.
+ * <li>Memory footprint has a fixed overhead (about 24 bytes per instance).
+ * <li><i>Some</i> construction use cases force the data to be copied (though several construction
+ * APIs are offered that don't).
+ * <li>Can't be passed directly to methods that expect {@code int[]} (though the most common
+ * utilities do have replacements here).
+ * <li>Dependency on {@code com.google.common} / Guava.
  * </ul>
  *
  * <p>Advantages compared to {@link ImmutableList ImmutableList}{@code
  * <Integer>}:
  *
  * <ul>
- *   <li>Improved memory compactness and locality.
- *   <li>Can be queried without allocating garbage.
- *   <li>Access to {@code IntStream} features (like {@link IntStream#sum}) using {@code stream()}
- *       instead of the awkward {@code stream().mapToInt(v -> v)}.
+ * <li>Improved memory compactness and locality.
+ * <li>Can be queried without allocating garbage.
+ * <li>Access to {@code IntStream} features (like {@link IntStream#sum}) using {@code stream()}
+ * instead of the awkward {@code stream().mapToInt(v -> v)}.
  * </ul>
  *
  * <p>Disadvantages compared to {@code ImmutableList<Integer>}:
  *
  * <ul>
- *   <li>Can't be passed directly to methods that expect {@code Iterable}, {@code Collection}, or
- *       {@code List} (though the most common utilities do have replacements here, and there is a
- *       lazy {@link #asList} view).
+ * <li>Can't be passed directly to methods that expect {@code Iterable}, {@code Collection}, or
+ * {@code List} (though the most common utilities do have replacements here, and there is a
+ * lazy {@link #asList} view).
  * </ul>
  *
  * @since 22.0
@@ -77,39 +79,53 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 public final class ImmutableIntArray implements Serializable {
     private static final ImmutableIntArray EMPTY = new ImmutableIntArray(new int[0]);
 
-    /** Returns the empty array. */
+    /**
+     * Returns the empty array.
+     */
     public static ImmutableIntArray of() {
         return EMPTY;
     }
 
-    /** Returns an immutable array containing a single value. */
+    /**
+     * Returns an immutable array containing a single value.
+     */
     public static ImmutableIntArray of(int e0) {
-        return new ImmutableIntArray(new int[] {e0});
+        return new ImmutableIntArray(new int[]{e0});
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray of(int e0, int e1) {
-        return new ImmutableIntArray(new int[] {e0, e1});
+        return new ImmutableIntArray(new int[]{e0, e1});
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray of(int e0, int e1, int e2) {
-        return new ImmutableIntArray(new int[] {e0, e1, e2});
+        return new ImmutableIntArray(new int[]{e0, e1, e2});
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray of(int e0, int e1, int e2, int e3) {
-        return new ImmutableIntArray(new int[] {e0, e1, e2, e3});
+        return new ImmutableIntArray(new int[]{e0, e1, e2, e3});
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray of(int e0, int e1, int e2, int e3, int e4) {
-        return new ImmutableIntArray(new int[] {e0, e1, e2, e3, e4});
+        return new ImmutableIntArray(new int[]{e0, e1, e2, e3, e4});
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray of(int e0, int e1, int e2, int e3, int e4, int e5) {
-        return new ImmutableIntArray(new int[] {e0, e1, e2, e3, e4, e5});
+        return new ImmutableIntArray(new int[]{e0, e1, e2, e3, e4, e5});
     }
 
     /**
@@ -129,12 +145,16 @@ public final class ImmutableIntArray implements Serializable {
         return new ImmutableIntArray(array);
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray copyOf(int[] values) {
         return values.length == 0 ? EMPTY : new ImmutableIntArray(Arrays.copyOf(values, values.length));
     }
 
-    /** Returns an immutable array containing the given values, in order. */
+    /**
+     * Returns an immutable array containing the given values, in order.
+     */
     public static ImmutableIntArray copyOf(Collection<Integer> values) {
         return values.isEmpty() ? EMPTY : new ImmutableIntArray(Ints.toArray(values));
     }
@@ -153,7 +173,9 @@ public final class ImmutableIntArray implements Serializable {
         return builder().addAll(values).build();
     }
 
-    /** Returns an immutable array containing all the values from {@code stream}, in order. */
+    /**
+     * Returns an immutable array containing all the values from {@code stream}, in order.
+     */
     public static ImmutableIntArray copyOf(IntStream stream) {
         // Note this uses very different growth behavior from copyOf(Iterable) and the builder.
         int[] array = stream.toArray();
@@ -332,12 +354,16 @@ public final class ImmutableIntArray implements Serializable {
         this.end = end;
     }
 
-    /** Returns the number of values in this array. */
+    /**
+     * Returns the number of values in this array.
+     */
     public int length() {
         return end - start;
     }
 
-    /** Returns {@code true} if there are no values in this array ({@link #length} is zero). */
+    /**
+     * Returns {@code true} if there are no values in this array ({@link #length} is zero).
+     */
     public boolean isEmpty() {
         return end == start;
     }
@@ -346,7 +372,7 @@ public final class ImmutableIntArray implements Serializable {
      * Returns the {@code int} value present at the given index.
      *
      * @throws IndexOutOfBoundsException if {@code index} is negative, or greater than or equal to
-     *     {@link #length}
+     *                                   {@link #length}
      */
     public int get(int index) {
         Preconditions.checkElementIndex(index, length());
@@ -387,7 +413,9 @@ public final class ImmutableIntArray implements Serializable {
         return indexOf(target) >= 0;
     }
 
-    /** Invokes {@code consumer} for each value contained in this array, in order. */
+    /**
+     * Invokes {@code consumer} for each value contained in this array, in order.
+     */
     public void forEach(IntConsumer consumer) {
         checkNotNull(consumer);
         for (int i = start; i < end; i++) {
@@ -395,12 +423,16 @@ public final class ImmutableIntArray implements Serializable {
         }
     }
 
-    /** Returns a stream over the values in this array, in order. */
+    /**
+     * Returns a stream over the values in this array, in order.
+     */
     public IntStream stream() {
         return Arrays.stream(array, start, end);
     }
 
-    /** Returns a new, mutable copy of this array's values, as a primitive {@code int[]}. */
+    /**
+     * Returns a new, mutable copy of this array's values, as a primitive {@code int[]}.
+     */
     public int[] toArray() {
         return Arrays.copyOfRange(array, start, end);
     }
@@ -544,7 +576,9 @@ public final class ImmutableIntArray implements Serializable {
         return true;
     }
 
-    /** Returns an unspecified hash code for the contents of this immutable array. */
+    /**
+     * Returns an unspecified hash code for the contents of this immutable array.
+     */
     @Override
     public int hashCode() {
         int hash = 1;

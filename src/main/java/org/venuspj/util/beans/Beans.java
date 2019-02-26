@@ -2,7 +2,6 @@ package org.venuspj.util.beans;
 
 /**
  * JavaBeans用のユーティリティクラスです。
- *
  */
 public class Beans {
 

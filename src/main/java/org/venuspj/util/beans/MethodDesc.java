@@ -1,18 +1,3 @@
-/*
- * Copyright 2004-2012 the Seasar Foundation and the Others.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 package org.venuspj.util.beans;
 
 import java.lang.reflect.Method;
@@ -55,8 +40,7 @@ public interface MethodDesc {
     /**
      * メソッドの戻り値の型を返します。
      *
-     * @param <T>
-     *            メソッドの戻り値の型
+     * @param <T> メソッドの戻り値の型
      * @return メソッドの戻り値の型
      */
     <T> Class<T> getReturnType();
@@ -92,8 +76,7 @@ public interface MethodDesc {
     /**
      * メソッドの引数型がパラメタ化された型の場合は{@literal true}を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return 引数型がパラメタ化された型の場合は{@literal true}
      */
     boolean isParameterized(int index);
@@ -122,18 +105,16 @@ public interface MethodDesc {
     /**
      * メソッドの引数型がパラメタ化された{@link Collection}の場合、その要素型を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return メソッドの引数型がパラメタ化された{@link Collection}の場合はその要素型、そうでない場合は
-     *         {@literal null}
+     * {@literal null}
      */
     Class<?> getElementClassOfCollection(int index);
 
     /**
      * メソッドの引数型がパラメタ化された{@link Map}の場合、そのキー型を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return メソッドの引数がパラメタ化された{@link Map}の場合はそのキー型、そうでない場合は{@literal null}
      */
     Class<?> getKeyClassOfMap(int index);
@@ -141,8 +122,7 @@ public interface MethodDesc {
     /**
      * メソッドの引数型がパラメタ化された{@link Map}の場合、その値型を返します。
      *
-     * @param index
-     *            引数のインデックス
+     * @param index 引数のインデックス
      * @return メソッドの引数型がパラメタ化された{@link Map}の場合はその値型、そうでない場合は{@literal null}
      */
     Class<?> getValueClassOfMap(int index);
@@ -151,7 +131,7 @@ public interface MethodDesc {
      * メソッドの戻り値型がパラメタ化された{@link Collection}の場合、その要素型を返します。
      *
      * @return メソッドの戻り値型がパラメタ化された{@link Collection}の場合はその要素型、そうでない場合は
-     *         {@literal null}
+     * {@literal null}
      */
     Class<?> getElementClassOfCollection();
 
@@ -172,12 +152,9 @@ public interface MethodDesc {
     /**
      * メソッドを呼び出してその戻り値を返します。
      *
-     * @param <T>
-     *            メソッドの戻り値の型
-     * @param target
-     *            対象のオブジェクト。{@literal null}であってはいけません
-     * @param args
-     *            メソッドの引数
+     * @param <T>    メソッドの戻り値の型
+     * @param target 対象のオブジェクト。{@literal null}であってはいけません
+     * @param args   メソッドの引数
      * @return メソッドの戻り値
      */
     <T> T invoke(Object target, Object... args);
@@ -185,10 +162,8 @@ public interface MethodDesc {
     /**
      * staticなメソッドを呼び出してその戻り値を返します。
      *
-     * @param <T>
-     *            メソッドの戻り値の型
-     * @param args
-     *            メソッドの引数
+     * @param <T>  メソッドの戻り値の型
+     * @param args メソッドの引数
      * @return メソッドの戻り値
      */
     <T> T invokeStatic(Object... args);

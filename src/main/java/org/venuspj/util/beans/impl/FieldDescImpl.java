@@ -1,18 +1,3 @@
-/*
- * Copyright 2004-2012 the Seasar Foundation and the Others.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 package org.venuspj.util.beans.impl;
 
 import org.venuspj.exception.FieldNotStaticRuntimeException;
@@ -30,33 +15,39 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
  * {@link FieldDesc}の実装クラスです。
- * 
- * @author koichik
  */
 public class FieldDescImpl implements FieldDesc {
 
-    /** このフィールドを所有するクラスの{@link BeanDesc} */
+    /**
+     * このフィールドを所有するクラスの{@link BeanDesc}
+     */
     protected final BeanDesc beanDesc;
 
-    /** フィールド */
+    /**
+     * フィールド
+     */
     protected final Field field;
 
-    /** フィールド名 */
+    /**
+     * フィールド名
+     */
     protected final String fieldName;
 
-    /** フィールドの型 */
+    /**
+     * フィールドの型
+     */
     protected final Class<?> fieldType;
 
-    /** パラメータ化された型の情報 */
+    /**
+     * パラメータ化された型の情報
+     */
     protected final ParameterizedClassDesc parameterizedClassDesc;
 
     /**
      * インスタンスを構築します。
-     * 
-     * @param beanDesc
-     *            このフィールドを所有するクラスの{@link BeanDesc}。{@literal null}であってはいけません
-     * @param field
-     *            フィールド。{@literal null}であってはいけません
+     *
+     * @param beanDesc このフィールドを所有するクラスの{@link BeanDesc}。{@literal null}であってはいけません
+     * @param field    フィールド。{@literal null}であってはいけません
      */
     public FieldDescImpl(final BeanDesc beanDesc, final Field field) {
         assertArgumentNotNull("beanDesc", beanDesc);
@@ -67,9 +58,9 @@ public class FieldDescImpl implements FieldDesc {
         fieldName = field.getName();
         fieldType = field.getType();
         parameterizedClassDesc =
-            ParameterizedClassDescFactory.createParameterizedClassDesc(
-                field,
-                beanDesc.getTypeVariables());
+                ParameterizedClassDescFactory.createParameterizedClassDesc(
+                        field,
+                        beanDesc.getTypeVariables());
     }
 
     @Override
@@ -111,7 +102,7 @@ public class FieldDescImpl implements FieldDesc {
     @Override
     public boolean isParameterized() {
         return parameterizedClassDesc != null
-            && parameterizedClassDesc.isParameterizedClass();
+                && parameterizedClassDesc.isParameterizedClass();
     }
 
     @Override
@@ -125,7 +116,7 @@ public class FieldDescImpl implements FieldDesc {
             return null;
         }
         final ParameterizedClassDesc pcd =
-            parameterizedClassDesc.getArguments()[0];
+                parameterizedClassDesc.getArguments()[0];
         if (pcd == null) {
             return null;
         }
@@ -138,7 +129,7 @@ public class FieldDescImpl implements FieldDesc {
             return null;
         }
         final ParameterizedClassDesc pcd =
-            parameterizedClassDesc.getArguments()[0];
+                parameterizedClassDesc.getArguments()[0];
         if (pcd == null) {
             return null;
         }
@@ -151,7 +142,7 @@ public class FieldDescImpl implements FieldDesc {
             return null;
         }
         final ParameterizedClassDesc pcd =
-            parameterizedClassDesc.getArguments()[1];
+                parameterizedClassDesc.getArguments()[1];
         if (pcd == null) {
             return null;
         }
@@ -171,8 +162,8 @@ public class FieldDescImpl implements FieldDesc {
     public <T> T getStaticFieldValue() {
         if (!isStatic()) {
             throw new FieldNotStaticRuntimeException(
-                beanDesc.getBeanClass(),
-                fieldName);
+                    beanDesc.getBeanClass(),
+                    fieldName);
         }
         return (T) Fields.get(field);
     }
@@ -188,8 +179,8 @@ public class FieldDescImpl implements FieldDesc {
     public void setStaticFieldValue(final Object value) {
         if (!isStatic()) {
             throw new FieldNotStaticRuntimeException(
-                beanDesc.getBeanClass(),
-                fieldName);
+                    beanDesc.getBeanClass(),
+                    fieldName);
         }
         Fields.set(field, value);
     }
