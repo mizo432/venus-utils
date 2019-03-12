@@ -26,10 +26,10 @@ public class Copy extends AbstractCopy<Copy> {
      */
     public Copy(Object src, Object dest) throws NullPointerException {
         if (src == null) {
-            throw new NullPointerException("src");
+            throw new NullPointerException("srcCollection");
         }
         if (dest == null) {
-            throw new NullPointerException("dest");
+            throw new NullPointerException("destCollection");
         }
         this.src = src;
         this.dest = dest;

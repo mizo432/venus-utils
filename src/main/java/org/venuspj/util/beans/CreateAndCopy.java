@@ -38,7 +38,7 @@ public class CreateAndCopy<T> extends AbstractCopy<CreateAndCopy<T>> {
             throw new NullPointerException("destClass");
         }
         if (isNull(src)) {
-            throw new NullPointerException("src");
+            throw new NullPointerException("srcCollection");
         }
         this.destClass = destClass;
         this.src = src;

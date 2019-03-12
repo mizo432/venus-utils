@@ -521,4 +521,14 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
         }
         return null;
     }
+
+    protected void assignSourceProperties(AbstractCopy<?> sourceAbstractCopy){
+        this.excludePropertyNames = sourceAbstractCopy.excludePropertyNames;
+        this.includePropertyNames = sourceAbstractCopy.includePropertyNames;
+        this.excludesNull = sourceAbstractCopy.excludesNull;
+        this.prefix = sourceAbstractCopy.prefix;
+        this.beanDelimiter = sourceAbstractCopy.beanDelimiter;
+        this.mapDelimiter = sourceAbstractCopy.mapDelimiter;
+
+    }
 }
