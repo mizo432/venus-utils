@@ -21,7 +21,7 @@ public class StaticDateTimeProviderTest {
 
     @Test
     public void initialize() throws Exception {
-        LocalDateTime actual = DateProvider.currentDateTime();
+        LocalDateTime actual = DateProvider.currentLocalDateTime();
         LOGGER.debug("actual:" + actual);
         Java6Assertions.assertThat(actual).isNotNull();
         Java6Assertions.assertThat(actual.toString()).isEqualTo("2012-03-04T05:06:07.000000008");

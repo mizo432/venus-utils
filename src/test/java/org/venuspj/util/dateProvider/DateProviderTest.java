@@ -17,14 +17,14 @@ public class DateProviderTest {
 
     @Test
     public void currentDateTime() throws Exception {
-        LocalDateTime actual = DateProvider.currentDateTime();
+        LocalDateTime actual = DateProvider.currentLocalDateTime();
         Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
 
     @Test
     public void currentDate() throws Exception {
-        LocalDate actual = DateProvider.currentDate();
+        LocalDate actual = DateProvider.currentLocalDate();
         Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
