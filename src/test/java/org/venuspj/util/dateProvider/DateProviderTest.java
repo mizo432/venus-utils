@@ -31,7 +31,7 @@ public class DateProviderTest {
 
     @Test
     public void currentTime() throws Exception {
-        LocalTime actual = DateProvider.currentTime();
+        LocalTime actual = DateProvider.currentLocalTime();
         Java6Assertions.assertThat(actual).isNotNull();
         LOGGER.debug("actual:" + actual);
     }
