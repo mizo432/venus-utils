@@ -149,7 +149,3 @@ gitRelease {
     artifactId = "venus-utils"
     repoUri = "https://github.com/mizo432/maven-repository.git"
 }
-
-//task wrapper(type: Wrapper) {
-//    gradleVersion = '5.1.1'
-//}
