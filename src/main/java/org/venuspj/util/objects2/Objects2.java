@@ -132,6 +132,8 @@ public class Objects2 {
             }
 
             try {
+                if (isPrimitiveLike(instance.getClass()))
+                    return instance.toString();
                 IndentationAwareStringBuilder builder = new IndentationAwareStringBuilder();
                 if (isIterable(instance)) {
                     internalToString(instance, builder);
@@ -349,8 +351,16 @@ public class Objects2 {
         }
 
         private boolean isPrimitiveLike(Class<?> aClazz) {
-            final Set<Class<?>> primitiveLikeClasses = newHashSet(Integer.class, LocalTime.class, LocalDateTime.class,
-                    YearMonth.class, LocalDate.class, Short.class, UUID.class, Currency.class, Locale.class,
+            final Set<Class<?>> primitiveLikeClasses = newHashSet(
+                    Integer.class,
+                    LocalTime.class,
+                    LocalDateTime.class,
+                    YearMonth.class,
+                    LocalDate.class,
+                    Short.class,
+                    UUID.class,
+                    Currency.class,
+                    Locale.class,
                     Boolean.class, URI.class, Long.class, Double.class);
             return primitiveLikeClasses.contains(aClazz);
 

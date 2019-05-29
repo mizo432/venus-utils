@@ -1,7 +1,5 @@
 package org.venuspj.util.collect;
 
-import org.venuspj.util.strings2.Strings2;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -16,8 +14,11 @@ public class Arrays2<T> {
     }
 
     @SafeVarargs
-    public static <T> Arrays2 of(T... argValue) {
-        return new Arrays2(Arrays.asList(argValue));
+    public static <T> Arrays2 of(T... argValues) {
+        Collection<T> collection = newArrayList();
+        collection.addAll(Arrays.asList(argValues));
+
+        return new Arrays2<T>(collection);
     }
 
     public boolean isEmpty() {

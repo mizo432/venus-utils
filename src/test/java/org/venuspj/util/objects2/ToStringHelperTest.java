@@ -69,6 +69,23 @@ public class ToStringHelperTest {
         Java6Assertions.assertThat(actual).isNotNull();
         System.out.println(actual);
     }
+
+    @Test
+    public void integerClass() {
+        Integer target = 1;
+        String actual = toStringHelper(target).defaultConfig().toString();
+        Java6Assertions.assertThat(actual).isNotNull();
+        System.out.println(actual);
+    }
+
+    @Test
+    public void intClass() {
+        int target = 1;
+        String actual = toStringHelper(target).defaultConfig().toString();
+        Java6Assertions.assertThat(actual).isNotNull();
+        System.out.println(actual);
+    }
+
     @Test
     public void listDirect() {
         List<String> given = newArrayList("A","B");

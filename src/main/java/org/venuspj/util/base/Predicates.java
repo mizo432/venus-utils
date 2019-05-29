@@ -705,6 +705,7 @@ public final class Predicates {
         return Arrays.<Predicate<? super T>>asList(first, second);
     }
 
+    @SafeVarargs
     private static <T> List<T> defensiveCopy(T... array) {
         return defensiveCopy(Arrays.asList(array));
     }
