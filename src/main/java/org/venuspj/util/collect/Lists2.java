@@ -30,8 +30,7 @@ public class Lists2 {
     }
 
     public static <T> ArrayList<T> newArrayList() {
-        ArrayList<T> ts = new ArrayList<>();
-        return ts;
+        return new ArrayList<>();
     }
 
     @SafeVarargs
