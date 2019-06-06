@@ -107,8 +107,9 @@ if (env.BRANCH_NAME == 'develop') {
 if (env.BRANCH_NAME == 'master') {
     stage('配備production') {
         echo "deploy to production"
-        gradlew 'release -x classes -x testClasses -x test'
-        // tagを作成する
+        steps {
+            gradlew 'release -x classes -x testClasses -x test'
+        }
     }
 }
 
