@@ -5,7 +5,7 @@ import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.MethodDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
-import org.venuspj.util.lang.MethodUtil;
+import org.venuspj.util.lang.Methods;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -112,22 +112,22 @@ public class MethodDescImpl implements MethodDesc {
 
     @Override
     public boolean isPublic() {
-        return MethodUtil.isPublic(method);
+        return Methods.isPublic(method);
     }
 
     @Override
     public boolean isStatic() {
-        return MethodUtil.isStatic(method);
+        return Methods.isStatic(method);
     }
 
     @Override
     public boolean isFinal() {
-        return MethodUtil.isFinal(method);
+        return Methods.isFinal(method);
     }
 
     @Override
     public boolean isAbstract() {
-        return MethodUtil.isAbstract(method);
+        return Methods.isAbstract(method);
     }
 
     @Override
@@ -245,7 +245,7 @@ public class MethodDescImpl implements MethodDesc {
     public <T> T invoke(final Object target, final Object... args) {
         assertArgumentNotNull("target", target);
 
-        return (T) MethodUtil.invoke(method, target, args);
+        return (T) Methods.invoke(method, target, args);
     }
 
     @SuppressWarnings("unchecked")
@@ -255,6 +255,6 @@ public class MethodDescImpl implements MethodDesc {
             throw new MethodNotStaticRuntimeException(getBeanDesc()
                     .getBeanClass(), methodName);
         }
-        return (T) MethodUtil.invokeStatic(method, args);
+        return (T) Methods.invokeStatic(method, args);
     }
 }

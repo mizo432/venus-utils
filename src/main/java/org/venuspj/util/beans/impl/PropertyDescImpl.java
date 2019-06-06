@@ -8,7 +8,7 @@ import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
 import org.venuspj.util.convert.*;
 import org.venuspj.util.lang.Constructors;
 import org.venuspj.util.lang.Fields;
-import org.venuspj.util.lang.MethodUtil;
+import org.venuspj.util.lang.Methods;
 import org.venuspj.util.lang.Modifiers;
 
 import java.lang.reflect.*;
@@ -237,7 +237,7 @@ public class PropertyDescImpl implements PropertyDesc {
         try {
             assertState(readable, propertyName + " is not readable.");
             if (hasReadMethod()) {
-                return (T) MethodUtil.invoke(readMethod, target, EMPTY_ARGS);
+                return (T) Methods.invoke(readMethod, target, EMPTY_ARGS);
             }
             return (T) Fields.get(field, target);
         } catch (final Throwable t) {
@@ -257,7 +257,7 @@ public class PropertyDescImpl implements PropertyDesc {
             assertState(writable, propertyName + " is not writable.");
             if (hasWriteMethod()) {
                 try {
-                    MethodUtil.invoke(
+                    Methods.invoke(
                             writeMethod,
                             target,
                             new Object[]{convertedValue});
@@ -374,7 +374,7 @@ public class PropertyDescImpl implements PropertyDesc {
                     arg);
         }
         if (valueOfMethod != null) {
-            return MethodUtil.invoke(valueOfMethod, null, arg);
+            return Methods.invoke(valueOfMethod, null, arg);
         }
         return arg;
     }

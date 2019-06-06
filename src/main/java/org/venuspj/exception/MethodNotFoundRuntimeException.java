@@ -1,7 +1,7 @@
 package org.venuspj.exception;
 
 
-import org.venuspj.util.lang.MethodUtil;
+import org.venuspj.util.lang.Methods;
 
 import java.lang.reflect.Method;
 
@@ -43,7 +43,7 @@ public class MethodNotFoundRuntimeException extends VRuntimeException {
                                           final String methodName, final Class<?>[] methodArgClasses) {
         super("EUTL0049", asArray(
                 targetClass.getName(),
-                MethodUtil.getSignature(methodName, methodArgClasses)));
+                Methods.getSignature(methodName, methodArgClasses)));
         this.targetClass = targetClass;
         this.methodName = methodName;
         this.methodArgClasses = methodArgClasses;

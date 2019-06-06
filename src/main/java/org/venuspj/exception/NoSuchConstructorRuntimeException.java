@@ -1,6 +1,6 @@
 package org.venuspj.exception;
 
-import org.venuspj.util.lang.MethodUtil;
+import org.venuspj.util.lang.Methods;
 
 import java.lang.reflect.Constructor;
 
@@ -30,7 +30,7 @@ public class NoSuchConstructorRuntimeException extends VRuntimeException {
                 "EUTL0064",
                 asArray(
                         targetClass.getName(),
-                        MethodUtil.getSignature(targetClass.getSimpleName(), argTypes)),
+                        Methods.getSignature(targetClass.getSimpleName(), argTypes)),
                 cause);
         this.targetClass = targetClass;
         this.argTypes = argTypes;

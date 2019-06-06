@@ -30,15 +30,14 @@ public class Lists2 {
     }
 
     public static <T> ArrayList<T> newArrayList() {
-        ArrayList<T> result = new ArrayList<>();
-        return result;
+        ArrayList<T> ts = new ArrayList<>();
+        return ts;
     }
 
     @SafeVarargs
     public static <T> List<T> newArrayList(T... args) {
-        List<T> result = new ArrayList<>();
-        for (T arg : args)
-            result.add(arg);
+        List<T> result;
+        result = newArrayList(Arrays.asList(args));
         return result;
     }
 

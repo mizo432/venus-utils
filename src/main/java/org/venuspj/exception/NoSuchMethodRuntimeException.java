@@ -1,6 +1,6 @@
 package org.venuspj.exception;
 
-import org.venuspj.util.lang.MethodUtil;
+import org.venuspj.util.lang.Methods;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
@@ -30,7 +30,7 @@ public class NoSuchMethodRuntimeException extends VRuntimeException {
                                         final Throwable cause) {
         super("EUTL0057", asArray(
                 targetClass.getName(),
-                MethodUtil.getSignature(methodName, argTypes)), cause);
+                Methods.getSignature(methodName, argTypes)), cause);
         this.targetClass = targetClass;
         this.methodName = methodName;
         this.argTypes = argTypes;

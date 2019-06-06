@@ -14,7 +14,7 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 /**
  * {@link Method}用のユーティリティクラスです。
  */
-public abstract class MethodUtil {
+public abstract class Methods {
 
     /**
      * {@link Method}オブジェクトによって表される基本となるメソッドを、指定したオブジェクトに対して指定したパラメータで呼び出します。
