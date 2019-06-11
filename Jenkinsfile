@@ -88,7 +88,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                gradlew 'release -x classes -x testClasses -x test '
+                gradlew 'release -x test '
             }
         }
 
