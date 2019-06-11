@@ -88,7 +88,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                gradlew 'release -x test'
+                gradlew 'release -x test -Prelease.useAutomaticVersion=true'
             }
         }
 
