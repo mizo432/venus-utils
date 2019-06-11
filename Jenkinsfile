@@ -15,7 +15,7 @@ pipeline {
 
     // stagesブロック中に一つ以上のstageを定義する
     stages {
-        stage('事前準備') {
+        stage('Preparation') {
             // 実際の処理はstepsブロック中に定義する
             steps {
                 deleteDir()
@@ -33,18 +33,17 @@ pipeline {
                     }
                 }
                 gradlew 'clean'
-//                gradlew 'dependencies'
             }
         }
 
 
-        stage('コンパイル') {
+        stage('Compile') {
             steps {
                 gradlew 'classes testClasses'
             }
         }
 
-        stage('静的コード解析') {
+        stage('Analysis') {
             steps {
                 // 並列処理の場合はparallelメソッドを使う
                 parallel(
@@ -73,7 +72,7 @@ pipeline {
                 )
             }
         }
-        stage('テスト') {
+        stage('Unit-test') {
             steps {
                 gradlew 'test jacocoTestReport -x classes -x testClasses'
                 junit allowEmptyResults: true, testResults: "**/${testReportDir}/*.xml"
@@ -84,33 +83,18 @@ pipeline {
                 echo 'JacocoReportアーカイブ 終了'
             }
         }
-
-    }
-
-    // stagesブロックと同じレベルにpostブロックを定義すると
-    // 全てのstage処理が終わった後の処理の定義が可能
-    post {
-        always {
-            // 最後にワークスペースの中身を削除
-            deleteDir()
+        stage('lib-release') {
+            when {
+                branch 'master'
+            }
+            steps {
+                gradlew 'release -x classes -x testClasses -x test'
+            }
         }
-    }
-}
 
-if (env.BRANCH_NAME == 'develop') {
-    stage('配備staging') {
-        echo "deploy to staging snapshot"
 
     }
-}
 
-if (env.BRANCH_NAME == 'master') {
-    stage('配備production') {
-        echo "deploy to production"
-        steps {
-            gradlew 'release -x classes -x testClasses -x test'
-        }
-    }
 }
 
 // Gradlewコマンドを実行する
