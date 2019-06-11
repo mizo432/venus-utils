@@ -88,7 +88,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                gradlew 'release -x classes -x testClasses -x test'
+                gradlew 'release -x classes -x testClasses -x test '
             }
         }
 
@@ -100,7 +100,7 @@ pipeline {
 // Gradlewコマンドを実行する
 def gradlew(command) {
     if(isUnix()) {
-            sh "./gradlew ${command} --stacktrace --daemon"
+            sh "./gradlew ${command} --stacktrace --daemon --warning-mode all --debug"
         } else {
             bat "./gradlew.bat ${command} --stacktrace  --daemon"
     }
