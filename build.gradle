@@ -45,8 +45,8 @@ group = 'org.venuspj'
 idea.module.outputDir = compileJava.destinationDir
 idea.module.inheritOutputDirs = true
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {

@@ -1,9 +1,6 @@
 package org.venuspj.util.reflection;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.UndeclaredThrowableException;
+import java.lang.reflect.*;
 import java.util.Map;
 
 import static org.venuspj.util.collect.Maps2.newHashMap;
@@ -49,7 +46,7 @@ public class Classes {
     public static void makeAccessible(Field field) {
         if ((!Modifier.isPublic(field.getModifiers()) ||
                 !Modifier.isPublic(field.getDeclaringClass().getModifiers()) ||
-                Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
+                Modifier.isFinal(field.getModifiers())) && !field.canAccess(field)) {
             field.setAccessible(true);
         }
     }

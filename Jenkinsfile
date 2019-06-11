@@ -43,11 +43,11 @@ pipeline {
             }
         }
 
-        stage('Analysis') {
+        stage('analysis') {
             steps {
                 // 並列処理の場合はparallelメソッドを使う
                 parallel(
-                    '静的コード解析sub' : {
+                    'static analysis' : {
                     gradlew 'check -x test'
                         // dirメソッドでカレントディレクトリを指定できる
                         findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/soptbugs/*.xml', unHealthy: ''
@@ -57,7 +57,7 @@ pipeline {
                         archiveArtifacts "**/pmd/*.xml"
                         archiveArtifacts "**/cpd/*.xml"
                     },
-                    'タスクスキャン': {
+                    'task-scan': {
                         step([
                             $class: 'TasksPublisher',
                             pattern: '**/*.java',
@@ -72,7 +72,7 @@ pipeline {
                 )
             }
         }
-        stage('Unit-test') {
+        stage('unit-test') {
             steps {
                 gradlew 'test jacocoTestReport -x classes -x testClasses'
                 junit allowEmptyResults: true, testResults: "**/${testReportDir}/*.xml"
