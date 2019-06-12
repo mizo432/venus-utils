@@ -57,10 +57,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
     compileOnly group: 'com.google.code.findbugs', name: 'annotations', version: "${findbugsAnnotationsVersion}"
     testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
     testCompile(group: 'junit', name: 'junit', version: "${junitVersion}")
-    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
     testRuntime group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
     testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
 //    compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
