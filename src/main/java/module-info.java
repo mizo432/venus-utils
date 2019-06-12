@@ -14,6 +14,6 @@ module venus.utils {
     exports org.venuspj.util.uuidProvider;
     requires java.sql;
     requires java.desktop;
-    requires slf4j.api;
+//    requires slf4j.api;
 
 }
