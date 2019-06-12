@@ -9,7 +9,7 @@ import static org.venuspj.util.base.Preconditions.checkArgument;
 import static org.venuspj.util.math.DoubleUtils.*;
 import static org.venuspj.util.math.MathPreconditions.*;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.annotations.GwtIncompatible;
 import org.venuspj.util.annotations.VisibleForTesting;
@@ -492,7 +492,7 @@ public final class DoubleMath {
     }
 
     @GwtIncompatible // com.google.common.math.DoubleUtils
-    @CanIgnoreReturnValue
+
     private static double checkFinite(double argument) {
         checkArgument(isFinite(argument));
         return argument;

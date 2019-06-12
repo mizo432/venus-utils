@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+
 import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtCompatible;
 
@@ -95,7 +95,7 @@ public abstract class Optional<T> implements Serializable {
      * <p><b>Comparison to {@code java.util.Optional}:</b> this method is equivalent to Java 8's
      * {@code Optional.ofNullable}.
      */
-    public static <T> Optional<T> fromNullable(@Nullable T nullableReference) {
+    public static <T> Optional<T> fromNullable(T nullableReference) {
         return (nullableReference == null) ? Optional.<T>absent() : new Present<T>(nullableReference);
     }
 
@@ -105,8 +105,8 @@ public abstract class Optional<T> implements Serializable {
      *
      * @since 21.0
      */
-    public static <T> @Nullable Optional<T> fromJavaUtil(
-            java.util.@Nullable Optional<T> javaUtilOptional) {
+    public static <T> Optional<T> fromJavaUtil(
+            java.util.Optional<T> javaUtilOptional) {
         return (javaUtilOptional == null) ? null : fromNullable(javaUtilOptional.orElse(null));
     }
 
@@ -123,8 +123,8 @@ public abstract class Optional<T> implements Serializable {
      *
      * @since 21.0
      */
-    public static <T> java.util.@Nullable Optional<T> toJavaUtil(
-            @Nullable Optional<T> googleOptional) {
+    public static <T> java.util.Optional<T> toJavaUtil(
+            Optional<T> googleOptional) {
         return googleOptional == null ? null : googleOptional.toJavaUtil();
     }
 
@@ -232,7 +232,7 @@ public abstract class Optional<T> implements Serializable {
      * <p><b>Comparison to {@code java.util.Optional}:</b> this method is equivalent to Java 8's
      * {@code Optional.orElse(null)}.
      */
-    public abstract @Nullable T orNull();
+    public abstract T orNull();
 
     /**
      * Returns an immutable singleton {@link Set} whose only element is the contained instance if it
@@ -278,7 +278,7 @@ public abstract class Optional<T> implements Serializable {
      * <p><b>Comparison to {@code java.util.Optional}:</b> no differences.
      */
     @Override
-    public abstract boolean equals(@Nullable Object object);
+    public abstract boolean equals(Object object);
 
     /**
      * Returns a hash code for this instance.

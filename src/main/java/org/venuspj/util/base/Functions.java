@@ -1,11 +1,10 @@
 package org.venuspj.util.base;
 
-import java.io.Serializable;
-import java.util.Map;
-
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.objects2.Objects2;
+
+import java.io.Serializable;
+import java.util.Map;
 
 import static org.venuspj.util.base.Preconditions.checkArgument;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
@@ -75,7 +74,7 @@ public final class Functions {
         INSTANCE;
 
         @Override
-        public @Nullable Object apply(@Nullable Object o) {
+        public  Object apply( Object o) {
             return o;
         }
 
@@ -90,8 +89,8 @@ public final class Functions {
      * IllegalArgumentException} if given a key that does not exist in the map. See also {@link
      * #forMap(Map, Object)}, which returns a default value in this case.
      *
-     * <p>Note: if {@code map} is a {@link com.google.common.collect.BiMap BiMap} (or can be one), you
-     * can use {@link com.google.common.collect.Maps#asConverter Maps.asConverter} instead to get a
+     * <p>Note: if {@code map} is a {@link org.venuspj.util.collect.BiMap BiMap} (or can be one), you
+     * can use  instead to get a
      * function that also supports reverse conversion.
      *
      * <p><b>Java 8 users:</b> if you are okay with {@code null} being returned for an unrecognized
@@ -115,7 +114,7 @@ public final class Functions {
      * @return function that returns {@code map.get(a)} when {@code a} is a key, or {@code
      * defaultValue} otherwise
      */
-    public static <K, V> Function<K, V> forMap(Map<K, ? extends V> map, @Nullable V defaultValue) {
+    public static <K, V> Function<K, V> forMap(Map<K, ? extends V> map,  V defaultValue) {
         return new ForMapWithDefault<>(map, defaultValue);
     }
 
@@ -127,14 +126,14 @@ public final class Functions {
         }
 
         @Override
-        public V apply(@Nullable K key) {
+        public V apply( K key) {
             V result = map.get(key);
             checkArgument(result != null || map.containsKey(key), "Key '%s' not present in map", key);
             return result;
         }
 
         @Override
-        public boolean equals(@Nullable Object o) {
+        public boolean equals( Object o) {
             if (o instanceof FunctionForMapNoDefault) {
                 FunctionForMapNoDefault<?, ?> that = (FunctionForMapNoDefault<?, ?>) o;
                 return map.equals(that.map);
@@ -157,21 +156,21 @@ public final class Functions {
 
     private static class ForMapWithDefault<K, V> implements Function<K, V>, Serializable {
         final Map<K, ? extends V> map;
-        final @Nullable V defaultValue;
+        final  V defaultValue;
 
-        ForMapWithDefault(Map<K, ? extends V> map, @Nullable V defaultValue) {
+        ForMapWithDefault(Map<K, ? extends V> map,  V defaultValue) {
             this.map = checkNotNull(map);
             this.defaultValue = defaultValue;
         }
 
         @Override
-        public V apply(@Nullable K key) {
+        public V apply( K key) {
             V result = map.get(key);
             return (result != null || map.containsKey(key)) ? result : defaultValue;
         }
 
         @Override
-        public boolean equals(@Nullable Object o) {
+        public boolean equals( Object o) {
             if (o instanceof ForMapWithDefault) {
                 ForMapWithDefault<?, ?> that = (ForMapWithDefault<?, ?>) o;
                 return map.equals(that.map) && Objects2.equal(defaultValue, that.defaultValue);
@@ -218,12 +217,12 @@ public final class Functions {
         }
 
         @Override
-        public C apply(@Nullable A a) {
+        public C apply( A a) {
             return g.apply(f.apply(a));
         }
 
         @Override
-        public boolean equals(@Nullable Object obj) {
+        public boolean equals( Object obj) {
             if (obj instanceof FunctionComposition) {
                 FunctionComposition<?, ?, ?> that = (FunctionComposition<?, ?, ?>) obj;
                 return f.equals(that.f) && g.equals(that.g);
@@ -267,12 +266,12 @@ public final class Functions {
         }
 
         @Override
-        public Boolean apply(@Nullable T t) {
+        public Boolean apply( T t) {
             return predicate.apply(t);
         }
 
         @Override
-        public boolean equals(@Nullable Object obj) {
+        public boolean equals( Object obj) {
             if (obj instanceof PredicateFunction) {
                 PredicateFunction<?> that = (PredicateFunction<?>) obj;
                 return predicate.equals(that.predicate);
@@ -301,24 +300,24 @@ public final class Functions {
      * @param value the constant value for the function to return
      * @return a function that always returns {@code value}
      */
-    public static <E> Function<Object, E> constant(@Nullable E value) {
+    public static <E> Function<Object, E> constant( E value) {
         return new ConstantFunction<E>(value);
     }
 
     private static class ConstantFunction<E> implements Function<Object, E>, Serializable {
-        private final @Nullable E value;
+        private final  E value;
 
-        public ConstantFunction(@Nullable E value) {
+        public ConstantFunction( E value) {
             this.value = value;
         }
 
         @Override
-        public E apply(@Nullable Object from) {
+        public E apply( Object from) {
             return value;
         }
 
         @Override
-        public boolean equals(@Nullable Object obj) {
+        public boolean equals( Object obj) {
             if (obj instanceof ConstantFunction) {
                 ConstantFunction<?> that = (ConstantFunction<?>) obj;
                 return Objects2.equal(value, that.value);
@@ -362,12 +361,12 @@ public final class Functions {
         }
 
         @Override
-        public T apply(@Nullable Object input) {
+        public T apply( Object input) {
             return supplier.get();
         }
 
         @Override
-        public boolean equals(@Nullable Object obj) {
+        public boolean equals( Object obj) {
             if (obj instanceof SupplierFunction) {
                 SupplierFunction<?> that = (SupplierFunction<?>) obj;
                 return this.supplier.equals(that.supplier);

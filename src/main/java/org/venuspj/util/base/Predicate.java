@@ -1,7 +1,7 @@
 package org.venuspj.util.base;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
+
+
 import org.venuspj.util.annotations.GwtCompatible;
 
 /**
@@ -41,8 +41,8 @@ public interface Predicate<T> extends java.util.function.Predicate<T> {
      * @throws NullPointerException if {@code input} is null and this predicate does not accept null
      *                              arguments
      */
-    @CanIgnoreReturnValue
-    boolean apply(@Nullable T input);
+
+    boolean apply( T input);
 
     /**
      * Indicates whether another object is equal to this predicate.
@@ -55,10 +55,10 @@ public interface Predicate<T> extends java.util.function.Predicate<T> {
      * predicates are known <i>not</i> to be interchangeable.
      */
     @Override
-    boolean equals(@Nullable Object object);
+    boolean equals( Object object);
 
     @Override
-    default boolean test(@Nullable T input) {
+    default boolean test( T input) {
         return apply(input);
     }
 }

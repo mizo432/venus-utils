@@ -1,6 +1,6 @@
 package org.venuspj.util.base;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+
 import org.venuspj.util.annotations.GwtCompatible;
 
 /**
@@ -21,7 +21,7 @@ public class VerifyException extends RuntimeException {
     /**
      * Constructs a {@code VerifyException} with the message {@code message}.
      */
-    public VerifyException(@Nullable String message) {
+    public VerifyException( String message) {
         super(message);
     }
 
@@ -31,7 +31,7 @@ public class VerifyException extends RuntimeException {
      *
      * @since 19.0
      */
-    public VerifyException(@Nullable Throwable cause) {
+    public VerifyException( Throwable cause) {
         super(cause);
     }
 
@@ -41,7 +41,7 @@ public class VerifyException extends RuntimeException {
      *
      * @since 19.0
      */
-    public VerifyException(@Nullable String message, @Nullable Throwable cause) {
+    public VerifyException( String message,  Throwable cause) {
         super(message, cause);
     }
 }

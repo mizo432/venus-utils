@@ -1,7 +1,5 @@
 package org.venuspj.util.base;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 
 /**
@@ -26,9 +24,7 @@ import org.venuspj.util.annotations.GwtCompatible;
 @FunctionalInterface
 public interface Function<F, T> extends java.util.function.Function<F, T> {
     @Override
-    @CanIgnoreReturnValue
-    @Nullable
-    T apply(@Nullable F input);
+    T apply(F input);
 
     /**
      * <i>May</i> return {@code true} if {@code object} is a {@code Function} that behaves identically
@@ -42,5 +38,5 @@ public interface Function<F, T> extends java.util.function.Function<F, T> {
      * disappear. It is best not to depend on it.
      */
     @Override
-    boolean equals(@Nullable Object object);
+    boolean equals(Object object);
 }

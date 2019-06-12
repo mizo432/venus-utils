@@ -3,7 +3,7 @@ package org.venuspj.util.base;
 import java.util.Collections;
 import java.util.Set;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+
 import org.venuspj.util.annotations.GwtCompatible;
 
 import static org.venuspj.util.base.Preconditions.checkNotNull;
@@ -66,7 +66,7 @@ final class Present<T> extends Optional<T> {
     }
 
     @Override
-    public boolean equals(@Nullable Object object) {
+    public boolean equals( Object object) {
         if (object instanceof Present) {
             Present<?> other = (Present<?>) object;
             return reference.equals(other.reference);

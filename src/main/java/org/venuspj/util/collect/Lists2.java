@@ -1,6 +1,5 @@
 package org.venuspj.util.collect;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.math.IntMath;
 import org.venuspj.util.objects2.Objects2;
@@ -195,7 +194,7 @@ public class Lists2 {
      * @param rest  an array of additional elements, possibly empty
      * @return an unmodifiable list containing the specified elements
      */
-    public static <E> List<E> asList(@Nullable E first, E[] rest) {
+    public static <E> List<E> asList(E first, E[] rest) {
         return new OnePlusArrayList<>(first, rest);
     }
 
@@ -215,7 +214,7 @@ public class Lists2 {
      * @param rest   an array of additional elements, possibly empty
      * @return an unmodifiable list containing the specified elements
      */
-    public static <E> List<E> asList(@Nullable E first, @Nullable E second, E[] rest) {
+    public static <E> List<E> asList(E first, E second, E[] rest) {
         return new TwoPlusArrayList<>(first, second, rest);
     }
 
@@ -224,10 +223,10 @@ public class Lists2 {
      */
     private static class OnePlusArrayList<E> extends AbstractList<E>
             implements Serializable, RandomAccess {
-        final @Nullable E first;
+        final E first;
         final E[] rest;
 
-        OnePlusArrayList(@Nullable E first, E[] rest) {
+        OnePlusArrayList(E first, E[] rest) {
             this.first = first;
             this.rest = Preconditions.checkNotNull(rest);
         }
@@ -252,11 +251,11 @@ public class Lists2 {
      */
     private static class TwoPlusArrayList<E> extends AbstractList<E>
             implements Serializable, RandomAccess {
-        final @Nullable E first;
-        final @Nullable E second;
+        final E first;
+        final E second;
         final E[] rest;
 
-        TwoPlusArrayList(@Nullable E first, @Nullable E second, E[] rest) {
+        TwoPlusArrayList(E first, E second, E[] rest) {
             this.first = first;
             this.second = second;
             this.rest = Preconditions.checkNotNull(rest);

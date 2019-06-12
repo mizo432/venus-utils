@@ -1,6 +1,6 @@
 package org.venuspj.util.base;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import org.venuspj.util.annotations.GwtCompatible;
 
 /**
@@ -27,7 +27,7 @@ public interface Supplier<T> extends java.util.function.Supplier<T> {
      *
      * @return an instance of the appropriate type
      */
-    @CanIgnoreReturnValue
+
     @Override
     T get();
 }

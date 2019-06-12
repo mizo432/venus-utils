@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.annotations.GwtIncompatible;
 
@@ -113,7 +112,7 @@ public final class Enums {
         }
 
         @Override
-        public boolean equals(@Nullable Object object) {
+        public boolean equals(Object object) {
             if (object instanceof StringConverter) {
                 StringConverter<?> that = (StringConverter<?>) object;
                 return this.enumClass.equals(that.enumClass);

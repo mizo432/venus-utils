@@ -1,6 +1,6 @@
 package org.venuspj.util.base;
 
-import javax.annotation.Nullable;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
@@ -33,7 +33,7 @@ public final class Throwables {
     }
 
     public static <X extends Throwable> void propagateIfInstanceOf(
-            @Nullable Throwable throwable, Class<X> declaredType) throws X {
+             Throwable throwable, Class<X> declaredType) throws X {
         if (throwable != null) {
             throwIfInstanceOf(throwable, declaredType);
         }
@@ -49,20 +49,20 @@ public final class Throwables {
         }
     }
 
-    public static void propagateIfPossible(@Nullable Throwable throwable) {
+    public static void propagateIfPossible( Throwable throwable) {
         if (throwable != null) {
             throwIfUnchecked(throwable);
         }
     }
 
     public static <X extends Throwable> void propagateIfPossible(
-            @Nullable Throwable throwable, Class<X> declaredType) throws X {
+             Throwable throwable, Class<X> declaredType) throws X {
         propagateIfInstanceOf(throwable, declaredType);
         propagateIfPossible(throwable);
     }
 
     public static <X1 extends Throwable, X2 extends Throwable> void propagateIfPossible(
-            @Nullable Throwable throwable, Class<X1> declaredType1, Class<X2> declaredType2)
+             Throwable throwable, Class<X1> declaredType1, Class<X2> declaredType2)
             throws X1, X2 {
         checkNotNull(declaredType2);
         propagateIfInstanceOf(throwable, declaredType1);

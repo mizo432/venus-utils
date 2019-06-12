@@ -1,12 +1,10 @@
 package org.venuspj.util.primitives;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
+import org.venuspj.util.annotations.GwtCompatible;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.venuspj.util.annotations.GwtCompatible;
 
 import static org.venuspj.util.base.Preconditions.checkArgument;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
@@ -60,7 +58,6 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
      * @throws IllegalArgumentException if {@code value} is negative
      * @since 14.0
      */
-    @CanIgnoreReturnValue
     public static UnsignedLong valueOf(long value) {
         checkArgument(value >= 0, "value (%s) is outside the range for an unsigned long value", value);
         return fromLongBits(value);
@@ -72,7 +69,6 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
      *
      * @throws IllegalArgumentException if {@code value} is negative or {@code value >= 2^64}
      */
-    @CanIgnoreReturnValue
     public static UnsignedLong valueOf(BigInteger value) {
         checkNotNull(value);
         checkArgument(
@@ -89,7 +85,6 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
      * @throws NumberFormatException if the string does not contain a parsable unsigned {@code long}
      *                               value
      */
-    @CanIgnoreReturnValue
     public static UnsignedLong valueOf(String string) {
         return valueOf(string, 10);
     }
@@ -102,7 +97,6 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
      *                               value, or {@code radix} is not between {@link Character#MIN_RADIX} and {@link
      *                               Character#MAX_RADIX}
      */
-    @CanIgnoreReturnValue
     public static UnsignedLong valueOf(String string, int radix) {
         return fromLongBits(UnsignedLongs.parseUnsignedLong(string, radix));
     }
@@ -226,7 +220,7 @@ public final class UnsignedLong extends Number implements Comparable<UnsignedLon
     }
 
     @Override
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals(Object obj) {
         if (obj instanceof UnsignedLong) {
             UnsignedLong other = (UnsignedLong) obj;
             return value == other.value;

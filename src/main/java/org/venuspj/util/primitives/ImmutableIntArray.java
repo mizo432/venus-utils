@@ -1,8 +1,5 @@
 package org.venuspj.util.primitives;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import com.google.errorprone.annotations.CheckReturnValue;
-import com.google.errorprone.annotations.Immutable;
 
 import java.io.Serializable;
 import java.util.AbstractList;
@@ -15,7 +12,7 @@ import java.util.Spliterators;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+
 import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.base.Preconditions;
@@ -53,7 +50,7 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  * <li>Dependency on {@code com.google.common} / Guava.
  * </ul>
  *
- * <p>Advantages compared to {@link ImmutableList ImmutableList}{@code
+ * <p>Advantages compared to {@code
  * <Integer>}:
  *
  * <ul>
@@ -75,7 +72,6 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  */
 @Beta
 @GwtCompatible
-@Immutable
 public final class ImmutableIntArray implements Serializable {
     private static final ImmutableIntArray EMPTY = new ImmutableIntArray(new int[0]);
 
@@ -213,7 +209,7 @@ public final class ImmutableIntArray implements Serializable {
      * A builder for {@link ImmutableIntArray} instances; obtained using {@link
      * ImmutableIntArray#builder}.
      */
-    @CanIgnoreReturnValue
+
     public static final class Builder {
         private int[] array;
         private int count = 0; // <= array.length
@@ -328,7 +324,6 @@ public final class ImmutableIntArray implements Serializable {
          * no data is copied as part of this step, but this may occupy more memory than strictly
          * necessary. To copy the data to a right-sized backing array, use {@code .build().trimmed()}.
          */
-        @CheckReturnValue
         public ImmutableIntArray build() {
             return count == 0 ? EMPTY : new ImmutableIntArray(array, 0, count);
         }
@@ -459,7 +454,7 @@ public final class ImmutableIntArray implements Serializable {
      * Returns an immutable <i>view</i> of this array's values as a {@code List}; note that {@code
      * int} values are boxed into {@link Integer} instances on demand, which can be very expensive.
      * The returned list should be used once and discarded. For any usages beyond that, pass the
-     * returned list to {@link com.google.common.collect.ImmutableList#copyOf(Collection)
+     * returned list to {@link (Collection)
      * ImmutableList.copyOf} and use that list instead.
      */
     public List<Integer> asList() {
@@ -517,7 +512,7 @@ public final class ImmutableIntArray implements Serializable {
         }
 
         @Override
-        public boolean equals(@Nullable Object object) {
+        public boolean equals(Object object) {
             if (object instanceof AsList) {
                 AsList that = (AsList) object;
                 return this.parent.equals(that.parent);
@@ -557,7 +552,7 @@ public final class ImmutableIntArray implements Serializable {
      * values as this one, in the same order.
      */
     @Override
-    public boolean equals(@Nullable Object object) {
+    public boolean equals(Object object) {
         if (object == this) {
             return true;
         }

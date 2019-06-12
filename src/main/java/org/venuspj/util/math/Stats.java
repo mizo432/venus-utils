@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Iterator;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+
 import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtIncompatible;
 import org.venuspj.util.objects2.Objects2;
@@ -321,7 +321,7 @@ public final class Stats implements Serializable {
      * {@code strictfp}-like semantics.)
      */
     @Override
-    public boolean equals(@Nullable Object obj) {
+    public boolean equals( Object obj) {
         if (obj == null) {
             return false;
         }
