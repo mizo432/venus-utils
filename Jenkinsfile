@@ -83,14 +83,14 @@ pipeline {
                 echo 'JacocoReportアーカイブ 終了'
             }
         }
-        stage('lib-release') {
-            when {
-                branch 'master'
-            }
-            steps {
-                gradlew 'release -x test -Prelease.useAutomaticVersion=true'
-            }
-        }
+//        stage('lib-release') {
+//            when {
+//                branch 'master'
+//            }
+//            steps {
+//                gradlew 'release -x test -Prelease.useAutomaticVersion=true'
+//            }
+//        }
 
 
     }
