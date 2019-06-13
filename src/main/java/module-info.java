@@ -1,5 +1,4 @@
 module venus.utils {
-    exports org.venuspj.util.logger;
     exports org.venuspj.util.base;
     exports org.venuspj.util.beans;
     exports org.venuspj.util.builder;
@@ -14,6 +13,5 @@ module venus.utils {
     exports org.venuspj.util.uuidProvider;
     requires java.sql;
     requires java.desktop;
-    requires slf4j.api;
 
 }
