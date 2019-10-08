@@ -1,7 +1,6 @@
 package org.venuspj.util.beans.converter;
 
 import org.venuspj.exception.ParseRuntimeException;
-import org.venuspj.util.beans.Converter;
 import org.venuspj.util.beans.EmptyRuntimeException;
 import org.venuspj.util.strings2.Strings2;
 

@@ -422,42 +422,42 @@ public class BeanDescImpl implements BeanDesc {
                                           final Object[] args, final int index) {
         if (paramTypes[index].isPrimitive()) {
             if (paramTypes[index] == byte.class) {
-                args[index] = ByteConversionUtil.toByte(args[index]);
+                args[index] = ByteConversions.toByte(args[index]);
                 return true;
             } else if (paramTypes[index] == short.class) {
-                args[index] = ShortConversionUtil.toShort(args[index]);
+                args[index] = ShortConversions.toShort(args[index]);
                 return true;
             } else if (paramTypes[index] == int.class) {
-                args[index] = IntegerConversionUtil.toInteger(args[index]);
+                args[index] = IntegerConversions.toInteger(args[index]);
                 return true;
             } else if (paramTypes[index] == long.class) {
-                args[index] = LongConversionUtil.toLong(args[index]);
+                args[index] = LongConversions.toLong(args[index]);
                 return true;
             } else if (paramTypes[index] == float.class) {
-                args[index] = FloatConversionUtil.toFloat(args[index]);
+                args[index] = FloatConversions.toFloat(args[index]);
                 return true;
             } else if (paramTypes[index] == double.class) {
-                args[index] = DoubleConversionUtil.toDouble(args[index]);
+                args[index] = DoubleConversions.toDouble(args[index]);
                 return true;
             }
         } else {
             if (paramTypes[index] == Byte.class) {
-                args[index] = ByteConversionUtil.toByte(args[index]);
+                args[index] = ByteConversions.toByte(args[index]);
                 return true;
             } else if (paramTypes[index] == Short.class) {
-                args[index] = ShortConversionUtil.toShort(args[index]);
+                args[index] = ShortConversions.toShort(args[index]);
                 return true;
             } else if (paramTypes[index] == Integer.class) {
-                args[index] = IntegerConversionUtil.toInteger(args[index]);
+                args[index] = IntegerConversions.toInteger(args[index]);
                 return true;
             } else if (paramTypes[index] == Long.class) {
-                args[index] = LongConversionUtil.toLong(args[index]);
+                args[index] = LongConversions.toLong(args[index]);
                 return true;
             } else if (paramTypes[index] == Float.class) {
-                args[index] = FloatConversionUtil.toFloat(args[index]);
+                args[index] = FloatConversions.toFloat(args[index]);
                 return true;
             } else if (paramTypes[index] == Double.class) {
-                args[index] = DoubleConversionUtil.toDouble(args[index]);
+                args[index] = DoubleConversions.toDouble(args[index]);
                 return true;
             }
         }

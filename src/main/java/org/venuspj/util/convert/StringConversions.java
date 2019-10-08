@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 /**
  * {@link String}用の変換ユーティリティです。
  */
-public class StringConversionUtil {
+public class StringConversions {
 
     /**
      * WAVE DASHです。
@@ -23,7 +23,7 @@ public class StringConversionUtil {
     /**
      * インスタンスを構築します。
      */
-    protected StringConversionUtil() {
+    protected StringConversions() {
     }
 
     /**

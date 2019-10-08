@@ -3,7 +3,7 @@ package org.venuspj.util.convert;
 /**
  * {@link Boolean}用の変換ユーティリティです。
  */
-public abstract class BooleanConversionUtil {
+public abstract class BooleanConversions {
 
     /**
      * {@link Boolean}に変換します。

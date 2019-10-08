@@ -4,6 +4,8 @@ package org.venuspj.util.validate;
  *
  */
 public class ValidateRuntimeException extends RuntimeException {
-    public ValidateRuntimeException(String s) {
+    public ValidateRuntimeException(String massage) {
+        super(massage);
+
     }
 }

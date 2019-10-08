@@ -9,7 +9,7 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 /**
  * {@link DecimalFormat}用のユーティリティクラスです。
  */
-public abstract class DecimalFormatUtil {
+public abstract class DecimalFormats {
 
     /**
      * 数値の文字列での表記を正規化します。

@@ -1,14 +1,14 @@
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
-import org.venuspj.util.text.DecimalFormatUtil;
+import org.venuspj.util.text.DecimalFormats;
 
 import java.text.SimpleDateFormat;
 
 /**
  * {@link Long}用の変換ユーティリティです。
  */
-public abstract class LongConversionUtil {
+public abstract class LongConversions {
 
     /**
      * {@link Long}に変換します。
@@ -18,6 +18,7 @@ public abstract class LongConversionUtil {
      */
     public static Long toLong(final Object o) {
         return toLong(o, null);
+
     }
 
     /**
@@ -53,7 +54,7 @@ public abstract class LongConversionUtil {
         if (Strings2.isEmpty(s)) {
             return null;
         }
-        return Long.valueOf(DecimalFormatUtil.normalize(s));
+        return Long.valueOf(DecimalFormats.normalize(s));
     }
 
     /**
@@ -96,7 +97,7 @@ public abstract class LongConversionUtil {
         if (Strings2.isEmpty(s)) {
             return 0;
         }
-        return Long.parseLong(DecimalFormatUtil.normalize(s));
+        return Long.parseLong(DecimalFormats.normalize(s));
     }
 
 }

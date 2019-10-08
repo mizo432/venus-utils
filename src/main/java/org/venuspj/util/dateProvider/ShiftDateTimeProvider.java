@@ -8,14 +8,14 @@ public class ShiftDateTimeProvider extends DateProvider {
     private static AtomicReference<LocalDateTime> startDateTime = new AtomicReference<>();
     private static AtomicReference<LocalDateTime> localDateTime = new AtomicReference<>();
 
-    public ShiftDateTimeProvider(LocalDateTime aLocalDateTime) {
+    public ShiftDateTimeProvider(LocalDateTime localDateTime) {
         super();
-        ShiftDateTimeProvider.localDateTime.set(aLocalDateTime);
+        ShiftDateTimeProvider.localDateTime.set(localDateTime);
         ShiftDateTimeProvider.startDateTime.set(LocalDateTime.now());
     }
 
-    public static void initialize(LocalDateTime aLocalDateTime) {
-        ShiftDateTimeProvider instance = new ShiftDateTimeProvider(aLocalDateTime);
+    public static void initialize(LocalDateTime localDateTime) {
+        ShiftDateTimeProvider instance = new ShiftDateTimeProvider(localDateTime);
         new DateProvider(instance);
     }
 

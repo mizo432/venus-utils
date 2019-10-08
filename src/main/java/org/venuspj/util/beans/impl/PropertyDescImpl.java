@@ -326,14 +326,14 @@ public class PropertyDescImpl implements PropertyDesc {
         } else if (java.util.Date.class.isAssignableFrom(propertyType)) {
             return (T) convertDate(arg);
         } else if (Boolean.class.isAssignableFrom(propertyType)) {
-            return (T) BooleanConversionUtil.toBoolean(arg);
+            return (T) BooleanConversions.toBoolean(arg);
         } else if (arg != null && arg.getClass() != String.class
                 && String.class == propertyType) {
             return (T) arg.toString();
         } else if (arg instanceof String && !String.class.equals(propertyType)) {
             return (T) convertWithString(arg);
         } else if (java.util.Calendar.class.isAssignableFrom(propertyType)) {
-            return (T) CalendarConversionUtil.toCalendar(arg);
+            return (T) CalendarConversions.toCalendar(arg);
         }
         return (T) arg;
     }
@@ -349,20 +349,20 @@ public class PropertyDescImpl implements PropertyDesc {
     private Object convertDate(final Object arg) {
         if (propertyType == java.util.Date.class) {
             try {
-                return TimestampConversionUtil.toDate(arg);
+                return TimestampConversions.toDate(arg);
             } catch (ParseRuntimeException ex) {
                 try {
-                    return DateConversionUtil.toDate(arg);
+                    return DateConversions.toDate(arg);
                 } catch (ParseRuntimeException ex2) {
-                    return TimeConversionUtil.toDate(arg);
+                    return TimeConversions.toDate(arg);
                 }
             }
         } else if (propertyType == Timestamp.class) {
-            return TimestampConversionUtil.toSqlTimestamp(arg);
+            return TimestampConversions.toSqlTimestamp(arg);
         } else if (propertyType == java.sql.Date.class) {
-            return DateConversionUtil.toSqlDate(arg);
+            return DateConversions.toSqlDate(arg);
         } else if (propertyType == Time.class) {
-            return TimeConversionUtil.toSqlTime(arg);
+            return TimeConversions.toSqlTime(arg);
         }
         return arg;
     }

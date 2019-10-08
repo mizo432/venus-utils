@@ -5,7 +5,7 @@ import java.math.BigInteger;
 /**
  * {@link BigInteger}用の変換ユーティリティです。
  */
-public abstract class BigIntegerConversionUtil {
+public abstract class BigIntegerConversions {
 
     /**
      * {@link BigInteger}に変換します。
@@ -30,7 +30,7 @@ public abstract class BigIntegerConversionUtil {
         } else if (o instanceof BigInteger) {
             return (BigInteger) o;
         } else {
-            final Long l = LongConversionUtil.toLong(o, pattern);
+            final Long l = LongConversions.toLong(o, pattern);
             if (l == null) {
                 return null;
             }

@@ -1,9 +1,9 @@
-package org.venuspj.util.beans;
+package org.venuspj.util.beans.converter;
 
 /**
  * 文字列とオブジェクトの変換を行なうインターフェースです。
  */
-public interface Converter {
+public interface Converter<T> {
 
     /**
      * 値を文字列として返します。
@@ -11,7 +11,7 @@ public interface Converter {
      * @param value 値
      * @return 文字列としての値
      */
-    String getAsString(Object value);
+    String getAsString(T value);
 
     /**
      * 値をオブジェクトとして返します。
@@ -19,7 +19,7 @@ public interface Converter {
      * @param value 値
      * @return オブジェクトとしての値
      */
-    Object getAsObject(String value);
+    T getAsObject(String value);
 
     /**
      * 対象の型かどうかを返します。 対象のプロパティを指定しない場合に呼び出されます。
@@ -27,5 +27,5 @@ public interface Converter {
      * @param clazz
      * @return
      */
-    boolean isTarget(Class clazz);
+    boolean isTarget(Class<?> clazz);
 }

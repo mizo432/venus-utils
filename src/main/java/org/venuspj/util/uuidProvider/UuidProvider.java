@@ -14,20 +14,24 @@ public class UuidProvider {
 
     }
 
-    protected UuidProvider(UuidProvider aUuidProvider) {
-        setUuidProvider(aUuidProvider);
+    protected UuidProvider(UuidProvider uuidProvider) {
+        setUuidProvider(uuidProvider);
+
     }
 
-    void setUuidProvider(UuidProvider aUuidProvider) {
-        UuidProvider.uuidProvider.set(aUuidProvider);
+    void setUuidProvider(UuidProvider uuidProvider) {
+        UuidProvider.uuidProvider.set(uuidProvider);
+
     }
 
     public static UUID randomUUID() {
         return UuidProvider.uuidProvider.get().uuid();
+
     }
 
     protected UUID uuid() {
         return UUID.randomUUID();
+
     }
 
 }

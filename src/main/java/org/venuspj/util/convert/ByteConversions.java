@@ -1,14 +1,14 @@
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
-import org.venuspj.util.text.DecimalFormatUtil;
+import org.venuspj.util.text.DecimalFormats;
 
 import java.text.SimpleDateFormat;
 
 /**
  * {@link Byte}用の変換ユーティリティです。
  */
-public abstract class ByteConversionUtil {
+public abstract class ByteConversions {
 
     /**
      * {@link Byte}に変換します。
@@ -53,7 +53,7 @@ public abstract class ByteConversionUtil {
         if (Strings2.isEmpty(s)) {
             return null;
         }
-        return Byte.valueOf(DecimalFormatUtil.normalize(s));
+        return Byte.valueOf(DecimalFormats.normalize(s));
     }
 
     /**
@@ -96,7 +96,7 @@ public abstract class ByteConversionUtil {
         if (Strings2.isEmpty(s)) {
             return 0;
         }
-        return Byte.parseByte(DecimalFormatUtil.normalize(s));
+        return Byte.parseByte(DecimalFormats.normalize(s));
     }
 
 }

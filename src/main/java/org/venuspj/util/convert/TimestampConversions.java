@@ -3,8 +3,9 @@ package org.venuspj.util.convert;
 import org.venuspj.exception.ParseRuntimeException;
 import org.venuspj.exception.VNoSuchElementException;
 import org.venuspj.exception.VUnsupportedOperationException;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.collect.MultiIterator;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -14,20 +15,19 @@ import java.util.Iterator;
 import java.util.Locale;
 
 import static java.text.DateFormat.*;
-import static org.venuspj.util.collect.MultiIterator.iterable;
+import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 import static org.venuspj.util.strings2.Strings2.isEmpty;
 import static org.venuspj.util.strings2.Strings2.isNotEmpty;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**
- * 日付だけを表現するオブジェクトから{@link Date}、{@link Calendar}、{@link java.sql.Date}
+ * 日付と時刻を表現するオブジェクトから{@link Date}、{@link Calendar}、{@link Timestamp}
  * への変換ユーティリティです。
  * <p>
- * 時刻だけを表現するオブジェクトを変換する場合は {@link TimeConversionUtil}を、 日付と時刻を表現するオブジェクトを変換する場合は
- * {@link TimestampConversionUtil}を 参照してください。
+ * 日付だけを表現するオブジェクトを変換する場合は{@link DateConversions}を、 時刻だけを表現するオブジェクトを変換する場合は
+ * {@link TimeConversions}を参照してください。
  * </p>
  * <p>
- * 変換元のオブジェクトが{@link Date}、{@link Calendar}、{@link java.sql.Date}の場合は、
+ * 変換元のオブジェクトが{@link Date}、{@link Calendar}、{@link Timestamp}の場合は、
  * それらの持つミリ秒単位の値を使って変換後のオブジェクトを作成します。
  * その他の型の場合は変換元オブジェクトの文字列表現から変換後のオブジェクトを作成します。
  * </p>
@@ -43,48 +43,48 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
  * <tr>
  * <td rowspan="4">{@link DateFormat}の標準形式</td>
  * <td>{@link DateFormat#SHORT}の形式</td>
- * <td>{@literal yy/MM/dd}</td>
+ * <td>{@literal yy/MM/dd H:mm}</td>
  * </tr>
  * <tr>
  * <td>{@link DateFormat#MEDIUM}の形式</td>
- * <td>{@literal yyyy/MM/dd}</td>
+ * <td>{@literal yyyy/MM/dd H:mm:ss}</td>
  * </tr>
  * <tr>
  * <td>{@link DateFormat#LONG}の形式</td>
- * <td>{@literal yyyy/MM/dd}</td>
+ * <td>{@literal yyyy/MM/dd H:mm:ss z}</td>
  * </tr>
  * <tr>
  * <td>{@link DateFormat#FULL}の形式</td>
- * <td>{@literal yyyy'年'M'月'd'日'}</td>
+ * <td>{@literal yyyy'年'M'月'd'日' H'時'mm'分'ss'秒' z}</td>
  * </tr>
  * <tr>
  * <td rowspan="4">プレーン形式</td>
  * <td>{@link DateFormat#SHORT}の区切り文字を除去した形式</td>
- * <td>{@literal yyMMdd}</td>
+ * <td>{@literal yyMMdd HHmm}</td>
  * </tr>
  * <tr>
  * <td>{@link DateFormat#MEDIUM}の区切り文字を除去した形式</td>
- * <td>{@literal yyyyMMdd}</td>
+ * <td>{@literal yyyyMMdd HHmmss}</td>
  * </tr>
  * <tr>
  * <td>{@link DateFormat#LONG}の区切り文字を除去した形式</td>
- * <td>{@literal yyyyMMdd}</td>
+ * <td>{@literal yyyyMMdd HHmmss z}</td>
  * </tr>
  * <tr>
  * <td>{@link DateFormat#FULL}の区切り文字を除去した形式</td>
- * <td>{@literal yyyyMMdd}</td>
+ * <td>{@literal yyyyMMdd HHmmss z}</td>
  * </tr>
  * <tr>
  * <td>その他</td>
- * <td>{@link java.sql.Date#valueOf(String) Jdbcエスケープ構文}形式</td>
- * <td>{@literal yyyy-MM-dd}</td>
+ * <td>{@link Timestamp#valueOf(String) Jdbcエスケープ構文}形式</td>
+ * <td>{@literal yyyy-MM-dd HH:mm:ss[.SSS...]}</td>
  * </tr>
  * </table>
  *
- * @see TimeConversionUtil
- * @see TimestampConversionUtil
+ * @see DateConversions
+ * @see TimeConversions
  */
-public abstract class DateConversionUtil {
+public abstract class TimestampConversions {
 
     /**
      * {@link DateFormat}が持つスタイルの配列
@@ -109,7 +109,8 @@ public abstract class DateConversionUtil {
      */
     public static String getShortPattern(final Locale locale) {
         assertArgumentNotNull("locale", locale);
-        return ((SimpleDateFormat) getDateInstance(SHORT, locale)).toPattern();
+        return ((SimpleDateFormat) getDateTimeInstance(SHORT, SHORT, locale))
+                .toPattern();
     }
 
     /**
@@ -129,7 +130,8 @@ public abstract class DateConversionUtil {
      */
     public static String getMediumPattern(final Locale locale) {
         assertArgumentNotNull("locale", locale);
-        return ((SimpleDateFormat) getDateInstance(MEDIUM, locale)).toPattern();
+        return ((SimpleDateFormat) getDateTimeInstance(MEDIUM, MEDIUM, locale))
+                .toPattern();
     }
 
     /**
@@ -148,8 +150,8 @@ public abstract class DateConversionUtil {
      * @return {@link DateFormat#LONG}スタイルのパターン文字列
      */
     public static String getLongPattern(final Locale locale) {
-        assertArgumentNotNull("locale", locale);
-        return ((SimpleDateFormat) getDateInstance(LONG, locale)).toPattern();
+        return ((SimpleDateFormat) getDateTimeInstance(LONG, LONG, locale))
+                .toPattern();
     }
 
     /**
@@ -169,7 +171,8 @@ public abstract class DateConversionUtil {
      */
     public static String getFullPattern(final Locale locale) {
         assertArgumentNotNull("locale", locale);
-        return ((SimpleDateFormat) getDateInstance(FULL, locale)).toPattern();
+        return ((SimpleDateFormat) getDateTimeInstance(FULL, FULL, locale))
+                .toPattern();
     }
 
     /**
@@ -243,9 +246,9 @@ public abstract class DateConversionUtil {
         if (date != null) {
             return date;
         }
-        final java.sql.Date sqlDate = toSqlDateJdbcEscape(str);
-        if (sqlDate != null) {
-            return new java.sql.Date(sqlDate.getTime());
+        final Timestamp timestamp = toSqlTimestampJdbcEscape(str);
+        if (timestamp != null) {
+            return new Date(timestamp.getTime());
         }
         throw new ParseRuntimeException(str);
     }
@@ -307,8 +310,7 @@ public abstract class DateConversionUtil {
             return null;
         }
         if (isNotEmpty(pattern)) {
-            final SimpleDateFormat format =
-                    new SimpleDateFormat(pattern, locale);
+            final SimpleDateFormat format = new SimpleDateFormat(pattern);
             final Date date = toDate(str, format);
             if (date != null) {
                 return toCalendar(date, locale);
@@ -318,67 +320,68 @@ public abstract class DateConversionUtil {
         if (date != null) {
             return toCalendar(date, locale);
         }
-        final java.sql.Date sqlDate = toSqlDateJdbcEscape(str);
-        if (sqlDate != null) {
-            return toCalendar(sqlDate, locale);
+        final Timestamp timestamp = toSqlTimestampJdbcEscape(str);
+        if (timestamp != null) {
+            return toCalendar(timestamp, locale);
         }
         throw new ParseRuntimeException(str);
     }
 
     /**
-     * オブジェクトを{@link java.sql.Date}に変換します。
+     * オブジェクトを{@link Timestamp}に変換します。
      *
      * @param src 変換元のオブジェクト
-     * @return 変換された{@link java.sql.Date}
+     * @return 変換された{@link Timestamp}
      */
-    public static java.sql.Date toSqlDate(final Object src) {
-        return toSqlDate(src, null, Locale.getDefault());
+    public static Timestamp toSqlTimestamp(final Object src) {
+        return toSqlTimestamp(src, null, Locale.getDefault());
     }
 
     /**
-     * オブジェクトを{@link java.sql.Date}に変換します。
+     * オブジェクトを{@link Timestamp}に変換します。
      *
      * @param src     変換元のオブジェクト
      * @param pattern パターン文字列
-     * @return 変換された{@link java.sql.Date}
+     * @return 変換された{@link Timestamp}
      */
-    public static java.sql.Date toSqlDate(final Object src, final String pattern) {
-        return toSqlDate(src, pattern, Locale.getDefault());
+    public static Timestamp toSqlTimestamp(final Object src,
+                                           final String pattern) {
+        return toSqlTimestamp(src, pattern, Locale.getDefault());
     }
 
     /**
-     * オブジェクトを{@link java.sql.Date}に変換します。
+     * オブジェクトを{@link Timestamp}に変換します。
      *
      * @param src    変換元のオブジェクト
      * @param locale ロケール。{@literal null}であってはいけません
-     * @return 変換された{@link java.sql.Date}
+     * @return 変換された{@link Timestamp}
      */
-    public static java.sql.Date toSqlDate(final Object src, final Locale locale) {
+    public static Timestamp toSqlTimestamp(final Object src, final Locale locale) {
         assertArgumentNotNull("locale", locale);
-        return toSqlDate(src, null, locale);
+        return toSqlTimestamp(src, null, locale);
     }
 
     /**
-     * オブジェクトを{@link java.sql.Date}に変換します。
+     * オブジェクトを{@link Timestamp}に変換します。
      *
      * @param src     変換元のオブジェクト
      * @param pattern パターン文字列
      * @param locale  ロケール
-     * @return 変換された{@link java.sql.Date}
+     * @return 変換された{@link Timestamp}
      */
-    protected static java.sql.Date toSqlDate(final Object src,
-                                             final String pattern, final Locale locale) {
+    protected static Timestamp toSqlTimestamp(final Object src,
+                                              final String pattern, final Locale locale) {
         if (src == null) {
             return null;
         }
-        if (src instanceof java.sql.Date) {
-            return (java.sql.Date) src;
+        if (src.getClass() == Timestamp.class) {
+            return (Timestamp) src;
         }
         if (src instanceof Date) {
-            return new java.sql.Date(((Date) src).getTime());
+            return new Timestamp(((Date) src).getTime());
         }
         if (src instanceof Calendar) {
-            return new java.sql.Date(((Calendar) src).getTimeInMillis());
+            return new Timestamp(((Calendar) src).getTimeInMillis());
         }
         final String str = src.toString();
         if (isEmpty(str)) {
@@ -389,16 +392,16 @@ public abstract class DateConversionUtil {
                     new SimpleDateFormat(pattern, locale);
             final Date date = toDate(str, format);
             if (date != null) {
-                return new java.sql.Date(date.getTime());
+                return new Timestamp(date.getTime());
             }
         }
         final Date date = toDate(str, locale);
         if (date != null) {
-            return new java.sql.Date(date.getTime());
+            return new Timestamp(date.getTime());
         }
-        final java.sql.Date sqlDate = toSqlDateJdbcEscape(str);
-        if (sqlDate != null) {
-            return sqlDate;
+        final Timestamp timestamp = toSqlTimestampJdbcEscape(str);
+        if (timestamp != null) {
+            return timestamp;
         }
         throw new ParseRuntimeException(str);
     }
@@ -412,7 +415,7 @@ public abstract class DateConversionUtil {
      */
     @SuppressWarnings("unchecked")
     protected static Date toDate(final String str, final Locale locale) {
-        for (final DateFormat format : iterable(
+        for (final DateFormat format : MultiIterator.iterable(
                 new DateFormatIterator(locale),
                 new PlainDateFormatIterator(str, locale))) {
             if (format == null) {
@@ -468,14 +471,14 @@ public abstract class DateConversionUtil {
     }
 
     /**
-     * 文字列を{@link java.sql.Date}に変換します。
+     * 文字列を{@link Timestamp}に変換します。
      *
      * @param str 文字列
-     * @return 変換された{@link java.sql.Date}
+     * @return 変換された{@link Timestamp}
      */
-    protected static java.sql.Date toSqlDateJdbcEscape(final String str) {
+    protected static Timestamp toSqlTimestampJdbcEscape(final String str) {
         try {
-            return java.sql.Date.valueOf(str);
+            return Timestamp.valueOf(str);
         } catch (final IllegalArgumentException ex) {
             return null;
         }
@@ -513,21 +516,54 @@ public abstract class DateConversionUtil {
                 buf.replace(pos, pos + 1, "dd");
             }
         }
+        if (buf.indexOf("HH") == -1) {
+            final int pos = buf.indexOf("H");
+            if (pos != -1) {
+                buf.replace(pos, pos + 1, "HH");
+            }
+        }
+        if (buf.indexOf("mm") == -1) {
+            final int pos = buf.indexOf("m");
+            if (pos != -1) {
+                buf.replace(pos, pos + 1, "mm");
+            }
+        }
+        if (buf.indexOf("ss") == -1) {
+            final int pos = buf.indexOf("s");
+            if (pos != -1) {
+                buf.replace(pos, pos + 1, "ss");
+            }
+        }
         return new String(buf);
     }
 
     /**
-     * 年4桁用の日付パターンを返します。
+     * 日付パターンを返します。
      *
      * @param locale
-     * @return 年4桁用の日付パターン
+     * @return 日付パターン
      */
-    public static String getY4Pattern(Locale locale) {
-        String pattern = getPattern(locale);
-        if (pattern.indexOf("yyyy") < 0) {
-            pattern = Strings2.replace(pattern, "yy", "yyyy");
+    public static String getPattern(Locale locale) {
+        return DateConversions.getY4Pattern(locale) + " "
+                + TimeConversions.getPattern(locale);
+    }
+
+    /**
+     * {@link Timestamp}に変換します。
+     *
+     * @param o
+     * @param pattern
+     * @return {@link Timestamp}
+     */
+    public static Timestamp toTimestamp(Object o, String pattern) {
+        if (o instanceof Timestamp) {
+            return (Timestamp) o;
         }
-        return pattern;
+        Date date = DateConversions.toDate(o, pattern);
+        if (date != null) {
+            return new Timestamp(date.getTime());
+        }
+        return null;
     }
 
     /**
@@ -565,7 +601,7 @@ public abstract class DateConversionUtil {
                 throw new VNoSuchElementException();
             }
             final int style = STYLES[index++];
-            return DateFormat.getDateInstance(style, locale);
+            return DateFormat.getDateTimeInstance(style, style, locale);
         }
 
         @Override
@@ -618,7 +654,8 @@ public abstract class DateConversionUtil {
                 throw new VNoSuchElementException();
             }
             final int style = STYLES[index++];
-            final DateFormat format = DateFormat.getDateInstance(style, locale);
+            final DateFormat format =
+                    DateFormat.getDateTimeInstance(style, style, locale);
             if (format instanceof SimpleDateFormat) {
                 final SimpleDateFormat simpleFormat = (SimpleDateFormat) format;
                 final String pattern = toPlainPattern(simpleFormat.toPattern());
@@ -634,29 +671,6 @@ public abstract class DateConversionUtil {
             throw new VUnsupportedOperationException("remove");
         }
 
-    }
-
-    /**
-     * 日付パターンを返します。
-     *
-     * @param locale
-     * @return 日付パターン
-     */
-    public static String getPattern(Locale locale) {
-        SimpleDateFormat df = (SimpleDateFormat) DateFormat.getDateInstance(
-                DateFormat.SHORT, locale);
-        String pattern = df.toPattern();
-        int index = pattern.indexOf(' ');
-        if (index > 0) {
-            pattern = pattern.substring(0, index);
-        }
-        if (pattern.indexOf("MM") < 0) {
-            pattern = Strings2.replace(pattern, "M", "MM");
-        }
-        if (pattern.indexOf("dd") < 0) {
-            pattern = Strings2.replace(pattern, "d", "dd");
-        }
-        return pattern;
     }
 
 }
