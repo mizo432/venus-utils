@@ -277,7 +277,7 @@ public final class Ints {
      *
      * <p>If you need to convert and concatenate several values (possibly even of different types),
      * use a shared {@link java.nio.ByteBuffer} instance, or use {@link
-     * com.google.common.io.ByteStreams#newDataOutput()} to get a growable buffer.
+     * ByteStreams#newDataOutput()} to get a growable buffer.
      */
     public static byte[] toByteArray(int value) {
         return new byte[]{

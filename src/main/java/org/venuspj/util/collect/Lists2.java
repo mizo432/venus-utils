@@ -39,11 +39,11 @@ public class Lists2 {
         return result;
     }
 
-    public static <E> List<E> newArrayListWithCapacity(int initialArraySize) {
+    public static <E> ArrayList<E> newArrayListWithCapacity(int initialArraySize) {
         return new ArrayList<E>(initialArraySize);
     }
 
-    public static <E> List<E> newArrayList(Iterable<? extends E> elements) {
+    public static <E> ArrayList<E> newArrayList(Iterable<? extends E> elements) {
         checkNotNull(elements);
         return (elements instanceof Collection)
                 ? new ArrayList<E>(Collections3.cast(elements))
@@ -58,6 +58,7 @@ public class Lists2 {
 
     public static <T> List<T> unmodifiableList(List<T> list) {
         return Collections.unmodifiableList(list);
+
     }
 
     public static <T> List<T> getPage(List<T> sourceList, int page, int pageSize) {
@@ -77,11 +78,13 @@ public class Lists2 {
 
     public static <E> List<E> empty() {
         return Collections.emptyList();
+
     }
 
     public static <E> void addAll(List<E> anyList, Iterable<E> iterable) {
         for (E entity : iterable)
             anyList.add(entity);
+
     }
 
     static int indexOfImpl(List<?> list, Object element) {

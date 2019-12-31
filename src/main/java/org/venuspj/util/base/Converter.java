@@ -2,6 +2,7 @@ package org.venuspj.util.base;
 
 
 import org.venuspj.util.annotations.GwtCompatible;
+import org.venuspj.util.primitives.Ints;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -45,10 +46,10 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
  *
  * <ul>
  * <li>Use a provided converter implementation, such as {@link Enums#stringConverter}, {@link
- * com.google.common.primitives.Ints#stringConverter Ints.stringConverter} or the {@linkplain
+ * org.venuspj.util.primitives.Ints#stringConverter()} or the {@linkplain
  * #reverse reverse} views of these.
  * <li>Convert between specific preset values using {@link
- * com.google.common.collect.Maps#asConverter Maps.asConverter}. For example, use this to
+ * org.venuspj.util.collect.Maps2#asConverter Maps.asConverter}. For example, use this to
  * create a "fake" converter for a unit test. It is unnecessary (and confusing) to <i>mock</i>
  * the {@code Converter} type using a mocking framework.
  * <li>Extend this class and implement its {@link #doForward} and {@link #doBackward} methods.

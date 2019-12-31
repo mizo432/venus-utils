@@ -1,4 +1,4 @@
-package org.venuspj.util.math;
+package org.venuspj.util.primitives;
 
 import org.venuspj.util.annotations.GwtIncompatible;
 import org.venuspj.util.annotations.VisibleForTesting;
@@ -18,8 +18,8 @@ import java.math.BigInteger;
  * Utilities for {@code double} primitives.
  */
 @GwtIncompatible
-final class DoubleUtils {
-    private DoubleUtils() {
+public final class Doubles {
+    private Doubles() {
     }
 
     static double nextDown(double d) {
@@ -38,16 +38,16 @@ final class DoubleUtils {
     // Double#doubleToRawLongBits(double)} spec.
     static final long SIGN_MASK = 0x8000000000000000L;
 
-    static final int SIGNIFICAND_BITS = 52;
+    public static final int SIGNIFICAND_BITS = 52;
 
     static final int EXPONENT_BIAS = 1023;
 
     /**
      * The implicit 1 bit that is omitted in significands of normal doubles.
      */
-    static final long IMPLICIT_BIT = SIGNIFICAND_MASK + 1;
+    public static final long IMPLICIT_BIT = SIGNIFICAND_MASK + 1;
 
-    static long getSignificand(double d) {
+    public static long getSignificand(double d) {
         checkArgument(isFinite(d), "not a normal value");
         int exponent = getExponent(d);
         long bits = doubleToRawLongBits(d);
@@ -55,11 +55,11 @@ final class DoubleUtils {
         return (exponent == MIN_EXPONENT - 1) ? bits << 1 : bits | IMPLICIT_BIT;
     }
 
-    static boolean isFinite(double d) {
+    public static boolean isFinite(double d) {
         return getExponent(d) <= MAX_EXPONENT;
     }
 
-    static boolean isNormal(double d) {
+    public static boolean isNormal(double d) {
         return getExponent(d) >= MIN_EXPONENT;
     }
 
@@ -67,12 +67,12 @@ final class DoubleUtils {
      * Returns x scaled by a power of 2 such that it is in the range [1, 2). Assumes x is positive,
      * normal, and finite.
      */
-    static double scaleNormalize(double x) {
+    public static double scaleNormalize(double x) {
         long significand = doubleToRawLongBits(x) & SIGNIFICAND_MASK;
         return longBitsToDouble(significand | ONE_BITS);
     }
 
-    static double bigToDouble(BigInteger x) {
+    public static double bigToDouble(BigInteger x) {
         // This is an extremely fast implementation of BigInteger.doubleValue(). JDK patch pending.
         BigInteger absX = x.abs();
         int exponent = absX.bitLength() - 1;
@@ -119,7 +119,7 @@ final class DoubleUtils {
     /**
      * Returns its argument if it is non-negative, zero if it is negative.
      */
-    static double ensureNonNegative(double value) {
+    public static double ensureNonNegative(double value) {
         checkArgument(!isNaN(value));
         if (value > 0.0) {
             return value;

@@ -7,8 +7,8 @@ import org.venuspj.util.misc.Disposables;
 
 import java.util.concurrent.ConcurrentMap;
 
-import static org.venuspj.util.collect.CollectionsUtil.newConcurrentHashMap;
-import static org.venuspj.util.collect.CollectionsUtil.putIfAbsent;
+import static org.venuspj.util.collect.Collections3.newConcurrentHashMap;
+import static org.venuspj.util.collect.Collections3.putIfAbsent;
 import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 /**

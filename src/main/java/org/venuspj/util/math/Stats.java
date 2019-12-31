@@ -4,8 +4,8 @@ import static java.lang.Double.NaN;
 import static java.lang.Double.doubleToLongBits;
 import static java.lang.Double.isNaN;
 import static org.venuspj.util.base.Preconditions.*;
-import static org.venuspj.util.math.DoubleUtils.ensureNonNegative;
-import static org.venuspj.util.math.DoubleUtils.isFinite;
+import static org.venuspj.util.primitives.Doubles.ensureNonNegative;
+import static org.venuspj.util.primitives.Doubles.isFinite;
 import static org.venuspj.util.math.StatsAccumulator.calculateNewMeanNonFinite;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
 package org.venuspj.util.lang;
 
-import org.venuspj.util.collect.CollectionsUtil;
+import org.venuspj.util.collect.Collections3;
 
 import java.lang.reflect.*;
 import java.util.Collection;
@@ -54,7 +54,7 @@ public abstract class Genericses {
      */
     public static Class<?> getRawClass(final Type type) {
         if (type instanceof Class) {
-            return Class.class.cast(type);
+            return (Class) type;
         }
         if (type instanceof ParameterizedType) {
             final ParameterizedType parameterizedType =
@@ -68,7 +68,7 @@ public abstract class Genericses {
         }
         if (type instanceof GenericArrayType) {
             final GenericArrayType genericArrayType =
-                    GenericArrayType.class.cast(type);
+                    (GenericArrayType) type;
             final Class<?> rawClass =
                     getRawClass(genericArrayType.getGenericComponentType());
             return Array.newInstance(rawClass, 0).getClass();
@@ -95,11 +95,10 @@ public abstract class Genericses {
      */
     public static Type[] getGenericParameters(final Type type) {
         if (type instanceof ParameterizedType) {
-            return ParameterizedType.class.cast(type).getActualTypeArguments();
+            return ((ParameterizedType) type).getActualTypeArguments();
         }
         if (type instanceof GenericArrayType) {
-            return getGenericParameters(GenericArrayType.class
-                    .cast(type)
+            return getGenericParameters(((GenericArrayType) type)
                     .getGenericComponentType());
         }
         return null;
@@ -140,7 +139,7 @@ public abstract class Genericses {
         if (!(type instanceof GenericArrayType)) {
             return null;
         }
-        return GenericArrayType.class.cast(type).getGenericComponentType();
+        return ((GenericArrayType) type).getGenericComponentType();
     }
 
     /**
@@ -234,7 +233,7 @@ public abstract class Genericses {
         assertArgumentNotNull("clazz", clazz);
 
         final Map<TypeVariable<?>, Type> map =
-                CollectionsUtil.newLinkedHashMap();
+                Collections3.newLinkedHashMap();
 
         final TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
         for (final TypeVariable<?> typeParameter : typeParameters) {
@@ -295,10 +294,9 @@ public abstract class Genericses {
                                               final Map<TypeVariable<?>, Type> map) {
         if (type instanceof ParameterizedType) {
             final ParameterizedType parameterizedType =
-                    ParameterizedType.class.cast(type);
+                    (ParameterizedType) type;
             final TypeVariable<?>[] typeVariables =
-                    GenericDeclaration.class
-                            .cast(parameterizedType.getRawType())
+                    ((GenericDeclaration) parameterizedType.getRawType())
                             .getTypeParameters();
             final Type[] actualTypes =
                     parameterizedType.getActualTypeArguments();
@@ -327,16 +325,14 @@ public abstract class Genericses {
     public static Class<?> getActualClass(final Type type,
                                           final Map<TypeVariable<?>, Type> map) {
         if (type instanceof Class) {
-            return Class.class.cast(type);
+            return (Class) type;
         }
         if (type instanceof ParameterizedType) {
-            return getActualClass(ParameterizedType.class
-                    .cast(type)
+            return getActualClass(((ParameterizedType) type)
                     .getRawType(), map);
         }
         if (type instanceof WildcardType) {
-            return getActualClass(WildcardType.class
-                    .cast(type)
+            return getActualClass(((WildcardType) type)
                     .getUpperBounds()[0], map);
         }
         if (type instanceof TypeVariable) {
@@ -348,7 +344,7 @@ public abstract class Genericses {
         }
         if (type instanceof GenericArrayType) {
             final GenericArrayType genericArrayType =
-                    GenericArrayType.class.cast(type);
+                    (GenericArrayType) type;
             final Class<?> componentClass =
                     getActualClass(genericArrayType.getGenericComponentType(), map);
             return Array.newInstance(componentClass, 0).getClass();
@@ -377,8 +373,7 @@ public abstract class Genericses {
         if (!(type instanceof GenericArrayType)) {
             return null;
         }
-        return getActualClass(GenericArrayType.class
-                .cast(type)
+        return getActualClass(((GenericArrayType) type)
                 .getGenericComponentType(), map);
     }
 

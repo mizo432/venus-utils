@@ -1,11 +1,10 @@
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
-import org.venuspj.util.text.DecimalFormatSymbolsUtil;
+import org.venuspj.util.text.AbstractDecimalFormatSymbols;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 /**
@@ -118,7 +117,7 @@ public abstract class NumberConversionUtil {
      * @return グルーピング用のセパレータ
      */
     public static String findGroupingSeparator(final Locale locale) {
-        final DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
+        final java.text.DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
         return Character.toString(symbol.getGroupingSeparator());
     }
 
@@ -129,17 +128,17 @@ public abstract class NumberConversionUtil {
      * @return 数値のセパレータ
      */
     public static String findDecimalSeparator(final Locale locale) {
-        final DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
+        final java.text.DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
         return Character.toString(symbol.getDecimalSeparator());
     }
 
-    private static DecimalFormatSymbols getDecimalFormatSymbols(
+    private static java.text.DecimalFormatSymbols getDecimalFormatSymbols(
             final Locale locale) {
-        DecimalFormatSymbols symbol;
+        java.text.DecimalFormatSymbols symbol;
         if (locale != null) {
-            symbol = DecimalFormatSymbolsUtil.getDecimalFormatSymbols(locale);
+            symbol = AbstractDecimalFormatSymbols.getDecimalFormatSymbols(locale);
         } else {
-            symbol = DecimalFormatSymbolsUtil.getDecimalFormatSymbols();
+            symbol = AbstractDecimalFormatSymbols.getDecimalFormatSymbols();
         }
         return symbol;
     }

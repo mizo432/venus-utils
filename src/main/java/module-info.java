@@ -13,5 +13,6 @@ module venus.utils {
     exports org.venuspj.util.uuidProvider;
     requires java.sql;
     requires java.desktop;
+//    requires kotlin.stdlib;
 
 }

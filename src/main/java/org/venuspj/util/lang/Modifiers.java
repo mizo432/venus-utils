@@ -65,6 +65,7 @@ public abstract class Modifiers {
      */
     public static boolean isPublic(final int modifier) {
         return Modifier.isPublic(modifier);
+
     }
 
     /**
@@ -87,6 +88,7 @@ public abstract class Modifiers {
      */
     public static boolean isAbstract(final int modifier) {
         return Modifier.isAbstract(modifier);
+
     }
 
     /**
@@ -97,6 +99,7 @@ public abstract class Modifiers {
      */
     public static boolean isStatic(final int modifier) {
         return Modifier.isStatic(modifier);
+
     }
 
     /**
@@ -107,6 +110,7 @@ public abstract class Modifiers {
      */
     public static boolean isFinal(final int modifier) {
         return Modifier.isFinal(modifier);
+
     }
 
     /**
@@ -117,6 +121,7 @@ public abstract class Modifiers {
      */
     public static boolean isFinal(final Method method) {
         return isFinal(method.getModifiers());
+
     }
 
     /**
@@ -128,6 +133,7 @@ public abstract class Modifiers {
      */
     public static boolean isTransient(final Field field) {
         return isTransient(field.getModifiers());
+
     }
 
     /**
@@ -138,6 +144,7 @@ public abstract class Modifiers {
      */
     public static boolean isTransient(final int modifier) {
         return Modifier.isTransient(modifier);
+
     }
 
     /**

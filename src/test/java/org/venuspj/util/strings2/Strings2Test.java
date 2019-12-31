@@ -3,6 +3,8 @@ package org.venuspj.util.strings2;
 import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class Strings2Test {
     public static class IsEmptyTest {
         @Test
@@ -300,5 +302,79 @@ public class Strings2Test {
             Strings2.repeat("111", Integer.MAX_VALUE);
 
         }
+    }
+
+    public static class LtrimTest{
+
+        @Test
+        public void doLtrim1(){
+            String actual = Strings2.ltrim("abcdef","abc");
+            assertThat(actual)
+                    .isEqualTo("def");
+        }
+        @Test
+        public void doLtrim2(){
+            String actual = Strings2.ltrim("abcabcdef","abc");
+            assertThat(actual)
+                    .isEqualTo("def");
+        }
+        @Test
+        public void doLtrim3(){
+            String actual = Strings2.ltrim("abczabcdef","abc");
+            assertThat(actual)
+                    .isEqualTo("zabcdef");
+        }
+        @Test
+        public void doLtrim4(){
+            String actual = Strings2.ltrim("abc","abc");
+            assertThat(actual)
+                    .isEqualTo("");
+        }
+        @Test
+        public void doLtrim5(){
+            String actual = Strings2.ltrim("ab","abc");
+            assertThat(actual)
+                    .isEqualTo("ab");
+        }
+
+    }
+
+    public static class RtrimTest{
+
+        @Test
+        public void doRtrim1(){
+            String actual = Strings2.rtrim("abcdef","def");
+            assertThat(actual)
+                    .isEqualTo("abc");
+        }
+
+        @Test
+        public void doRtrim2(){
+            String actual = Strings2.rtrim("abcdefdef","def");
+            assertThat(actual)
+                    .isEqualTo("abc");
+        }
+
+        @Test
+        public void doRtrim3(){
+            String actual = Strings2.rtrim("abcdefzdef","def");
+            assertThat(actual)
+                    .isEqualTo("abcdefz");
+        }
+
+        @Test
+        public void doRtrim4(){
+            String actual = Strings2.rtrim("def","def");
+            assertThat(actual)
+                    .isEqualTo("");
+        }
+
+        @Test
+        public void doRtrim5(){
+            String actual = Strings2.rtrim("de","def");
+            assertThat(actual)
+                    .isEqualTo("de");
+        }
+
     }
 }

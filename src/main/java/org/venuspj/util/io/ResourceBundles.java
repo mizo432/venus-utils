@@ -9,7 +9,7 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 /**
  * {@link ResourceBundle}用のユーティリティクラスです。
  */
-public abstract class ResourceBundleUtil {
+public abstract class ResourceBundles {
 
     /**
      * バンドルを返します。 見つからない場合は、<code>null</code>を返します。
