@@ -33,5 +33,17 @@ public class Arrays2<T> {
      */
     public static Object[] asArray(final Object... elements) {
         return elements;
+
+    }
+
+    public static <T> T firstElement(T... elements) {
+        if (isEmpty(elements))
+            throw new IndexOutOfBoundsException();
+
+        return elements[0];
+    }
+
+    public static <T> boolean isEmpty(T... elements) {
+        return elements.length == 0;
     }
 }

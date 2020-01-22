@@ -33,9 +33,11 @@ public class Lists2 {
     }
 
     @SafeVarargs
-    public static <T> List<T> newArrayList(T... args) {
-        List<T> result;
-        result = newArrayList(Arrays.asList(args));
+    public static <T> ArrayList<T> newArrayList(T... args) {
+        ArrayList<T> result;
+        result = newArrayList();
+        Collections3.addAll(result, args);
+
         return result;
     }
 
@@ -43,17 +45,19 @@ public class Lists2 {
         return new ArrayList<E>(initialArraySize);
     }
 
-    public static <E> ArrayList<E> newArrayList(Iterable<? extends E> elements) {
-        checkNotNull(elements);
-        return (elements instanceof Collection)
-                ? new ArrayList<E>(Collections3.cast(elements))
-                : newArrayList(elements.iterator());
+    public static <E> ArrayList<E> newArrayList(Iterable<? extends E> elements, E newElement) {
+        ArrayList<E> result = newArrayList(elements.iterator());
+        result.add(newElement);
+
+        return result;
     }
 
     public static <E> ArrayList<E> newArrayList(Iterator<? extends E> elements) {
+        checkNotNull(elements);
         ArrayList<E> list = newArrayList();
         Iterators.addAll(list, elements);
         return list;
+
     }
 
     public static <T> List<T> unmodifiableList(List<T> list) {
@@ -219,6 +223,13 @@ public class Lists2 {
      */
     public static <E> List<E> asList(E first, E second, E[] rest) {
         return new TwoPlusArrayList<>(first, second, rest);
+    }
+
+    public static <T> T firstItemOfIndex(List<T> objects) {
+        if (objects.isEmpty()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return objects.get(0);
     }
 
     /**

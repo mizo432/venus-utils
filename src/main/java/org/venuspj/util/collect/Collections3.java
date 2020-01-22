@@ -1285,4 +1285,17 @@ public final class Collections3 {
      */
     public static boolean isNotEmpty(final Map<?, ?> map) {
         return !isEmpty(map);
-    }}
+    }
+
+    public static <T> T firstItemOfIndex(Collection<T> objects) {
+        if (objects.isEmpty()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return objects.iterator().next();
+
+    }
+
+    public static <T> boolean addAll(Collection<T> c, T[] elements) {
+        return Collections.addAll(c, elements);
+    }
+}
