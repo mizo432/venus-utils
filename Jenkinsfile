@@ -48,19 +48,19 @@ pipeline {
                 // 並列処理の場合はparallelメソッドを使う
                 parallel(
                     'static analysis' : {
-                    gradlew 'check -x test'
+                        gradlew 'check -x test'
                         // dirメソッドでカレントディレクトリを指定できる
 //                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/soptbugs/*.xml', unHealthy: ''
 //                        pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd/*.xml', unHealthy: ''
 //                        dry canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/cpd/*.xml', unHealthy: ''
-                        archiveArtifacts "**/spotbugs/*.xml"
+                        recordIssues enabledForFailure: true, tool: spotBugs(pattern: '**/build/reports/spotbugs/main.xml')
+                        recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/build/reports/pmd/main.xml')
+                        recordIssues enabledForFailure: true, tools: [cpd(pattern: '**/build/reports/cpd/cpd.xml', reportEncoding: 'UTF-8', skipSymbolicLinks: true)])
                         archiveArtifacts "**/pmd/*.xml"
                         archiveArtifacts "**/cpd/*.xml"
                     },
                     'task-scan': {
                         recordIssues(tools: [taskScanner(highTags: 'FIXME', ignoreCase: true, includePattern: '**/src/main/java/**/*.java', lowTags: 'XXX', normalTags: 'TODO')])
-                        recordIssues enabledForFailure: true, tool: spotBugs(pattern: '**/build/reports/spotbugs/main.xml')
-                        recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/build/reports/pmd/main.xml')
                     },
                     'step-count': {
                             // レポート作成
