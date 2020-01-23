@@ -50,9 +50,6 @@ pipeline {
                     'static analysis' : {
                         gradlew 'check -x test'
                         // dirメソッドでカレントディレクトリを指定できる
-//                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/soptbugs/*.xml', unHealthy: ''
-//                        pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd/*.xml', unHealthy: ''
-//                        dry canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/cpd/*.xml', unHealthy: ''
                         recordIssues enabledForFailure: true, tools: [spotBugs(pattern: '**/build/reports/spotbugs/main.xml')]
                         recordIssues enabledForFailure: true, tools: [pmdParser(pattern: '**/build/reports/pmd/main.xml')]
                         recordIssues enabledForFailure: true, tools: [cpd(pattern: '**/build/reports/cpd/cpd.xml', reportEncoding: 'UTF-8', skipSymbolicLinks: true)]
@@ -89,14 +86,14 @@ pipeline {
                 echo 'JacocoReportアーカイブ 終了'
             }
         }
-//        stage('lib-release') {
-//            when {
-//                branch 'master'
-//            }
-//            steps {
-//                gradlew 'release -x test -Prelease.useAutomaticVersion=true'
-//            }
-//        }
+        stage('lib-release') {
+            when {
+                branch 'master'
+            }
+            steps {
+                gradlew 'release -x test -Prelease.useAutomaticVersion=true'
+            }
+        }
 
 
     }
