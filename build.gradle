@@ -4,7 +4,7 @@ buildscript {
         assertJVersion = '3.11.1'
         logbackVersion = '1.1.11'
         slf4jVersion = '1.7.25'
-        junitVersion = "4.12"
+        junitVersion = "4.13"
         findbugsAnnotationsVersion = '3.0.1'
         guavaVersion = '26.0-jre'
         // build paramaters
@@ -57,12 +57,12 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
     compileOnly group: 'com.google.code.findbugs', name: 'annotations', version: "${findbugsAnnotationsVersion}"
-    testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
-    testCompile(group: 'junit', name: 'junit', version: "${junitVersion}")
-    testRuntime group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
-    testRuntime group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
+    testImplementation(group: 'junit', name: 'junit', version: "${junitVersion}")
+    testImplementation group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
 //    compile group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
 
 
