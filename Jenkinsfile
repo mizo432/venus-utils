@@ -50,24 +50,29 @@ pipeline {
                     'static analysis' : {
                     gradlew 'check -x test'
                         // dirメソッドでカレントディレクトリを指定できる
-                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/soptbugs/*.xml', unHealthy: ''
-                        pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd/*.xml', unHealthy: ''
-                        dry canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/cpd/*.xml', unHealthy: ''
+//                        findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/soptbugs/*.xml', unHealthy: ''
+//                        pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/pmd/*.xml', unHealthy: ''
+//                        dry canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/cpd/*.xml', unHealthy: ''
                         archiveArtifacts "**/spotbugs/*.xml"
                         archiveArtifacts "**/pmd/*.xml"
                         archiveArtifacts "**/cpd/*.xml"
                     },
                     'task-scan': {
-                        step([
-                            $class: 'TasksPublisher',
-                            pattern: '**/*.java',
-                            // 集計対象を検索するときに大文字小文字を区別するか
-                            ignoreCase: false,
-                            // 優先度別に集計対象の文字列を指定できる
-                            // 複数指定する場合はカンマ区切りの文字列を指定する
-                            high: 'FIXME,XXX',
-                            normal: 'TODO',
-                        ])
+                        recordIssues(tools: [taskScanner(highTags: 'FIXME', ignoreCase: true, includePattern: '**/src/main/java/**/*.java', lowTags: 'XXX', normalTags: 'TODO')])
+                        recordIssues enabledForFailure: true, tool: spotBugs(pattern: '**/build/reports/spotbugs/main.xml')
+                        recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/build/reports/pmd/main.xml')
+                    },
+                    'step-count': {
+                            // レポート作成
+                            stepcounter outputFile: "stepcount.xls", outputFormat: 'excel', settings: [
+                                    [key: 'Java', filePattern: "**/${javaDir}/**/*.java"],
+                                    [key: 'SQL', filePattern: "**/${resourcesDir}/**/*.sql"],
+                                    [key: 'HTML', filePattern: "**/${resourcesDir}/**/*.html"],
+                                    [key: 'JS', filePattern: "**/${resourcesDir}/**/*.js"],
+                                    [key: 'CSS', filePattern: "**/${resourcesDir}/**/*.css"]
+                            ]
+                            // 一応エクセルファイルも成果物として保存する
+                            archiveArtifacts allowEmptyArchive: true, artifacts: "stepcount.xls"
                     }
                 )
             }
