@@ -1,6 +1,6 @@
 package org.venuspj.util.message;
 
-import org.venuspj.util.io.ResourceBundleUtil;
+import org.venuspj.util.io.ResourceBundles;
 import org.venuspj.util.misc.Disposable;
 import org.venuspj.util.misc.Disposables;
 import org.venuspj.util.strings2.Strings2;
@@ -96,7 +96,7 @@ public abstract class MessageFormatter {
                     messageCode.charAt(0)
                             + messageCode.substring(length - CODE_NUMBER_LENGTH);
             final String pattern =
-                    ResourceBundleUtil.getString(resourceBundle, key);
+                    ResourceBundles.getString(resourceBundle, key);
             if (pattern != null) {
                 return pattern;
             }
@@ -126,7 +126,7 @@ public abstract class MessageFormatter {
         if (!initialized) {
             initialize();
         }
-        return ResourceBundleUtil.getBundle(systemName + MESSAGES);
+        return ResourceBundles.getBundle(systemName + MESSAGES);
     }
 
     /**

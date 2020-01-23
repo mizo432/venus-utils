@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 /**
  * {@link BigDecimal}用の変換ユーティリティです。
  */
-public abstract class BigDecimalConversionUtil {
+public abstract class BigDecimalConversions {
 
     /**
      * {@link BigDecimal}に変換します。

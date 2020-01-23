@@ -57,6 +57,7 @@ public final class Functions {
         @Override
         public String toString() {
             return "Functions.toStringFunction()";
+
         }
     }
 
@@ -99,6 +100,7 @@ public final class Functions {
      */
     public static <K, V> Function<K, V> forMap(Map<K, V> map) {
         return new FunctionForMapNoDefault<>(map);
+
     }
 
     /**
@@ -116,6 +118,7 @@ public final class Functions {
      */
     public static <K, V> Function<K, V> forMap(Map<K, ? extends V> map,  V defaultValue) {
         return new ForMapWithDefault<>(map, defaultValue);
+
     }
 
     private static class FunctionForMapNoDefault<K, V> implements Function<K, V>, Serializable {
@@ -186,6 +189,7 @@ public final class Functions {
         @Override
         public String toString() {
             return "Functions.forMap(" + map + ", defaultValue=" + defaultValue + ")";
+
         }
 
         private static final long serialVersionUID = 0;
@@ -205,6 +209,7 @@ public final class Functions {
      */
     public static <A, B, C> Function<A, C> compose(Function<B, C> g, Function<A, ? extends B> f) {
         return new FunctionComposition<>(g, f);
+
     }
 
     private static class FunctionComposition<A, B, C> implements Function<A, C>, Serializable {
@@ -214,6 +219,7 @@ public final class Functions {
         public FunctionComposition(Function<B, C> g, Function<A, ? extends B> f) {
             this.g = checkNotNull(g);
             this.f = checkNotNull(f);
+
         }
 
         @Override
@@ -228,16 +234,19 @@ public final class Functions {
                 return f.equals(that.f) && g.equals(that.g);
             }
             return false;
+
         }
 
         @Override
         public int hashCode() {
             return f.hashCode() ^ g.hashCode();
+
         }
 
         @Override
         public String toString() {
             return g + "(" + f + ")";
+
         }
 
         private static final long serialVersionUID = 0;
@@ -277,6 +286,7 @@ public final class Functions {
                 return predicate.equals(that.predicate);
             }
             return false;
+
         }
 
         @Override

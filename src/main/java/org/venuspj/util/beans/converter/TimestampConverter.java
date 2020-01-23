@@ -1,9 +1,8 @@
 package org.venuspj.util.beans.converter;
 
-import org.venuspj.util.beans.Converter;
 import org.venuspj.util.beans.EmptyRuntimeException;
-import org.venuspj.util.convert.StringConversionUtil;
-import org.venuspj.util.convert.TimestampConversionUtil;
+import org.venuspj.util.convert.StringConversions;
+import org.venuspj.util.convert.TimestampConversions;
 import org.venuspj.util.strings2.Strings2;
 
 import java.util.Date;
@@ -35,11 +34,11 @@ public class TimestampConverter implements Converter {
                 .isEmpty(value)) {
             return null;
         }
-        return TimestampConversionUtil.toTimestamp(value, pattern);
+        return TimestampConversions.toTimestamp(value, pattern);
     }
 
     public String getAsString(Object value) {
-        return StringConversionUtil.toString((Date) value, pattern);
+        return StringConversions.toString((Date) value, pattern);
     }
 
     public boolean isTarget(Class clazz) {

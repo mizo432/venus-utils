@@ -262,4 +262,57 @@ public final class Strings2 {
         return new String(chars);
     }
 
+    /**
+     * 左側の空白を削ります。
+     *
+     * @param text テキスト
+     * @return 結果の文字列
+     */
+    public static final String ltrim(final String text) {
+        return ltrim(text, null);
+    }
+
+    /**
+     * 左側の指定した文字列を削ります。
+     *
+     * @param text     テキスト
+     * @param trimText 削るテキスト
+     * @return 結果の文字列
+     */
+    public static final String ltrim(final String text, String trimText) {
+        if (text == null) {
+            return null;
+        }
+        if (trimText == null) {
+            trimText = " ";
+        }
+        if (text.length() < trimText.length())
+            return text;
+        if (text.startsWith(trimText))
+            return ltrim(text.substring(trimText.length()),trimText);
+        return text;
+    }
+
+    /**
+     * 右側の指定した文字列を削ります。
+     *
+     * @param text     テキスト
+     * @param trimText 削る文字列
+     * @return 結果の文字列
+     */
+    public static String rtrim(final String text, String trimText) {
+        if (text == null) {
+            return null;
+        }
+        if (trimText == null) {
+            trimText = " ";
+        }
+        if (text.length() < trimText.length())
+            return text;
+        if (text.endsWith(trimText))
+            return rtrim(text.substring(0,text.length() - trimText.length()),trimText);
+
+        return text;
+
+    }
 }

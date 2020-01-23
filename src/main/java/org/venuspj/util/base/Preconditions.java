@@ -3,6 +3,10 @@ package org.venuspj.util.base;
 
 
 import org.venuspj.util.annotations.GwtCompatible;
+import org.venuspj.util.functor.Command;
+
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static org.venuspj.util.base.Strings.lenientFormat;
 
@@ -111,6 +115,29 @@ public final class Preconditions {
         if (!expression) {
             throw new IllegalArgumentException();
         }
+    }
+    public static <E extends RuntimeException> void checkArgument(boolean expression, Supplier<E> aSupplier) {
+        if (!expression) {
+            throw aSupplier.get();
+        }
+    }
+
+    public static void checkArgument(boolean expression, Command aCommand) {
+        if (!expression) {
+            aCommand.execute();
+        }
+    }
+    public static <T, E extends RuntimeException > T checkNotNull(T reference, Supplier<E> aSupplier) {
+        if (reference == null) {
+            throw aSupplier.get();
+        }
+        return reference;
+    }
+    public static <T> T checkNotNull(T reference, Command aCommand) {
+        if (reference == null) {
+            aCommand.execute();
+        }
+        return reference;
     }
 
     /**
@@ -856,7 +883,6 @@ public final class Preconditions {
      * @throws NullPointerException if {@code reference} is null
      * @see Verify#verifyNotNull Verify.verifyNotNull()
      */
-
     public static <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();

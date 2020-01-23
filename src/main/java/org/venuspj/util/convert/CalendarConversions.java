@@ -9,7 +9,7 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 /**
  * {@link Calendar}用の変換ユーティリティです。
  */
-public abstract class CalendarConversionUtil {
+public abstract class CalendarConversions {
 
     /**
      * {@link Calendar}に変換します。
@@ -32,7 +32,7 @@ public abstract class CalendarConversionUtil {
         if (o instanceof Calendar) {
             return (Calendar) o;
         }
-        final java.util.Date date = DateConversionUtil.toDate(o, pattern);
+        final java.util.Date date = DateConversions.toDate(o, pattern);
         if (date != null) {
             final Calendar cal = Calendar.getInstance();
             cal.setTime(date);

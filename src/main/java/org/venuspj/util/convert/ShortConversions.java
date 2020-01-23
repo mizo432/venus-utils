@@ -1,14 +1,14 @@
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
-import org.venuspj.util.text.DecimalFormatUtil;
+import org.venuspj.util.text.DecimalFormats;
 
 import java.text.SimpleDateFormat;
 
 /**
  * {@link Short}用の変換ユーティリティです。
  */
-public abstract class ShortConversionUtil {
+public abstract class ShortConversions {
 
     /**
      * {@link Short}に変換します。
@@ -53,7 +53,7 @@ public abstract class ShortConversionUtil {
         if (Strings2.isEmpty(s)) {
             return null;
         }
-        return Short.valueOf(DecimalFormatUtil.normalize(s));
+        return Short.valueOf(DecimalFormats.normalize(s));
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class ShortConversionUtil {
         if (Strings2.isEmpty(s)) {
             return 0;
         }
-        return Short.parseShort(DecimalFormatUtil.normalize(s));
+        return Short.parseShort(DecimalFormats.normalize(s));
     }
 
 }

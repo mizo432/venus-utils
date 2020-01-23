@@ -107,7 +107,7 @@ public abstract class Optional<T> implements Serializable {
      */
     public static <T> Optional<T> fromJavaUtil(
             java.util.Optional<T> javaUtilOptional) {
-        return (javaUtilOptional == null) ? null : fromNullable(javaUtilOptional.orElse(null));
+        return (!javaUtilOptional.isPresent()) ? null : fromNullable(javaUtilOptional.orElse(null));
     }
 
     /**

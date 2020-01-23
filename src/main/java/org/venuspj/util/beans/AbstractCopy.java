@@ -1,13 +1,12 @@
 package org.venuspj.util.beans;
 
 
-import org.venuspj.util.convert.DateConversionUtil;
+import org.venuspj.util.convert.*;
 import org.venuspj.util.beans.converter.*;
 import org.venuspj.util.beans.factory.BeanDescFactory;
-import org.venuspj.util.convert.TimeConversionUtil;
-import org.venuspj.util.convert.TimestampConversionUtil;
 
 import java.sql.Time;
+import java.time.*;
 import java.util.*;
 
 import static org.venuspj.util.collect.Lists2.newArrayList;
@@ -29,19 +28,25 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      * 日付用のデフォルトコンバータです。
      */
     protected static final Converter DEFAULT_DATE_CONVERTER = new DateConverter(
-            DateConversionUtil.getY4Pattern(Locale.getDefault()));
+            DateConversions.getY4Pattern(Locale.getDefault()));
 
     /**
      * 日時用のデフォルトコンバータです。
      */
     protected static final Converter DEFAULT_TIMESTAMP_CONVERTER = new DateConverter(
-            TimestampConversionUtil.getPattern(Locale.getDefault()));
+            TimestampConversions.getPattern(Locale.getDefault()));
 
     /**
      * 時間用のデフォルトコンバータです。
      */
     protected static final Converter DEFAULT_TIME_CONVERTER = new DateConverter(
-            TimeConversionUtil.getPattern(Locale.getDefault()));
+            TimeConversions.getPattern(Locale.getDefault()));
+
+    protected static final Converter DEFAULT_LOCAL_DATE_CONVERTER = new LocalDateConverter(LocalDateConversions.getPattern(Locale.getDefault()));
+    protected static final Converter DEFAULT_LOCAL_DATETIME_CONVERTER = new LocalDateTimeConverter(LocalDateConversions.getPattern(Locale.getDefault()));
+    protected static final Converter DEFAULT_LOCAL_TIME_CONVERTER = new LocalTimeConverter(LocalTimeConversions.getPattern(Locale.getDefault()));
+    protected static final Converter DEFAULT_YEAR_MONTH_CONVERTER = new YearMonthConverter(YearMonthConversions.getPattern(Locale.getDefault()));
+    protected static final Converter DEFAULT_MONTH_DAY_CONVERTER = new MonthDayConverter(MonthDayConversions.getPattern(Locale.getDefault()));
 
     /**
      * 操作の対象に含めるプロパティ名の配列です。
@@ -510,15 +515,29 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      * @return コンバータ
      */
     protected Converter findDefaultConverter(Class<?> clazz) {
-        if (clazz == java.sql.Date.class) {
+        if(clazz == LocalDate.class)
+            return DEFAULT_LOCAL_DATE_CONVERTER;
+
+        if(clazz == LocalDateTime.class)
+            return DEFAULT_LOCAL_DATETIME_CONVERTER;
+
+        if(clazz == LocalTime.class)
+            return DEFAULT_LOCAL_TIME_CONVERTER;
+
+        if(clazz == YearMonth.class)
+            return DEFAULT_YEAR_MONTH_CONVERTER;
+
+        if(clazz == MonthDay.class)
+            return DEFAULT_MONTH_DAY_CONVERTER;
+
+        if (clazz == java.sql.Date.class)
             return DEFAULT_DATE_CONVERTER;
-        }
-        if (clazz == Time.class) {
+
+        if (clazz == Time.class)
             return DEFAULT_TIME_CONVERTER;
-        }
-        if (Date.class.isAssignableFrom(clazz)) {
+
+        if (Date.class.isAssignableFrom(clazz))
             return DEFAULT_TIMESTAMP_CONVERTER;
-        }
         return null;
     }
 

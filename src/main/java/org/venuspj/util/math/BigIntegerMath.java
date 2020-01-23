@@ -4,6 +4,7 @@ import org.venuspj.util.annotations.Beta;
 import org.venuspj.util.annotations.GwtCompatible;
 import org.venuspj.util.annotations.GwtIncompatible;
 import org.venuspj.util.annotations.VisibleForTesting;
+import org.venuspj.util.primitives.Doubles;
 
 import static java.math.RoundingMode.CEILING;
 import static java.math.RoundingMode.FLOOR;
@@ -267,7 +268,7 @@ public final class BigIntegerMath {
         if (log2 < Double.MAX_EXPONENT) {
             sqrt0 = sqrtApproxWithDoubles(x);
         } else {
-            int shift = (log2 - DoubleUtils.SIGNIFICAND_BITS) & ~1; // even!
+            int shift = (log2 - Doubles.SIGNIFICAND_BITS) & ~1; // even!
             /*
              * We have that x / 2^shift < 2^54. Our initial approximation to sqrtFloor(x) will be
              * 2^(shift/2) * sqrtApproxWithDoubles(x / 2^shift).
@@ -287,7 +288,7 @@ public final class BigIntegerMath {
 
     @GwtIncompatible
     private static BigInteger sqrtApproxWithDoubles(BigInteger x) {
-        return DoubleMath.roundToBigInteger(Math.sqrt(DoubleUtils.bigToDouble(x)), HALF_EVEN);
+        return DoubleMath.roundToBigInteger(Math.sqrt(Doubles.bigToDouble(x)), HALF_EVEN);
     }
 
     /**

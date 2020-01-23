@@ -1,11 +1,10 @@
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
-import org.venuspj.util.text.DecimalFormatSymbolsUtil;
+import org.venuspj.util.text.AbstractDecimalFormatSymbols;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 /**
@@ -22,21 +21,21 @@ public abstract class NumberConversionUtil {
      */
     public static Object convertNumber(final Class<?> type, final Object o) {
         if (type == Integer.class) {
-            return IntegerConversionUtil.toInteger(o);
+            return IntegerConversions.toInteger(o);
         } else if (type == BigDecimal.class) {
-            return BigDecimalConversionUtil.toBigDecimal(o);
+            return BigDecimalConversions.toBigDecimal(o);
         } else if (type == Double.class) {
-            return DoubleConversionUtil.toDouble(o);
+            return DoubleConversions.toDouble(o);
         } else if (type == Long.class) {
-            return LongConversionUtil.toLong(o);
+            return LongConversions.toLong(o);
         } else if (type == Float.class) {
-            return FloatConversionUtil.toFloat(o);
+            return FloatConversions.toFloat(o);
         } else if (type == Short.class) {
-            return ShortConversionUtil.toShort(o);
+            return ShortConversions.toShort(o);
         } else if (type == BigInteger.class) {
-            return BigIntegerConversionUtil.toBigInteger(o);
+            return BigIntegerConversions.toBigInteger(o);
         } else if (type == Byte.class) {
-            return ByteConversionUtil.toByte(o);
+            return ByteConversions.toByte(o);
         }
         return o;
     }
@@ -51,43 +50,43 @@ public abstract class NumberConversionUtil {
     public static Object convertPrimitiveWrapper(final Class<?> type,
                                                  final Object o) {
         if (type == int.class) {
-            final Integer i = IntegerConversionUtil.toInteger(o);
+            final Integer i = IntegerConversions.toInteger(o);
             if (i != null) {
                 return i;
             }
             return 0;
         } else if (type == double.class) {
-            final Double d = DoubleConversionUtil.toDouble(o);
+            final Double d = DoubleConversions.toDouble(o);
             if (d != null) {
                 return d;
             }
             return (double) 0;
         } else if (type == long.class) {
-            final Long l = LongConversionUtil.toLong(o);
+            final Long l = LongConversions.toLong(o);
             if (l != null) {
                 return l;
             }
             return 0L;
         } else if (type == float.class) {
-            final Float f = FloatConversionUtil.toFloat(o);
+            final Float f = FloatConversions.toFloat(o);
             if (f != null) {
                 return f;
             }
             return (float) 0;
         } else if (type == short.class) {
-            final Short s = ShortConversionUtil.toShort(o);
+            final Short s = ShortConversions.toShort(o);
             if (s != null) {
                 return s;
             }
             return (short) 0;
         } else if (type == boolean.class) {
-            final Boolean b = BooleanConversionUtil.toBoolean(o);
+            final Boolean b = BooleanConversions.toBoolean(o);
             if (b != null) {
                 return b;
             }
             return Boolean.FALSE;
         } else if (type == byte.class) {
-            final Byte b = ByteConversionUtil.toByte(o);
+            final Byte b = ByteConversions.toByte(o);
             if (b != null) {
                 return b;
             }
@@ -118,7 +117,7 @@ public abstract class NumberConversionUtil {
      * @return グルーピング用のセパレータ
      */
     public static String findGroupingSeparator(final Locale locale) {
-        final DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
+        final java.text.DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
         return Character.toString(symbol.getGroupingSeparator());
     }
 
@@ -129,17 +128,17 @@ public abstract class NumberConversionUtil {
      * @return 数値のセパレータ
      */
     public static String findDecimalSeparator(final Locale locale) {
-        final DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
+        final java.text.DecimalFormatSymbols symbol = getDecimalFormatSymbols(locale);
         return Character.toString(symbol.getDecimalSeparator());
     }
 
-    private static DecimalFormatSymbols getDecimalFormatSymbols(
+    private static java.text.DecimalFormatSymbols getDecimalFormatSymbols(
             final Locale locale) {
-        DecimalFormatSymbols symbol;
+        java.text.DecimalFormatSymbols symbol;
         if (locale != null) {
-            symbol = DecimalFormatSymbolsUtil.getDecimalFormatSymbols(locale);
+            symbol = AbstractDecimalFormatSymbols.getDecimalFormatSymbols(locale);
         } else {
-            symbol = DecimalFormatSymbolsUtil.getDecimalFormatSymbols();
+            symbol = AbstractDecimalFormatSymbols.getDecimalFormatSymbols();
         }
         return symbol;
     }

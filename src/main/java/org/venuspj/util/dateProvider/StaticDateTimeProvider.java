@@ -23,11 +23,13 @@ public class StaticDateTimeProvider extends DateProvider {
 
     private void setLocalDateTime(LocalDateTime aLocalDateTime) {
         StaticDateTimeProvider.localDateTime.set(aLocalDateTime);
+
     }
 
     @Override
     protected LocalDateTime now() {
         return localDateTime.get();
+        
     }
 
 }

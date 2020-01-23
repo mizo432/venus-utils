@@ -1,6 +1,7 @@
 package org.venuspj.util.beans;
 
 import org.venuspj.exception.VRuntimeException;
+import org.venuspj.util.beans.converter.Converter;
 
 /**
  * {@link Converter}でエラーが起きた場合にスローされる例外です。

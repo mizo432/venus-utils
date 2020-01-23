@@ -1,14 +1,14 @@
 package org.venuspj.util.convert;
 
 import org.venuspj.util.strings2.Strings2;
-import org.venuspj.util.text.DecimalFormatUtil;
+import org.venuspj.util.text.DecimalFormats;
 
 import java.text.SimpleDateFormat;
 
 /**
  * {@link Double}用の変換ユーティリティです。
  */
-public abstract class DoubleConversionUtil {
+public abstract class DoubleConversions {
 
     /**
      * {@link Double}に変換します。
@@ -50,7 +50,7 @@ public abstract class DoubleConversionUtil {
         if (Strings2.isEmpty(s)) {
             return null;
         }
-        return Double.valueOf(DecimalFormatUtil.normalize(s));
+        return Double.valueOf(DecimalFormats.normalize(s));
     }
 
     /**
@@ -92,7 +92,7 @@ public abstract class DoubleConversionUtil {
         if (Strings2.isEmpty(s)) {
             return 0;
         }
-        return Double.parseDouble(DecimalFormatUtil.normalize(s));
+        return Double.parseDouble(DecimalFormats.normalize(s));
     }
 
 }

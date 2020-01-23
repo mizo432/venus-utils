@@ -19,12 +19,12 @@ import static org.venuspj.util.strings2.Strings2.isNotEmpty;
 /**
  * タイム用の変換ユーティリティです。
  */
-public class TimeConversionUtil {
+public class TimeConversions {
 
     /**
      * インスタンスを構築します。
      */
-    protected TimeConversionUtil() {
+    protected TimeConversions() {
     }
 
     /**
@@ -241,8 +241,8 @@ public class TimeConversionUtil {
     @SuppressWarnings("unchecked")
     protected static Date toDate(final String str, final Locale locale) {
         for (final DateFormat format : MultiIterator.iterable(
-                new DateConversionUtil.DateFormatIterator(locale),
-                new DateConversionUtil.PlainDateFormatIterator(str, locale))) {
+                new DateConversions.DateFormatIterator(locale),
+                new DateConversions.PlainDateFormatIterator(str, locale))) {
             if (format == null) {
                 continue;
             }

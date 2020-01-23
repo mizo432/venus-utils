@@ -6,7 +6,7 @@ import static java.lang.Math.getExponent;
 import static java.lang.Math.log;
 import static java.lang.Math.rint;
 import static org.venuspj.util.base.Preconditions.checkArgument;
-import static org.venuspj.util.math.DoubleUtils.*;
+import static org.venuspj.util.primitives.Doubles.*;
 import static org.venuspj.util.math.MathPreconditions.*;
 
 

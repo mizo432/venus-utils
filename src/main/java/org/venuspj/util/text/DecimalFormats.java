@@ -1,7 +1,6 @@
 package org.venuspj.util.text;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
@@ -9,7 +8,7 @@ import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 /**
  * {@link DecimalFormat}用のユーティリティクラスです。
  */
-public abstract class DecimalFormatUtil {
+public abstract class DecimalFormats {
 
     /**
      * 数値の文字列での表記を正規化します。
@@ -35,8 +34,8 @@ public abstract class DecimalFormatUtil {
         if (s == null) {
             return null;
         }
-        final DecimalFormatSymbols symbols =
-                DecimalFormatSymbolsUtil.getDecimalFormatSymbols(locale);
+        final java.text.DecimalFormatSymbols symbols =
+                AbstractDecimalFormatSymbols.getDecimalFormatSymbols(locale);
         final char decimalSep = symbols.getDecimalSeparator();
         final char groupingSep = symbols.getGroupingSeparator();
         final StringBuilder buf = new StringBuilder(20);

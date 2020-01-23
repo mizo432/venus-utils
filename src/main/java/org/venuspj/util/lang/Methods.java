@@ -82,6 +82,7 @@ public abstract class Methods {
      */
     public static boolean isAbstract(final Method method) {
         return Modifier.isAbstract(method.getModifiers());
+
     }
 
     /**

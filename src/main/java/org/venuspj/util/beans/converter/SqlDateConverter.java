@@ -1,9 +1,8 @@
 package org.venuspj.util.beans.converter;
 
-import org.venuspj.util.beans.Converter;
 import org.venuspj.util.beans.EmptyRuntimeException;
-import org.venuspj.util.convert.SqlDateConversionUtil;
-import org.venuspj.util.convert.StringConversionUtil;
+import org.venuspj.util.convert.SqlDateConversions;
+import org.venuspj.util.convert.StringConversions;
 import org.venuspj.util.strings2.Strings2;
 
 import java.util.Date;
@@ -34,11 +33,11 @@ public class SqlDateConverter implements Converter {
         if (Strings2.isEmpty(value)) {
             return null;
         }
-        return SqlDateConversionUtil.toDate(value, pattern);
+        return SqlDateConversions.toDate(value, pattern);
     }
 
     public String getAsString(Object value) {
-        return StringConversionUtil.toString((Date) value, pattern);
+        return StringConversions.toString((Date) value, pattern);
     }
 
     public boolean isTarget(Class clazz) {

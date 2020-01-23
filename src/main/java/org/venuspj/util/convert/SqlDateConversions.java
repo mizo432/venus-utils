@@ -5,12 +5,12 @@ import java.sql.Date;
 /**
  * {@link Date}用の変換ユーティリティです。
  */
-public class SqlDateConversionUtil {
+public class SqlDateConversions {
 
     /**
      * インスタンスを構築します。
      */
-    protected SqlDateConversionUtil() {
+    protected SqlDateConversions() {
     }
 
     /**
@@ -34,7 +34,7 @@ public class SqlDateConversionUtil {
         if (o instanceof Date) {
             return (Date) o;
         }
-        java.util.Date date = DateConversionUtil.toDate(o, pattern);
+        java.util.Date date = DateConversions.toDate(o, pattern);
         if (date != null) {
             return new Date(date.getTime());
         }
