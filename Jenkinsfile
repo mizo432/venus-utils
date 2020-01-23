@@ -55,7 +55,8 @@ pipeline {
 //                        dry canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/cpd/*.xml', unHealthy: ''
                         recordIssues enabledForFailure: true, tool: spotBugs(pattern: '**/build/reports/spotbugs/main.xml')
                         recordIssues enabledForFailure: true, tool: pmdParser(pattern: '**/build/reports/pmd/main.xml')
-                        recordIssues enabledForFailure: true, tools: [cpd(pattern: '**/build/reports/cpd/cpd.xml', reportEncoding: 'UTF-8', skipSymbolicLinks: true)])
+                        recordIssues enabledForFailure: true, tools: [cpd(pattern: '**/build/reports/cpd/cpd.xml', reportEncoding: 'UTF-8', skipSymbolicLinks: true)]
+                        archiveArtifacts "**/spotbugs/*.xml"
                         archiveArtifacts "**/pmd/*.xml"
                         archiveArtifacts "**/cpd/*.xml"
                     },
