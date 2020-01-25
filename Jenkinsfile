@@ -112,6 +112,7 @@ pipeline {
                 echo 'JacocoReportアーカイブ 終了'
             }
         }
+/*
         stage('lib-release') {
             when {
                 branch 'master'
@@ -120,7 +121,7 @@ pipeline {
                 gradlew 'release -x test -Prelease.useAutomaticVersion=true'
             }
         }
-
+*/
 
     }
 
