@@ -515,6 +515,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      * @param clazz クラス
      * @return コンバータ
      */
+    @SuppressWarnings("unchecked")
     protected Converter<?> findDefaultConverter(Class<?> clazz) {
         if(clazz == LocalDate.class)
             return DEFAULT_LOCAL_DATE_CONVERTER;
