@@ -5,10 +5,7 @@ import org.venuspj.util.strings2.Strings2;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URI;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.YearMonth;
+import java.time.*;
 import java.util.*;
 
 import static org.venuspj.util.base.Preconditions.checkNotNull;
@@ -356,6 +353,7 @@ public class Objects2 {
                     LocalTime.class,
                     LocalDateTime.class,
                     YearMonth.class,
+                    Year.class,
                     LocalDate.class,
                     Short.class,
                     UUID.class,
