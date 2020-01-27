@@ -41,6 +41,15 @@ pipeline {
             steps {
                 gradlew 'classes testClasses'
             }
+            post {
+                // alwaysブロックはstepsブロックの処理が失敗しても成功しても必ず実行される
+                always {
+
+                    // JavaDoc生成時に実行するとJavaDocの警告も含まれてしまうので
+                    // Javaコンパイル時の警告はコンパイル直後に収集する
+                    recordIssues(enabledForFailure: true, tools: [java()])
+                }
+            }
         }
 
         stage('analysis') {
