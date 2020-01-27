@@ -462,7 +462,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
                 && destPropertyClass != String.class) {
             return value;
         }
-        Converter<?> converter = converterMap.get(destPropertyName);
+        Converter converter = converterMap.get(destPropertyName);
         if (converter == null) {
             Class<?> targetClass = value.getClass() != String.class ? value
                     .getClass() : destPropertyClass;
@@ -487,7 +487,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
             if (value.getClass() == String.class) {
                 return converter.getAsObject((String) value);
             }
-            return converter.getAsString((Object) value);
+            return converter.getAsString(value);
         } catch (Throwable cause) {
             throw new ConverterRuntimeException(destPropertyName, value, cause);
         }
@@ -517,19 +517,19 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      */
     @SuppressWarnings("unchecked")
     protected Converter<?> findDefaultConverter(Class<?> clazz) {
-        if (clazz == LocalDate.class)
+        if(clazz == LocalDate.class)
             return DEFAULT_LOCAL_DATE_CONVERTER;
 
-        if (clazz == LocalDateTime.class)
+        if(clazz == LocalDateTime.class)
             return DEFAULT_LOCAL_DATETIME_CONVERTER;
 
-        if (clazz == LocalTime.class)
+        if(clazz == LocalTime.class)
             return DEFAULT_LOCAL_TIME_CONVERTER;
 
-        if (clazz == YearMonth.class)
+        if(clazz == YearMonth.class)
             return DEFAULT_YEAR_MONTH_CONVERTER;
 
-        if (clazz == MonthDay.class)
+        if(clazz == MonthDay.class)
             return DEFAULT_MONTH_DAY_CONVERTER;
 
         if (clazz == java.sql.Date.class)
@@ -543,7 +543,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
         return null;
     }
 
-    protected void assignSourceProperties(AbstractCopy<?> sourceAbstractCopy) {
+    protected void assignSourceProperties(AbstractCopy<?> sourceAbstractCopy){
         this.excludePropertyNames = sourceAbstractCopy.excludePropertyNames;
         this.includePropertyNames = sourceAbstractCopy.includePropertyNames;
         this.excludesNull = sourceAbstractCopy.excludesNull;
