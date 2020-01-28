@@ -3,6 +3,8 @@ package org.venuspj.util.misc;
 import org.venuspj.util.collect.Arrays2;
 import org.venuspj.util.strings2.Strings2;
 
+import java.util.Arrays;
+
 /**
  * Base64を扱うためのユーティリティクラスです。
  */
@@ -20,9 +22,7 @@ public abstract class Base64Us {
     private static final byte[] DECODE_TABLE = new byte[128];
 
     static {
-        for (int i = 0; i < DECODE_TABLE.length; i++) {
-            DECODE_TABLE[i] = Byte.MAX_VALUE;
-        }
+        Arrays.fill(DECODE_TABLE, Byte.MAX_VALUE);
         for (int i = 0; i < ENCODE_TABLE.length; i++) {
             DECODE_TABLE[ENCODE_TABLE[i]] = (byte) i;
         }
@@ -40,7 +40,7 @@ public abstract class Base64Us {
         }
         final int mod = inData.length % 3;
         final int num = inData.length / 3;
-        char[] outData = null;
+        char[] outData;
         if (mod != 0) {
             outData = new char[(num + 1) * 4];
         } else {
