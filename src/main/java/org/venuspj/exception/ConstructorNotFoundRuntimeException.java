@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
+import static org.venuspj.util.objects2.Objects2.isNull;
 
 /**
  * {@link Constructor}が見つからなかったときにスローされる例外Vです。
@@ -65,6 +66,8 @@ public class ConstructorNotFoundRuntimeException extends VRuntimeException {
      * @return 引数の並び
      */
     public Object[] getMethodArgs() {
+        if(isNull(methodArgs))
+            return new Object[0];
         return Arrays.copyOf(methodArgs,methodArgs.length);
 
     }
@@ -75,6 +78,8 @@ public class ConstructorNotFoundRuntimeException extends VRuntimeException {
      * @return 引数型の並び
      */
     public Class<?>[] getParamTypes() {
+        if(isNull(paramTypes))
+            return new Class<?>[0];
         return Arrays.copyOf(paramTypes,paramTypes.length);
 
     }
