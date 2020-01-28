@@ -1,6 +1,7 @@
 package org.venuspj.exception;
 
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
@@ -64,7 +65,8 @@ public class ConstructorNotFoundRuntimeException extends VRuntimeException {
      * @return 引数の並び
      */
     public Object[] getMethodArgs() {
-        return methodArgs;
+        return Arrays.copyOf(methodArgs,methodArgs.length);
+
     }
 
     /**
@@ -73,7 +75,8 @@ public class ConstructorNotFoundRuntimeException extends VRuntimeException {
      * @return 引数型の並び
      */
     public Class<?>[] getParamTypes() {
-        return paramTypes;
+        return Arrays.copyOf(paramTypes,paramTypes.length);
+
     }
 
     private static String getSignature(final Object... methodArgs) {
