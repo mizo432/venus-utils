@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
+import static org.venuspj.util.objects2.Objects2.isNull;
 
 /**
  * 表明についてのユーティリティクラスです。
@@ -104,7 +105,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final byte[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -121,7 +122,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final short[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -138,7 +139,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final int[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -155,7 +156,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final long[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -172,7 +173,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final float[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -189,7 +190,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final double[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -206,7 +207,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final char[] argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
+        if (Arrays2.isEmpty(argValue)) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0011",
@@ -223,7 +224,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final Collection<?> argValue) {
-        if (argValue == null || argValue.isEmpty()) {
+        if (isNull(argValue) || argValue.isEmpty()) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0012",
@@ -240,7 +241,7 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final Map<?, ?> argValue) {
-        if (argValue == null || argValue.isEmpty()) {
+        if (isNull(argValue) || argValue.isEmpty()) {
             throw new EmptyArgumentException(
                     argName,
                     "EUTL0013",

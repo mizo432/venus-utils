@@ -6,6 +6,7 @@ import org.venuspj.util.lang.Methods;
 import java.lang.reflect.Method;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
+import static org.venuspj.util.objects2.Objects2.isNull;
 
 /**
  * {@link Method}が見つからなかったときにスローされる例外です。
@@ -30,6 +31,7 @@ public class MethodNotFoundRuntimeException extends VRuntimeException {
     public MethodNotFoundRuntimeException(final Class<?> targetClass,
                                           final String methodName, final Object[] methodArgs) {
         this(targetClass, methodName, toClassArray(methodArgs));
+
     }
 
     /**
@@ -47,6 +49,7 @@ public class MethodNotFoundRuntimeException extends VRuntimeException {
         this.targetClass = targetClass;
         this.methodName = methodName;
         this.methodArgClasses = methodArgClasses;
+
     }
 
     /**
@@ -56,6 +59,7 @@ public class MethodNotFoundRuntimeException extends VRuntimeException {
      */
     public Class<?> getTargetClass() {
         return targetClass;
+
     }
 
     /**

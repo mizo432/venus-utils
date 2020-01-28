@@ -421,12 +421,20 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
 
     @Override
     public Object clone() {
-        final ArrayMap<K, V> copy = new ArrayMap<K, V>();
-        copy.threshold = threshold;
-        copy.mapTable = Arrays.copyOf(mapTable, size);
-        copy.listTable = Arrays.copyOf(listTable, size);
-        copy.size = size;
-        return copy;
+        try {
+            final ArrayMap<K, V> copy = new ArrayMap<>();
+            copy.threshold = threshold;
+            copy.mapTable = Arrays.copyOf(mapTable, size);
+            copy.listTable = Arrays.copyOf(listTable, size);
+            copy.size = size;
+            return copy;
+        } catch (RuntimeException re) {
+            try {
+                return super.clone();
+            } catch (CloneNotSupportedException e) {
+                return null;
+            }
+        }
     }
 
     /**

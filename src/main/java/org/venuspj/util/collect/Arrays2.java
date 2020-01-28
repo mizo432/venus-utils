@@ -36,6 +36,7 @@ public class Arrays2<T> {
 
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T firstElement(T... elements) {
         if (isEmpty(elements))
             throw new IndexOutOfBoundsException();
@@ -43,7 +44,10 @@ public class Arrays2<T> {
         return elements[0];
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> boolean isEmpty(T... elements) {
         return elements.length == 0;
+
     }
+
 }
