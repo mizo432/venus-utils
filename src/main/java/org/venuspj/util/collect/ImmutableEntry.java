@@ -2,7 +2,7 @@ package org.venuspj.util.collect;
 
 import java.io.Serializable;
 
-class ImmutableEntry<K, V> extends AbstractMapEntry<K, V> implements Serializable {
+class ImmutableEntry<K extends Serializable, V extends Serializable> extends AbstractMapEntry<K, V> implements Serializable {
     final K key;
     final V value;
 
@@ -24,6 +24,7 @@ class ImmutableEntry<K, V> extends AbstractMapEntry<K, V> implements Serializabl
     @Override
     public final V setValue(V value) {
         throw new UnsupportedOperationException();
+
     }
 
     private static final long serialVersionUID = 0;

@@ -1,10 +1,12 @@
 package org.venuspj.util.collect;
 
+import java.io.Serializable;
+
 import static org.venuspj.util.collect.CollectPreconditions.checkEntryNotNull;
 
-class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
+class ImmutableMapEntry<K extends Serializable, V extends Serializable> extends ImmutableEntry<K, V> {
     @SuppressWarnings("unchecked")
-    static <K, V> ImmutableMapEntry<K, V>[] createEntryArray(int size) {
+    static <K extends Serializable, V extends Serializable> ImmutableMapEntry<K, V>[] createEntryArray(int size) {
         return new ImmutableMapEntry[size];
     }
 
@@ -30,7 +32,7 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
         return true;
     }
 
-    static class NonTerminalImmutableMapEntry<K, V> extends ImmutableMapEntry<K, V> {
+    static class NonTerminalImmutableMapEntry<K extends Serializable, V extends Serializable> extends ImmutableMapEntry<K, V> {
         private final transient ImmutableMapEntry<K, V> nextInKeyBucket;
 
         NonTerminalImmutableMapEntry(K key, V value, ImmutableMapEntry<K, V> nextInKeyBucket) {
@@ -53,7 +55,7 @@ class ImmutableMapEntry<K, V> extends ImmutableEntry<K, V> {
 
     }
 
-    static final class NonTerminalImmutableBiMapEntry<K, V>
+    static final class NonTerminalImmutableBiMapEntry<K extends Serializable, V extends Serializable>
             extends NonTerminalImmutableMapEntry<K, V> {
         private final transient ImmutableMapEntry<K, V> nextInValueBucket;
 

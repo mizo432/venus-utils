@@ -86,12 +86,12 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
     /**
      * 特定のプロパティに関連付けられたコンバータです。
      */
-    protected Map<String, Converter> converterMap = newHashMap();
+    protected Map<String, Converter<?>> converterMap = newHashMap();
 
     /**
      * 特定のプロパティに関連付けられていないコンバータです。
      */
-    protected List<Converter> converters = newArrayList();
+    protected List<Converter<?>> converters = newArrayList();
 
     /**
      * CharSequenceの配列をStringの配列に変換します。
@@ -198,7 +198,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      * @return このインスタンス自身
      */
     @SuppressWarnings("unchecked")
-    public S converter(Converter converter, CharSequence... propertyNames) {
+    public S converter(Converter<?> converter, CharSequence... propertyNames) {
         if (propertyNames.length == 0) {
             converters.add(converter);
         } else {
@@ -499,8 +499,9 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      * @param clazz クラス
      * @return コンバータ
      */
-    protected Converter findConverter(Class<?> clazz) {
-        for (Converter c : converters) {
+    @SuppressWarnings("unchecked")
+    protected Converter<?> findConverter(Class<?> clazz) {
+        for (Converter<?> c : converters) {
             if (c.isTarget(clazz)) {
                 return c;
             }
@@ -514,7 +515,8 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
      * @param clazz クラス
      * @return コンバータ
      */
-    protected Converter findDefaultConverter(Class<?> clazz) {
+    @SuppressWarnings("unchecked")
+    protected Converter<?> findDefaultConverter(Class<?> clazz) {
         if(clazz == LocalDate.class)
             return DEFAULT_LOCAL_DATE_CONVERTER;
 

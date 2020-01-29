@@ -54,13 +54,13 @@ public class BeanDescImpl implements BeanDesc {
      * プロパティ名から{@link PropertyDesc}へのマップ
      */
     protected final CaseInsensitiveMap<PropertyDesc> propertyDescCache =
-            new CaseInsensitiveMap<PropertyDesc>();
+            new CaseInsensitiveMap<>();
 
     /**
      * フィールド名から{@link FieldDescImpl}へのマップ
      */
     protected final ArrayMap<String, FieldDesc> fieldDescCache =
-            new ArrayMap<String, FieldDesc>();
+            new ArrayMap<>();
 
     /**
      * {@link ConstructorDesc}の配列
@@ -173,6 +173,7 @@ public class BeanDescImpl implements BeanDesc {
     @Override
     public Iterable<FieldDesc> getFieldDescs() {
         return unmodifiableCollection(fieldDescCache.values());
+
     }
 
     @SuppressWarnings("unchecked")
@@ -577,7 +578,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * コンストラクタを準備します。
      */
-    protected void setupConstructorDescs() {
+    protected final void setupConstructorDescs() {
         for (final Constructor<?> constructor : beanClass.getConstructors()) {
             constructorDescs.add(new ConstructorDescImpl(this, constructor));
         }
@@ -586,7 +587,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * メソッドを準備します。
      */
-    protected void setupMethodDescs() {
+    protected final void setupMethodDescs() {
         final ArrayMap<String, List<MethodDesc>> methodDescListMap =
                 new ArrayMap<String, List<MethodDesc>>();
         for (final Method method : beanClass.getMethods()) {
@@ -612,7 +613,7 @@ public class BeanDescImpl implements BeanDesc {
     /**
      * フィールドを準備します。
      */
-    protected void setupFieldDescs() {
+    protected final void setupFieldDescs() {
         if (beanClass.isInterface()) {
             setupFieldDescsByInterface(beanClass);
         } else {
@@ -625,7 +626,7 @@ public class BeanDescImpl implements BeanDesc {
      *
      * @param interfaceClass 対象のインターフェース
      */
-    protected void setupFieldDescsByInterface(final Class<?> interfaceClass) {
+    protected final void setupFieldDescsByInterface(final Class<?> interfaceClass) {
         addFieldDescs(interfaceClass);
         final Class<?>[] interfaces = interfaceClass.getInterfaces();
         for (final Class<?> intf : interfaces) {
@@ -638,7 +639,7 @@ public class BeanDescImpl implements BeanDesc {
      *
      * @param targetClass 対象のクラス
      */
-    private void setupFieldDescsByClass(final Class<?> targetClass) {
+    private final void setupFieldDescsByClass(final Class<?> targetClass) {
         addFieldDescs(targetClass);
         for (final Class<?> intf : targetClass.getInterfaces()) {
             setupFieldDescsByInterface(intf);
