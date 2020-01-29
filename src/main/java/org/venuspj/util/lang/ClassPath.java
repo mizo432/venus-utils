@@ -25,6 +25,11 @@ public class ClassPath {
         }
     }
 
+    /**
+     * パッケージ名で指定したパッケージに存在するクラスを一覧化する
+     * @param packageName パッケージ名
+     * @return クラスの一覧
+     */
     public static Set<Class<?>> listClasses(String packageName) {
 
         final String resourceName = packageName.replace('.', '/');
