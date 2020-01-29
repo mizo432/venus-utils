@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
 
 import static org.venuspj.util.collect.Sets2.newHashSet;
 
@@ -45,10 +46,12 @@ public class ClassPath {
         final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         final URL root = classLoader.getResource(resourceName);
 
+        assert root != null;
         if ("file".equals(root.getProtocol())) {
             File[] files = new File(root.getFile()).listFiles((dir, name) -> name.endsWith(CLASS_SUFFIX));
-            return Arrays.asList(files).stream()
-                    .map(file -> file.getName())
+            assert files != null;
+            return Arrays.stream(files)
+                    .map(File::getName)
                     .map(name -> name.replaceAll(STATIC_CLASS_SUFFIX, ""))
                     .map(name -> packageName + PACKAGE_SEPARATOR + name)
                     .map(fullName -> uncheckCall(() -> Class.forName(fullName)))
@@ -57,7 +60,7 @@ public class ClassPath {
         if ("jar".equals(root.getProtocol())) {
             try (JarFile jarFile = ((JarURLConnection) root.openConnection()).getJarFile()) {
                 return Collections.list(jarFile.entries()).stream()
-                        .map(jarEntry -> jarEntry.getName())
+                        .map(ZipEntry::getName)
                         .filter(name -> name.startsWith(resourceName))
                         .filter(name -> name.endsWith(CLASS_SUFFIX))
                         .map(name -> name.replace(File.separator, PACKAGE_SEPARATOR).replaceAll(STATIC_CLASS_SUFFIX, ""))
