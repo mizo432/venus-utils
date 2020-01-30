@@ -296,7 +296,7 @@ public class BeanDescImpl implements BeanDesc {
     @Override
     public String[] getMethodNames() {
         return methodDescsCache.keySet().toArray(
-                new String[methodDescsCache.size()]);
+                new String[0]);
     }
 
     /**
@@ -589,24 +589,20 @@ public class BeanDescImpl implements BeanDesc {
      */
     protected final void setupMethodDescs() {
         final ArrayMap<String, List<MethodDesc>> methodDescListMap =
-                new ArrayMap<String, List<MethodDesc>>();
+                new ArrayMap<>();
         for (final Method method : beanClass.getMethods()) {
             if (method.isBridge() || method.isSynthetic()) {
                 continue;
             }
             final String methodName = method.getName();
-            List<MethodDesc> list = methodDescListMap.get(methodName);
-            if (list == null) {
-                list = newArrayList();
-                methodDescListMap.put(methodName, list);
-            }
+            List<MethodDesc> list = methodDescListMap.computeIfAbsent(methodName, k -> newArrayList());
             list.add(new MethodDescImpl(this, method));
         }
         for (int i = 0; i < methodDescListMap.size(); ++i) {
             final List<MethodDesc> methodDescList = methodDescListMap.getAt(i);
             methodDescsCache.put(
                     methodDescListMap.getKeyAt(i),
-                    methodDescList.toArray(new MethodDesc[methodDescList.size()]));
+                    methodDescList.toArray(new MethodDesc[0]));
         }
     }
 
@@ -639,7 +635,7 @@ public class BeanDescImpl implements BeanDesc {
      *
      * @param targetClass 対象のクラス
      */
-    private final void setupFieldDescsByClass(final Class<?> targetClass) {
+    private void setupFieldDescsByClass(final Class<?> targetClass) {
         addFieldDescs(targetClass);
         for (final Class<?> intf : targetClass.getInterfaces()) {
             setupFieldDescsByInterface(intf);
@@ -656,18 +652,19 @@ public class BeanDescImpl implements BeanDesc {
      * @param clazz 対象のクラスまたはインターフェース
      */
     protected void addFieldDescs(final Class<?> clazz) {
-        for (final Field field : clazz.getDeclaredFields()) {
-            final String fname = field.getName();
-            if (fieldDescCache.containsKey(fname)) {
+        Field[] fields = clazz.getDeclaredFields();
+        AccessibleObject.setAccessible(fields, true);
+        for (final Field field : fields) {
+            final String fieldName = field.getName();
+            if (fieldDescCache.containsKey(fieldName)) {
                 continue;
             }
-            field.setAccessible(true);
             final FieldDescImpl fieldDesc = new FieldDescImpl(this, field);
-            fieldDescCache.put(fname, fieldDesc);
+            fieldDescCache.put(fieldName, fieldDesc);
             if (!Fields.isInstanceField(field)) {
                 continue;
             }
-            if (hasPropertyDesc(fname)) {
+            if (hasPropertyDesc(fieldName)) {
                 final PropertyDescImpl pd =
                         (PropertyDescImpl) propertyDescCache.get(field.getName());
                 pd.setField(field);
@@ -682,7 +679,7 @@ public class BeanDescImpl implements BeanDesc {
                                 null,
                                 field,
                                 this);
-                propertyDescCache.put(fname, pd);
+                propertyDescCache.put(fieldName, pd);
             }
         }
     }
