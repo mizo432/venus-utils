@@ -1,6 +1,7 @@
 package org.venuspj.util.misc;
 
 import org.venuspj.exception.*;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.collect.Arrays2;
 
 import java.util.Collection;
@@ -12,6 +13,7 @@ import static org.venuspj.util.objects2.Objects2.isNull;
 /**
  * 表明についてのユーティリティクラスです。
  */
+@Deprecated
 public abstract class Assertions {
 
     /**
@@ -37,12 +39,10 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final String argValue) {
-        if (Arrays2.of(argValue).isEmpty()) {
-            throw new EmptyArgumentException(
-                    argName,
-                    "EUTL0010",
-                    asArray(argName));
-        }
+        Preconditions.checkNotEmpty(argValue, () -> new EmptyArgumentException(
+                argName,
+                "EUTL0010",
+                asArray(argName)));
     }
 
     /**
@@ -54,12 +54,10 @@ public abstract class Assertions {
      */
     public static void assertArgumentNotEmpty(final String argName,
                                               final CharSequence argValue) {
-        if (argValue == null || argValue.length() == 0) {
-            throw new EmptyArgumentException(
-                    argName,
-                    "EUTL0010",
-                    asArray(argName));
-        }
+        Preconditions.checkNotEmpty(argValue, () -> new EmptyArgumentException(
+                argName,
+                "EUTL0010",
+                asArray(argName)));
     }
 
     /**

@@ -46,7 +46,12 @@ public class ClassPath {
         final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         final URL root = classLoader.getResource(resourceName);
 
-        assert root != null;
+        if(root == null) {
+            return newHashSet();
+        }
+
+
+
         if ("file".equals(root.getProtocol())) {
             File[] files = new File(root.getFile()).listFiles((dir, name) -> name.endsWith(CLASS_SUFFIX));
             assert files != null;
@@ -77,13 +82,26 @@ public class ClassPath {
 
         Set<String> packageNameSet = Packages.getPackageNames(aClass);
 
-        Set<Class<?>> resultIncludeNull = newHashSet();
+        Set<Class<?>> result = newHashSet();
         for (String packageName : packageNameSet) {
-            resultIncludeNull.addAll(ClassPath.listClasses(packageName));
+            result.addAll(ClassPath.listClasses(packageName));
         }
-        resultIncludeNull.add(aClass);
+        result.add(aClass);
 
-        return resultIncludeNull.stream().filter(Objects2::nonNull).collect(Collectors.toSet());
+        return result;
+
+    }
+
+    public static Set<Class<?>> listRecursiveClasses(String aPackageName) {
+
+        Set<String> packageNameSet = Packages.getPackageNames(aPackageName);
+
+        Set<Class<?>> result = newHashSet();
+        for (String packageName : packageNameSet) {
+            result.addAll(ClassPath.listClasses(packageName));
+        }
+
+        return result;
 
     }
 }

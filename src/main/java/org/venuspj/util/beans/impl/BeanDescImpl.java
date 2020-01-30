@@ -4,12 +4,14 @@ import org.venuspj.exception.ConstructorNotFoundRuntimeException;
 import org.venuspj.exception.FieldNotFoundRuntimeException;
 import org.venuspj.exception.MethodNotFoundRuntimeException;
 import org.venuspj.exception.PropertyNotFoundRuntimeException;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.beans.*;
 import org.venuspj.util.collect.ArrayMap;
 import org.venuspj.util.collect.CaseInsensitiveMap;
 import org.venuspj.util.convert.*;
 import org.venuspj.util.lang.Classes;
 import org.venuspj.util.lang.Fields;
+import org.venuspj.util.misc.Assertions;
 import org.venuspj.util.strings2.Strings2;
 
 import java.lang.reflect.*;
@@ -19,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static java.util.Collections.unmodifiableCollection;
+import static org.venuspj.util.base.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
 import static org.venuspj.util.collect.Sets2.newHashSet;
@@ -83,7 +86,7 @@ public class BeanDescImpl implements BeanDesc {
      * @param beanClass ビーンのクラス。{@literal null}であってはいけません
      */
     public BeanDescImpl(final Class<?> beanClass) {
-        assertArgumentNotNull("beanClass", beanClass);
+        checkNotNull("beanClass", beanClass);
 
         this.beanClass = beanClass;
         typeVariables = getTypeVariableMap(beanClass);
@@ -106,7 +109,7 @@ public class BeanDescImpl implements BeanDesc {
 
     @Override
     public boolean hasPropertyDesc(final String propertyName) {
-        assertArgumentNotEmpty("propertyName", propertyName);
+        Preconditions.checkNotEmpty("propertyName", propertyName);
 
         return propertyDescCache.get(propertyName) != null;
     }
@@ -125,7 +128,7 @@ public class BeanDescImpl implements BeanDesc {
 
     @Override
     public PropertyDesc getPropertyDesc(final int index) {
-        assertArgumentArrayIndex("index", index, getPropertyDescSize());
+        Assertions.assertArgumentArrayIndex("index", index, getPropertyDescSize());
 
         return propertyDescCache.getAt(index);
     }
@@ -160,7 +163,7 @@ public class BeanDescImpl implements BeanDesc {
 
     @Override
     public FieldDesc getFieldDesc(final int index) {
-        assertArgumentArrayIndex("index", index, getFieldDescSize());
+        Assertions.assertArgumentArrayIndex("index", index, getFieldDescSize());
 
         return fieldDescCache.getAt(index);
     }
