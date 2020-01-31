@@ -51,7 +51,14 @@ gradle.projectsEvaluated {
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
 }
-
+compileJava {
+    doFirst {
+        options.compilerArgs = [
+                "--module-path", classpath.asPath
+        ]
+        classpath = files()
+    }
+}
 tasks.withType(JavaCompile) {
     options.incremental = true
 }
