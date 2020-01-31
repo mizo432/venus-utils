@@ -1,6 +1,7 @@
 module venus.utils {
     exports org.venuspj.util.base;
     exports org.venuspj.util.beans;
+    exports org.venuspj.util.beans.factory;
     exports org.venuspj.util.builder;
     exports org.venuspj.util.collect;
     exports org.venuspj.util.convert;
@@ -14,5 +15,10 @@ module venus.utils {
     requires java.sql;
     requires java.desktop;
 //    requires kotlin.stdlib;
+    opens org.venuspj.util.beans;
+    opens org.venuspj.util.beans.impl;
+    opens org.venuspj.util.beans.factory;
+    opens org.venuspj.util.lang;
+
 
 }
