@@ -44,13 +44,14 @@ idea.module.outputDir = compileJava.destinationDir
 idea.module.inheritOutputDirs = true
 
 sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_1_8
 
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
 }
+/*
 compileJava {
     doFirst {
         options.compilerArgs = [
@@ -59,6 +60,7 @@ compileJava {
         classpath = files()
     }
 }
+*/
 tasks.withType(JavaCompile) {
     options.incremental = true
 }
