@@ -1,7 +1,7 @@
 package org.venuspj.util.lang;
 
-import org.venuspj.exception.IllegalAccessRuntimeException;
-import org.venuspj.exception.VIllegalArgumentException;
+import org.venuspj.util.exception.IllegalAccessRuntimeException;
+import org.venuspj.util.exception.VIllegalArgumentException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

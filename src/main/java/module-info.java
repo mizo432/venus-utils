@@ -12,6 +12,8 @@ module venus.utils {
     exports org.venuspj.util.primitives;
     exports org.venuspj.util.strings2;
     exports org.venuspj.util.uuidProvider;
+    exports org.venuspj.util.validate;
+    exports org.venuspj.util.exception;
     requires java.sql;
     requires java.desktop;
 //    requires kotlin.stdlib;

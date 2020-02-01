@@ -1,4 +1,4 @@
-package org.venuspj.exception;
+package org.venuspj.util.exception;
 
 import org.venuspj.util.message.MessageFormatter;
 

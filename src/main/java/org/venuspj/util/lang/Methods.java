@@ -1,7 +1,7 @@
 package org.venuspj.util.lang;
 
-import org.venuspj.exception.IllegalAccessRuntimeException;
-import org.venuspj.exception.InvocationTargetRuntimeException;
+import org.venuspj.util.exception.IllegalAccessRuntimeException;
+import org.venuspj.util.exception.InvocationTargetRuntimeException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

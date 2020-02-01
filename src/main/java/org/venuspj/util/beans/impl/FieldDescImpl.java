@@ -1,6 +1,6 @@
 package org.venuspj.util.beans.impl;
 
-import org.venuspj.exception.FieldNotStaticRuntimeException;
+import org.venuspj.util.exception.FieldNotStaticRuntimeException;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.FieldDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;

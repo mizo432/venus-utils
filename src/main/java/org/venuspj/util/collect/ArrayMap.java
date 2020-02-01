@@ -1,7 +1,7 @@
 package org.venuspj.util.collect;
 
 
-import org.venuspj.exception.VNoSuchElementException;
+import org.venuspj.util.exception.VNoSuchElementException;
 
 import java.io.Externalizable;
 import java.io.IOException;

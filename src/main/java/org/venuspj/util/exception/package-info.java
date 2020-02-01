@@ -4,4 +4,4 @@
  *     通常はプログラムミスにより起こる例外を格納します.
  * </pre>
  */
-package org.venuspj.exception;
+package org.venuspj.util.exception;

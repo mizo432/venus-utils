@@ -1,8 +1,8 @@
 package org.venuspj.util.collect;
 
 
-import org.venuspj.exception.VNoSuchElementException;
-import org.venuspj.exception.VUnsupportedOperationException;
+import org.venuspj.util.exception.VNoSuchElementException;
+import org.venuspj.util.exception.VUnsupportedOperationException;
 
 import java.util.Iterator;
 

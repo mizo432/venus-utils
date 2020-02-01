@@ -1,12 +1,10 @@
 package org.venuspj.util.base;
 
 
-import org.venuspj.exception.EmptyArgumentException;
+import org.venuspj.util.exception.EmptyArgumentException;
 import org.venuspj.util.annotations.GwtCompatible;
-import org.venuspj.util.collect.Arrays2;
 import org.venuspj.util.functor.Command;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static org.venuspj.util.base.Strings.lenientFormat;

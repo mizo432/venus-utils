@@ -1,6 +1,6 @@
 package org.venuspj.util.beans.impl;
 
-import org.venuspj.exception.MethodNotStaticRuntimeException;
+import org.venuspj.util.exception.MethodNotStaticRuntimeException;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.MethodDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;

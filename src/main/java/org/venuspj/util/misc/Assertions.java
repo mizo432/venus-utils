@@ -1,6 +1,6 @@
 package org.venuspj.util.misc;
 
-import org.venuspj.exception.*;
+import org.venuspj.util.exception.*;
 import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.collect.Arrays2;
 

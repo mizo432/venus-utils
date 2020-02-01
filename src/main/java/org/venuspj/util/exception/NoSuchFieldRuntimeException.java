@@ -1,29 +1,28 @@
-package org.venuspj.exception;
-
-import java.lang.reflect.Field;
+package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
- * オブジェクトを指定せずに非{@literal static}な{@link Field}にアクセスした場合にスローされる例外です。
+ * {@link NoSuchFieldException}をラップする例外です。
  */
-public class FieldNotStaticRuntimeException extends VRuntimeException {
+public class NoSuchFieldRuntimeException extends VRuntimeException {
 
-    private static final long serialVersionUID = -7791347225750660981L;
+    private static final long serialVersionUID = 6609175673610180338L;
 
     private final Class<?> targetClass;
 
     private final String fieldName;
 
     /**
-     * {@link FieldNotStaticRuntimeException}を作成します。
+     * {@link NoSuchFieldRuntimeException}を作成します。
      *
      * @param targetClass ターゲットクラス
      * @param fieldName   フィールド名
+     * @param cause       原因となった例外
      */
-    public FieldNotStaticRuntimeException(final Class<?> targetClass,
-                                          final String fieldName) {
-        super("EUTL0099", asArray(targetClass.getName(), fieldName));
+    public NoSuchFieldRuntimeException(final Class<?> targetClass,
+                                       final String fieldName, final Throwable cause) {
+        super("EUTL0070", asArray(targetClass.getName(), fieldName), cause);
         this.targetClass = targetClass;
         this.fieldName = fieldName;
     }

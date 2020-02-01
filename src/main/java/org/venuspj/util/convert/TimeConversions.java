@@ -1,6 +1,6 @@
 package org.venuspj.util.convert;
 
-import org.venuspj.exception.ParseRuntimeException;
+import org.venuspj.util.exception.ParseRuntimeException;
 import org.venuspj.util.collect.MultiIterator;
 
 import java.sql.Time;

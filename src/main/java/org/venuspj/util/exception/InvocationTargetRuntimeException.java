@@ -1,4 +1,4 @@
-package org.venuspj.exception;
+package org.venuspj.util.exception;
 
 import java.lang.reflect.InvocationTargetException;
 

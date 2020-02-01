@@ -1,6 +1,6 @@
 package org.venuspj.util.lang;
 
-import org.venuspj.exception.*;
+import org.venuspj.util.exception.*;
 import org.venuspj.util.strings2.Strings2;
 
 import java.lang.reflect.Constructor;

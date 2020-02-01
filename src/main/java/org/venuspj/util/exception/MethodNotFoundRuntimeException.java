@@ -1,4 +1,4 @@
-package org.venuspj.exception;
+package org.venuspj.util.exception;
 
 
 import org.venuspj.util.lang.Methods;
@@ -6,7 +6,6 @@ import org.venuspj.util.lang.Methods;
 import java.lang.reflect.Method;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
-import static org.venuspj.util.objects2.Objects2.isNull;
 
 /**
  * {@link Method}が見つからなかったときにスローされる例外です。

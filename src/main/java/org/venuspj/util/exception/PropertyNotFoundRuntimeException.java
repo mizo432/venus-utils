@@ -1,31 +1,27 @@
-package org.venuspj.exception;
+package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
 /**
- * プロパティの値の設定に失敗したときにスローされる例外です。
+ * プロパティが見つからなかった場合にスローされる例外です。
  */
-public class IllegalPropertyRuntimeException extends VRuntimeException {
+public class PropertyNotFoundRuntimeException extends VRuntimeException {
 
-    private static final long serialVersionUID = 3584516316082904020L;
+    private static final long serialVersionUID = -5177019197796206774L;
 
     private final Class<?> targetClass;
 
     private final String propertyName;
 
     /**
-     * {@link IllegalPropertyRuntimeException}を作成します。
+     * {@link PropertyNotFoundRuntimeException}を返します。
      *
      * @param targetClass  ターゲットクラス
      * @param propertyName プロパティ名
-     * @param cause        原因となった例外
      */
-    public IllegalPropertyRuntimeException(final Class<?> targetClass,
-                                           final String propertyName, final Throwable cause) {
-        super(
-                "EUTL0059",
-                asArray(targetClass.getName(), propertyName, cause),
-                cause);
+    public PropertyNotFoundRuntimeException(final Class<?> targetClass,
+                                            final String propertyName) {
+        super("EUTL0065", asArray(targetClass.getName(), propertyName));
         this.targetClass = targetClass;
         this.propertyName = propertyName;
     }
@@ -49,3 +45,4 @@ public class IllegalPropertyRuntimeException extends VRuntimeException {
     }
 
 }
+

@@ -1,6 +1,6 @@
 package org.venuspj.util.beans;
 
-import org.venuspj.exception.VRuntimeException;
+import org.venuspj.util.exception.VRuntimeException;
 
 /**
  * 空の場合にスローされる例外です。

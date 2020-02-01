@@ -1,7 +1,7 @@
 package org.venuspj.util.assigner;
 
 
-import org.venuspj.exception.NoSuchConstructorRuntimeException;
+import org.venuspj.util.exception.NoSuchConstructorRuntimeException;
 import org.venuspj.util.lang.Classes;
 
 import java.lang.reflect.Field;
