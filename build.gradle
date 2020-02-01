@@ -66,13 +66,14 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+    compileOnly group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
     compileOnly "net.jcip:jcip-annotations:${jcipAnnotationsVersion}"
     compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugsAnnotationsVersion}"
     testImplementation group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
     testImplementation(group: 'junit', name: 'junit', version: "${junitVersion}")
     testImplementation group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
     testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
+    testImplementation group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
 
 
 }
