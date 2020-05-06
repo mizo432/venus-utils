@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 import java.util.function.Supplier;
 
 import static org.venuspj.util.collect.Lists2.newArrayList;
+import static org.venuspj.util.objects2.Objects2.isNull;
 
 public final class Strings2 {
     /**
@@ -425,4 +426,116 @@ public final class Strings2 {
         return text;
 
     }
+    /**
+     * サーチキャラクターが検索対象の文字列に含まれているかを返却する.
+     *
+     * <pre>
+     *    このメソッドでは{@link String#indexOf(int)}を使用する.
+     * </pre>
+     *
+     * <pre>
+     * <code>
+     * null
+     * </code>
+     *    または 空白 (&quot;&quot;) の文字列は
+     * <code>
+     * false
+     * </code>
+     * を返却する
+     * </pre>
+     *
+     * <pre>
+     *     Strings2.contains(null, *)    = false
+     *     Strings2.contains(&quot;&quot;, *)      = false
+     *     Strings2.contains(&quot;abc&quot;, 'a') = true
+     *     Strings2.contains(&quot;abc&quot;, 'z') = false
+     * </pre>
+     *
+     * @param str        検索対象の文字列
+     * @param searchChar サーチキャラクター
+     * @return 見つかった場合true 見つからない場合falseを返却する
+     */
+    public static boolean contains(String str, char searchChar) {
+        if (isEmpty(str)) {
+            return false;
+        }
+        return str.indexOf(searchChar) >= 0;
+    }
+
+    /**
+     * サーチ文字列が検索対象の文字列に含まれているかを返却する.
+     *
+     * <pre>
+     *    このメソッドでは{@link String#indexOf(int)}を使用する.
+     * </pre>
+     *
+     * <pre>
+     * <code>
+     * null
+     * </code>
+     *    または 空白 (&quot;&quot;) の文字列は
+     * <code>
+     * false
+     * </code>
+     * を返却する
+     * </pre>
+     *
+     * <pre>
+     *     Strings2.contains(null, *)     = false
+     *     Strings2.contains(*, null)     = false
+     *     Strings2.contains(&quot;&quot;, &quot;&quot;)      = true
+     *     Strings2.contains(&quot;abc&quot;, &quot;&quot;)   = true
+     *     Strings2.contains(&quot;abc&quot;, &quot;a&quot;)  = true
+     *     Strings2.contains(&quot;abc&quot;, &quot;z&quot;)  = false
+     * </pre>
+     *
+     * @param str       検索対象の文字列
+     * @param searchStr サーチキャラクター
+     * @return 見つかった場合true 見つからない場合falseを返却する
+     */
+    public static boolean contains(String str, String searchStr) {
+        if (str == null || searchStr == null) {
+            return false;
+        }
+        return str.contains(searchStr);
+    }
+    /**
+     * 大文字小文字を無視して特定の文字で始まっているのかどうかを返します。
+     *
+     * @param target1 テキスト
+     * @param target2 比較する文字列
+     * @return 大文字小文字を無視して特定の文字で始まっていれば{@literal true}
+     */
+    public static boolean startsWithIgnoreCase(final String target1, final String target2) {
+        if (isNull(target1) || isNull(target2)) {
+            return false;
+        }
+        final int length1 = target1.length();
+        final int length2 = target2.length();
+        if (length1 < length2) {
+            return false;
+        }
+        final String s1 = target1.substring(0, target2.length());
+        return s1.equalsIgnoreCase(target2);
+    }
+    /**
+     * 特定の文字で始まっているのかどうかを返します。
+     *
+     * @param target1 テキスト
+     * @param target2 比較する文字列
+     * @return 特定の文字で始まっていれば{@literal true}
+     */
+    public static boolean startsWith(final String target1, final String target2) {
+        if (isNull(target1) || isNull(target2)) {
+            return false;
+        }
+        final int length1 = target1.length();
+        final int length2 = target2.length();
+        if (length1 < length2) {
+            return false;
+        }
+        final String s1 = target1.substring(0, target2.length());
+        return s1.equals(target2);
+    }
+
 }
