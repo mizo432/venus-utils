@@ -2,9 +2,12 @@ package org.venuspj.util.strings2;
 
 import org.venuspj.util.base.Joiner;
 
+import java.nio.CharBuffer;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.function.Supplier;
 
 import static org.venuspj.util.collect.Lists2.newArrayList;
 
@@ -50,6 +53,113 @@ public final class Strings2 {
 
     public static String repeat(String string, int count, String aSeparator) {
         return Joiner.on(aSeparator).join(Collections.nCopies(count, string));
+    }
+    /**
+     * 配列文字列をジョインする
+     *
+     * @param stringSupplier ジョイン時のデリミタサプライア
+     * @param strings        配列文字列
+     * @return ジョイン後文字列
+     */
+    public static String join(Supplier<String> stringSupplier, String... strings) {
+        CharSequence c = stringSupplier.get();
+        return join(c, strings);
+    }
+
+    /**
+     * コレクションをデリミタサプライヤを使用しジョインする.
+     * <pre>
+     *     {@code
+     *         String actual = Strings2.join(() -> ", \n", newArrayList("ABC","DEF"));
+     *     }
+     * </pre>
+     *
+     * @param delimiterSupplier ジョイン時のデリミタサプライア
+     * @param strings           コレクション文字列
+     * @return ジョイン後文字列
+     */
+    public static String join(Supplier<String> delimiterSupplier, Collection<String> strings) {
+        CharSequence delimiter = delimiterSupplier.get();
+        return join(delimiter, strings);
+
+    }
+
+    /**
+     * コレクションをデリミタでつなぎジョインする。
+     * <pre>
+     *     {@code
+     *         String actual = Strings2.join(", \n", newArrayList("ABC","DEF"));
+     *     }
+     * </pre>
+     *
+     * @param delimiter  デリミタ
+     * @param stringList 文字列のリスト
+     * @return ジョイン後の文字列
+     */
+    public static String join(CharSequence delimiter, Collection<String> stringList) {
+        StringBuilder sb = new StringBuilder();
+        for (String string : stringList) {
+            sb.append(string).append(delimiter);
+        }
+        if (stringList.size() > 0) {
+            sb.setLength(sb.length() - delimiter.length());
+        }
+        return sb.toString();
+    }
+
+
+    /**
+     * 配列文字列をジョインする
+     *
+     * @param c       ジョイン時のデリミタ
+     * @param strings 配列文字列
+     * @return ジョイン後文字列
+     */
+    public static String join(CharSequence c, String... strings) {
+        StringBuilder sb = new StringBuilder();
+        for (String string : strings) {
+            sb.append(string).append(c);
+        }
+        if (strings.length > 0) {
+            sb.setLength(sb.length() - c.length());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 配列文字列をジョインする
+     *
+     * @param c       ジョイン時のデリミタ
+     * @param strings 配列文字列
+     * @return ジョイン後文字列
+     */
+    public static String join(char c, String... strings) {
+        CharSequence delimiter = CharBuffer.wrap(new char[]{c});
+        return Strings2.join(delimiter, strings);
+
+    }
+
+    /**
+     * System.lineSeparator()をデリミタに使用し、配列文字列をジョインする
+     *
+     * @param strings 配列文字列
+     * @return ジョイン後文字列
+     */
+    public static String join(String... strings) {
+        String delimiter = System.lineSeparator();
+        return join(delimiter, strings);
+    }
+
+    /**
+     * System.lineSeparator()をデリミタに使用し、配列文字列をジョインする
+     *
+     * @param strings 配列文字列
+     * @return ジョイン後文字列
+     */
+    public static String join(Collection<String> strings) {
+        String delimiter = System.lineSeparator();
+        return join(delimiter, strings);
+
     }
 
     public static boolean isNumber(final String str) {
