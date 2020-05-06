@@ -150,3 +150,13 @@ gitRelease {
     artifactId = "venus-utils"
     repoUri = "https://github.com/mizo432/maven-repository.git"
 }
+
+import groovy.json.JsonSlurper
+
+wrapper {
+    doFirst {
+        def versionService = new URL('https://services.gradle.org/versions/current')
+        gradleVersion = new JsonSlurper().parseText(versionService.text).version
+        print("gradleVersion: " + gradleVersion)
+    }
+}

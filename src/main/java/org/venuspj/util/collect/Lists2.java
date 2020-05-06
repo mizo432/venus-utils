@@ -6,6 +6,8 @@ import org.venuspj.util.objects2.Objects2;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.venuspj.util.base.Preconditions.checkElementIndex;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
@@ -295,6 +297,26 @@ public class Lists2 {
         }
 
         private static final long serialVersionUID = 0;
+    }
+
+    /**
+     * コレクションを特定の型のリストに変換する
+     * <pre>
+     *     サンプル
+     *     {@code
+     *      List<MyBean> sourceList = Lists2.newArrayList(MyBean.of("A"),MyBean.of("B"));
+     *      List<String> result = Lists2.transform(sourceList, MyBean::getName);
+     *     }
+     * </pre>
+     *
+     * @param collection 基コレクション
+     * @param function   変換処理
+     * @param <T>        返還前の型
+     * @param <E>        返還後の型
+     * @return 返還後リスト
+     */
+    public static <T, E> List<T> transform(Collection<E> collection, Function<E, T> function) {
+        return collection.stream().map(function).collect(Collectors.toList());
     }
 
 }
