@@ -18,6 +18,8 @@ public final class Strings2 {
      */
     public static final String EMPTY = "";
 
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
     /**
      * 文字列型の空の配列です。
      */
@@ -536,6 +538,176 @@ public final class Strings2 {
         }
         final String s1 = target1.substring(0, target2.length());
         return s1.equals(target2);
+    }
+    public static String[] split(String str) {
+        return split(str, (String) null, -1);
+    }
+
+    public static String[] split(String str, char separatorChar) {
+        return splitWorker(str, separatorChar, false);
+    }
+
+    public static String[] split(String str, String separatorChars, int max) {
+        return splitWorker(str, separatorChars, max, false);
+    }
+
+    private static String[] splitWorker(String str, char separatorChar, boolean preserveAllTokens) {
+        if (str == null) {
+            return new String[]{};
+        } else {
+            int len = str.length();
+            if (len == 0) {
+                return EMPTY_STRING_ARRAY;
+            } else {
+                List<String> list = newArrayList();
+                int i = 0;
+                int start = 0;
+                boolean match = false;
+                boolean lastMatch = false;
+
+                while (true) {
+                    while (i < len) {
+                        if (str.charAt(i) == separatorChar) {
+                            if (match || preserveAllTokens) {
+                                list.add(str.substring(start, i));
+                                match = false;
+                                lastMatch = true;
+                            }
+
+                            ++i;
+                            start = i;
+                        } else {
+                            lastMatch = false;
+                            match = true;
+                            ++i;
+                        }
+                    }
+
+                    if (match || preserveAllTokens && lastMatch) {
+                        list.add(str.substring(start, i));
+                    }
+
+                    return list.toArray(new String[list.size()]);
+                }
+            }
+        }
+    }
+
+    private static String[] splitWorker(String str, String separatorChars, int max,
+                                        boolean preserveAllTokens) {
+        if (isNull(str)) {
+            return new String[]{};
+        } else {
+            int len = str.length();
+            if (len == 0) {
+                return EMPTY_STRING_ARRAY;
+            } else {
+                List<String> list = newArrayList();
+                int sizePlus1 = 1;
+                int i = 0;
+                int start = 0;
+                boolean match = false;
+                boolean lastMatch = false;
+                if (separatorChars != null) {
+                    if (separatorChars.length() != 1) {
+                        label87:
+                        while (true) {
+                            while (true) {
+                                if (i >= len) {
+                                    break label87;
+                                }
+
+                                if (separatorChars.indexOf(str.charAt(i)) >= 0) {
+                                    if (match || preserveAllTokens) {
+                                        lastMatch = true;
+                                        if (sizePlus1++ == max) {
+                                            i = len;
+                                            lastMatch = false;
+                                        }
+
+                                        list.add(str.substring(start, i));
+                                        match = false;
+                                    }
+
+                                    ++i;
+                                    start = i;
+                                } else {
+                                    lastMatch = false;
+                                    match = true;
+                                    ++i;
+                                }
+                            }
+                        }
+                    } else {
+                        char sep = separatorChars.charAt(0);
+
+                        label71:
+                        while (true) {
+                            while (true) {
+                                if (i >= len) {
+                                    break label71;
+                                }
+
+                                if (str.charAt(i) == sep) {
+                                    if (match || preserveAllTokens) {
+                                        lastMatch = true;
+                                        if (sizePlus1++ == max) {
+                                            i = len;
+                                            lastMatch = false;
+                                        }
+
+                                        list.add(str.substring(start, i));
+                                        match = false;
+                                    }
+
+                                    ++i;
+                                    start = i;
+                                } else {
+                                    lastMatch = false;
+                                    match = true;
+                                    ++i;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    label103:
+                    while (true) {
+                        while (true) {
+                            if (i >= len) {
+                                break label103;
+                            }
+
+                            if (Character.isWhitespace(str.charAt(i))) {
+                                if (match || preserveAllTokens) {
+                                    lastMatch = true;
+                                    if (sizePlus1++ == max) {
+                                        i = len;
+                                        lastMatch = false;
+                                    }
+
+                                    list.add(str.substring(start, i));
+                                    match = false;
+                                }
+
+                                ++i;
+                                start = i;
+                            } else {
+                                lastMatch = false;
+                                match = true;
+                                ++i;
+                            }
+                        }
+                    }
+                }
+
+                if (match || preserveAllTokens && lastMatch) {
+                    list.add(str.substring(start, i));
+                }
+
+                return list.toArray(new String[0]);
+            }
+        }
     }
 
 }
