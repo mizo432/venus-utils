@@ -1,162 +1,60 @@
 buildscript {
-    ext {
-        //Library versions
-        assertJVersion = '3.11.1'
-        logbackVersion = '1.1.11'
-        slf4jVersion = '1.7.25'
-        junitVersion = "4.13"
-        findbugsAnnotationsVersion = '3.0.1'
-        guavaVersion = '26.0-jre'
-        // build paramators
-        defaultEncoding = 'UTF-8'
-        spotbugsAnnotationsVersion = "4.0.0-RC1"
-        jcipAnnotationsVersion = '1.0'
-    }
-    repositories {
-        maven {
-            url 'https://plugins.gradle.org/m2/'
-        }
-        maven { url 'http://kamatama41.github.com/maven-repository/repository' }
-        mavenCentral()
-        jcenter()
-
-    }
-    dependencies {
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.13"
-        classpath("com.github.kamatama41:gradle-git-release-plugin:0.2.0")
-        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.5"
-    }
+  ext {
+    //Library versions
+    assertJVersion = '3.11.1'
+    logbackVersion = '1.4.14'
+    slf4jVersion = '2.0.12'
+    junitVersion = '4.13.1'
+    findbugsAnnotationsVersion = '3.0.1'
+    defaultEncoding = 'UTF-8'
+    spotbugsAnnotationsVersion = '4.8.4'
+  }
 }
 
 apply plugin: 'base'
 apply plugin: 'idea'
-apply plugin: "com.github.kamatama41.git-release"
 apply plugin: 'java'
-apply plugin: 'jacoco'
-apply plugin: "maven"
-apply plugin: 'pmd'
-apply plugin: "com.github.spotbugs"
 
 repositories {
-    jcenter()
+  mavenCentral()
 }
 
 group = 'org.venuspj'
-idea.module.outputDir = compileJava.destinationDir
-idea.module.inheritOutputDirs = true
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+  tasks.withType(JavaCompile).tap {
+    configureEach {
+      options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
+  }
 }
 compileJava {
-    doFirst {
-        options.compilerArgs = [
-                "--module-path", classpath.asPath
-        ]
-        classpath = files()
-    }
+  doFirst {
+    options.compilerArgs = [
+            "--module-path", classpath.asPath
+    ]
+    classpath = files()
+  }
 }
-tasks.withType(JavaCompile) {
-    options.incremental = true
+tasks.withType(JavaCompile).configureEach {
+  options.incremental = true
 }
 
 dependencies {
-    compileOnly group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
-    compileOnly "net.jcip:jcip-annotations:${jcipAnnotationsVersion}"
-    compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugsAnnotationsVersion}"
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
-    testImplementation(group: 'junit', name: 'junit', version: "${junitVersion}")
-    testImplementation group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
-    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
-    testImplementation group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+  compileOnly group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+  compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugsAnnotationsVersion}"
+  implementation("org.jetbrains:annotations:24.1.0")
+  testImplementation group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
+  testImplementation group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
+  testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: "${logbackVersion}"
+  testImplementation group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 
-
-}
-spotbugs {
-    // 失敗しても後続の処理を継続させる
-    ignoreFailures = true
-    sourceSets = [sourceSets.main]
-    toolVersion = '3.1.9'
-}
-jacoco {
-    toolVersion = "0.8.2"
-    reportsDir = file("$buildDir/customJacocoReportDir")
-}
-
-pmd {
-    // 失敗しても後続の処理を継続させる
-    ignoreFailures = true
-    sourceSets = [sourceSets.main]
-}
-
-tasks.withType(Pmd) {
-    reports {
-        xml.enabled = true
-    }
-}
-
-// CPD（重複コードチェック処理）をCheckタスクに追加
-check.doLast {
-    File outputDir = new File("$reportsDir/cpd/")
-    outputDir.mkdirs()
-
-    ant.taskdef(
-            name: 'cpd',
-            classname: 'net.sourceforge.pmd.cpd.CPDTask',
-            classpath: configurations.pmd.asPath)
-
-    ant.cpd(
-            minimumTokenCount: '100',
-            format: 'xml',
-            encoding: defaultEncoding,
-            outputFile: new File(outputDir, 'cpd.xml')
-    ) {
-        fileset(dir: "src/main/java") {
-            include(name: '**/*.java')
-            exclude(name: '**/*Mock.java')
-            exclude(name: '**/mybatis/**/*.java')
-        }
-    }
-}
-
-test {
-    // 失敗しても後続の処理を継続させる
-    ignoreFailures = true
-    reports {
-        junitXml.enabled = true
-    }
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-    }
-
-    // カバレッジレポートからテストクラスを除外
-    afterEvaluate {
-        classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/ *Test.class ', '**/*Mock.class', '**/mybatis/**/*.class '])
-        })
-    }
-}
-
-gitRelease {
-    groupId = "org.venuspj"
-    artifactId = "venus-utils"
-    repoUri = "https://github.com/mizo432/maven-repository.git"
-}
-
-import groovy.json.JsonSlurper
-
-wrapper {
-    doFirst {
-        def versionService = new URL('https://services.gradle.org/versions/current')
-        gradleVersion = new JsonSlurper().parseText(versionService.text).version
-        print("gradleVersion: " + gradleVersion)
-    }
+  test {
+    useJUnit()
+  }
 }
