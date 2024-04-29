@@ -1,88 +1,87 @@
 package org.venuspj.util.base;
 
-import org.venuspj.util.annotations.GwtCompatible;
+
+import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 import java.util.Collections;
 import java.util.Set;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
-
 /**
  * Implementation of an {@link Optional} not containing a reference.
  */
-@GwtCompatible
 final class Absent<T> extends Optional<T> {
-    static final Absent<Object> INSTANCE = new Absent<>();
 
-    @SuppressWarnings("unchecked") // implementation is "fully variant"
-    static <T> Optional<T> withType() {
-        return (Optional<T>) INSTANCE;
-    }
+  static final Absent<Object> INSTANCE = new Absent<>();
 
-    private Absent() {
-    }
+  @SuppressWarnings("unchecked") // implementation is "fully variant"
+  static <T> Optional<T> withType() {
+    return (Optional<T>) INSTANCE;
+  }
 
-    @Override
-    public boolean isPresent() {
-        return false;
-    }
+  private Absent() {
+  }
 
-    @Override
-    public T get() {
-        throw new IllegalStateException("Optional.get() cannot be called on an absent value");
-    }
+  @Override
+  public boolean isPresent() {
+    return false;
+  }
 
-    @Override
-    public T or(T defaultValue) {
-        return checkNotNull(defaultValue, "use Optional.orNull() instead of Optional.or(null)");
-    }
+  @Override
+  public T get() {
+    throw new IllegalStateException("Optional.get() cannot be called on an absent value");
+  }
 
-    @SuppressWarnings("unchecked") // safe covariant cast
-    @Override
-    public Optional<T> or(Optional<? extends T> secondChoice) {
-        return (Optional<T>) checkNotNull(secondChoice);
-    }
+  @Override
+  public T or(T defaultValue) {
+    return checkNotNull(defaultValue, "use Optional.orNull() instead of Optional.or(null)");
+  }
 
-    @Override
-    public T or(Supplier<? extends T> supplier) {
-        return checkNotNull(
-                supplier.get(), "use Optional.orNull() instead of a Supplier that returns null");
-    }
+  @SuppressWarnings("unchecked") // safe covariant cast
+  @Override
+  public Optional<T> or(Optional<? extends T> secondChoice) {
+    return (Optional<T>) checkNotNull(secondChoice);
+  }
 
-    @Override
-    public T orNull() {
-        return null;
-    }
+  @Override
+  public T or(Supplier<? extends T> supplier) {
+    return checkNotNull(
+        supplier.get(), "use Optional.orNull() instead of a Supplier that returns null");
+  }
 
-    @Override
-    public Set<T> asSet() {
-        return Collections.emptySet();
-    }
+  @Override
+  public T orNull() {
+    return null;
+  }
 
-    @Override
-    public <V> Optional<V> transform(Function<? super T, V> function) {
-        checkNotNull(function);
-        return Optional.absent();
-    }
+  @Override
+  public Set<T> asSet() {
+    return Collections.emptySet();
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        return object == this;
-    }
+  @Override
+  public <V> Optional<V> transform(Function<? super T, V> function) {
+    checkNotNull(function);
+    return Optional.absent();
+  }
 
-    @Override
-    public int hashCode() {
-        return 0x79a31aac;
-    }
+  @Override
+  public boolean equals(Object object) {
+    return object == this;
+  }
 
-    @Override
-    public String toString() {
-        return "Optional.absent()";
-    }
+  @Override
+  public int hashCode() {
+    return 0x79a31aac;
+  }
 
-    private Object readResolve() {
-        return INSTANCE;
-    }
+  @Override
+  public String toString() {
+    return "Optional.absent()";
+  }
 
-    private static final long serialVersionUID = 0;
+  private Object readResolve() {
+    return INSTANCE;
+  }
+
+  private static final long serialVersionUID = 0;
 }

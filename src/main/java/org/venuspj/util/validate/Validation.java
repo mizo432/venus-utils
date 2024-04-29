@@ -1,22 +1,23 @@
 package org.venuspj.util.validate;
 
 import java.util.Optional;
-import java.util.function.Supplier;
 
 public interface Validation {
-    Optional<String> run();
 
-    static ValidationErrorMessage of(ErrorCondition condition) {
-        return errorMessage -> {
-            if(condition.hasError()) {
-                return () -> Optional.ofNullable(errorMessage.get());
+  Optional<String> run();
 
-            } else
-                return Optional::empty;
-        };
-    }
+  static ValidationErrorMessage of(ErrorCondition condition) {
+    return errorMessage -> {
+        if (condition.hasError()) {
+            return () -> Optional.ofNullable(errorMessage.get());
 
-    static ValidationErrorMessage notNull(NullableSupplier input) {
-        return of(input::isNull);
-    }
+        } else {
+            return Optional::empty;
+        }
+    };
+  }
+
+  static ValidationErrorMessage notNull(NullableSupplier input) {
+    return of(input::isNull);
+  }
 }
