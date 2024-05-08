@@ -1,5 +1,6 @@
 package org.venuspj.util.dateProvider;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -55,6 +56,13 @@ public class DateProvider {
   public static YearMonth currentYearMonth() {
     LocalDateTime currentDateTime = currentLocalDateTime();
     return YearMonth.of(currentDateTime.getYear(), currentDateTime.getMonth());
+  }
+
+  public static long currentTimeMillis() {
+    LocalDateTime currentLocalDateTime = currentLocalDateTime();
+    Instant instant = currentLocalDateTime.atZone(ZoneId.systemDefault()).toInstant();
+    return instant.toEpochMilli();
+    
   }
 
   protected LocalDateTime now() {
