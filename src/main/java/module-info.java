@@ -9,9 +9,11 @@ module venus.utils.main {
   exports org.venuspj.util.convert;
   exports org.venuspj.util.collect;
   exports org.venuspj.util.builder;
+  exports org.venuspj.util.entity.generator;
   exports org.venuspj.util.exception;
   exports org.venuspj.util.dateProvider;
   exports org.venuspj.util.primitives;
+  exports org.venuspj.util.primitives.application;
   exports org.venuspj.util.io;
   exports org.venuspj.util.lang;
   exports org.venuspj.util.misc;
@@ -20,4 +22,6 @@ module venus.utils.main {
   exports org.venuspj.util.uuidProvider;
   exports org.venuspj.util.text;
   exports org.venuspj.util.beans.factory;
+  exports org.venuspj.util.io.ipadress;
+  exports org.venuspj.util.taple;
 }
