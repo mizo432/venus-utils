@@ -2,7 +2,7 @@ package org.venuspj.util.objects2;
 
 import static org.venuspj.util.base.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Lists2.newArrayList;
-import static org.venuspj.util.collect.Maps2.newHashMap;
+import static org.venuspj.util.collect.Lists2.newArrayListWithCapacity;
 import static org.venuspj.util.collect.Sets2.newHashSet;
 
 import java.lang.reflect.Field;
@@ -14,14 +14,16 @@ import java.time.LocalTime;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Currency;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import org.venuspj.util.collect.Sets2;
 import org.venuspj.util.strings2.Strings2;
 
 public class Objects2 {
@@ -42,10 +44,6 @@ public class Objects2 {
     return Objects.hash(values);
   }
 
-  public static ToStringHelper toStringHelper(Class<?> selfClass) {
-    return toStringHelper(selfClass.getSimpleName());
-  }
-
   public static ToStringHelper toStringHelper(Object self) {
     return new ToStringHelper(self);
   }
@@ -53,7 +51,6 @@ public class Objects2 {
 
   public static final class ToStringHelper {
 
-    private final String className;
     private final Object instance;
     private final List<ValueHolder> valueHolders = newArrayList();
     boolean prettyPrint = true;
@@ -61,16 +58,17 @@ public class Objects2 {
     private boolean multiLine = false;
     private boolean hideFieldNames = false;
 
-    private ToStringHelper(String className) {
-      this.className = checkNotNull(className);
-      this.instance = null;
-    }
-
     private ToStringHelper(Object anInstance) {
-      this.className = anInstance.getClass().getSimpleName();
       this.instance = anInstance;
     }
 
+    /**
+     * omitNullValuesフラグをtrueに設定します。
+     * <p>
+     * このフラグは、null値を出力から省略するかどうかを決定します。
+     *
+     * @return 現在のToStringHelperオブジェクト。
+     */
     public ToStringHelper omitNullValues() {
       omitNullValues = true;
       return this;
@@ -104,34 +102,6 @@ public class Objects2 {
       return addHolder(name, String.valueOf(value));
     }
 
-    public ToStringHelper addValue(Object value) {
-      return addHolder(value);
-    }
-
-    public ToStringHelper addValue(boolean value) {
-      return addHolder(String.valueOf(value));
-    }
-
-    public ToStringHelper addValue(char value) {
-      return addHolder(String.valueOf(value));
-    }
-
-    public ToStringHelper addValue(double value) {
-      return addHolder(String.valueOf(value));
-    }
-
-    public ToStringHelper addValue(float value) {
-      return addHolder(String.valueOf(value));
-    }
-
-    public ToStringHelper addValue(int value) {
-      return addHolder(String.valueOf(value));
-    }
-
-    public ToStringHelper addValue(long value) {
-      return addHolder(String.valueOf(value));
-    }
-
     @Override
     public String toString() {
 
@@ -140,15 +110,18 @@ public class Objects2 {
       }
 
       try {
-          if (isPrimitiveLike(instance.getClass())) {
-              return instance.toString();
-          }
+        if (isPrimitiveLike(instance.getClass())) {
+          return instance.toString();
+        }
+        if (instance instanceof Enum<?>) {
+          return ((Enum<?>) instance).name();
+        }
         IndentationAwareStringBuilder builder = new IndentationAwareStringBuilder();
         if (isIterable(instance)) {
           internalToString(instance, builder);
           return builder.toString();
         }
-        builder.append(className);
+        builder.append(toSimpleReferenceString(instance));
         builder.append("{");
         String nextSeparator = "";
         if (multiLine && valueHolders.size() > 1) {
@@ -198,7 +171,7 @@ public class Objects2 {
         return;
       }
       try {
-        builder.append(className);
+        builder.append(toSimpleReferenceString(instance));
         builder.append("{");
         String nextSeparator = "";
         if (multiLine && valueHolders.size() > 1) {
@@ -247,21 +220,41 @@ public class Objects2 {
       return this;
     }
 
+    /**
+     * インスタンスのクラスに宣言された全てのフィールドをToStringHelperオブジェクトに追加します。
+     *
+     * @return フィールドが追加されたToStringHelperオブジェクト。
+     */
     public ToStringHelper addAllFields() {
-      if (nonNull(instance)) {
-          for (Field field : instance.getClass().getDeclaredFields()) {
-              addField(field);
-          }
+      if (isNull(instance)) {
+        return this;
+      }
+      if (isPrimitiveLike(instance.getClass()) || isIterable(instance)
+          || instance instanceof Enum<?>) {
+        return this;
+      }
+      for (Field field : instance.getClass().getDeclaredFields()) {
+        addField(field);
       }
       return this;
     }
 
+    /**
+     * インスタンスのクラスで宣言されたすべてのフィールドをToStringHelperオブジェクトに追加します。
+     *
+     * @return フィールドが追加されたToStringHelperオブジェクト。
+     */
     public ToStringHelper addAllDeclaredFields() {
-        if (nonNull(instance)) {
-            for (Field field : getAllDeclaredFields(instance.getClass())) {
-                addField(field);
-            }
-        }
+      if (isNull(instance)) {
+        return this;
+      }
+      if (isPrimitiveLike(instance.getClass()) || isIterable(instance)
+          || instance instanceof Enum<?>) {
+        return this;
+      }
+      for (Field field : getAllDeclaredFields(instance.getClass())) {
+        addField(field);
+      }
       return this;
     }
 
@@ -315,35 +308,33 @@ public class Objects2 {
         return;
       }
       if (prettyPrint) {
-        if (object instanceof Iterable<?>) {
-          serializeIterable((Iterable) object, sb);
-        } else if (object instanceof Map<?, ?>) {
-          serializeMap((Map) object, sb);
-        } else if (object instanceof Object[]) {
-          sb.append(Arrays.toString((Object[]) object));
-        } else if (object instanceof byte[]) {
-          sb.append(Arrays.toString((byte[]) object));
-        } else if (object instanceof char[]) {
-          sb.append(Arrays.toString((char[]) object));
-        } else if (object instanceof int[]) {
-          sb.append(Arrays.toString((int[]) object));
-        } else if (object instanceof boolean[]) {
-          sb.append(Arrays.toString((boolean[]) object));
-        } else if (object instanceof long[]) {
-          sb.append(Arrays.toString((long[]) object));
-        } else if (object instanceof float[]) {
-          sb.append(Arrays.toString((float[]) object));
-        } else if (object instanceof double[]) {
-          sb.append(Arrays.toString((double[]) object));
-        } else if (object instanceof CharSequence) {
+        if (isPrimitiveLike(object.getClass())) {
+          sb.append(object.toString());
+          return;
+        }
+        if (object instanceof Enum<?>) {
+          sb.append(((Enum<?>) object).name());
+          return;
+        }
+        if (object instanceof Collection<?>) {
+          serializeCollection((Collection<?>) object, sb);
+          return;
+        }
+        if (object instanceof Map<?, ?>) {
+          serializeMap((Map<?, ?>) object, sb);
+          return;
+        }
+        if (object instanceof Object[]) {
+          serializeCollection(Arrays.asList((Object[]) object), sb);
+          return;
+        }
+        if (object instanceof CharSequence) {
           sb.append("\"")
               .append(((CharSequence) object).toString().replace("\n", "\\n").replace("\r", "\\r"))
               .append("\"");
-        } else if (object instanceof Enum<?>) {
-          sb.append(((Enum) object).name());
-        } else if (object.getClass().isPrimitive()) {
-          sb.append(String.valueOf(object));
-        } else if (isPrimitiveLike(object.getClass())) {
+          return;
+        }
+        if (object.getClass().isPrimitive()) {
           sb.append(String.valueOf(object));
         } else {
           toStringHelper(object).addAllDeclaredFields().configFrom(this).convertToString(sb);
@@ -353,8 +344,8 @@ public class Objects2 {
       }
     }
 
-    private void serializeMap(Map object, IndentationAwareStringBuilder sb) {
-      serializeIterable(object.entrySet(), sb);
+    private void serializeMap(Map<?, ?> object, IndentationAwareStringBuilder sb) {
+      serializeCollection(object.entrySet(), sb);
     }
 
     private ToStringHelper configFrom(ToStringHelper toStringHelper) {
@@ -364,44 +355,66 @@ public class Objects2 {
       return this;
     }
 
+    private static final Set<Class<?>> primitiveLikeClasses = newHashSet(
+        Integer.class,
+        LocalTime.class,
+        LocalDateTime.class,
+        YearMonth.class,
+        Year.class,
+        LocalDate.class,
+        Short.class,
+        UUID.class,
+        Currency.class,
+        Locale.class,
+        Boolean.class,
+        URI.class,
+        Long.class,
+        String.class,
+        Enum.class,
+        Double.class);
+
     private boolean isPrimitiveLike(Class<?> aClazz) {
-      final Set<Class<?>> primitiveLikeClasses = newHashSet(
-          Integer.class,
-          LocalTime.class,
-          LocalDateTime.class,
-          YearMonth.class,
-          Year.class,
-          LocalDate.class,
-          Short.class,
-          UUID.class,
-          Currency.class,
-          Locale.class,
-          Boolean.class, URI.class, Long.class, Double.class);
       return primitiveLikeClasses.contains(aClazz);
 
     }
 
-    private void serializeIterable(Iterable<?> object, IndentationAwareStringBuilder sb) {
-      Iterator<?> iterator = object.iterator();
-      sb.append(object.getClass().getSimpleName()).append("[");
+    private static final int MAX_RECORD = 5;
+
+    private <I> void serializeCollection(Collection<I> object, IndentationAwareStringBuilder sb) {
+      List<I> wkList = newArrayListWithCapacity(object.size());
+      wkList.addAll(object);
+      int collectionSize = wkList.size();
+      sb.append("[");
+
       if (multiLine) {
         sb.increaseIndent();
       }
-      boolean wasEmpty = true;
-      while (iterator.hasNext()) {
-        wasEmpty = false;
+      for (int index = 0; index < collectionSize; index++) {
         if (multiLine) {
           sb.newLine();
         }
-        internalToString(iterator.next(), sb);
-        if (iterator.hasNext()) {
-          sb.append(",");
+        if (MAX_RECORD <= index) {
+          sb.append(" 計 ").append(String.valueOf(collectionSize)).append("件");
+          break;
         }
+        Object indexedObject = wkList.get(index);
+        if (indexedObject instanceof Map.Entry<?, ?>) {
+          Map.Entry<?, ?> entry = (Entry<?, ?>) indexedObject;
+          internalToString(entry.getKey(), sb);
+          sb.append(":");
+          internalToString(entry.getValue(), sb);
+        } else {
+          internalToString(indexedObject, sb);
+        }
+        if (index + 1 < collectionSize && index + 1 != MAX_RECORD) {
+          sb.append(", ");
+        }
+
       }
       if (multiLine) {
         sb.decreaseIndent();
       }
-      if (!wasEmpty && multiLine) {
+      if (!(collectionSize == 0) && multiLine) {
         sb.newLine();
       }
       sb.append("]");
@@ -453,21 +466,47 @@ public class Objects2 {
     }
   }
 
+  /**
+   * このクラスはtoString() メソッドのためのコンテキストを提供し、オブジェクトが現在処理中かどうかを追跡できるようにします。
+   * <p>
+   * これにより、無限再帰を防ぎます。
+   */
   static class ToStringContext {
 
     public static ToStringContext INSTANCE = new ToStringContext();
 
-    static ThreadLocal<Map<Object, Boolean>> currentlyProcessed = new ThreadLocal<>();
+    /**
+     * この変数は、toString()メソッドのコンテキストを提供し、オブジェクトが現在処理中であるかを追跡するThreadLocalオブジェクトです。
+     * <p>
+     * これにより、無限再帰が防止されます。
+     *
+     * @see ToStringContext#currentlyProcessed
+     * @see ThreadLocal
+     * @see Set
+     */
+    static ThreadLocal<Set<Object>> currentlyProcessed = new ThreadLocal<>();
 
+    /**
+     * 指定されたオブジェクトの処理を開始します。
+     *
+     * @param obj 処理するべきオブジェクト。
+     * @return オブジェクトが正常に処理リストに追加された場合はtrue、それ以外の場合はfalseを返します。
+     */
     public boolean startProcessing(Object obj) {
-        if (isNull(currentlyProcessed.get())) {
-            currentlyProcessed.set(newHashMap());
-        }
-      return currentlyProcessed.get().put(obj, Boolean.TRUE) == null;
+      if (isNull(currentlyProcessed.get())) {
+        currentlyProcessed.set(Sets2.newHashSet());
+      }
+      return currentlyProcessed.get().add(obj);
     }
 
+    /**
+     * 現在処理中のオブジェクトから指定したオブジェクトを削除します。
+     *
+     * @param obj 現在処理中のオブジェクトから削除するオブジェクト
+     */
     public void endProcessing(Object obj) {
       currentlyProcessed.get().remove(obj);
+
     }
 
   }
