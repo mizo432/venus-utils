@@ -5,12 +5,19 @@ import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Lists2.newArrayListWithCapacity;
 import static org.venuspj.util.collect.Sets2.newHashSet;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.MonthDay;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.Arrays;
@@ -44,16 +51,49 @@ public class Objects2 {
     return Objects.hash(values);
   }
 
+  /**
+   * 指定されたオブジェクトのための新しい{@link ToStringHelper}インスタンスを返します。
+   *
+   * <pre>使用例1:
+   * {@code String result = toStringHelper(anyObject)
+   *   .defaultConfig()
+   *   .toString();
+   * }</pre>
+   * <pre>使用例2:
+   * {@code String result = toStringHelper(anyObject)
+   *   .addAllFields() // オブジェクトに定義されたプロパティを対象とする
+   *   .omitNullValue() // nullプロパティは出力しない
+   *   .toString();
+   * }</pre>
+   * <pre>使用例3:
+   * {@code String result = toStringHelper(anyObject)
+   *   .addAllDeclaredFields() //オブジェクトとその継承元クラスに含まれるプロパティを対象とする
+   *   .multiLine() // 複数行で表現する
+   *   .toString();
+   * }</pre>
+   *
+   * @param self ToStringHelperを作成する対象のオブジェクト
+   * @return 新しいToStringHelperインスタンス
+   */
   public static ToStringHelper toStringHelper(Object self) {
     return new ToStringHelper(self);
   }
 
 
+  /**
+   * The ToStringHelper class provides a convenient way to create string representations of
+   * objects.
+   */
+  /*
+   * フルエントAPIを使用してオブジェクトの文字列表現を作成するためのヘルパークラス。
+   */
   public static final class ToStringHelper {
 
+    /**
+     * プライベートなfinalインスタンス変数を表します。
+     */
     private final Object instance;
     private final List<ValueHolder> valueHolders = newArrayList();
-    boolean prettyPrint = true;
     private boolean omitNullValues = false;
     private boolean multiLine = false;
     private boolean hideFieldNames = false;
@@ -74,41 +114,107 @@ public class Objects2 {
       return this;
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, Object value) {
       return addHolder(name, value);
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, boolean value) {
       return addHolder(name, String.valueOf(value));
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, char value) {
       return addHolder(name, String.valueOf(value));
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, double value) {
       return addHolder(name, String.valueOf(value));
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, float value) {
       return addHolder(name, String.valueOf(value));
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, int value) {
       return addHolder(name, String.valueOf(value));
     }
 
+    /**
+     * 名前と値のペアをToStringHelperオブジェクトに追加します。
+     *
+     * @param name 値の名前。
+     * @param value 追加する値。
+     * @return 名前と値のペアを追加したToStringHelperオブジェクト。
+     */
     public ToStringHelper add(String name, long value) {
       return addHolder(name, String.valueOf(value));
     }
 
+    /**
+     * オブジェクトの文字列表現を返します。
+     * <p>
+     * オブジェクトが既に処理されている場合は、シンプルな参照文字列が返されます。
+     * <p>
+     * それ以外の場合、次のルールを使用してオブジェクトが処理され、文字列に変換されます：
+     *   <ul>
+     *     <li>オブジェクトがプリミティブ風のクラスの場合、そのtoString()メソッドが呼び出され、その結果が返されます。</li>
+     *     <li>オブジェクトが列挙型(Enum)の場合、その名前が返されます。</li>
+     *     <li>オブジェクトがIterable（Map、配列、プリミティブ配列を含む）の場合、要素が処理され、文字列に追加されます。</li>
+     *   </ul>
+     * オブジェクトのシンプルな参照文字列には、そのフィールドとその値のカンマ区切りリストが追加されます。
+     *
+     * @return オブジェクトの文字列表現
+     */
     @Override
     public String toString() {
 
       if (!ToStringContext.INSTANCE.startProcessing(instance)) {
         return toSimpleReferenceString(instance);
       }
-
+      if (isSimpleType(instance)) {
+        return toSimpleReferenceString(instance);
+      }
       try {
         if (isPrimitiveLike(instance.getClass())) {
           return instance.toString();
@@ -149,6 +255,13 @@ public class Objects2 {
       } finally {
         ToStringContext.INSTANCE.endProcessing(instance);
       }
+    }
+
+    private boolean isSimpleType(Object object) {
+      return object instanceof InputStream ||
+          object instanceof OutputStream ||
+          object instanceof Reader ||
+          object instanceof Writer;
     }
 
     private boolean isIterable(Object object) {
@@ -195,7 +308,6 @@ public class Objects2 {
           builder.decreaseIndent().newLine();
         }
         builder.append("}");
-        return;
       } finally {
         ToStringContext.INSTANCE.endProcessing(instance);
       }
@@ -205,12 +317,6 @@ public class Objects2 {
       ToStringHelper.ValueHolder valueHolder = new ToStringHelper.ValueHolder();
       valueHolders.add(valueHolder);
       return valueHolder;
-    }
-
-    private ToStringHelper addHolder(Object value) {
-      ToStringHelper.ValueHolder valueHolder = addHolder();
-      valueHolder.value = value;
-      return this;
     }
 
     private ToStringHelper addHolder(String name, Object value) {
@@ -229,7 +335,7 @@ public class Objects2 {
       if (isNull(instance)) {
         return this;
       }
-      if (isPrimitiveLike(instance.getClass()) || isIterable(instance)
+      if (isPrimitiveLike(instance.getClass()) || isIterable(instance) || isSimpleType(instance)
           || instance instanceof Enum<?>) {
         return this;
       }
@@ -248,7 +354,7 @@ public class Objects2 {
       if (isNull(instance)) {
         return this;
       }
-      if (isPrimitiveLike(instance.getClass()) || isIterable(instance)
+      if (isPrimitiveLike(instance.getClass()) || isIterable(instance) || isSimpleType(instance)
           || instance instanceof Enum<?>) {
         return this;
       }
@@ -284,17 +390,22 @@ public class Objects2 {
       return obj.getClass().getSimpleName() + "@" + System.identityHashCode(obj);
     }
 
+    /**
+     * multiLine フラグを true に設定します。
+     *
+     * @return 現在の ToStringHelper オブジェクト。
+     */
     public ToStringHelper multiLine() {
       multiLine = true;
       return this;
 
     }
 
-    ToStringHelper verbatimValues() {
-      prettyPrint = false;
-      return this;
-    }
-
+    /**
+     * ToStringHelperオブジェクトのデフォルト設定をします。
+     *
+     * @return 現在のToStringHelperオブジェクト。
+     */
     public ToStringHelper defaultConfig() {
       addAllDeclaredFields()
           .omitNullValues()
@@ -307,38 +418,34 @@ public class Objects2 {
         sb.append("null");
         return;
       }
-      if (prettyPrint) {
-        if (isPrimitiveLike(object.getClass())) {
-          sb.append(object.toString());
-          return;
-        }
-        if (object instanceof Enum<?>) {
-          sb.append(((Enum<?>) object).name());
-          return;
-        }
-        if (object instanceof Collection<?>) {
-          serializeCollection((Collection<?>) object, sb);
-          return;
-        }
-        if (object instanceof Map<?, ?>) {
-          serializeMap((Map<?, ?>) object, sb);
-          return;
-        }
-        if (object instanceof Object[]) {
-          serializeCollection(Arrays.asList((Object[]) object), sb);
-          return;
-        }
-        if (object instanceof CharSequence) {
-          sb.append("\"")
-              .append(((CharSequence) object).toString().replace("\n", "\\n").replace("\r", "\\r"))
-              .append("\"");
-          return;
-        }
-        if (object.getClass().isPrimitive()) {
-          sb.append(String.valueOf(object));
-        } else {
-          toStringHelper(object).addAllDeclaredFields().configFrom(this).convertToString(sb);
-        }
+      if (isPrimitiveLike(object.getClass())) {
+        sb.append(object.toString());
+        return;
+      }
+      if (object instanceof Enum<?>) {
+        sb.append(((Enum<?>) object).name());
+        return;
+      }
+      if (object instanceof Collection<?>) {
+        serializeCollection((Collection<?>) object, sb);
+        return;
+      }
+      if (object instanceof Map<?, ?>) {
+        serializeMap((Map<?, ?>) object, sb);
+        return;
+      }
+      if (object instanceof Object[]) {
+        serializeCollection(Arrays.asList((Object[]) object), sb);
+        return;
+      }
+      if (object instanceof CharSequence) {
+        sb.append("\"")
+            .append(((CharSequence) object).toString().replace("\n", "\\n").replace("\r", "\\r"))
+            .append("\"");
+        return;
+      }
+      if (object.getClass().isPrimitive()) {
+        sb.append(String.valueOf(object));
       } else {
         toStringHelper(object).addAllDeclaredFields().configFrom(this).convertToString(sb);
       }
@@ -359,6 +466,7 @@ public class Objects2 {
         Integer.class,
         LocalTime.class,
         LocalDateTime.class,
+        MonthDay.class,
         YearMonth.class,
         Year.class,
         LocalDate.class,
@@ -371,6 +479,8 @@ public class Objects2 {
         Long.class,
         String.class,
         Enum.class,
+        BigInteger.class,
+        BigDecimal.class,
         Double.class);
 
     private boolean isPrimitiveLike(Class<?> aClazz) {

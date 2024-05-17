@@ -1,16 +1,24 @@
 package org.venuspj.util.objects2;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
 import static org.venuspj.util.objects2.Objects2.toStringHelper;
 import static org.venuspj.util.strings2.Strings2.EMPTY_STRING_ARRAY;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.venuspj.util.objects2.Objects2.ToStringHelper;
 
+/**
+ * このクラスは、{@link ToStringHelper}クラスのテストメソッドを含みます。
+ */
 public class ToStringHelperTest {
 
 
@@ -112,10 +120,32 @@ public class ToStringHelperTest {
   }
 
   @Test
+  public void bigDecimalDirect() {
+    BigDecimal given = BigDecimal.valueOf(1.1d);
+    String actual = toStringHelper(given).defaultConfig().toString();
+    assertThat(actual).isNotNull().isEqualTo("1.1");
+  }
+
+  @Test
+  public void bigIntegerDirect() {
+    BigInteger given = BigInteger.valueOf(1);
+    String actual = toStringHelper(given).defaultConfig().toString();
+    assertThat(actual).isNotNull().isEqualTo("1");
+  }
+
+  @Test
+  public void simpleDirect() {
+    InputStream given = new ByteArrayInputStream(new byte[0]);
+    String actual = toStringHelper(given).defaultConfig().toString();
+    assertThat(actual).isNotNull();
+    System.out.println(actual);
+  }
+
+  @Test
   public void enumDirect() {
     Succeed given = Succeed.FAILURE;
     String actual = toStringHelper(given).defaultConfig().toString();
-    assertThat(actual).isNotNull();
+    assertThat(actual).isNotNull().isEqualTo("FAILURE");
     System.out.println(actual);
   }
 
