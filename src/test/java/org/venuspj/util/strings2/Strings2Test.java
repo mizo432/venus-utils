@@ -5,6 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+/**
+ * このクラスはStrings2クラスのための単体テストが含まれています。
+ */
 class Strings2Test {
 
   /**
