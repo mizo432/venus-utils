@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class Strings2Test {
+class Strings2Test {
 
   /**
    * Method under test: {@link Strings2#defaultIfEmpty(String, String)}
@@ -58,7 +58,7 @@ public class Strings2Test {
    * Method under test: {@link Strings2#splitWorker(String, String, int, boolean)}
    */
   @Test
-  public void splitWorker() {
+  void splitWorker() {
     // Arrange, Act and Assert
     assertThat(Strings2.splitWorker("Str", "Separator Chars", 3, true))
         .isEqualTo(new String[]{Strings2.EMPTY, Strings2.EMPTY, "r"});
@@ -79,7 +79,7 @@ public class Strings2Test {
   class IsEmptyTest {
 
     @Test
-    public void test01() throws Exception {
+    void test01() {
       String arg = "";
       boolean actual = Strings2.isEmpty(arg);
       assertThat(actual).isTrue();
@@ -87,7 +87,7 @@ public class Strings2Test {
     }
 
     @Test
-    public void test02() throws Exception {
+    void test02() {
       String arg = null;
       boolean actual = Strings2.isEmpty(arg);
       assertThat(actual).isTrue();
@@ -95,7 +95,7 @@ public class Strings2Test {
     }
 
     @Test
-    public void test03() throws Exception {
+    void test03() {
       String arg = "A";
       boolean actual = Strings2.isEmpty(arg);
       assertThat(actual).isFalse();
@@ -107,7 +107,7 @@ public class Strings2Test {
   class IsNotEmptyTest {
 
     @Test
-    public void test01() {
+    void test01() {
       String arg = "";
       boolean actual = Strings2.isNotEmpty(arg);
       assertThat(actual).isFalse();
@@ -115,7 +115,7 @@ public class Strings2Test {
     }
 
     @Test
-    public void test02() {
+    void test02() {
       String arg = "";
       boolean actual = Strings2.isNotEmpty(arg);
       assertThat(actual).isFalse();
@@ -123,7 +123,7 @@ public class Strings2Test {
     }
 
     @Test
-    public void test03() throws Exception {
+    void test03() {
       String arg = "A";
       boolean actual = Strings2.isNotEmpty(arg);
       assertThat(actual).isTrue();
@@ -135,161 +135,161 @@ public class Strings2Test {
   class IsNumberTest {
 
     @Test
-    public void test01() {
+    void test01() {
       String arg = "";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test02() {
+    void test02() {
       String arg = "1";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test03() throws Exception {
+    void test03() {
       String arg = " 1";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test04() throws Exception {
+    void test04() {
       String arg = "3 ";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test05() throws Exception {
+    void test05() {
       String arg = String.valueOf(Integer.MIN_VALUE);
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test06() throws Exception {
+    void test06() {
       String arg = String.valueOf(Integer.MAX_VALUE);
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test07() throws Exception {
+    void test07() {
       String arg = "0x10";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test08() throws Exception {
+    void test08() {
       String arg = "0.1";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test09() throws Exception {
+    void test09() {
       String arg = "0xf";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test11() throws Exception {
+    void test11() {
       String arg = "0xff";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test12() throws Exception {
+    void test12() {
       String arg = "0xG";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test13() throws Exception {
+    void test13() {
       String arg = "0x ";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test14() throws Exception {
+    void test14() {
       String arg = "1e3";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test22() throws Exception {
+    void test22() {
       String arg = "1";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test23() throws Exception {
+    void test23() {
       String arg = "- 1";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test24() throws Exception {
+    void test24() {
       String arg = "-3 ";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test27() throws Exception {
+    void test27() {
       String arg = "-0x10";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test28() throws Exception {
+    void test28() {
       String arg = "-0.1";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test29() throws Exception {
+    void test29() {
       String arg = "-0xf";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test31() throws Exception {
+    void test31() {
       String arg = "-0xff";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
     }
 
     @Test
-    public void test32() throws Exception {
+    void test32() {
       String arg = "-0xG";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test33() throws Exception {
+    void test33() {
       String arg = "-0x ";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isFalse();
     }
 
     @Test
-    public void test34() throws Exception {
+    void test34() {
       String arg = "-1e3";
       boolean actual = Strings2.isNumber(arg);
       assertThat(actual).isTrue();
@@ -301,42 +301,42 @@ public class Strings2Test {
   class RepeatTest {
 
     @Test
-    public void repeat1() throws Exception {
+    void repeat1() {
       String actual = Strings2.repeat("1", 1);
       assertThat(actual).isNotNull().isEqualTo("1");
 
     }
 
     @Test
-    public void repeat2() throws Exception {
+    void repeat2() {
       String actual = Strings2.repeat("12", 1);
       assertThat(actual).isNotNull().isEqualTo("12");
 
     }
 
     @Test
-    public void repeat3() {
+    void repeat3() {
       String actual = Strings2.repeat("12", 3);
       assertThat(actual).isNotNull().isEqualTo("121212");
 
     }
 
     @Test
-    public void repeat11() {
+    void repeat11() {
       String actual = Strings2.repeat("1", 1, ", ");
       assertThat(actual).isNotNull().isEqualTo("1");
 
     }
 
     @Test
-    public void repeat12() {
+    void repeat12() {
       String actual = Strings2.repeat("12", 1, ", ");
       assertThat(actual).isNotNull().isEqualTo("12");
 
     }
 
     @Test
-    public void repeat13() {
+    void repeat13() {
       String actual = Strings2.repeat("12", 3, ", ");
       assertThat(actual).isNotNull().isEqualTo("12, 12, 12");
 
