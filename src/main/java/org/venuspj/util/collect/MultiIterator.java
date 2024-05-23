@@ -1,9 +1,9 @@
 package org.venuspj.util.collect;
 
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.util.Iterator;
+import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VNoSuchElementException;
 import org.venuspj.util.exception.VUnsupportedOperationException;
 
@@ -48,7 +48,7 @@ public class MultiIterator<E> implements Iterator<E> {
    */
   @SafeVarargs
   public static <E> Iterable<E> iterable(final Iterable<E>... iterables) {
-    assertArgumentNotNull("iterables", iterables);
+    Preconditions.checkNotNull(iterables, () -> new NullArgumentException("iterables"));
 
     @SuppressWarnings("unchecked") final Iterator<E>[] iterators = new Iterator[iterables.length];
     for (int i = 0; i < iterables.length; ++i) {
@@ -66,7 +66,7 @@ public class MultiIterator<E> implements Iterator<E> {
    */
   @SafeVarargs
   public static <E> Iterable<E> iterable(final Iterator<E>... iterators) {
-    assertArgumentNotNull("iterators", iterators);
+    Preconditions.checkNotNull(iterators, () -> new NullArgumentException("iterators"));
 
     return () -> new MultiIterator<>(iterators);
 
@@ -79,7 +79,7 @@ public class MultiIterator<E> implements Iterator<E> {
    */
   @SafeVarargs
   public MultiIterator(final Iterator<E>... iterators) {
-    assertArgumentNotNull("iterators", iterators);
+    Preconditions.checkNotNull(iterators, () -> new NullArgumentException("iterators"));
     this.iterators = iterators;
   }
 

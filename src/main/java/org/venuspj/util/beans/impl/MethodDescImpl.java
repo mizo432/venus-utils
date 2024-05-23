@@ -1,16 +1,15 @@
 package org.venuspj.util.beans.impl;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.MethodDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
 import org.venuspj.util.exception.MethodNotStaticRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.lang.Methods;
 
 /**
@@ -60,8 +59,8 @@ public class MethodDescImpl implements MethodDesc {
    * @param method メソッド。{@literal null}であってはいけません
    */
   public MethodDescImpl(final BeanDesc beanDesc, final Method method) {
-    assertArgumentNotNull("beanDesc", beanDesc);
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(beanDesc, () -> new NullArgumentException("beanDesc"));
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     this.beanDesc = beanDesc;
     this.method = method;
@@ -131,7 +130,7 @@ public class MethodDescImpl implements MethodDesc {
 
   @Override
   public boolean isParameterized(final int index) {
-    assertArgumentArrayIndex("index", index, parameterTypes.length);
+    Preconditions.checkArgumentArrayIndex("index", index, parameterTypes.length);
 
     return parameterizedClassDescs[index].isParameterizedClass();
   }
@@ -153,7 +152,7 @@ public class MethodDescImpl implements MethodDesc {
 
   @Override
   public Class<?> getElementClassOfCollection(final int index) {
-    assertArgumentArrayIndex("index", index, parameterTypes.length);
+    Preconditions.checkArgumentArrayIndex("index", index, parameterTypes.length);
 
     if (!Collection.class.isAssignableFrom(parameterTypes[index])
         || !isParameterized(index)) {
@@ -169,7 +168,7 @@ public class MethodDescImpl implements MethodDesc {
 
   @Override
   public Class<?> getKeyClassOfMap(final int index) {
-    assertArgumentArrayIndex("index", index, parameterTypes.length);
+    Preconditions.checkArgumentArrayIndex("index", index, parameterTypes.length);
 
     if (!Map.class.isAssignableFrom(parameterTypes[index])
         || !isParameterized(index)) {
@@ -185,7 +184,7 @@ public class MethodDescImpl implements MethodDesc {
 
   @Override
   public Class<?> getValueClassOfMap(final int index) {
-    assertArgumentArrayIndex("index", index, parameterTypes.length);
+    Preconditions.checkArgumentArrayIndex("index", index, parameterTypes.length);
 
     if (!Map.class.isAssignableFrom(parameterTypes[index])
         || !isParameterized(index)) {
@@ -242,7 +241,7 @@ public class MethodDescImpl implements MethodDesc {
   @SuppressWarnings("unchecked")
   @Override
   public <T> T invoke(final Object target, final Object... args) {
-    assertArgumentNotNull("target", target);
+    Preconditions.checkNotNull(target, () -> new NullArgumentException("target"));
 
     return (T) Methods.invoke(method, target, args);
   }

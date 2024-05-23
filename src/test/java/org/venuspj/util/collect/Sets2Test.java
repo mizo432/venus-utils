@@ -1,9 +1,11 @@
 package org.venuspj.util.collect;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.venuspj.util.primitives.Ints;
 
 class Sets2Test {
 
@@ -18,7 +20,7 @@ class Sets2Test {
     testSet = Sets2.newHashSetWithExpectedSize(expectedSize);
 
     // Assert
-    Assertions.assertEquals(new HashSet<>(), testSet);
+    assertThat(testSet).isEqualTo(new HashSet<>());
   }
 
   @Test
@@ -30,7 +32,7 @@ class Sets2Test {
     testSet = Sets2.newHashSetWithExpectedSize(expectedSize);
 
     // Assert
-    Assertions.assertEquals(new HashSet<>(), testSet);
+    assertThat(testSet).isEqualTo(new HashSet<>());
   }
 
   @Test
@@ -39,7 +41,7 @@ class Sets2Test {
     Set<String> testSet = Sets2.newHashSet();
 
     // Assert
-    Assertions.assertTrue(testSet.isEmpty());
+    assertThat(testSet.isEmpty()).isTrue();
   }
 
   @Test
@@ -51,7 +53,7 @@ class Sets2Test {
     Set<String> testSet = Sets2.newHashSet(initialCapacity);
 
     // Assert
-    Assertions.assertTrue(testSet.isEmpty());
+    assertThat(testSet.isEmpty()).isTrue();
   }
 
   @Test
@@ -63,7 +65,81 @@ class Sets2Test {
     Set<String> testSet = Sets2.newHashSet(arr);
 
     // Assert
-    Assertions.assertEquals(arr.length, testSet.size());
+    assertThat(testSet.size()).isEqualTo(arr.length);
   }
-  
+
+  @Test
+  void newHashSetWithExpectedSize_capacityLessThanThree() {
+    // Arrange
+    int expectedSize = 2;
+
+    // Act
+    testSet = Sets2.newHashSetWithExpectedSize(expectedSize);
+
+    // Assert
+    assertThat(testSet).isEqualTo(new HashSet<>());
+    assertThat(Sets2.capacity(expectedSize)).isEqualTo(expectedSize + 1);
+  }
+
+  @Test
+  void newHashSetWithExpectedSize_capacityLessThanMaxPowerOfTwo() {
+    // Arrange
+    int expectedSize = 4;
+
+    // Act
+    testSet = Sets2.newHashSetWithExpectedSize(expectedSize);
+
+    // Assert
+    assertThat(testSet).isEqualTo(new HashSet<>());
+    assertThat(Sets2.capacity(expectedSize)).isEqualTo((int) ((float) expectedSize / 0.75F + 1.0F));
+  }
+
+  @Test
+  void newHashSetWithExpectedSize_capacityGreaterThanMaxPowerOfTwo() {
+    // Arrange
+    int expectedSize = Ints.MAX_POWER_OF_TWO + 1;
+
+    // Act
+    testSet = Sets2.newHashSetWithExpectedSize(expectedSize);
+
+    // Assert
+    assertThat(testSet).isEqualTo(new HashSet<>());
+    assertThat(Sets2.capacity(expectedSize)).isEqualTo(Integer.MAX_VALUE);
+  }
+
+  @Test
+  void capacity_ExpectedSizeLessThanThree() {
+    // Arrange
+    int expectedSize = 2;
+
+    // Act
+    int result = Sets2.capacity(expectedSize);
+
+    // Assert
+    assertThat(result).isEqualTo(expectedSize + 1);
+  }
+
+  @Test
+  void capacity_ExpectedSizeLessThanMaxPowerOfTwo() {
+    // Arrange
+    int expectedSize = 4;
+
+    // Act
+    int result = Sets2.capacity(expectedSize);
+
+    // Assert
+    assertThat(result).isEqualTo((int) ((float) expectedSize / 0.75F + 1.0F));
+  }
+
+  @Test
+  void capacity_ExpectedSizeGreaterThanMaxPowerOfTwo() {
+    // Arrange
+    int expectedSize = Ints.MAX_POWER_OF_TWO + 1;
+
+    // Act
+    int result = Sets2.capacity(expectedSize);
+
+    // Assert
+    assertThat(result).isEqualTo(Integer.MAX_VALUE);
+  }
 }

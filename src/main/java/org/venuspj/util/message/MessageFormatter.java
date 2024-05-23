@@ -3,7 +3,6 @@ package org.venuspj.util.message;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import org.venuspj.util.io.ResourceBundles;
-import org.venuspj.util.misc.Disposable;
 import org.venuspj.util.misc.Disposables;
 import org.venuspj.util.strings2.Strings2;
 
@@ -140,7 +139,7 @@ public abstract class MessageFormatter {
     }
     final StringBuilder buffer = new StringBuilder();
     for (final Object arg : args) {
-      buffer.append(arg + ", ");
+      buffer.append(arg).append(", ");
     }
     buffer.setLength(buffer.length() - ", ".length());
     return new String(buffer);
@@ -151,12 +150,9 @@ public abstract class MessageFormatter {
    */
   protected static synchronized void initialize() {
     if (!initialized) {
-      Disposables.add(new Disposable() {
-        @Override
-        public void dispose() {
-          ResourceBundle.clearCache();
-          initialized = false;
-        }
+      Disposables.add(() -> {
+        ResourceBundle.clearCache();
+        initialized = false;
       });
       initialized = true;
     }

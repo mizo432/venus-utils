@@ -65,5 +65,6 @@ abstract class AbstractIterator<T> implements Iterator<T> {
   @Override
   public final void remove() {
     throw new UnsupportedOperationException();
+    
   }
 }

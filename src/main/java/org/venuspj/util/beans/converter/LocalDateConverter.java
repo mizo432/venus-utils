@@ -1,6 +1,7 @@
 package org.venuspj.util.beans.converter;
 
 import java.time.LocalDate;
+import org.venuspj.util.beans.Converter;
 import org.venuspj.util.beans.EmptyRuntimeException;
 import org.venuspj.util.convert.LocalDateConversions;
 import org.venuspj.util.convert.StringConversions;
@@ -19,9 +20,9 @@ public class LocalDateConverter implements Converter<LocalDate> {
 
   @Override
   public String getAsString(Object value) {
-      if (isTarget(value.getClass())) {
-          return StringConversions.toString(value, pattern);
-      }
+    if (isTarget(value.getClass())) {
+      return StringConversions.toString(value, pattern);
+    }
 
     return null;
   }

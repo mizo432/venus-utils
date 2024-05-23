@@ -1,33 +1,27 @@
 package org.venuspj.util.beans.impl;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-import static org.venuspj.util.misc.Assertions.assertState;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Map;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.base.StringPreconditions;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.beans.PropertyDesc;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
 import org.venuspj.util.convert.BooleanConversions;
-import org.venuspj.util.convert.CalendarConversions;
-import org.venuspj.util.convert.DateConversions;
 import org.venuspj.util.convert.NumberConversionUtil;
-import org.venuspj.util.convert.TimeConversions;
-import org.venuspj.util.convert.TimestampConversions;
 import org.venuspj.util.exception.EmptyArgumentException;
 import org.venuspj.util.exception.IllegalPropertyRuntimeException;
-import org.venuspj.util.exception.ParseRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VIllegalArgumentException;
+import org.venuspj.util.exception.VIllegalStateException;
 import org.venuspj.util.lang.Constructors;
 import org.venuspj.util.lang.Fields;
 import org.venuspj.util.lang.Methods;
@@ -100,8 +94,8 @@ public class PropertyDescImpl implements PropertyDesc {
         "propertyName",
         "EUTL0010",
         asArray("propertyName")));
-    assertArgumentNotNull("propertyType", propertyType);
-    assertArgumentNotNull("beanDesc", beanDesc);
+    Preconditions.checkNotNull(propertyType, () -> new NullArgumentException("propertyType"));
+    Preconditions.checkNotNull(beanDesc, () -> new NullArgumentException("beanDesc"));
 
     this.propertyName = propertyName;
     this.propertyType = propertyType;
@@ -249,10 +243,11 @@ public class PropertyDescImpl implements PropertyDesc {
   @SuppressWarnings("unchecked")
   @Override
   public <T> T getValue(final Object target) {
-    assertArgumentNotNull("target", target);
+    Preconditions.checkNotNull(target, () -> new NullArgumentException("target"));
 
     try {
-      assertState(readable, propertyName + " is not readable.");
+      Preconditions.checkState(
+          readable, () -> new VIllegalStateException(propertyName + " is not readable."));
       if (hasReadMethod()) {
         return (T) Methods.invoke(readMethod, target, EMPTY_ARGS);
       }
@@ -267,11 +262,12 @@ public class PropertyDescImpl implements PropertyDesc {
 
   @Override
   public void setValue(final Object target, final Object value) {
-    assertArgumentNotNull("target", target);
+    Preconditions.checkNotNull(target, () -> new NullArgumentException("target"));
 
     try {
       final Object convertedValue = convertIfNeed(value);
-      assertState(writable, propertyName + " is not writable.");
+      Preconditions.checkState(
+          writable, () -> new VIllegalStateException(propertyName + " is not writable."));
       if (hasWriteMethod()) {
         try {
           Methods.invoke(
@@ -340,8 +336,6 @@ public class PropertyDescImpl implements PropertyDesc {
       return (T) convertPrimitiveWrapper(arg);
     } else if (Number.class.isAssignableFrom(propertyType)) {
       return (T) convertNumber(arg);
-    } else if (java.util.Date.class.isAssignableFrom(propertyType)) {
-      return (T) convertDate(arg);
     } else if (Boolean.class.isAssignableFrom(propertyType)) {
       return (T) BooleanConversions.toBoolean(arg);
     } else if (arg != null && arg.getClass() != String.class
@@ -349,8 +343,6 @@ public class PropertyDescImpl implements PropertyDesc {
       return (T) arg.toString();
     } else if (arg instanceof String && !String.class.equals(propertyType)) {
       return (T) convertWithString(arg);
-    } else if (java.util.Calendar.class.isAssignableFrom(propertyType)) {
-      return (T) CalendarConversions.toCalendar(arg);
     }
     return (T) arg;
   }
@@ -361,27 +353,6 @@ public class PropertyDescImpl implements PropertyDesc {
 
   private Object convertNumber(final Object arg) {
     return NumberConversionUtil.convertNumber(propertyType, arg);
-  }
-
-  private Object convertDate(final Object arg) {
-    if (propertyType == java.util.Date.class) {
-      try {
-        return TimestampConversions.toDate(arg);
-      } catch (ParseRuntimeException ex) {
-        try {
-          return DateConversions.toDate(arg);
-        } catch (ParseRuntimeException ex2) {
-          return TimeConversions.toDate(arg);
-        }
-      }
-    } else if (propertyType == Timestamp.class) {
-      return TimestampConversions.toSqlTimestamp(arg);
-    } else if (propertyType == java.sql.Date.class) {
-      return DateConversions.toSqlDate(arg);
-    } else if (propertyType == Time.class) {
-      return TimeConversions.toSqlTime(arg);
-    }
-    return arg;
   }
 
   private Object convertWithString(final Object arg) {

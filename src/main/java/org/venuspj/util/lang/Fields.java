@@ -1,18 +1,21 @@
 package org.venuspj.util.lang;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.exception.IllegalAccessRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VIllegalArgumentException;
 
 /**
  * {@link Field}用のユーティリティクラスです。
  */
 public abstract class Fields {
+
+  public static final Field[] EMPTY_ARRAY = new Field[]{};
 
   /**
    * {@link Field}によって表される{@code static}フィールドの値を返します。
@@ -26,7 +29,7 @@ public abstract class Fields {
   @SuppressWarnings("unchecked")
   public static <T> T get(final Field field)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     return (T) get(field, null);
   }
@@ -44,7 +47,7 @@ public abstract class Fields {
   @SuppressWarnings("unchecked")
   public static <T> T get(final Field field, final Object target)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     try {
       return (T) field.get(target);
@@ -65,7 +68,7 @@ public abstract class Fields {
    */
   public static int getInt(final Field field)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     return getInt(field, null);
   }
@@ -81,7 +84,7 @@ public abstract class Fields {
    */
   public static int getInt(final Field field, final Object target)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     try {
       return field.getInt(target);
@@ -102,7 +105,7 @@ public abstract class Fields {
    */
   public static String getString(final Field field)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     return getString(field, null);
   }
@@ -118,7 +121,7 @@ public abstract class Fields {
    */
   public static String getString(final Field field, final Object target)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     try {
       return (String) field.get(target);
@@ -139,7 +142,7 @@ public abstract class Fields {
    */
   public static void set(final Field field, final Object value)
       throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     set(field, null, value);
   }
@@ -155,7 +158,7 @@ public abstract class Fields {
    */
   public static void set(final Field field, final Object target,
       final Object value) throws IllegalAccessRuntimeException {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     try {
       field.set(target, value);
@@ -190,7 +193,7 @@ public abstract class Fields {
    * @return インスタンスフィールドなら{@literal true}
    */
   public static boolean isInstanceField(final Field field) {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     return !Modifier.isStatic(field.getModifiers());
   }
@@ -202,7 +205,7 @@ public abstract class Fields {
    * @return パブリックフィールドなら{@literal true}
    */
   public static boolean isPublicField(final Field field) {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     return Modifier.isPublic(field.getModifiers());
   }
@@ -214,7 +217,7 @@ public abstract class Fields {
    * @return ファイナルフィールドなら{@literal true}
    */
   public static boolean isFinalField(final Field field) {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     return Modifier.isFinal(field.getModifiers());
   }
@@ -226,7 +229,7 @@ public abstract class Fields {
    * @return コレクションの要素型
    */
   public static Class<?> getElementTypeOfCollection(final Field field) {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     final Type type = field.getGenericType();
     return Genericses.getRawClass(Genericses
@@ -240,7 +243,7 @@ public abstract class Fields {
    * @return マップのキー型
    */
   public static Class<?> getKeyTypeOfMap(final Field field) {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     final Type type = field.getGenericType();
     return Genericses.getRawClass(Genericses.getKeyTypeOfMap(type));
@@ -253,7 +256,7 @@ public abstract class Fields {
    * @return マップの値型
    */
   public static Class<?> getValueTypeOfMap(final Field field) {
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     final Type type = field.getGenericType();
     return Genericses.getRawClass(Genericses.getValueTypeOfMap(type));

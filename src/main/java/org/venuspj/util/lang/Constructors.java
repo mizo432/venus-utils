@@ -1,13 +1,13 @@
 package org.venuspj.util.lang;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.exception.IllegalAccessRuntimeException;
 import org.venuspj.util.exception.InstantiationRuntimeException;
 import org.venuspj.util.exception.InvocationTargetRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link Constructor}用のユーティリティクラスです。
@@ -29,7 +29,7 @@ public abstract class Constructors {
   public static <T> T newInstance(final Constructor<T> constructor,
       final Object... args) throws InstantiationRuntimeException,
       IllegalAccessRuntimeException {
-    assertArgumentNotNull("constructor", constructor);
+    Preconditions.checkNotNull(constructor, () -> new NullArgumentException("constructor"));
 
     try {
       return constructor.newInstance(args);
@@ -55,7 +55,7 @@ public abstract class Constructors {
    * @return <code>public</code>かどうか
    */
   public static boolean isPublic(final Constructor<?> constructor) {
-    assertArgumentNotNull("constructor", constructor);
+    Preconditions.checkNotNull(constructor, () -> new NullArgumentException("constructor"));
 
     return Modifier.isPublic(constructor.getModifiers());
   }

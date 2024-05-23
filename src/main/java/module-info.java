@@ -3,6 +3,7 @@ module venus.utils.main {
   requires java.logging;
   requires java.desktop;
   requires java.sql;
+  requires org.slf4j;
   exports org.venuspj.util.annotations;
   exports org.venuspj.util.base;
   exports org.venuspj.util.beans;

@@ -1,15 +1,15 @@
 package org.venuspj.util.beans.impl;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Map;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.FieldDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.beans.factory.ParameterizedClassDescFactory;
 import org.venuspj.util.exception.FieldNotStaticRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.lang.Fields;
 
 /**
@@ -49,8 +49,8 @@ public class FieldDescImpl implements FieldDesc {
    * @param field フィールド。{@literal null}であってはいけません
    */
   public FieldDescImpl(final BeanDesc beanDesc, final Field field) {
-    assertArgumentNotNull("beanDesc", beanDesc);
-    assertArgumentNotNull("field", field);
+    Preconditions.checkNotNull(beanDesc, () -> new NullArgumentException("beanDesc"));
+    Preconditions.checkNotNull(field, () -> new NullArgumentException("field"));
 
     this.beanDesc = beanDesc;
     this.field = field;
@@ -151,7 +151,7 @@ public class FieldDescImpl implements FieldDesc {
   @SuppressWarnings("unchecked")
   @Override
   public <T> T getFieldValue(final Object target) {
-    assertArgumentNotNull("target", target);
+    Preconditions.checkNotNull(target, () -> new NullArgumentException("target"));
 
     return (T) Fields.get(field, target);
   }
@@ -169,7 +169,7 @@ public class FieldDescImpl implements FieldDesc {
 
   @Override
   public void setFieldValue(final Object target, final Object value) {
-    assertArgumentNotNull("target", target);
+    Preconditions.checkNotNull(target, () -> new NullArgumentException("target"));
 
     Fields.set(field, target, value);
   }

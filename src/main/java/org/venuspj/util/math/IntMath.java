@@ -505,8 +505,6 @@ public final class IntMath {
   /**
    * Returns the sum of {@code a} and {@code b} unless it would overflow or underflow in which case
    * {@code Integer.MAX_VALUE} or {@code Integer.MIN_VALUE} is returned, respectively.
-   *
-   * @since 20.0
    */
   public static int saturatedAdd(int a, int b) {
     return Ints.saturatedCast((long) a + b);
@@ -515,8 +513,6 @@ public final class IntMath {
   /**
    * Returns the difference of {@code a} and {@code b} unless it would overflow or underflow in
    * which case {@code Integer.MAX_VALUE} or {@code Integer.MIN_VALUE} is returned, respectively.
-   *
-   * @since 20.0
    */
   public static int saturatedSubtract(int a, int b) {
     return Ints.saturatedCast((long) a - b);
@@ -666,8 +662,6 @@ public final class IntMath {
   /**
    * Returns the arithmetic mean of {@code x} and {@code y}, rounded towards negative infinity. This
    * method is overflow resilient.
-   *
-   * @since 14.0
    */
   public static int mean(int x, int y) {
     // Efficient method for computing the arithmetic mean.

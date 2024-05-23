@@ -310,7 +310,7 @@ public class ToStringHelperTest {
 
   private static class ListClass {
 
-    public List<TargetChildClass> list = newArrayList();
+    private List<TargetChildClass> list = newArrayList();
 
   }
 

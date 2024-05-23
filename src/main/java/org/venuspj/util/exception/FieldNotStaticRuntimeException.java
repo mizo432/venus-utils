@@ -2,6 +2,7 @@ package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
+import java.io.Serial;
 import java.lang.reflect.Field;
 
 /**
@@ -9,6 +10,7 @@ import java.lang.reflect.Field;
  */
 public class FieldNotStaticRuntimeException extends VRuntimeException {
 
+  @Serial
   private static final long serialVersionUID = -7791347225750660981L;
 
   private final Class<?> targetClass;

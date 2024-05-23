@@ -1,16 +1,17 @@
 package org.venuspj.util.lang;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.base.StringPreconditions;
 import org.venuspj.util.exception.EmptyArgumentException;
 import org.venuspj.util.exception.IllegalAccessRuntimeException;
 import org.venuspj.util.exception.InvocationTargetRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link Method}用のユーティリティクラスです。
@@ -34,7 +35,7 @@ public abstract class Methods {
   public static <T> T invoke(final Method method, final Object target,
       final Object... args) throws InvocationTargetRuntimeException,
       IllegalAccessRuntimeException {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     try {
       return (T) method.invoke(target, args);
@@ -72,7 +73,7 @@ public abstract class Methods {
   public static <T> T invokeStatic(final Method method, final Object... args)
       throws InvocationTargetRuntimeException,
       IllegalAccessRuntimeException {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return (T) invoke(method, null, args);
   }
@@ -95,7 +96,7 @@ public abstract class Methods {
    * @return <code>public</code>なら{@literal true}
    */
   public static boolean isPublic(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return Modifier.isPublic(method.getModifiers());
   }
@@ -107,7 +108,7 @@ public abstract class Methods {
    * @return <code>static</code>かどうか
    */
   public static boolean isStatic(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return Modifier.isStatic(method.getModifiers());
   }
@@ -119,7 +120,7 @@ public abstract class Methods {
    * @return <code>final </code>かどうか
    */
   public static boolean isFinal(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return Modifier.isFinal(method.getModifiers());
   }
@@ -185,7 +186,7 @@ public abstract class Methods {
    * @return {@literal equals(Object)}メソッドなら{@literal true}
    */
   public static boolean isEqualsMethod(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return method != null && method.getName().equals("equals")
         && method.getReturnType() == boolean.class
@@ -200,7 +201,7 @@ public abstract class Methods {
    * @return {@literal hashCode()}メソッドなら{@literal true}
    */
   public static boolean isHashCodeMethod(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return method != null && method.getName().equals("hashCode")
         && method.getReturnType() == int.class
@@ -214,7 +215,7 @@ public abstract class Methods {
    * @return {@literal toString()}メソッドなら{@literal true}
    */
   public static boolean isToStringMethod(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     return method != null && method.getName().equals("toString")
         && method.getReturnType() == String.class
@@ -230,7 +231,7 @@ public abstract class Methods {
    */
   public static Class<?> getElementTypeOfCollectionFromParameterType(
       final Method method, final int position) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     final Type[] parameterTypes = method.getGenericParameterTypes();
     return Genericses.getRawClass(Genericses
@@ -245,7 +246,7 @@ public abstract class Methods {
    */
   public static Class<?> getElementTypeOfCollectionFromReturnType(
       final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     final Type returnType = method.getGenericReturnType();
     return Genericses.getRawClass(Genericses
@@ -261,7 +262,7 @@ public abstract class Methods {
    */
   public static Class<?> getKeyTypeOfMapFromParameterType(
       final Method method, final int position) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     final Type[] parameterTypes = method.getGenericParameterTypes();
     return Genericses.getRawClass(Genericses
@@ -275,7 +276,7 @@ public abstract class Methods {
    * @return 指定されたメソッドの戻り値型として宣言されているパラメタ化されたマップのキー型
    */
   public static Class<?> getKeyTypeOfMapFromReturnType(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     final Type returnType = method.getGenericReturnType();
     return Genericses.getRawClass(Genericses
@@ -291,7 +292,7 @@ public abstract class Methods {
    */
   public static Class<?> getValueTypeOfMapFromParameterType(
       final Method method, final int position) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     final Type[] parameterTypes = method.getGenericParameterTypes();
     return Genericses.getRawClass(Genericses
@@ -305,7 +306,7 @@ public abstract class Methods {
    * @return 指定されたメソッドの戻り値型として宣言されているパラメタ化されたマップの値型
    */
   public static Class<?> getValueTypeOfMapFromReturnType(final Method method) {
-    assertArgumentNotNull("method", method);
+    Preconditions.checkNotNull(method, () -> new NullArgumentException("method"));
 
     final Type returnType = method.getGenericReturnType();
     return Genericses.getRawClass(Genericses

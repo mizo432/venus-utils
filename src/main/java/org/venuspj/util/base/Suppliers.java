@@ -6,6 +6,7 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.venuspj.util.objects2.Objects2;
 

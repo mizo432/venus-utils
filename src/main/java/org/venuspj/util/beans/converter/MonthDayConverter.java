@@ -1,6 +1,7 @@
 package org.venuspj.util.beans.converter;
 
 import java.time.MonthDay;
+import org.venuspj.util.beans.Converter;
 import org.venuspj.util.convert.MonthDayConversions;
 import org.venuspj.util.convert.StringConversions;
 import org.venuspj.util.strings2.Strings2;

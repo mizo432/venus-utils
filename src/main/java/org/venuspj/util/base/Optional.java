@@ -6,6 +6,7 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * An immutable object that may contain a non-null reference to another object. Each instance of
@@ -98,8 +99,6 @@ public abstract class Optional<T> implements Serializable {
   /**
    * Returns the equivalent {@code com.google.common.base.Optional} value to the given
    * {@code java.util.Optional}, or {@code null} if the argument is null.
-   *
-   * @since 21.0
    */
   public static <T> Optional<T> fromJavaUtil(
       java.util.Optional<T> javaUtilOptional) {
@@ -116,8 +115,6 @@ public abstract class Optional<T> implements Serializable {
    * <p>Unfortunately, the method reference {@code Optional::toJavaUtil} will not work, because it
    * could refer to either the static or instance version of this method. Write out the lambda
    * expression {@code o -> Optional.toJavaUtil(o)} instead.
-   *
-   * @since 21.0
    */
   public static <T> java.util.Optional<T> toJavaUtil(
       Optional<T> googleOptional) {
@@ -130,8 +127,6 @@ public abstract class Optional<T> implements Serializable {
    * <p>Unfortunately, the method reference {@code Optional::toJavaUtil} will not work, because it
    * could refer to either the static or instance version of this method. Write out the lambda
    * expression {@code o -> o.toJavaUtil()} instead.
-   *
-   * @since 21.0
    */
   public java.util.Optional<T> toJavaUtil() {
     return java.util.Optional.ofNullable(orNull());

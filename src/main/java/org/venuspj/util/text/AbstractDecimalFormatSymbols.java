@@ -1,10 +1,12 @@
 package org.venuspj.util.text;
 
 import static org.venuspj.util.collect.Collections3.newConcurrentHashMap;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 import java.util.Locale;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link java.text.DecimalFormatSymbols}用のユーティリティクラスです。
@@ -30,8 +32,8 @@ public abstract class AbstractDecimalFormatSymbols {
    * @return {@link java.text.DecimalFormatSymbols}
    */
   public static java.text.DecimalFormatSymbols getDecimalFormatSymbols(
-      final Locale locale) {
-    assertArgumentNotNull("locale", locale);
+      @NotNull final Locale locale) {
+    Preconditions.checkNotNull(locale, () -> new NullArgumentException("locale"));
 
     java.text.DecimalFormatSymbols symbols = CACHE.get(locale);
     if (symbols == null) {
@@ -40,8 +42,5 @@ public abstract class AbstractDecimalFormatSymbols {
     }
     return symbols;
   }
-/**
- * システム 開発費
- *         技術的夫妻
- */
+  
 }

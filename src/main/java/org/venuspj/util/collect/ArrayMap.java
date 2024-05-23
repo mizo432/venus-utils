@@ -1,8 +1,6 @@
 package org.venuspj.util.collect;
 
 
-import static org.venuspj.util.misc.Assertions.assertState;
-
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -15,6 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.exception.VIllegalStateException;
 import org.venuspj.util.exception.VNoSuchElementException;
 
 /**
@@ -582,7 +581,7 @@ public class ArrayMap<K, V> extends AbstractMap<K, V> implements Map<K, V>,
 
     @Override
     public void remove() {
-      assertState(last != -1, "last == -1");
+      Preconditions.checkState(last != -1, () -> new VIllegalStateException("last == -1"));
       ArrayMap.this.remove(last);
       if (last < current) {
         current--;

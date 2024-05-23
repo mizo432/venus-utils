@@ -6,6 +6,7 @@ import static org.venuspj.util.base.Preconditions.checkPositionIndex;
 
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.function.Predicate;
 import org.jetbrains.annotations.VisibleForTesting;
 
 /**
@@ -74,8 +75,7 @@ public abstract class CharMatcher implements Predicate<Character> {
    * <p>All Unicode White_Space characters are on the BMP and thus supported by this API.
    *
    * <p><b>Note:</b> as the Unicode definition evolves, we will modify this matcher to keep it up
-   * to
-   * date.
+   * to date.
    *
    * @since 19.0 (since 1.0 as constant {@code WHITESPACE})
    */
@@ -848,7 +848,7 @@ public abstract class CharMatcher implements Predicate<Character> {
    */
   @Deprecated
   @Override
-  public boolean apply(Character character) {
+  public boolean test(Character character) {
     return matches(character);
   }
 
@@ -1786,13 +1786,13 @@ public abstract class CharMatcher implements Predicate<Character> {
 
     @Override
     public boolean matches(char c) {
-      return predicate.apply(c);
+      return predicate.test(c);
     }
 
     @SuppressWarnings("deprecation") // intentional; deprecation is for callers primarily
     @Override
-    public boolean apply(Character character) {
-      return predicate.apply(checkNotNull(character));
+    public boolean test(Character character) {
+      return predicate.test(checkNotNull(character));
     }
 
     @Override

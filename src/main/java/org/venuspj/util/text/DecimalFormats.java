@@ -1,9 +1,9 @@
 package org.venuspj.util.text;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.text.DecimalFormat;
 import java.util.Locale;
+import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link DecimalFormat}用のユーティリティクラスです。
@@ -29,7 +29,7 @@ public abstract class DecimalFormats {
    * @return 正規化された文字列
    */
   public static String normalize(final String s, final Locale locale) {
-    assertArgumentNotNull("locale", locale);
+    Preconditions.checkNotNull(locale, () -> new NullArgumentException("locale"));
 
     if (s == null) {
       return null;

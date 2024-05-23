@@ -14,26 +14,26 @@ public abstract class NumberConversionUtil {
   /**
    * 適切な {@link Number}に変換します。
    *
-   * @param type 変換先の型
+   * @param clazz 変換先の型
    * @param o 変換元のオブジェクト
    * @return {@literal type}に変換された{@link Number}
    */
-  public static Object convertNumber(final Class<?> type, final Object o) {
-    if (type == Integer.class) {
+  public static Object convertNumber(final Class<?> clazz, final Object o) {
+    if (clazz == Integer.class) {
       return IntegerConversions.toInteger(o);
-    } else if (type == BigDecimal.class) {
+    } else if (clazz == BigDecimal.class) {
       return BigDecimalConversions.toBigDecimal(o);
-    } else if (type == Double.class) {
+    } else if (clazz == Double.class) {
       return DoubleConversions.toDouble(o);
-    } else if (type == Long.class) {
+    } else if (clazz == Long.class) {
       return LongConversions.toLong(o);
-    } else if (type == Float.class) {
+    } else if (clazz == Float.class) {
       return FloatConversions.toFloat(o);
-    } else if (type == Short.class) {
+    } else if (clazz == Short.class) {
       return ShortConversions.toShort(o);
-    } else if (type == BigInteger.class) {
+    } else if (clazz == BigInteger.class) {
       return BigIntegerConversions.toBigInteger(o);
-    } else if (type == Byte.class) {
+    } else if (clazz == Byte.class) {
       return ByteConversions.toByte(o);
     }
     return o;

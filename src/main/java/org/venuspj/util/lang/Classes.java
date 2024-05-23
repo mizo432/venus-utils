@@ -1,14 +1,21 @@
 package org.venuspj.util.lang;
 
+import static org.venuspj.util.base.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Arrays2.asArray;
+import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 import org.venuspj.util.base.StringPreconditions;
 import org.venuspj.util.exception.ClassNotFoundRuntimeException;
 import org.venuspj.util.exception.EmptyArgumentException;
@@ -18,6 +25,7 @@ import org.venuspj.util.exception.InvocationTargetRuntimeException;
 import org.venuspj.util.exception.NoSuchConstructorRuntimeException;
 import org.venuspj.util.exception.NoSuchFieldRuntimeException;
 import org.venuspj.util.exception.NoSuchMethodRuntimeException;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.strings2.Strings2;
 
 /**
@@ -195,7 +203,7 @@ public abstract class Classes {
    */
   public static <T> T newInstance(final Class<T> clazz)
       throws InstantiationRuntimeException, IllegalAccessRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     try {
       return clazz.getConstructor(new Class[]{}).newInstance();
@@ -227,7 +235,7 @@ public abstract class Classes {
   public static <T> T newInstance(final String className)
       throws ClassNotFoundRuntimeException,
       InstantiationRuntimeException, IllegalAccessRuntimeException {
-    assertArgumentNotNull("className", className);
+    checkNotNull(className, () -> new NullArgumentException("className"));
 
     return (T) newInstance(forName(className));
   }
@@ -267,8 +275,8 @@ public abstract class Classes {
    */
   public static boolean isAssignableFrom(final Class<?> toClass,
       Class<?> fromClass) {
-    assertArgumentNotNull("toClass", toClass);
-    assertArgumentNotNull("fromClass", fromClass);
+    checkNotNull(toClass, () -> new NullArgumentException("toClass"));
+    checkNotNull(fromClass, () -> new NullArgumentException("fromClass"));
 
     if (toClass == Object.class && !fromClass.isPrimitive()) {
       return true;
@@ -285,8 +293,8 @@ public abstract class Classes {
    * @param clazz ラッパークラス。{@literal null}であってはいけません
    * @return 引数がラッパークラスならプリミティブクラス、それ以外の場合は{@literal null}
    */
-  public static Class<?> getPrimitiveClass(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+  public static Class<?> getPrimitiveClass(@NotNull final Class<?> clazz) {
+    checkNotNull(clazz, "clazz");
 
     return wrapperToPrimitiveMap.get(clazz);
   }
@@ -298,7 +306,7 @@ public abstract class Classes {
    * @return 引数がラッパークラスならプリミティブクラス、それ以外の場合は引数で渡されたクラス
    */
   public static Class<?> getPrimitiveClassIfWrapper(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, "clazz");
 
     final Class<?> ret = getPrimitiveClass(clazz);
     if (ret != null) {
@@ -314,7 +322,7 @@ public abstract class Classes {
    * @return 引数がプリミティブクラスならラッパークラス、それ以外の場合は{@literal null}
    */
   public static Class<?> getWrapperClass(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     return primitiveToWrapperMap.get(clazz);
   }
@@ -326,7 +334,7 @@ public abstract class Classes {
    * @return 引数がプリミティブクラスならラッパークラス、それ以外の場合は引数で渡されたクラス
    */
   public static Class<?> getWrapperClassIfPrimitive(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     final Class<?> ret = getWrapperClass(clazz);
     if (ret != null) {
@@ -348,7 +356,7 @@ public abstract class Classes {
   public static <T> Constructor<T> getConstructor(final Class<T> clazz,
       final Class<?>... argTypes)
       throws NoSuchConstructorRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     try {
       return clazz.getConstructor(argTypes);
@@ -370,7 +378,7 @@ public abstract class Classes {
   public static <T> Constructor<T> getDeclaredConstructor(
       final Class<T> clazz, final Class<?>... argTypes)
       throws NoSuchConstructorRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     try {
       return clazz.getDeclaredConstructor(argTypes);
@@ -392,7 +400,7 @@ public abstract class Classes {
    */
   public static Field getField(final Class<?> clazz, final String name)
       throws NoSuchFieldRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
     StringPreconditions.checkNotEmpty(name, () -> new EmptyArgumentException(
         "name",
         "EUTL0010",
@@ -416,7 +424,7 @@ public abstract class Classes {
    */
   public static Field getDeclaredField(final Class<?> clazz, final String name)
       throws NoSuchFieldRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
     StringPreconditions.checkNotEmpty(name, () -> new EmptyArgumentException(
         "name",
         "EUTL0010",
@@ -443,7 +451,7 @@ public abstract class Classes {
    */
   public static Method getMethod(final Class<?> clazz, final String name,
       final Class<?>... argTypes) throws NoSuchMethodRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
     StringPreconditions.checkNotEmpty(name, () -> new EmptyArgumentException(
         "name",
         "EUTL0010",
@@ -469,7 +477,7 @@ public abstract class Classes {
   public static Method getDeclaredMethod(final Class<?> clazz,
       final String name, final Class<?>... argTypes)
       throws NoSuchMethodRuntimeException {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
     StringPreconditions.checkNotEmpty(name, () -> new EmptyArgumentException(
         "name",
         "EUTL0010",
@@ -489,7 +497,7 @@ public abstract class Classes {
    * @return パッケージ名
    */
   public static String getPackageName(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     final String fqcn = clazz.getName();
     final int pos = fqcn.lastIndexOf('.');
@@ -548,7 +556,7 @@ public abstract class Classes {
    * @return クラス名
    */
   public static String getSimpleClassName(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     if (clazz.isArray()) {
       return getSimpleClassName(clazz.getComponentType()) + "[]";
@@ -564,7 +572,7 @@ public abstract class Classes {
    * @see #getResourcePath(String)
    */
   public static String getResourcePath(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     return getResourcePath(clazz.getName());
   }
@@ -607,4 +615,183 @@ public abstract class Classes {
   public static Class<?>[] empty() {
     return new Class[0];
   }
+
+  /**
+   * クラスの宣言フィールドのリストです。SecurityExceptionによりフィールドにアクセスできない場合は空のリストを返します。
+   *
+   * @param aClass フィールドを取得するクラス
+   * @return クラスとそのスーパークラスで宣言されたフィールドのリスト
+   */
+  public static List<Field> getAllDeclaredFieldsSafely(Class<?> aClass) {
+    List<Field> results = newArrayList();
+
+    for (Class<?> clazz = aClass; clazz != Object.class; clazz = clazz.getSuperclass()) {
+      List<Field> fields = getDeclaredFieldsSafely(clazz);
+      results.addAll(fields);
+    }
+
+    return results;
+  }
+
+  /**
+   * 与えられたクラスの宣言フィールドを安全に取得するために用いられます
+   *
+   * @param clazz 宣言フィールドを取得するためのクラス
+   * @return クラスの宣言フィールドのリストです。SecurityExceptionによりフィールドにアクセスできない場合は空のリストを返します。
+   */
+  public static List<Field> getDeclaredFieldsSafely(Class<?> clazz) {
+    try {
+      return Arrays.asList(clazz.getDeclaredFields());
+    } catch (SecurityException ignored) {
+      return Collections.emptyList();
+    }
+  }
+
+  private static final Map<Class<?>, Field[]> declaredFieldsCache =
+      newHashMap();
+  private static final Field[] NO_FIELDS = {};
+
+  /**
+   * 指定された名前を持つフィールドを指定されたクラスおよびそのスーパークラスから探します。
+   *
+   * @param clazz フィールドを検索するクラスです。
+   * @param name 検索するフィールドの名前です。もしnullの場合は、どのフィールド名でもマッチします。
+   * @return 指定された名前と型に一致するフィールド、またはそんなフィールドが見つからない場合はnullを返します。
+   */
+  public static Field findField(Class<?> clazz, String name) {
+    return findField(clazz, name, null);
+
+  }
+
+  /**
+   * 指定されたクラスとそのスーパークラスで、指定された名前と型のフィールドを検索します。
+   *
+   * @param clazz フィールドを検索するクラス。
+   * @param name 検索するフィールドの名前。nullの場合、任意のフィールド名が一致します。
+   * @param type 検索するフィールドの型。nullの場合、任意のフィールドタイプが一致します。
+   * @return 名前とタイプが一致するフィールド、または一致するフィールドが見つからない場合はnull。
+   */
+  public static Field findField(Class<?> clazz, String name, Class<?> type) {
+    Class<?> searchType = clazz;
+    while (Object.class != searchType && searchType != null) {
+      Field[] fields = getDeclaredFields(searchType);
+      for (Field field : fields) {
+        if ((name == null || name.equals(field.getName())) &&
+            (type == null || type.equals(field.getType()))) {
+          return field;
+        }
+      }
+      searchType = searchType.getSuperclass();
+    }
+    return null;
+  }
+
+  /**
+   * 指定されたクラスで宣言されているすべてのフィールドの配列を返します。
+   *
+   * @param clazz 宣言されたフィールドを見つけるクラス
+   * @return クラスのすべての宣言されたフィールドを表すFieldオブジェクトの配列を返します。 宣言されたフィールドがない場合は、空の配列が返されます。
+   */
+  private static Field[] getDeclaredFields(Class<?> clazz) {
+    Field[] result = declaredFieldsCache.get(clazz);
+    if (result == null) {
+      try {
+        result = clazz.getDeclaredFields();
+        declaredFieldsCache.put(clazz, (result.length == 0 ? NO_FIELDS : result));
+
+      } catch (SecurityException ignored) {
+        return Fields.EMPTY_ARRAY;
+      }
+    }
+    return result;
+
+  }
+
+  /**
+   * フィールドが公開（public）されていない場合や最終（final）化されている場合でも、そのフィールドをアクセス可能にします。
+   * フィールドがまだアクセス可能ではない場合、そのアクセス可能フラグを true に設定します。
+   *
+   * @param field アクセス可能にするフィールド
+   */
+  public static void makeAccessible(Field field) {
+    if ((!Modifier.isPublic(field.getModifiers()) ||
+        !Modifier.isPublic(field.getDeclaringClass().getModifiers()) ||
+        Modifier.isFinal(field.getModifiers()))) {
+      field.setAccessible(true);
+    }
+  }
+
+  /**
+   * 指定したオブジェクト上のフィールドの値にアクセスします。
+   *
+   * @param field アクセスするフィールド。
+   * @param target フィールドがアクセスされるべきオブジェクト。
+   * @return オブジェクト上のフィールドの値。
+   * @throws IllegalStateException 想定外のリフレクション例外が発生した場合。
+   */
+  public static Object getFieldValue(Field field, Object target) {
+    try {
+      return field.get(target);
+    } catch (IllegalAccessException ex) {
+      handleReflectionException(ex);
+      throw new IllegalStateException(
+          "Unexpected reflection exception - " + ex.getClass().getName() + ": " + ex.getMessage());
+    }
+  }
+
+  /**
+   * 受け取った例外のタイプに基づき、適切な例外をスローすることでリフレクション例外を処理します。
+   *
+   * @param ex 処理するリフレクション例外。
+   * @throws IllegalStateException 例外がNoSuchMethodExceptionあるいはIllegalAccessExceptionの場合にスローされます。
+   * @throws UndeclaredThrowableException 例外がRuntimeExceptionの場合にスローされます。
+   */
+  public static void handleReflectionException(Exception ex) {
+    if (ex instanceof NoSuchMethodException) {
+      throw new IllegalStateException("Method not found: " + ex.getMessage());
+    }
+    if (ex instanceof IllegalAccessException) {
+      throw new IllegalStateException("Could not access method: " + ex.getMessage());
+    }
+    if (ex instanceof InvocationTargetException) {
+      handleInvocationTargetException((InvocationTargetException) ex);
+    }
+    if (ex instanceof RuntimeException) {
+      throw (RuntimeException) ex;
+    }
+    throw new UndeclaredThrowableException(ex);
+  }
+
+  /**
+   * InvocationTargetExceptionを処理します。
+   * <p>
+   * これは通常、リフレクションを使用してメソッドを呼び出す際に、そのメソッドが例外をスローした場合に発生します
+   *
+   * @param ex InvocationTargetExceptionであり、メソッド内部でこの例外を処理します
+   */
+  private static void handleInvocationTargetException(InvocationTargetException ex) {
+    rethrowRuntimeException(ex.getTargetException());
+  }
+
+  /**
+   * ランタイム例外またはエラーを再スローします。与えられたスローアブルがRuntimeExceptionのインスタンスである場合、 それはそのままスローされます。
+   * <p>
+   * 与えられたスローアブルがErrorのインスタンスである場合、それもそのままスローされます。
+   * それ以外の場合、与えられた例外を原因とするUndeclaredThrowableExceptionがスローされます。
+   *
+   * @param ex 再スローするスローアブル
+   * @throws RuntimeException 与えられたスローアブルがRuntimeExceptionのインスタンスの場合
+   * @throws Error 与えられたスローアブルがErrorのインスタンスの場合
+   * @throws UndeclaredThrowableException 与えられたスローアブルがRuntimeExceptionでもErrorでもない場合
+   */
+  public static void rethrowRuntimeException(Throwable ex) {
+    if (ex instanceof RuntimeException) {
+      throw (RuntimeException) ex;
+    }
+    if (ex instanceof Error) {
+      throw (Error) ex;
+    }
+    throw new UndeclaredThrowableException(ex);
+  }
+
 }

@@ -3,7 +3,6 @@ package org.venuspj.util.builder;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 
 import java.util.List;
-import org.venuspj.util.assigner.Assigner;
 
 /**
  * ValueObjectのインスタンスを生成するビルダー。
@@ -41,12 +40,6 @@ public abstract class ObjectBuilder<T, S extends ObjectBuilder<T, S>> {
     }
 
     return createValueObject();
-  }
-
-  public void assignTo(T vo) {
-    T applied = apply(vo);
-    Assigner.assignTo(applied, vo);
-
   }
 
   /**

@@ -9,18 +9,14 @@ import org.venuspj.util.dateProvider.DateProvider;
 public class SnowflakeIdGenerator {
 
   /**
-   * The EPOCH variable represents the starting point of time for generating unique IDs using the
-   * Snowflake algorithm.
+   * EPOCH変数は、Snowflakeアルゴリズムを使用して一意のIDを生成する際の時間の起点を表しています。
    * <p>
-   * It is a constant value that is set to 1609459200000L, which represents January 1st, 2021, at
-   * 00:00:00 UTC in milliseconds.
+   * この定数は1609459200000Lに設定されており、これは2021年1月1日の00:00:00 UTCをミリ秒で表したものです。
    * <p>
-   * This variable is used in the generation of unique IDs in the {@link SnowflakeIdGenerator}
-   * class, where it is subtracted from the current timestamp to calculate the time elapsed since
-   * the EPOCH. The resulting value is then shifted left by 22 bits and combined with the worker ID
-   * and sequence number to generate a unique ID.
+   * この変数は{@link
+   * SnowflakeIdGenerator}クラスで一意のIDを生成する際に使用されます。現在のタイムスタンプからEPOCHを引いてから経過時間を算出し、その結果の値は22ビット左シフトされてから、ワーカーIDとシーケンス番号と組み合わされて一意のIDが生成されます。
    * <p>
-   * Example usage:
+   * 使い方の例:
    * <pre>{@code
    *     long timestamp = System.currentTimeMillis();
    *     long id = ((timestamp - EPOCH) << 22) | (workerId << 12) | sequence;
@@ -69,7 +65,7 @@ public class SnowflakeIdGenerator {
    * @return 生成された一意のID。
    * @throws RuntimeException 時計が後ろ向きに動く場合。
    */
-  public synchronized long generateID() {
+  public synchronized long generateId() {
     long timestamp = DateProvider.currentTimeMillis();
 
     if (timestamp < lastTimestamp) {

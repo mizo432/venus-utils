@@ -4,6 +4,7 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Implementation of an {@link Optional} containing a reference.

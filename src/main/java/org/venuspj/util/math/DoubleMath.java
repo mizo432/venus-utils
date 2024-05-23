@@ -324,7 +324,6 @@ public final class DoubleMath {
    * implementations.
    *
    * @throws IllegalArgumentException if {@code tolerance} is {@code < 0} or NaN
-   * @since 13.0
    */
   public static boolean fuzzyEquals(double a, double b, double tolerance) {
     checkNonNegative("tolerance", tolerance);
@@ -345,7 +344,6 @@ public final class DoubleMath {
    * Comparable#compareTo} implementations. In particular, it is not transitive.
    *
    * @throws IllegalArgumentException if {@code tolerance} is {@code < 0} or NaN
-   * @since 13.0
    */
   public static int fuzzyCompare(double a, double b, double tolerance) {
     if (fuzzyEquals(a, b, tolerance)) {

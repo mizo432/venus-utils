@@ -4,6 +4,7 @@ package org.venuspj.util.primitives;
 import static org.venuspj.util.base.Preconditions.checkArgument;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
+import org.jetbrains.annotations.NotNull;
 import org.venuspj.util.base.Preconditions;
 
 /**
@@ -191,8 +193,7 @@ public final class ImmutableIntArray implements Serializable {
    * capacity. The returned builder is not thread-safe.
    *
    * <p><b>Performance note:</b> The {@link ImmutableIntArray} that is built will very likely
-   * occupy
-   * more memory than necessary; to trim memory usage, build using
+   * occupy more memory than necessary; to trim memory usage, build using
    * {@code builder.build().trimmed()}.
    */
   public static Builder builder() {
@@ -316,8 +317,7 @@ public final class ImmutableIntArray implements Serializable {
      * more values and build again.
      *
      * <p><b>Performance note:</b> the returned array is backed by the same array as the builder,
-     * so
-     * no data is copied as part of this step, but this may occupy more memory than strictly
+     * so no data is copied as part of this step, but this may occupy more memory than strictly
      * necessary. To copy the data to a right-sized backing array, use {@code .build().trimmed()}.
      */
     public ImmutableIntArray build() {
@@ -497,7 +497,7 @@ public final class ImmutableIntArray implements Serializable {
     }
 
     @Override
-    public List<Integer> subList(int fromIndex, int toIndex) {
+    public @NotNull List<Integer> subList(int fromIndex, int toIndex) {
       return parent.subArray(fromIndex, toIndex).asList();
     }
 
@@ -509,15 +509,13 @@ public final class ImmutableIntArray implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-      if (object instanceof AsList) {
-        AsList that = (AsList) object;
+      if (object instanceof AsList that) {
         return this.parent.equals(that.parent);
       }
       // We could delegate to super now but it would still box too much
-      if (!(object instanceof List)) {
+      if (!(object instanceof List<?> that)) {
         return false;
       }
-      List<?> that = (List<?>) object;
       if (this.size() != that.size()) {
         return false;
       }
@@ -552,10 +550,9 @@ public final class ImmutableIntArray implements Serializable {
     if (object == this) {
       return true;
     }
-    if (!(object instanceof ImmutableIntArray)) {
+    if (!(object instanceof ImmutableIntArray that)) {
       return false;
     }
-    ImmutableIntArray that = (ImmutableIntArray) object;
     if (this.length() != that.length()) {
       return false;
     }
@@ -613,10 +610,12 @@ public final class ImmutableIntArray implements Serializable {
     return start > 0 || end < array.length;
   }
 
+  @Serial
   Object writeReplace() {
     return trimmed();
   }
 
+  @Serial
   Object readResolve() {
     return isEmpty() ? EMPTY : this;
   }

@@ -1,6 +1,5 @@
 package org.venuspj.util.beans;
 
-import org.venuspj.util.beans.converter.Converter;
 import org.venuspj.util.exception.VRuntimeException;
 
 /**

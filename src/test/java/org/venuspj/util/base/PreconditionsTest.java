@@ -1,61 +1,70 @@
 package org.venuspj.util.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-public class PreconditionsTest {
+class PreconditionsTest {
 
   @Test()
-  public void checkNotNull1() throws Exception {
-    Preconditions.checkNotNull(null);
+  void checkNotNull1() {
+    assertThatExceptionOfType(NullPointerException.class).isThrownBy(
+        () -> Preconditions.checkNotNull(null));
+  }
+
+
+  @Test
+  void checkNotNull2() {
+    Integer actual = Preconditions.checkNotNull(Integer.valueOf(1));
+    assertThat(actual).isEqualTo(1);
+  }
+
+
+  @Test
+  void checkArgument1() {
+    Preconditions.checkArgument(true, () -> new RuntimeException("test"));
   }
 
   @Test
-  public void checkNotNull2() throws Exception {
-    Preconditions.checkNotNull(Integer.valueOf(1));
-  }
-
-  @Test
-  public void checkArgument1() {
-    Preconditions.checkArgument(true, new RuntimeException("test"));
-  }
-
-  @Test
-  public void checkArgument2() {
-    Preconditions.checkArgument(false, new RuntimeException("test"));
+  void checkArgument2() {
+    assertThatThrownBy(
+        () -> Preconditions.checkArgument(false, () -> new RuntimeException("test")))
+        .isInstanceOf(RuntimeException.class);
 
   }
 
   @Test
-  public void checkArgument3() {
-    DummyDto arg = new DummyDto(1);
-    Preconditions.checkArgument(arg.getValue() == 0, () -> arg.setMessage("MSG"));
-    assertThat(arg.getMessage())
-        .isEqualTo("MSG");
-
+  void checkState1() {
+    assertThatExceptionOfType(IllegalStateException.class).isThrownBy(
+        () -> Preconditions.checkState(false));
   }
 
-  private static class DummyDto {
+  @Test
+  void checkState2() {
+    Preconditions.checkState(true);
+  }
 
-    private final int value;
-    private String message;
+  @Test
+  void checkState3() {
+    assertThatExceptionOfType(IllegalStateException.class).isThrownBy(
+        () -> Preconditions.checkState(false, "Illegal State"));
+  }
 
-    public String getMessage() {
-      return message;
-    }
+  @Test
+  void checkState4() {
+    Preconditions.checkState(true, "Illegal State");
+  }
 
-    public void setMessage(String message) {
-      this.message = message;
-    }
+  @Test
+  void checkState5() {
+    assertThatExceptionOfType(IllegalStateException.class).isThrownBy(
+        () -> Preconditions.checkState(false, "Illegal State: %s", "Not true"));
+  }
 
-    public DummyDto(int aValue) {
-      value = aValue;
-    }
-
-    public int getValue() {
-      return value;
-    }
-
+  @Test
+  void checkState6() {
+    Preconditions.checkState(true, "Illegal State: %s", "Not true");
   }
 }

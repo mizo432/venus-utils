@@ -1,10 +1,12 @@
 package org.venuspj.util.lang;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
+import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import org.jetbrains.annotations.NotNull;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link Modifier}用のユーティリティクラスです。
@@ -17,8 +19,8 @@ public abstract class Modifiers {
    * @param method メソッド。{@literal null}であってはいけません
    * @return パブリックかどうか
    */
-  public static boolean isPublic(final Method method) {
-    assertArgumentNotNull("method", method);
+  public static boolean isPublic(@NotNull final Method method) {
+    checkNotNull(method, () -> new NullArgumentException("method"));
 
     return isPublic(method.getModifiers());
   }
@@ -29,8 +31,8 @@ public abstract class Modifiers {
    * @param field フィールド。{@literal null}であってはいけません
    * @return パブリックかどうか
    */
-  public static boolean isPublic(final Field field) {
-    assertArgumentNotNull("field", field);
+  public static boolean isPublic(@NotNull final Field field) {
+    checkNotNull(field, () -> new NullArgumentException("field"));
 
     return isPublic(field.getModifiers());
   }
@@ -42,7 +44,7 @@ public abstract class Modifiers {
    * @return <code>public</code>,<code>static</code>,<code>final</code>かどうか
    */
   public static boolean isPublicStaticFinalField(final Field field) {
-    assertArgumentNotNull("field", field);
+    checkNotNull(field, () -> new NullArgumentException("field"));
 
     return isPublicStaticFinal(field.getModifiers());
   }
@@ -75,7 +77,7 @@ public abstract class Modifiers {
    * @return <code>abstract</code>なら{@literal true}
    */
   public static boolean isAbstract(final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     return isAbstract(clazz.getModifiers());
   }
@@ -154,7 +156,7 @@ public abstract class Modifiers {
    * @return インスタンスフィールドなら{@literal true}
    */
   public static boolean isInstanceField(final Field field) {
-    assertArgumentNotNull("field", field);
+    checkNotNull(field, () -> new NullArgumentException("field"));
 
     final int m = field.getModifiers();
     return !isStatic(m) && !isFinal(m);

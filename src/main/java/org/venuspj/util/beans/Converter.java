@@ -1,4 +1,4 @@
-package org.venuspj.util.beans.converter;
+package org.venuspj.util.beans;
 
 /**
  * 文字列とオブジェクトの変換を行なうインターフェースです。

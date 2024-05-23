@@ -5,7 +5,6 @@ import static org.venuspj.util.collect.IndexedIterator.indexed;
 import static org.venuspj.util.lang.Genericses.getActualClass;
 import static org.venuspj.util.lang.Genericses.getGenericParameters;
 import static org.venuspj.util.lang.Genericses.getTypeVariableMap;
-import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -101,10 +100,8 @@ public abstract class ParameterizedClassDescFactory {
       final Method method, final int index,
       final Map<TypeVariable<?>, Type> map) {
     Preconditions.checkNotNull(method, "method is null");
-    assertArgumentArrayIndex(
-        "index",
-        index,
-        method.getParameterTypes().length);
+    Preconditions.checkArgumentArrayIndex("index", index, method.getParameterTypes().length);
+
     Preconditions.checkNotNull(map, "map is null");
 
     return createParameterizedClassDesc(

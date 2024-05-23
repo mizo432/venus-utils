@@ -5,14 +5,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.venuspj.util.primitives.Ints;
 
+/**
+ * Maps2クラスは、HashMapおよびLinkedHashMapの作成と操作のためのユーティリティメソッドを提供します。
+ */
 public final class Maps2 {
 
   public static <K, V> HashMap<K, V> newHashMap(Map<? extends K, ? extends V> map) {
-    return new HashMap<K, V>(map);
+    return new HashMap<>(map);
   }
 
   public static <K, V> LinkedHashMap<K, V> newLinkedHashMap() {
-    return new LinkedHashMap<K, V>();
+    return new LinkedHashMap<>();
   }
 
   static int capacity(int expectedSize) {

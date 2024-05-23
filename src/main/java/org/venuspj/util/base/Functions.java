@@ -5,6 +5,8 @@ import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import org.venuspj.util.objects2.Objects2;
 
 /**
@@ -274,7 +276,7 @@ public final class Functions {
 
     @Override
     public Boolean apply(T t) {
-      return predicate.apply(t);
+      return predicate.test(t);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package org.venuspj.util.beans.impl;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.beans.ParameterizedClassDesc;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link ParameterizedClassDesc}の実装クラスです。
@@ -25,7 +25,7 @@ public class ParameterizedClassDescImpl implements ParameterizedClassDesc {
    * @param rawClass 原型となるクラス。{@literal null}であってはいけません
    */
   public ParameterizedClassDescImpl(final Class<?> rawClass) {
-    assertArgumentNotNull("rawClass", rawClass);
+    Preconditions.checkNotNull(rawClass, () -> new NullArgumentException("rawClass"));
 
     this.rawClass = rawClass;
   }
@@ -38,7 +38,7 @@ public class ParameterizedClassDescImpl implements ParameterizedClassDesc {
    */
   public ParameterizedClassDescImpl(final Class<?> rawClass,
       final ParameterizedClassDesc[] arguments) {
-    assertArgumentNotNull("rawClass", rawClass);
+    Preconditions.checkNotNull(rawClass, () -> new NullArgumentException("rawClass"));
 
     this.rawClass = rawClass;
     this.arguments = arguments;
@@ -61,7 +61,7 @@ public class ParameterizedClassDescImpl implements ParameterizedClassDesc {
    * @param rawClass 原型となるクラス。{@literal null}であってはいけません
    */
   public void setRawClass(final Class<?> rawClass) {
-    assertArgumentNotNull("rawClass", rawClass);
+    Preconditions.checkNotNull(rawClass, () -> new NullArgumentException("rawClass"));
 
     this.rawClass = rawClass;
   }

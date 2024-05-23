@@ -16,31 +16,27 @@ import java.math.RoundingMode;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.venuspj.util.primitives.UnsignedLongs;
 
-/**
- * A class for arithmetic on values of type {@code long}. Where possible, methods are defined and
- * named analogously to their {@code BigInteger} counterparts.
- *
- * <p>The implementations of many methods in this class are based on material from Henry S. Warren,
- * Jr.'s <i>Hacker's Delight</i>, (Addison Wesley, 2002).
- *
- * <p>Similar functionality for {@code int} and for {@link BigInteger} can be found in {@link
- * IntMath} and {@link BigIntegerMath} respectively. For other common operations on {@code long}
- * values, see {@link com.google.common.primitives.Longs}.
- */
 public final class LongMath {
   // NOTE: Whenever both tests are cheap and functional, it's faster to use &, | instead of &&, ||
 
+  /**
+   * long データ型を使用して表すことができる最大の符号付き 2 のべき乗値。
+   *
+   * <p>
+   * この値は、1を(Long.SIZE - 2)ビット左にシフトすることで計算されます。 これは
+   * {@code @VisibleForTesting}とマークされており、テストの目的のみに使用することを示しています。
+   * </p>
+   */
   @VisibleForTesting
   static final long MAX_SIGNED_POWER_OF_TWO = 1L << (Long.SIZE - 2);
 
   /**
-   * Returns the smallest power of two greater than or equal to {@code x}. This is equivalent to
-   * {@code checkedPow(2, log2(x, CEILING))}.
+   * {@code x}以上の最小の2の冪を返します。
+   * <p>
+   * これは、{@code checkedPow(2, log2(x, CEILING))}と同等です。
    *
-   * @throws IllegalArgumentException if {@code x <= 0}
-   * @throws ArithmeticException of the next-higher power of two is not representable as a
-   * {@code long}, i.e. when {@code x > 2^62}
-   * @since 20.0
+   * @throws IllegalArgumentException {@code x <= 0}の場合
+   * @throws ArithmeticException 次に高い2の冪が{@code long}として表現できない場合、つまり{@code x > 2^62}の場合
    */
   public static long ceilingPowerOfTwo(long x) {
     checkPositive("x", x);
@@ -51,11 +47,11 @@ public final class LongMath {
   }
 
   /**
-   * Returns the largest power of two less than or equal to {@code x}. This is equivalent to
-   * {@code checkedPow(2, log2(x, FLOOR))}.
+   * {@code x}以下のうち最も大きい2のべき乗を返します。
+   * <p>
+   * これは {@code checkedPow(2, log2(x, FLOOR))}と同等です。
    *
-   * @throws IllegalArgumentException if {@code x <= 0}
-   * @since 20.0
+   * @throws IllegalArgumentException {@code x <= 0}の場合
    */
   public static long floorPowerOfTwo(long x) {
     checkPositive("x", x);
@@ -76,9 +72,11 @@ public final class LongMath {
   }
 
   /**
-   * Returns 1 if {@code x < y} as unsigned longs, and 0 otherwise. Assumes that x - y fits into a
-   * signed long. The implementation is branch-free, and benchmarks suggest it is measurably faster
-   * than the straightforward ternary expression.
+   * ブランチを使用せずに、2つのlong値 x と y の差の符号ビットを返します。
+   *
+   * @param x 最初のlong値
+   * @param y 2番目のlong値
+   * @return x - y の符号ビット
    */
   @VisibleForTesting
   static int lessThanBranchFree(long x, long y) {
@@ -612,8 +610,6 @@ public final class LongMath {
   /**
    * Returns the sum of {@code a} and {@code b} unless it would overflow or underflow in which case
    * {@code Long.MAX_VALUE} or {@code Long.MIN_VALUE} is returned, respectively.
-   *
-   * @since 20.0
    */
   public static long saturatedAdd(long a, long b) {
     long naiveSum = a + b;
@@ -671,8 +667,6 @@ public final class LongMath {
   /**
    * Returns the {@code b} to the {@code k}th power, unless it would overflow or underflow in which
    * case {@code Long.MAX_VALUE} or {@code Long.MIN_VALUE} is returned, respectively.
-   *
-   * @since 20.0
    */
   public static long saturatedPow(long b, int k) {
     checkNonNegative("exponent", k);
@@ -929,8 +923,6 @@ public final class LongMath {
   /**
    * Returns the arithmetic mean of {@code x} and {@code y}, rounded toward negative infinity. This
    * method is resilient to overflow.
-   *
-   * @since 14.0
    */
   public static long mean(long x, long y) {
     // Efficient method for computing the arithmetic mean.
@@ -958,7 +950,6 @@ public final class LongMath {
    * <p>To test larger numbers, use {@link BigInteger#isProbablePrime}.
    *
    * @throws IllegalArgumentException if {@code n} is negative
-   * @since 20.0
    */
   public static boolean isPrime(long n) {
     if (n < 2) {

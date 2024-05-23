@@ -1,9 +1,11 @@
 package org.venuspj.util.collect;
 
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
+import static org.venuspj.util.base.Preconditions.checkNotNull;
 
 import java.util.Iterator;
+import org.jetbrains.annotations.NotNull;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VUnsupportedOperationException;
 
 
@@ -58,7 +60,7 @@ public class IndexedIterator<T> implements Iterator<Indexed<T>> {
    * @return {@link IndexedIterator}をラップした{@link Iterable}
    */
   public static <T> Iterable<Indexed<T>> indexed(final Iterable<T> iterable) {
-    assertArgumentNotNull("iterable", iterable);
+    checkNotNull(iterable, () -> new NullArgumentException("iterable"));
     return indexed(iterable.iterator());
   }
 
@@ -70,11 +72,11 @@ public class IndexedIterator<T> implements Iterator<Indexed<T>> {
    * @return {@link IndexedIterator}をラップした{@link Iterable}
    */
   public static <T> Iterable<Indexed<T>> indexed(final Iterator<T> iterator) {
-    assertArgumentNotNull("iterator", iterator);
+    checkNotNull(iterator, () -> new NullArgumentException("iterator"));
 
     return new Iterable<Indexed<T>>() {
       @Override
-      public Iterator<Indexed<T>> iterator() {
+      public @NotNull Iterator<Indexed<T>> iterator() {
         return new IndexedIterator<T>(iterator);
       }
     };
@@ -86,7 +88,7 @@ public class IndexedIterator<T> implements Iterator<Indexed<T>> {
    * @param iterator イテレータ。{@literal null}であってはいけません
    */
   public IndexedIterator(final Iterator<T> iterator) {
-    assertArgumentNotNull("iterator", iterator);
+    checkNotNull(iterator, () -> new NullArgumentException("iterator"));
 
     this.iterator = iterator;
     this.index = 0;

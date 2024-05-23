@@ -7,29 +7,30 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  */
 public class StaticDateTimeProvider extends DateProvider {
-    private static AtomicReference<LocalDateTime> localDateTime = new AtomicReference<LocalDateTime>();
 
-    private StaticDateTimeProvider() {
+  private static final AtomicReference<LocalDateTime> localDateTime = new AtomicReference<LocalDateTime>();
 
-    }
+  private StaticDateTimeProvider() {
 
-    public static void initialize(LocalDateTime aLocalDateTime) {
-        StaticDateTimeProvider instance = new StaticDateTimeProvider();
-        instance.setLocalDateTime(aLocalDateTime);
-        setDateProvider(instance);
+  }
+
+  public static void initialize(LocalDateTime aLocalDateTime) {
+    StaticDateTimeProvider instance = new StaticDateTimeProvider();
+    instance.setLocalDateTime(aLocalDateTime);
+    setDateProvider(instance);
 
 
-    }
+  }
 
-    private void setLocalDateTime(LocalDateTime aLocalDateTime) {
-        StaticDateTimeProvider.localDateTime.set(aLocalDateTime);
+  private void setLocalDateTime(LocalDateTime aLocalDateTime) {
+    StaticDateTimeProvider.localDateTime.set(aLocalDateTime);
 
-    }
+  }
 
-    @Override
-    protected LocalDateTime now() {
-        return localDateTime.get();
-        
-    }
+  @Override
+  protected LocalDateTime now() {
+    return localDateTime.get();
+
+  }
 
 }

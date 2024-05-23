@@ -27,4 +27,19 @@ class StringPreconditionsTest {
     assertThatExceptionOfType(EmptyArgumentException.class).isThrownBy(
         () -> StringPreconditions.checkNotEmpty(input, "input"));
   }
+
+  @Test
+  void checkNotEmpty_withSupplier_shouldThrowException() {
+    String input = "";
+    assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+        () -> StringPreconditions.checkNotEmpty(input, () -> new RuntimeException("Is empty")));
+  }
+
+  @Test
+  void checkNotEmpty_withNotEmptyStringAndSupplier_shouldPass() {
+    String input = "notEmpty";
+    String result = StringPreconditions.checkNotEmpty(input,
+        () -> new RuntimeException("Is empty"));
+    assertThat(result).isEqualTo(input);
+  }
 }

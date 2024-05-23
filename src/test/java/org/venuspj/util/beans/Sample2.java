@@ -1,27 +1,20 @@
 package org.venuspj.util.beans;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
 import java.time.YearMonth;
-import java.util.Date;
 
 public class Sample2 {
+
+  private Boolean boolean0;
+  private String boolean1;
+  private Boolean boolean2;
 
   private int int0;
   private String int1;
   private int int2;
-  private Date date0;
-  private String date1;
-  private Date date2;
-  private java.sql.Date sqlDate0;
-  private String sqlDate1;
-  private java.sql.Date sqlDate2;
-  private Timestamp timestamp0;
-  private String timestamp1;
-  private Timestamp timestamp2;
   private LocalDate localDate0;
   private String localDate1;
   private LocalDate localDate2;
@@ -37,6 +30,57 @@ public class Sample2 {
   private MonthDay monthDay0;
   private String monthDay1;
   private MonthDay monthDay2;
+  private Sex enum0;
+  private String enum1;
+  private Sex enum2;
+
+  public Boolean getBoolean0() {
+    return boolean0;
+  }
+
+  public void setBoolean0(Boolean boolean0) {
+    this.boolean0 = boolean0;
+  }
+
+  public String getBoolean1() {
+    return boolean1;
+  }
+
+  public void setBoolean1(String boolean1) {
+    this.boolean1 = boolean1;
+  }
+
+  public Boolean getBoolean2() {
+    return boolean2;
+  }
+
+  public void setBoolean2(Boolean boolean2) {
+    this.boolean2 = boolean2;
+  }
+
+  public Sex getEnum0() {
+    return enum0;
+  }
+
+  public void setEnum0(Sex enum0) {
+    this.enum0 = enum0;
+  }
+
+  public String getEnum1() {
+    return enum1;
+  }
+
+  public void setEnum1(String enum1) {
+    this.enum1 = enum1;
+  }
+
+  public Sex getEnum2() {
+    return enum2;
+  }
+
+  public void setEnum2(Sex enum2) {
+    this.enum2 = enum2;
+  }
 
   public int getInt0() {
     return int0;
@@ -60,78 +104,6 @@ public class Sample2 {
 
   public void setInt2(int int2) {
     this.int2 = int2;
-  }
-
-  public Date getDate0() {
-    return date0;
-  }
-
-  public void setDate0(Date date0) {
-    this.date0 = date0;
-  }
-
-  public String getDate1() {
-    return date1;
-  }
-
-  public void setDate1(String date1) {
-    this.date1 = date1;
-  }
-
-  public Date getDate2() {
-    return date2;
-  }
-
-  public void setDate2(Date date2) {
-    this.date2 = date2;
-  }
-
-  public java.sql.Date getSqlDate0() {
-    return sqlDate0;
-  }
-
-  public void setSqlDate0(java.sql.Date sqlDate0) {
-    this.sqlDate0 = sqlDate0;
-  }
-
-  public String getSqlDate1() {
-    return sqlDate1;
-  }
-
-  public void setSqlDate1(String sqlDate1) {
-    this.sqlDate1 = sqlDate1;
-  }
-
-  public java.sql.Date getSqlDate2() {
-    return sqlDate2;
-  }
-
-  public void setSqlDate2(java.sql.Date sqlDate2) {
-    this.sqlDate2 = sqlDate2;
-  }
-
-  public Timestamp getTimestamp0() {
-    return timestamp0;
-  }
-
-  public void setTimestamp0(Timestamp timestamp0) {
-    this.timestamp0 = timestamp0;
-  }
-
-  public String getTimestamp1() {
-    return timestamp1;
-  }
-
-  public void setTimestamp1(String timestamp1) {
-    this.timestamp1 = timestamp1;
-  }
-
-  public Timestamp getTimestamp2() {
-    return timestamp2;
-  }
-
-  public void setTimestamp2(Timestamp timestamp2) {
-    this.timestamp2 = timestamp2;
   }
 
   public LocalDate getLocalDate0() {
@@ -257,18 +229,12 @@ public class Sample2 {
   @Override
   public String toString() {
     return "Sample2{" +
-        "int0=" + int0 +
+        "boolean0=" + boolean0 +
+        ", boolean1='" + boolean1 + '\'' +
+        ", boolean2=" + boolean2 +
+        ", int0=" + int0 +
         ", int1='" + int1 + '\'' +
         ", int2=" + int2 +
-        ", date0=" + date0 +
-        ", date1='" + date1 + '\'' +
-        ", date2=" + date2 +
-        ", sqlDate0=" + sqlDate0 +
-        ", sqlDate1='" + sqlDate1 + '\'' +
-        ", sqlDate2=" + sqlDate2 +
-        ", timestamp0=" + timestamp0 +
-        ", timestamp1='" + timestamp1 + '\'' +
-        ", timestamp2=" + timestamp2 +
         ", localDate0=" + localDate0 +
         ", localDate1='" + localDate1 + '\'' +
         ", localDate2=" + localDate2 +
@@ -284,6 +250,9 @@ public class Sample2 {
         ", monthDay0=" + monthDay0 +
         ", monthDay1='" + monthDay1 + '\'' +
         ", monthDay2=" + monthDay2 +
+        ", enum0=" + enum0 +
+        ", enum1='" + enum1 + '\'' +
+        ", enum2=" + enum2 +
         '}';
   }
 }

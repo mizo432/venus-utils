@@ -1,10 +1,10 @@
 package org.venuspj.util.beans.factory;
 
+import static org.venuspj.util.base.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Collections3.newConcurrentHashMap;
 import static org.venuspj.util.collect.Collections3.putIfAbsent;
 
 import java.util.concurrent.ConcurrentMap;
-import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.impl.BeanDescImpl;
 import org.venuspj.util.exception.NullArgumentException;
@@ -51,7 +51,7 @@ public abstract class BeanDescFactory {
    * @return {@link BeanDesc}
    */
   public static BeanDesc getBeanDesc(final Class<?> clazz) {
-    Preconditions.checkNotNull(clazz, () -> new NullArgumentException("clazz is null"));
+    checkNotNull(clazz, () -> new NullArgumentException("clazz is null"));
 
     if (!initialized) {
       initialize();

@@ -1,8 +1,8 @@
 package org.venuspj.util.collect;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.util.Iterator;
+import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VNoSuchElementException;
 import org.venuspj.util.exception.VUnsupportedOperationException;
 
@@ -44,7 +44,7 @@ public class ArrayIterator<T> implements Iterator<T> {
    */
   @SafeVarargs
   public static <T> Iterable<T> iterable(final T... items) {
-    assertArgumentNotNull("items", items);
+    Preconditions.checkNotNull(items, () -> new NullArgumentException("items"));
 
     return new Iterable<T>() {
       @Override

@@ -4,35 +4,25 @@ package org.venuspj.util.beans;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
 import java.time.YearMonth;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.venuspj.util.beans.converter.Converter;
-import org.venuspj.util.beans.converter.DateConverter;
+import org.venuspj.util.beans.converter.BooleanConverter;
 import org.venuspj.util.beans.converter.LocalDateConverter;
 import org.venuspj.util.beans.converter.LocalDateTimeConverter;
 import org.venuspj.util.beans.converter.LocalTimeConverter;
 import org.venuspj.util.beans.converter.MonthDayConverter;
 import org.venuspj.util.beans.converter.NumberConverter;
-import org.venuspj.util.beans.converter.SqlDateConverter;
-import org.venuspj.util.beans.converter.TimeConverter;
-import org.venuspj.util.beans.converter.TimestampConverter;
 import org.venuspj.util.beans.converter.YearMonthConverter;
 import org.venuspj.util.beans.factory.BeanDescFactory;
-import org.venuspj.util.convert.DateConversions;
 import org.venuspj.util.convert.LocalDateConversions;
 import org.venuspj.util.convert.LocalTimeConversions;
 import org.venuspj.util.convert.MonthDayConversions;
-import org.venuspj.util.convert.TimeConversions;
-import org.venuspj.util.convert.TimestampConversions;
 import org.venuspj.util.convert.YearMonthConversions;
 import org.venuspj.util.strings2.Strings2;
 
@@ -48,24 +38,6 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
    */
   protected static final String[] EMPTY_STRING_ARRAY = Strings2.EMPTY_STRING_ARRAY;
 
-  /**
-   * 日付用のデフォルトコンバータです。
-   */
-  protected static final DateConverter DEFAULT_DATE_CONVERTER = new DateConverter(
-      DateConversions.getY4Pattern(Locale.getDefault()));
-
-  /**
-   * 日時用のデフォルトコンバータです。
-   */
-  protected static final TimestampConverter DEFAULT_TIMESTAMP_CONVERTER = new TimestampConverter(
-      TimestampConversions.getPattern(Locale.getDefault()));
-
-  /**
-   * 時間用のデフォルトコンバータです。
-   */
-  protected static final DateConverter DEFAULT_TIME_CONVERTER = new DateConverter(
-      TimeConversions.getPattern(Locale.getDefault()));
-
   protected static final LocalDateConverter DEFAULT_LOCAL_DATE_CONVERTER = new LocalDateConverter(
       LocalDateConversions.getPattern(Locale.getDefault()));
   protected static final LocalDateTimeConverter DEFAULT_LOCAL_DATETIME_CONVERTER = new LocalDateTimeConverter(
@@ -76,6 +48,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
       YearMonthConversions.getPattern(Locale.getDefault()));
   protected static final MonthDayConverter DEFAULT_MONTH_DAY_CONVERTER = new MonthDayConverter(
       MonthDayConversions.getPattern(Locale.getDefault()));
+  protected static final BooleanConverter DEFAULT_BOOLEAN_CONVERTER = new BooleanConverter();
 
   /**
    * 操作の対象に含めるプロパティ名の配列です。
@@ -238,17 +211,6 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
     return (S) this;
   }
 
-  /**
-   * 日付のコンバータを設定します。
-   *
-   * @param pattern 日付のパターン
-   * @param propertyNames プロパティ名の配列
-   * @return このインスタンス自身
-   */
-  public S dateConverter(String pattern, CharSequence... propertyNames) {
-    return converter(new DateConverter(pattern), propertyNames);
-  }
-
   public S localDateConverter(String pattern, CharSequence... propertyNames) {
     return converter(new LocalDateConverter(pattern), propertyNames);
   }
@@ -267,39 +229,6 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
 
   public S monthDayConverter(String pattern, CharSequence... propertyNames) {
     return converter(new MonthDayConverter(pattern), propertyNames);
-  }
-
-  /**
-   * SQL用日付のコンバータを設定します。
-   *
-   * @param pattern 日付のパターン
-   * @param propertyNames プロパティ名の配列
-   * @return このインスタンス自身
-   */
-  public S sqlDateConverter(String pattern, CharSequence... propertyNames) {
-    return converter(new SqlDateConverter(pattern), propertyNames);
-  }
-
-  /**
-   * 時間のコンバータを設定します。
-   *
-   * @param pattern 時間のパターン
-   * @param propertyNames プロパティ名の配列
-   * @return このインスタンス自身
-   */
-  public S timeConverter(String pattern, CharSequence... propertyNames) {
-    return converter(new TimeConverter(pattern), propertyNames);
-  }
-
-  /**
-   * 日時のコンバータを設定します。
-   *
-   * @param pattern 日時のパターン
-   * @param propertyNames プロパティ名の配列
-   * @return このインスタンス自身
-   */
-  public S timestampConverter(String pattern, CharSequence... propertyNames) {
-    return converter(new TimestampConverter(pattern), propertyNames);
   }
 
   /**
@@ -375,7 +304,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
       }
       Object value = srcPropertyDesc.getValue(src);
       if (value instanceof String && excludesWhitespace
-          && ((String) value).trim().length() == 0) {
+          && ((String) value).trim().isEmpty()) {
         continue;
       }
       if (value == null && excludesNull) {
@@ -393,8 +322,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
    * @param src コピー元
    * @param dest コピー先
    */
-  @SuppressWarnings("unchecked")
-  protected void copyBeanToMap(Object src, Map dest) {
+  protected void copyBeanToMap(Object src, Map<String, Object> dest) {
     BeanDesc srcBeanDesc = BeanDescFactory.getBeanDesc(src.getClass());
     int size = srcBeanDesc.getPropertyDescSize();
     for (int i = 0; i < size; i++) {
@@ -406,7 +334,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
       }
       Object value = srcPropertyDesc.getValue(src);
       if (value instanceof String && excludesWhitespace
-          && ((String) value).trim().length() == 0) {
+          && ((String) value).trim().isEmpty()) {
         continue;
       }
       if (value == null && excludesNull) {
@@ -427,8 +355,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
    */
   protected void copyMapToBean(Map<String, Object> src, Object dest) {
     BeanDesc destBeanDesc = BeanDescFactory.getBeanDesc(dest.getClass());
-    for (Iterator<String> i = src.keySet().iterator(); i.hasNext(); ) {
-      String srcPropertyName = i.next();
+    for (String srcPropertyName : src.keySet()) {
       if (!isTargetProperty(srcPropertyName)) {
         continue;
       }
@@ -444,7 +371,7 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
       }
       Object value = src.get(srcPropertyName);
       if (value instanceof String && excludesWhitespace
-          && ((String) value).trim().length() == 0) {
+          && ((String) value).trim().isEmpty()) {
         continue;
       }
       if (value == null && excludesNull) {
@@ -464,15 +391,14 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
    */
   protected void copyMapToMap(Map<String, Object> src,
       Map<String, Object> dest) {
-    for (Iterator<String> i = src.keySet().iterator(); i.hasNext(); ) {
-      String srcPropertyName = i.next();
+    for (String srcPropertyName : src.keySet()) {
       if (!isTargetProperty(srcPropertyName)) {
         continue;
       }
       String destPropertyName = trimPrefix(srcPropertyName);
       Object value = src.get(srcPropertyName);
       if (value instanceof String && excludesWhitespace
-          && ((String) value).trim().length() == 0) {
+          && ((String) value).trim().isEmpty()) {
         continue;
       }
       if (value == null && excludesNull) {
@@ -548,7 +474,6 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
    * @param clazz クラス
    * @return コンバータ
    */
-  @SuppressWarnings("unchecked")
   protected Converter<?> findConverter(Class<?> clazz) {
     for (Converter<?> c : converters) {
       if (c.isTarget(clazz)) {
@@ -564,7 +489,6 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
    * @param clazz クラス
    * @return コンバータ
    */
-  @SuppressWarnings("unchecked")
   protected Converter<?> findDefaultConverter(Class<?> clazz) {
     if (clazz == LocalDate.class) {
       return DEFAULT_LOCAL_DATE_CONVERTER;
@@ -585,18 +509,10 @@ public abstract class AbstractCopy<S extends AbstractCopy<S>> {
     if (clazz == MonthDay.class) {
       return DEFAULT_MONTH_DAY_CONVERTER;
     }
-
-    if (clazz == java.sql.Date.class) {
-      return DEFAULT_DATE_CONVERTER;
+    if (clazz == Boolean.class) {
+      return DEFAULT_BOOLEAN_CONVERTER;
     }
 
-    if (clazz == Time.class) {
-      return DEFAULT_TIME_CONVERTER;
-    }
-
-    if (Date.class.isAssignableFrom(clazz)) {
-      return DEFAULT_TIMESTAMP_CONVERTER;
-    }
     return null;
   }
 

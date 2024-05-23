@@ -1,8 +1,5 @@
 package org.venuspj.util.lang;
 
-import static org.venuspj.util.misc.Assertions.assertArgumentArrayIndex;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
-
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.GenericDeclaration;
@@ -14,8 +11,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.venuspj.util.base.ArrayPreconditions;
 import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.collect.Collections3;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * genericsを扱うためのユーティリティ・クラスです。
@@ -128,7 +127,8 @@ public abstract class Genericses {
     if (genericParameter == null) {
       return null;
     }
-    assertArgumentArrayIndex("index", index, genericParameter.length);
+    ArrayPreconditions.checkLength(genericParameter, index,
+        () -> new IndexOutOfBoundsException(index));
     return genericParameter[index];
   }
 
@@ -236,7 +236,7 @@ public abstract class Genericses {
    */
   public static Map<TypeVariable<?>, Type> getTypeVariableMap(
       final Class<?> clazz) {
-    assertArgumentNotNull("clazz", clazz);
+    Preconditions.checkNotNull(clazz, () -> new NullArgumentException("clazz"));
 
     final Map<TypeVariable<?>, Type> map =
         Collections3.newLinkedHashMap();

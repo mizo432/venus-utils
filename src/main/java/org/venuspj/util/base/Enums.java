@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * Utility methods for working with {@link Enum} instances.
+ * {@link Enum}インスタンスを扱うためのユーティリティメソッド群
  */
 public final class Enums {
 
@@ -20,11 +20,10 @@ public final class Enums {
   }
 
   /**
-   * Returns the {@link Field} in which {@code enumValue} is defined. For example, to get the
-   * {@code Description} annotation on the {@code GOLF} constant of enum {@code Sport}, use
-   * {@code Enums.getField(Sport.GOLF).getAnnotation(Description.class)}.
+   * 指定されたenum定数を表すFieldオブジェクトを返します。
    *
-   * @since 12.0
+   * @param enumValue enum定数
+   * @return 指定されたenum定数を表すFieldオブジェクト
    */
   public static Field getField(Enum<?> enumValue) {
     Class<?> clazz = enumValue.getDeclaringClass();
@@ -36,10 +35,12 @@ public final class Enums {
   }
 
   /**
-   * Returns an optional enum constant for the given type, using {@link Enum#valueOf}. If the
-   * constant does not exist, {@link Optional#absent} is returned. A common use case is for parsing
-   * user input or falling back to a default enum constant. For example,
-   * {@code Enums.getIfPresent(Country.class, countryInput).or(Country.DEFAULT);}
+   * 指定されたEnumクラスのEnum定数と一致する値を返すOptionalを取得します。
+   *
+   * @param <T> Enum型
+   * @param enumClass Enum型を表すクラスオブジェクト
+   * @param value 一致する値
+   * @return Enum定数が見つかった場合はそのEnum定数を含むOptional、見つからなかった場合は空のOptionalを返します。
    */
   public static <T extends Enum<T>> Optional<T> getIfPresent(Class<T> enumClass, String value) {
     checkNotNull(enumClass);
@@ -72,12 +73,11 @@ public final class Enums {
   }
 
   /**
-   * Returns a converter that converts between strings and {@code enum} values of type
-   * {@code enumClass} using {@link Enum#valueOf(Class, String)} and {@link Enum#name()}. The
-   * converter will throw an {@code IllegalArgumentException} if the argument is not the name of any
-   * enum constant in the specified enum.
+   * 指定した列挙型クラスのEnum定数に文字列を変換するConverterを返します。
    *
-   * @since 16.0
+   * @param enumClass Enum型のクラスオブジェクト
+   * @param <T> Enum型
+   * @return 文字列をEnum定数に変換するためのConverter
    */
   public static <T extends Enum<T>> Converter<String, T> stringConverter(final Class<T> enumClass) {
     return new StringConverter<T>(enumClass);

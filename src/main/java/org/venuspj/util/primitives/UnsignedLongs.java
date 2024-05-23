@@ -157,8 +157,6 @@ public final class UnsignedLongs {
 
   /**
    * Sorts the array, treating its elements as unsigned 64-bit integers.
-   *
-   * @since 23.1
    */
   public static void sort(long[] array) {
     checkNotNull(array);
@@ -168,8 +166,6 @@ public final class UnsignedLongs {
   /**
    * Sorts the array between {@code fromIndex} inclusive and {@code toIndex} exclusive, treating its
    * elements as unsigned 64-bit integers.
-   *
-   * @since 23.1
    */
   public static void sort(long[] array, int fromIndex, int toIndex) {
     checkNotNull(array);
@@ -186,8 +182,6 @@ public final class UnsignedLongs {
   /**
    * Sorts the elements of {@code array} in descending order, interpreting them as unsigned 64-bit
    * integers.
-   *
-   * @since 23.1
    */
   public static void sortDescending(long[] array) {
     checkNotNull(array);
@@ -197,8 +191,6 @@ public final class UnsignedLongs {
   /**
    * Sorts the elements of {@code array} between {@code fromIndex} inclusive and {@code toIndex}
    * exclusive in descending order, interpreting them as unsigned 64-bit integers.
-   *
-   * @since 23.1
    */
   public static void sortDescending(long[] array, int fromIndex, int toIndex) {
     checkNotNull(array);
@@ -349,7 +341,6 @@ public final class UnsignedLongs {
    *
    * @throws NumberFormatException if the string does not contain a valid unsigned {@code long}
    * value
-   * @since 13.0
    */
   public static long decode(String stringValue) {
     ParseRequest request = ParseRequest.fromString(stringValue);

@@ -9,8 +9,9 @@ import static org.venuspj.util.primitives.Doubles.isFinite;
 import java.util.Iterator;
 
 /**
- * A mutable object which accumulates double values and tracks some basic statistics over all the
- * values added so far. The values may be added singly or in groups. This class is not thread safe.
+ * これまでに追加されたすべての値に対して基本的な統計を追跡しながら、double型の値を累積する可変性のオブジェクトです。
+ * <p>
+ * 値は単独またはグループ単位で追加することができます。このクラスはスレッドセーフではありません。
  */
 public final class StatsAccumulator {
 

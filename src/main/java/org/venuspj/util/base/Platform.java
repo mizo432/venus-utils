@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Methods factored out so that they can be emulated differently in GWT.
  */
-final class Platform {
+public final class Platform {
 
   private static final Logger logger = Logger.getLogger(Platform.class.getName());
   private static final PatternCompiler patternCompiler = loadPatternCompiler();
@@ -38,15 +38,15 @@ final class Platform {
     return String.format(Locale.ROOT, "%.4g", value);
   }
 
-  static boolean stringIsNullOrEmpty(String reference) {
-    return Strings.isNullOrEmpty(reference);
+  public static boolean stringIsNullOrEmpty(String reference) {
+    return reference == null || reference.isEmpty();
   }
 
-  static String nullToEmpty(String string) {
+  public static String nullToEmpty(String string) {
     return (string == null) ? "" : string;
   }
 
-  static String emptyToNull(String string) {
+  public static String emptyToNull(String string) {
     return stringIsNullOrEmpty(string) ? null : string;
   }
 

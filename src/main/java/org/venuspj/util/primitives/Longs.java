@@ -16,14 +16,11 @@ import java.util.List;
 import java.util.RandomAccess;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import org.jetbrains.annotations.NotNull;
 import org.venuspj.util.base.Converter;
 
 /**
- * Static utility methods pertaining to {@code long} primitives, that are not already found in
- * either {@link Long} or {@link Arrays}.
- *
- * <p>See the Guava User Guide article on <a
- * href="https://github.com/google/guava/wiki/PrimitivesExplained">primitive utilities</a>.
+ * Longsクラスは、プリミティブなlong値を操作するためのユーティリティメソッドを提供します。
  */
 public final class Longs {
 
@@ -31,58 +28,52 @@ public final class Longs {
   }
 
   /**
-   * The number of bytes required to represent a primitive {@code long} value.
-   *
-   * <p><b>Java 8 users:</b> use {@link Long#BYTES} instead.
+   * BYTES変数は、long値を格納するために必要なバイト数を表します。
+   * <p>
+   * それは、long値のビット数を1バイトのビット数で割ることにより計算されます。
+   * <p>
+   * 注意: BYTESの値は定数であり、変更することはできません。
+   * <p>
+   * 使用方法： int bytesRequired = BYTES;
    */
   public static final int BYTES = Long.SIZE / Byte.SIZE;
 
   /**
-   * The largest power of two that can be represented as a {@code long}.
-   *
-   * @since 10.0
+   * longデータ型として表現できる2の最大の累乗。
+   * <p>
+   * この定数の値は、(Long.SIZE - 2) ビット左に1をシフトすることで計算されます。
    */
   public static final long MAX_POWER_OF_TWO = 1L << (Long.SIZE - 2);
 
   /**
-   * Returns a hash code for {@code value}; equal to the result of invoking
-   * {@code ((Long) value).hashCode()}.
+   * 与えられたlong値のハッシュコードを計算します。
    *
-   * <p>This method always return the value specified by {@link Long#hashCode()} in java, which
-   * might be different from {@code ((Long) value).hashCode()} in GWT because
-   * {@link Long#hashCode()} in GWT does not obey the JRE contract.
-   *
-   * <p><b>Java 8 users:</b> use {@link Long#hashCode(long)} instead.
-   *
-   * @param value a primitive {@code long} value
-   * @return a hash code for the value
+   * @param value ハッシュコードを計算する必要があるlong値
+   * @return 与えられたlong値のハッシュコード
    */
   public static int hashCode(long value) {
-    return (int) (value ^ (value >>> 32));
+    return Long.hashCode(value);
+
   }
 
   /**
-   * Compares the two specified {@code long} values. The sign of the value returned is the same as
-   * that of {@code ((Long) a).compareTo(b)}.
+   * 2つのlong型の値を比較します。
    *
-   * <p><b>Note for Java 7 and later:</b> this method should be treated as deprecated; use the
-   * equivalent {@link Long#compare} method instead.
-   *
-   * @param a the first {@code long} to compare
-   * @param b the second {@code long} to compare
-   * @return a negative value if {@code a} is less than {@code b}; a positive value if {@code a} is
-   * greater than {@code b}; or zero if they are equal
+   * @param a 比較する最初のlong型の値
+   * @param b 比較する2つ目のlong型の値
+   * @return {@code a} が {@code b} と等しい場合は0; {@code a} が {@code b} より小さい場合は0より小さい値; {@code a} が
+   * {@code b} より大きい場合は0より大きい値を返します。
    */
   public static int compare(long a, long b) {
-    return (a < b) ? -1 : ((a > b) ? 1 : 0);
+    return Long.compare(a, b);
   }
 
   /**
-   * Returns {@code true} if {@code target} is present as an element anywhere in {@code array}.
+   * 与えられた対象の値が配列の中に存在するかをチェックします。
    *
-   * @param array an array of {@code long} values, possibly empty
-   * @param target a primitive {@code long} value
-   * @return {@code true} if {@code array[i] == target} for some value of {@code i}
+   * @param array 検索対象の配列
+   * @param target 配列内の存在を確認するための値
+   * @return ターゲットの値が配列内に存在する場合はtrue、そうでない場合はfalse
    */
   public static boolean contains(long[] array, long target) {
     for (long value : array) {
@@ -94,17 +85,27 @@ public final class Longs {
   }
 
   /**
-   * Returns the index of the first appearance of the value {@code target} in {@code array}.
+   * このメソッドは配列中で指定値が初めて現れるインデックスを返します。
    *
-   * @param array an array of {@code long} values, possibly empty
-   * @param target a primitive {@code long} value
-   * @return the least index {@code i} for which {@code array[i] == target}, or {@code -1} if no
-   * such index exists.
+   * @param array 空でも可能な {@code long} 値の配列
+   * @param target 原始型の {@code long} 値
+   * @return {@code array[i] == target} を満たす最小のインデックス {@code i}。存在しない場合は {@code -1} を返します。
    */
   public static int indexOf(long[] array, long target) {
     return indexOf(array, target, 0, array.length);
   }
 
+  /**
+   * 指定された範囲内で指定された配列内の目標要素の最初の出現のインデックスを返します。
+   * <p>
+   * この範囲は、開始と終了のインデックスによって定義されます。
+   *
+   * @param array 検索対象の配列
+   * @param target 検索対象の目標要素
+   * @param start 検索を開始するインデックス（これ自体を含む）
+   * @param end 検索を終了するインデックス（これ自体は含まない）
+   * @return 目標要素の最初の出現のインデックス。だが、指定した範囲内に目標要素が見つからない場合は-1を返します。
+   */
   private static int indexOf(long[] array, long target, int start, int end) {
     for (int i = start; i < end; i++) {
       if (array[i] == target) {
@@ -145,17 +146,26 @@ public final class Longs {
   }
 
   /**
-   * Returns the index of the last appearance of the value {@code target} in {@code array}.
+   * {@code array}のなかから{@code target}の最後の出現インデックスを返します。
    *
-   * @param array an array of {@code long} values, possibly empty
-   * @param target a primitive {@code long} value
-   * @return the greatest index {@code i} for which {@code array[i] == target}, or {@code -1} if no
-   * such index exists.
+   * @param array {@code long}値の配列、空の可能性あり
+   * @param target プリミティブな{@code long}値
+   * @return {@code array[i] == target}となる最大のインデックス{@code i}を返します。該当するインデックスが存在しない場合は{@code
+   * -1}を返します。
    */
   public static int lastIndexOf(long[] array, long target) {
     return lastIndexOf(array, target, 0, array.length);
   }
 
+  /**
+   * 指定された範囲内で指定された対象要素の最後の出現インデックスを返します。
+   *
+   * @param array 検索する配列
+   * @param target 見つけるターゲット要素
+   * @param start 検索範囲の開始インデックス（含む）
+   * @param end 検索範囲の終了インデックス（含まず）
+   * @return 指定された範囲内での目標要素の最後の出現のインデックス、または 要素が見つからない場合は-1
+   */
   private static int lastIndexOf(long[] array, long target, int start, int end) {
     for (int i = end - 1; i >= start; i--) {
       if (array[i] == target) {
@@ -166,12 +176,11 @@ public final class Longs {
   }
 
   /**
-   * Returns the least value present in {@code array}.
+   * {@code array}内の最小値を返します。
    *
-   * @param array a <i>nonempty</i> array of {@code long} values
-   * @return the value present in {@code array} that is less than or equal to every other value in
-   * the array
-   * @throws IllegalArgumentException if {@code array} is empty
+   * @param array {@code long}型の値の<a href="">非空</a>配列
+   * @return 配列内で他の値すべてよりも小さいか等しい値
+   * @throws IllegalArgumentException {@code array}が空の場合に発生します
    */
   public static long min(long... array) {
     checkArgument(array.length > 0);
@@ -204,18 +213,16 @@ public final class Longs {
   }
 
   /**
-   * Returns the value nearest to {@code value} which is within the closed range
-   * {@code [min..max]}.
+   * {@code [min..max]}の閉区間内で、{@code value}に最も近い値を返します。
    *
-   * <p>If {@code value} is within the range {@code [min..max]}, {@code value} is returned
-   * unchanged. If {@code value} is less than {@code min}, {@code min} is returned, and if
-   * {@code value} is greater than {@code max}, {@code max} is returned.
+   * <p>{@code value}が{@code [min..max]}の範囲内にある場合、{@code value}はそのまま返されます。
+   * {@code value}が{@code min}より小さい場合、{@code min}が返され、
+   * {@code value}が{@code max}より大きい場合、{@code max}が返されます。
    *
-   * @param value the {@code long} value to constrain
-   * @param min the lower bound (inclusive) of the range to constrain {@code value} to
-   * @param max the upper bound (inclusive) of the range to constrain {@code value} to
-   * @throws IllegalArgumentException if {@code min > max}
-   * @since 21.0
+   * @param value 制約する{@code long}型の値
+   * @param min {@code value}を制約する範囲の下限（含む）
+   * @param max {@code value}を制約する範囲の上限（含む）
+   * @throws IllegalArgumentException {@code min > max}の場合
    */
   public static long constrainToRange(long value, long min, long max) {
     checkArgument(min <= max, "min (%s) must be less than or equal to max (%s)", min, max);
@@ -223,12 +230,11 @@ public final class Longs {
   }
 
   /**
-   * Returns the values from each provided array combined into a single array. For example,
-   * {@code concat(new long[] {a, b}, new long[] {}, new long[] {c}} returns the array
-   * {@code {a, b, c}}.
+   * 提供された各配列からの値を単一の配列に結合して返します。例えば、
+   * {@code concat(new long[] {a, b}, new long[] {}, new long[] {c}}は配列 {@code {a, b, c}}を返します。
    *
-   * @param arrays zero or more {@code long} arrays
-   * @return a single array containing all the values from the source arrays, in order
+   * @param arrays 0個以上の{@code long}配列
+   * @return ソース配列のすべての値を順序通りに含む単一の配列を返します。
    */
   public static long[] concat(long[]... arrays) {
     int length = 0;
@@ -244,6 +250,12 @@ public final class Longs {
     return result;
   }
 
+  /**
+   * long値をバイト配列に変換します。
+   *
+   * @param value 変換するling値
+   * @return long値のバイト配列表現
+   */
   public static byte[] toByteArray(long value) {
     // Note that this code needs to stay compatible with GWT, which has known
     // bugs when narrowing byte casts of long values occur.
@@ -256,15 +268,11 @@ public final class Longs {
   }
 
   /**
-   * Returns the {@code long} value whose big-endian representation is stored in the first 8 bytes
-   * of {@code bytes}; equivalent to {@code ByteBuffer.wrap(bytes).getLong()}. For example, the
-   * input byte array {@code {0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19}} would yield the
-   * {@code long} value {@code 0x1213141516171819L}.
+   * バイト配列をlong値に変換します。
    *
-   * <p>Arguably, it's preferable to use {@link java.nio.ByteBuffer}; that library exposes much
-   * more flexibility at little cost in readability.
-   *
-   * @throws IllegalArgumentException if {@code bytes} has fewer than 8 elements
+   * @param bytes 変換するバイト配列。長さは少なくとも8である必要があります。
+   * @return バイト配列によって表されるlong値。
+   * @throws IllegalArgumentException バイト配列の長さが8未満の場合。
    */
   public static long fromByteArray(byte[] bytes) {
     checkArgument(bytes.length >= BYTES, "array too small: %s < %s", bytes.length, BYTES);
@@ -333,7 +341,6 @@ public final class Longs {
    * @param string the string representation of a long value
    * @return the long value represented by {@code string}, or {@code null} if {@code string} has a
    * length of zero or cannot be parsed as a long value
-   * @since 14.0
    */
   public static Long tryParse(String string) {
     return tryParse(string, 10);
@@ -419,6 +426,7 @@ public final class Longs {
       return "Longs.stringConverter()";
     }
 
+    @Serial
     private Object readResolve() {
       return INSTANCE;
     }
@@ -522,8 +530,6 @@ public final class Longs {
 
   /**
    * Sorts the elements of {@code array} in descending order.
-   *
-   * @since 23.1
    */
   public static void sortDescending(long[] array) {
     checkNotNull(array);
@@ -533,8 +539,6 @@ public final class Longs {
   /**
    * Sorts the elements of {@code array} between {@code fromIndex} inclusive and {@code toIndex}
    * exclusive in descending order.
-   *
-   * @since 23.1
    */
   public static void sortDescending(long[] array, int fromIndex, int toIndex) {
     checkNotNull(array);
@@ -546,8 +550,6 @@ public final class Longs {
   /**
    * Reverses the elements of {@code array}. This is equivalent to
    * {@code Collections.reverse(Longs.asList(array))}, but is likely to be more efficient.
-   *
-   * @since 23.1
    */
   public static void reverse(long[] array) {
     checkNotNull(array);
@@ -562,7 +564,6 @@ public final class Longs {
    *
    * @throws IndexOutOfBoundsException if {@code fromIndex < 0}, {@code toIndex > array.length}, or
    * {@code toIndex > fromIndex}
-   * @since 23.1
    */
   public static void reverse(long[] array, int fromIndex, int toIndex) {
     checkNotNull(array);
@@ -687,7 +688,7 @@ public final class Longs {
     }
 
     @Override
-    public List<Long> subList(int fromIndex, int toIndex) {
+    public @NotNull List<Long> subList(int fromIndex, int toIndex) {
       int size = size();
       checkPositionIndexes(fromIndex, toIndex, size);
       if (fromIndex == toIndex) {
@@ -701,8 +702,7 @@ public final class Longs {
       if (object == this) {
         return true;
       }
-      if (object instanceof LongArrayAsList) {
-        LongArrayAsList that = (LongArrayAsList) object;
+      if (object instanceof LongArrayAsList that) {
         int size = size();
         if (that.size() != size) {
           return false;
@@ -740,6 +740,7 @@ public final class Longs {
       return Arrays.copyOfRange(array, start, end);
     }
 
+    @Serial
     private static final long serialVersionUID = 0;
   }
 }

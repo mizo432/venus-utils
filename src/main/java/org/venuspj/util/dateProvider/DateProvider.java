@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class DateProvider {
 
-  private static AtomicReference<DateProvider> dateProvider = new AtomicReference<>(
+  private static final AtomicReference<DateProvider> dateProvider = new AtomicReference<>(
       new DateProvider());
 
   DateProvider() {
@@ -62,7 +62,7 @@ public class DateProvider {
     LocalDateTime currentLocalDateTime = currentLocalDateTime();
     Instant instant = currentLocalDateTime.atZone(ZoneId.systemDefault()).toInstant();
     return instant.toEpochMilli();
-    
+
   }
 
   protected LocalDateTime now() {

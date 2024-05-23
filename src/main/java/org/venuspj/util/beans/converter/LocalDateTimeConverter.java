@@ -1,6 +1,7 @@
 package org.venuspj.util.beans.converter;
 
 import java.time.LocalDateTime;
+import org.venuspj.util.beans.Converter;
 import org.venuspj.util.convert.LocalDateTimeConversions;
 import org.venuspj.util.convert.StringConversions;
 import org.venuspj.util.strings2.Strings2;

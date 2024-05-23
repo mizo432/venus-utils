@@ -2,15 +2,16 @@ package org.venuspj.util.io;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 import static org.venuspj.util.collect.Maps2.newHashMap;
-import static org.venuspj.util.misc.Assertions.assertArgumentNotNull;
 
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.base.StringPreconditions;
 import org.venuspj.util.exception.EmptyArgumentException;
+import org.venuspj.util.exception.NullArgumentException;
 
 /**
  * {@link ResourceBundle}用のユーティリティクラスです。
@@ -70,8 +71,8 @@ public abstract class ResourceBundles {
    */
   public static final ResourceBundle getBundle(final String name,
       final Locale locale, final ClassLoader classLoader) {
-    assertArgumentNotNull("name", name);
-    assertArgumentNotNull("classLoader", classLoader);
+    Preconditions.checkNotNull(name, () -> new NullArgumentException("name"));
+    Preconditions.checkNotNull(classLoader, () -> new NullArgumentException("classLoader"));
 
     try {
       return ResourceBundle.getBundle(
@@ -92,7 +93,7 @@ public abstract class ResourceBundles {
    * @see ResourceBundle#getString(String)
    */
   public static String getString(final ResourceBundle bundle, final String key) {
-    assertArgumentNotNull("bundle", bundle);
+    Preconditions.checkNotNull(bundle, () -> new NullArgumentException("bundle"));
     StringPreconditions.checkNotEmpty(key, () -> new EmptyArgumentException(
         "key",
         "EUTL0010",
@@ -113,7 +114,7 @@ public abstract class ResourceBundles {
    */
   public static final Map<String, String> convertMap(
       final ResourceBundle bundle) {
-    assertArgumentNotNull("bundle", bundle);
+    Preconditions.checkNotNull(bundle, () -> new NullArgumentException("bundle"));
 
     final Map<String, String> ret = newHashMap();
     for (final Enumeration<String> e = bundle.getKeys(); e

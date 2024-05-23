@@ -1,8 +1,12 @@
 package org.venuspj.util.misc;
 
+import static org.venuspj.util.base.Preconditions.checkNotNull;
+
 import java.beans.Introspector;
 import java.util.Deque;
-import org.venuspj.util.base.Preconditions;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.venuspj.util.collect.Lists2;
 
 /**
@@ -13,6 +17,7 @@ import org.venuspj.util.collect.Lists2;
  */
 public abstract class Disposables {
 
+  private final static Logger log = LoggerFactory.getLogger(Disposables.class);
   /**
    * 登録済みの{@link Disposable}
    */
@@ -23,8 +28,8 @@ public abstract class Disposables {
    *
    * @param disposable 破棄可能なリソース。{@literal null}であってはいけません
    */
-  public static synchronized void add(final Disposable disposable) {
-    Preconditions.checkNotNull("disposable", disposable);
+  public static synchronized void add(@NotNull final Disposable disposable) {
+    checkNotNull(disposable, "disposable");
     disposables.addLast(disposable);
   }
 
@@ -36,8 +41,8 @@ public abstract class Disposables {
    *
    * @param disposable 破棄可能なリソース。{@literal null}であってはいけません
    */
-  public static synchronized void addFirst(final Disposable disposable) {
-    Preconditions.checkNotNull("disposable", disposable);
+  public static synchronized void addFirst(@NotNull final Disposable disposable) {
+    checkNotNull(disposable, "disposable");
     disposables.addFirst(disposable);
   }
 
@@ -46,8 +51,8 @@ public abstract class Disposables {
    *
    * @param disposable 破棄可能なリソース。{@literal null}であってはいけません
    */
-  public static synchronized void remove(final Disposable disposable) {
-    Preconditions.checkNotNull("disposable", disposable);
+  public static synchronized void remove(@NotNull final Disposable disposable) {
+    checkNotNull(disposable, "disposable");
     disposables.remove(disposable);
   }
 
@@ -60,10 +65,9 @@ public abstract class Disposables {
       try {
         disposable.dispose();
       } catch (final Throwable t) {
-        t.printStackTrace(); // must not use Logger.
+        log.error("Error disposing " + disposable, t);
       }
     }
-    disposables.clear();
     Introspector.flushCaches();
   }
 

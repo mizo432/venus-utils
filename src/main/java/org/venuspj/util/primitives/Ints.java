@@ -239,7 +239,6 @@ public final class Ints {
    * @param min the lower bound (inclusive) of the range to constrain {@code value} to
    * @param max the upper bound (inclusive) of the range to constrain {@code value} to
    * @throws IllegalArgumentException if {@code min > max}
-   * @since 21.0
    */
   public static int constrainToRange(int value, int min, int max) {
     checkArgument(min <= max, "min (%s) must be less than or equal to max (%s)", min, max);
@@ -422,8 +421,6 @@ public final class Ints {
 
   /**
    * Sorts the elements of {@code array} in descending order.
-   *
-   * @since 23.1
    */
   public static void sortDescending(int[] array) {
     checkNotNull(array);
@@ -458,7 +455,6 @@ public final class Ints {
    *
    * @throws IndexOutOfBoundsException if {@code fromIndex < 0}, {@code toIndex > array.length}, or
    * {@code toIndex > fromIndex}
-   * @since 23.1
    */
   public static void reverse(int[] array, int fromIndex, int toIndex) {
     checkNotNull(array);

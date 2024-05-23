@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import org.venuspj.util.objects2.Objects2;
 
@@ -152,8 +153,8 @@ public final class Predicates {
    * }</pre>
    * <p>
    * The code above returns an iterable containing {@code Number.class} and {@code Long.class}.
-   *
-   * @since 20.0 (since 10.0 under the incorrect name {@code assignableFrom})
+   * <p>
+   * (since 10.0 under the incorrect name {@code assignableFrom})
    */
   public static Predicate<Class<?>> subtypeOf(Class<?> clazz) {
     return new SubtypeOfPredicate(clazz);
@@ -217,7 +218,7 @@ public final class Predicates {
      */
     ALWAYS_TRUE {
       @Override
-      public boolean apply(Object o) {
+      public boolean test(Object o) {
         return true;
       }
 
@@ -231,7 +232,7 @@ public final class Predicates {
      */
     ALWAYS_FALSE {
       @Override
-      public boolean apply(Object o) {
+      public boolean test(Object o) {
         return false;
       }
 
@@ -245,7 +246,7 @@ public final class Predicates {
      */
     IS_NULL {
       @Override
-      public boolean apply(Object o) {
+      public boolean test(Object o) {
         return o == null;
       }
 
@@ -259,7 +260,7 @@ public final class Predicates {
      */
     NOT_NULL {
       @Override
-      public boolean apply(Object o) {
+      public boolean test(Object o) {
         return o != null;
       }
 
@@ -288,8 +289,8 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(T t) {
-      return !predicate.apply(t);
+    public boolean test(T t) {
+      return !predicate.test(t);
     }
 
     @Override
@@ -326,10 +327,10 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(T t) {
+    public boolean test(T t) {
       // Avoid using the Iterator to avoid generating garbage (issue 820).
       for (int i = 0; i < components.size(); i++) {
-        if (!components.get(i).apply(t)) {
+        if (!components.get(i).test(t)) {
           return false;
         }
       }
@@ -371,10 +372,10 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(T t) {
+    public boolean test(T t) {
       // Avoid using the Iterator to avoid generating garbage (issue 820).
       for (int i = 0; i < components.size(); i++) {
-        if (components.get(i).apply(t)) {
+        if (components.get(i).test(t)) {
           return true;
         }
       }
@@ -429,7 +430,7 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(T t) {
+    public boolean test(T t) {
       return target.equals(t);
     }
 
@@ -467,7 +468,7 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(Object o) {
+    public boolean test(Object o) {
       return clazz.isInstance(o);
     }
 
@@ -505,7 +506,7 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(Class<?> input) {
+    public boolean test(Class<?> input) {
       return clazz.isAssignableFrom(input);
     }
 
@@ -543,7 +544,7 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(T t) {
+    public boolean test(T t) {
       try {
         return target.contains(t);
       } catch (NullPointerException | ClassCastException e) {
@@ -587,8 +588,8 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(A a) {
-      return p.apply(f.apply(a));
+    public boolean test(A a) {
+      return p.test(f.apply(a));
     }
 
     @Override
@@ -626,7 +627,7 @@ public final class Predicates {
     }
 
     @Override
-    public boolean apply(CharSequence t) {
+    public boolean test(CharSequence t) {
       return pattern.matcher(t).find();
     }
 

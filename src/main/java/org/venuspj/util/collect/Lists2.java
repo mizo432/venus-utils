@@ -1,8 +1,11 @@
 package org.venuspj.util.collect;
 
+import static org.venuspj.util.base.NumberPreconditions.checkPositive;
+import static org.venuspj.util.base.NumberPreconditions.checkPositiveOrZero;
 import static org.venuspj.util.base.Preconditions.checkElementIndex;
 import static org.venuspj.util.base.Preconditions.checkNotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -16,19 +19,26 @@ import java.util.ListIterator;
 import java.util.RandomAccess;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.math.IntMath;
 import org.venuspj.util.objects2.Objects2;
 
 
 /**
- *
+ * Lists2クラスは、リストの操作に便利なメソッドを提供します。
  */
 public class Lists2 {
 
-  public static List<String> removeNothing(List<String> aList) {
+  /**
+   * 与えられたリストから"nothing"という文字列の全ての出現を削除します。
+   *
+   * @param list "nothing"を削除するリスト
+   * @return "nothing"が削除された新しいリスト
+   */
+  public static List<String> removeNothing(@NotNull List<String> list) {
     List<String> result = newArrayList();
-    for (String item : aList) {
+    for (String item : list) {
       if (!"nothing".equals(item)) {
         result.add(item);
       }
@@ -38,51 +48,80 @@ public class Lists2 {
     return result;
   }
 
+  /**
+   * 新しいArrayListを作成します。
+   *
+   * @param <T> ArrayList内の要素の型
+   * @return 新しいArrayListのインスタンス
+   */
   public static <T> ArrayList<T> newArrayList() {
     return new ArrayList<>();
+
   }
 
   @SafeVarargs
-  public static <T> ArrayList<T> newArrayList(T... args) {
+  public static <T> ArrayList<T> newArrayList(@NotNull T... args) {
+    checkNotNull(args);
+
     ArrayList<T> result;
-    result = newArrayList();
-    Collections3.addAll(result, args);
+    result = newArrayListWithCapacity(args.length);
+    result.addAll(Arrays.asList(args));
 
     return result;
   }
 
-  public static <E> ArrayList<E> newArrayListWithCapacity(int initialArraySize) {
-    return new ArrayList<E>(initialArraySize);
+  /**
+   * 指定された初期容量で新しいArrayListを作成します。
+   *
+   * @param initialCapacity ArrayListの初期容量
+   * @param <E> ArrayList内の要素の型
+   * @return 指定された初期容量で新しいArrayListのインスタンス
+   */
+  public static <E> ArrayList<E> newArrayListWithCapacity(int initialCapacity) {
+    checkPositiveOrZero(initialCapacity,
+        () -> new IllegalArgumentException("Initial capacity must be positive"));
+    return new ArrayList<>(initialCapacity);
+
   }
 
-  public static <E> ArrayList<E> newArrayList(Iterable<? extends E> elements, E newElement) {
-    ArrayList<E> result = newArrayList(elements.iterator());
+  public static <E> ArrayList<E> newArrayList(@NotNull Iterable<? extends E> iterable,
+      @NotNull E newElement) {
+    ArrayList<E> result = newArrayList(iterable.iterator());
     result.add(newElement);
 
     return result;
   }
 
-  public static <E> ArrayList<E> newArrayList(Iterator<? extends E> elements) {
-    checkNotNull(elements);
+  public static <E> ArrayList<E> newArrayList(@NotNull Iterator<? extends E> iterator) {
+    checkNotNull(iterator);
+
     ArrayList<E> list = newArrayList();
-    Iterators.addAll(list, elements);
+    Iterators.addAll(list, iterator);
     return list;
 
   }
 
-  public static <T> List<T> unmodifiableList(List<T> list) {
+  /**
+   * 指定されたリストの変更できないビューを返します。
+   *
+   * @param list 変更できないようにするリスト
+   * @param <T> リストの要素の型
+   * @return 指定されたリストの変更できないビュー
+   * @throws NullPointerException 指定されたリストがnullの場合
+   * @see Collections#unmodifiableList(List)
+   */
+  public static <T> List<T> unmodifiableList(@NotNull List<T> list) {
+    checkNotNull(list);
     return Collections.unmodifiableList(list);
 
   }
 
-  public static <T> List<T> getPage(List<T> sourceList, int page, int pageSize) {
-    if (pageSize <= 0 || page <= 0) {
-      throw new IllegalArgumentException(
-          String.format("invalid page:%s page size:%s", pageSize, page));
-    }
-
+  public static <T> List<T> getPage(@NotNull List<T> sourceList, int page, int pageSize) {
+    checkNotNull(sourceList);
+    checkPositive(pageSize, "pageSize");
+    checkPositive(page, "page");
     int fromIndex = (page - 1) * pageSize;
-    if (sourceList == null || sourceList.size() < fromIndex) {
+    if (sourceList.size() < fromIndex) {
       return newArrayList();
     }
 
@@ -97,9 +136,9 @@ public class Lists2 {
   }
 
   public static <E> void addAll(List<E> anyList, Iterable<E> iterable) {
-      for (E entity : iterable) {
-          anyList.add(entity);
-      }
+    for (E entity : iterable) {
+      anyList.add(entity);
+    }
 
   }
 
@@ -309,6 +348,7 @@ public class Lists2 {
       }
     }
 
+    @Serial
     private static final long serialVersionUID = 0;
   }
 
@@ -328,7 +368,10 @@ public class Lists2 {
    * @param <E> 返還後の型
    * @return 返還後リスト
    */
-  public static <T, E> List<T> transform(Collection<E> collection, Function<E, T> function) {
+  public static <T, E> List<T> transform(@NotNull Collection<E> collection,
+      @NotNull Function<E, T> function) {
+    checkNotNull(collection);
+    checkNotNull(function);
     return collection.stream().map(function).collect(Collectors.toList());
   }
 

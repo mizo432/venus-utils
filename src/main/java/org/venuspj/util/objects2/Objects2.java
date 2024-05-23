@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.InaccessibleObjectException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URI;
@@ -26,11 +26,11 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import org.venuspj.util.collect.Sets2;
+import org.venuspj.util.lang.Classes;
 import org.venuspj.util.strings2.Strings2;
 
 public class Objects2 {
@@ -216,7 +216,7 @@ public class Objects2 {
         return toSimpleReferenceString(instance);
       }
       try {
-        if (isPrimitiveLike(instance.getClass())) {
+        if (isPrimitiveLike(instance)) {
           return instance.toString();
         }
         if (instance instanceof Enum<?>) {
@@ -265,11 +265,12 @@ public class Objects2 {
     }
 
     private boolean isIterable(Object object) {
-      return (object instanceof Iterable<?>) ||
-          (object instanceof Map<?, ?>) ||
+      return (object instanceof Map<?, ?>) ||
+          (object instanceof Iterable<?>) ||
           (object instanceof Object[]) ||
           (object instanceof byte[]) ||
           (object instanceof char[]) ||
+          (object instanceof short[]) ||
           (object instanceof int[]) ||
           (object instanceof boolean[]) ||
           (object instanceof long[]) ||
@@ -335,11 +336,10 @@ public class Objects2 {
       if (isNull(instance)) {
         return this;
       }
-      if (isPrimitiveLike(instance.getClass()) || isIterable(instance) || isSimpleType(instance)
-          || instance instanceof Enum<?>) {
+      if (isPrimitiveLike(instance.getClass()) || isIterable(instance) || isSimpleType(instance)) {
         return this;
       }
-      for (Field field : instance.getClass().getDeclaredFields()) {
+      for (Field field : Classes.getDeclaredFieldsSafely(instance.getClass())) {
         addField(field);
       }
       return this;
@@ -354,35 +354,23 @@ public class Objects2 {
       if (isNull(instance)) {
         return this;
       }
-      if (isPrimitiveLike(instance.getClass()) || isIterable(instance) || isSimpleType(instance)
-          || instance instanceof Enum<?>) {
+      if (isPrimitiveLike(instance) || isIterable(instance) || isSimpleType(instance)) {
         return this;
       }
-      for (Field field : getAllDeclaredFields(instance.getClass())) {
+      for (Field field : Classes.getAllDeclaredFieldsSafely(instance.getClass())) {
         addField(field);
       }
       return this;
     }
 
-    private List<Field> getAllDeclaredFields(Class<?> clazz) {
-      Class<?> current = clazz;
-      List<Field> result = newArrayList();
-      while (nonNull(current)) {
-        result.addAll(newArrayList(current.getDeclaredFields()));
-        current = current.getSuperclass();
-
-      }
-      return result;
-    }
-
     private void addField(Field field) {
       try {
-        if (!Modifier.isStatic(field.getModifiers())) {
-          field.setAccessible(true);
-          add(field.getName(), field.get(instance));
-        }
-      } catch (IllegalAccessException ignore) {
+        Classes.makeAccessible(field);
+        add(field.getName(), field.get(instance));
+      } catch (IllegalAccessException ignored) {
         // この例外が出ても握り潰す
+      } catch (InaccessibleObjectException ignored) {
+
       }
     }
 
@@ -418,31 +406,35 @@ public class Objects2 {
         sb.append("null");
         return;
       }
-      if (isPrimitiveLike(object.getClass())) {
+      if (isPrimitiveLike(object)) {
         sb.append(object.toString());
         return;
       }
-      if (object instanceof Enum<?>) {
-        sb.append(((Enum<?>) object).name());
-        return;
-      }
-      if (object instanceof Collection<?>) {
-        serializeCollection((Collection<?>) object, sb);
-        return;
-      }
-      if (object instanceof Map<?, ?>) {
-        serializeMap((Map<?, ?>) object, sb);
-        return;
-      }
-      if (object instanceof Object[]) {
-        serializeCollection(Arrays.asList((Object[]) object), sb);
-        return;
-      }
-      if (object instanceof CharSequence) {
-        sb.append("\"")
-            .append(((CharSequence) object).toString().replace("\n", "\\n").replace("\r", "\\r"))
-            .append("\"");
-        return;
+      switch (object) {
+        case Enum<?> anEnum -> {
+          sb.append(anEnum.name());
+          return;
+        }
+        case Collection<?> objects -> {
+          serializeCollection(objects, sb);
+          return;
+        }
+        case Map<?, ?> map -> {
+          serializeMap(map, sb);
+          return;
+        }
+        case Object[] objects -> {
+          serializeCollection(Arrays.asList(objects), sb);
+          return;
+        }
+        case CharSequence charSequence -> {
+          sb.append("\"")
+              .append(charSequence.toString().replace("\n", "\\n").replace("\r", "\\r"))
+              .append("\"");
+          return;
+        }
+        default -> {
+        }
       }
       if (object.getClass().isPrimitive()) {
         sb.append(String.valueOf(object));
@@ -478,13 +470,13 @@ public class Objects2 {
         URI.class,
         Long.class,
         String.class,
-        Enum.class,
         BigInteger.class,
         BigDecimal.class,
         Double.class);
 
-    private boolean isPrimitiveLike(Class<?> aClazz) {
-      return primitiveLikeClasses.contains(aClazz);
+    private boolean isPrimitiveLike(Object instance) {
+      return primitiveLikeClasses.contains(instance.getClass()) ||
+          instance instanceof Enum<?>;
 
     }
 
@@ -508,8 +500,7 @@ public class Objects2 {
           break;
         }
         Object indexedObject = wkList.get(index);
-        if (indexedObject instanceof Map.Entry<?, ?>) {
-          Map.Entry<?, ?> entry = (Entry<?, ?>) indexedObject;
+        if (indexedObject instanceof Map.Entry<?, ?> entry) {
           internalToString(entry.getKey(), sb);
           sb.append(":");
           internalToString(entry.getValue(), sb);

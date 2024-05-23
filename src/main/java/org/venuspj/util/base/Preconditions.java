@@ -1,12 +1,16 @@
 package org.venuspj.util.base;
 
 
-import static org.venuspj.util.base.Strings.lenientFormat;
+import static org.venuspj.util.collect.Arrays2.asArray;
+import static org.venuspj.util.strings2.Strings2.lenientFormat;
 
 import java.util.function.Supplier;
-import org.venuspj.util.functor.Command;
+import org.venuspj.util.exception.VIllegalArgumentException;
 
 
+/**
+ * Preconditionsは、コードの前提条件をチェックするさまざまな静的メソッドを提供するユーティリティクラスです。
+ */
 public final class Preconditions {
 
   private Preconditions() {
@@ -19,34 +23,30 @@ public final class Preconditions {
    * @throws IllegalArgumentException if {@code expression} is false
    */
   public static void checkArgument(boolean expression) {
-    if (!expression) {
-      throw new IllegalArgumentException();
-    }
+    checkArgument(expression, () -> new IllegalArgumentException());
   }
 
   public static <E extends RuntimeException> void checkArgument(boolean expression,
-      Supplier<E> aSupplier) {
+      Supplier<E> runtimeExceptionSupplier) {
     if (!expression) {
-      throw aSupplier.get();
+      throw runtimeExceptionSupplier.get();
     }
   }
 
-  public static void checkArgument(boolean expression, Command aCommand) {
-    if (!expression) {
-      aCommand.execute();
-    }
-  }
-
-  public static <T, E extends RuntimeException> T checkNotNull(T reference, Supplier<E> aSupplier) {
+  /**
+   * 与えられた参照がnullでないことを確認します。
+   *
+   * @param reference nullであることを確認する参照
+   * @param runtimeExceptionSupplier ランタイム例外を作成するためのサプライヤ
+   * @param <T> 参照の型
+   * @param <E> ランタイム例外の型
+   * @return 参照がnullでない場合、参照自体を返します
+   * @throws E 参照がnullである場合、サプライヤによって供給されるランタイム例外がスローされます
+   */
+  public static <T, E extends RuntimeException> T checkNotNull(T reference,
+      Supplier<E> runtimeExceptionSupplier) {
     if (reference == null) {
-      throw aSupplier.get();
-    }
-    return reference;
-  }
-
-  public static <T> T checkNotNull(T reference, Command aCommand) {
-    if (reference == null) {
-      aCommand.execute();
+      throw runtimeExceptionSupplier.get();
     }
     return reference;
   }
@@ -60,9 +60,8 @@ public final class Preconditions {
    * @throws IllegalArgumentException if {@code expression} is false
    */
   public static void checkArgument(boolean expression, Object errorMessage) {
-    if (!expression) {
-      throw new IllegalArgumentException(String.valueOf(errorMessage));
-    }
+    checkArgument(expression,
+        () -> new IllegalArgumentException(String.valueOf(errorMessage)));
   }
 
   /**
@@ -82,323 +81,8 @@ public final class Preconditions {
       boolean expression,
       String errorMessageTemplate,
       Object... errorMessageArgs) {
-    if (!expression) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, errorMessageArgs));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(boolean b, String errorMessageTemplate, char p1) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(boolean b, String errorMessageTemplate, int p1) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(boolean b, String errorMessageTemplate, long p1) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, Object p1) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, char p1, char p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, char p1, int p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, char p1, long p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, char p1, Object p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, int p1, char p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, int p1, int p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, int p1, long p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, int p1, Object p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, long p1, char p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, long p1, int p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, long p1, long p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, long p1, Object p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, Object p1, char p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, Object p1, int p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, Object p1, long p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b, String errorMessageTemplate, Object p1, Object p2) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b,
-      String errorMessageTemplate,
-      Object p1,
-      Object p2,
-      Object p3) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2, p3));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving one or more parameters to the calling method.
-   *
-   * <p>See {@link #checkArgument(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkArgument(
-      boolean b,
-      String errorMessageTemplate,
-      Object p1,
-      Object p2,
-      Object p3,
-      Object p4) {
-    if (!b) {
-      throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2, p3, p4));
-    }
+    checkArgument(expression,
+        () -> new IllegalArgumentException(lenientFormat(errorMessageTemplate, errorMessageArgs)));
   }
 
   /**
@@ -407,12 +91,9 @@ public final class Preconditions {
    *
    * @param expression a boolean expression
    * @throws IllegalStateException if {@code expression} is false
-   * @see Verify#verify Verify.verify()
    */
   public static void checkState(boolean expression) {
-    if (!expression) {
-      throw new IllegalStateException();
-    }
+    checkState(expression, IllegalStateException::new);
   }
 
   /**
@@ -423,13 +104,11 @@ public final class Preconditions {
    * @param errorMessage the exception message to use if the check fails; will be converted to a
    * string using {@link String#valueOf(Object)}
    * @throws IllegalStateException if {@code expression} is false
-   * @see Verify#verify Verify.verify()
    */
   public static void checkState(boolean expression, Object errorMessage) {
-    if (!expression) {
-      throw new IllegalStateException(String.valueOf(errorMessage));
-    }
+    checkState(expression, () -> new IllegalStateException(String.valueOf(errorMessage)));
   }
+
 
   /**
    * Ensures the truth of an expression involving the state of the calling instance, but not
@@ -444,346 +123,13 @@ public final class Preconditions {
    * @param errorMessageArgs the arguments to be substituted into the message template. Arguments
    * are converted to strings using {@link String#valueOf(Object)}.
    * @throws IllegalStateException if {@code expression} is false
-   * @see Verify#verify Verify.verify()
    */
   public static void checkState(
       boolean expression,
       String errorMessageTemplate,
       Object... errorMessageArgs) {
-    if (!expression) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, errorMessageArgs));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, char p1) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, int p1) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, long p1) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, Object p1) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, char p1, char p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, char p1, int p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, char p1, long p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, char p1, Object p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, int p1, char p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, int p1, int p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, int p1, long p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, int p1, Object p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, long p1, char p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(boolean b, String errorMessageTemplate, long p1, int p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, long p1, long p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, long p1, Object p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, Object p1, char p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, Object p1, int p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, Object p1, long p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b, String errorMessageTemplate, Object p1, Object p2) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b,
-      String errorMessageTemplate,
-      Object p1,
-      Object p2,
-      Object p3) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2, p3));
-    }
-  }
-
-  /**
-   * Ensures the truth of an expression involving the state of the calling instance, but not
-   * involving any parameters to the calling method.
-   *
-   * <p>See {@link #checkState(boolean, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static void checkState(
-      boolean b,
-      String errorMessageTemplate,
-      Object p1,
-      Object p2,
-      Object p3,
-      Object p4) {
-    if (!b) {
-      throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2, p3, p4));
-    }
+    checkState(expression,
+        () -> new IllegalStateException(lenientFormat(errorMessageTemplate, errorMessageArgs)));
   }
 
   /**
@@ -792,403 +138,39 @@ public final class Preconditions {
    * @param reference an object reference
    * @return the non-null reference that was validated
    * @throws NullPointerException if {@code reference} is null
-   * @see Verify#verifyNotNull Verify.verifyNotNull()
    */
   public static <T> T checkNotNull(T reference) {
-    if (reference == null) {
-      throw new NullPointerException();
-    }
-    return reference;
+    return checkNotNull(reference, NullPointerException::new);
+
   }
 
   /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
+   * 呼び出し元のメソッドにパラメータとして渡されたオブジェクトリファレンスがnullでないことを確認します。
    *
-   * @param reference an object reference
-   * @param errorMessage the exception message to use if the check fails; will be converted to a
-   * string using {@link String#valueOf(Object)}
-   * @return the non-null reference that was validated
-   * @throws NullPointerException if {@code reference} is null
-   * @see Verify#verifyNotNull Verify.verifyNotNull()
+   * @param reference オブジェクトリファレンス
+   * @param errorMessage チェックが失敗した場合に使用する例外メッセージ； {@link String#valueOf(Object)}を使用して文字列に変換されます
+   * @return 検証されたnullでないリファレンス
+   * @throws NullPointerException {@code reference}がnullの場合
    */
-
   public static <T> T checkNotNull(T reference, Object errorMessage) {
-    if (reference == null) {
-      throw new NullPointerException(String.valueOf(errorMessage));
-    }
-    return reference;
+    return checkNotNull(reference, () -> new NullPointerException(String.valueOf(errorMessage)));
+
   }
 
   /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
+   * 指定された参照がnullでないことを確認します。
    *
-   * @param reference an object reference
-   * @param errorMessageTemplate a template for the exception message should the check fail. The
-   * message is formed by replacing each {@code %s} placeholder in the template with an argument.
-   * These are matched by position - the first {@code %s} gets {@code errorMessageArgs[0]}, etc.
-   * Unmatched arguments will be appended to the formatted message in square braces. Unmatched
-   * placeholders will be left as-is.
-   * @param errorMessageArgs the arguments to be substituted into the message template. Arguments
-   * are converted to strings using {@link String#valueOf(Object)}.
-   * @return the non-null reference that was validated
-   * @throws NullPointerException if {@code reference} is null
-   * @see Verify#verifyNotNull Verify.verifyNotNull()
+   * @param reference nullでないことを確認する対象の参照
+   * @param errorMessageTemplate 参照がnullの場合に使用するエラーメッセージのテンプレート
+   * @param errorMessageArgs エラーメッセージのテンプレートに代入する引数
+   * @param <T> 参照の型
+   * @return 参照がnullでない場合、その非nullの参照
+   * @throws NullPointerException 参照がnullの場合
    */
-
   public static <T> T checkNotNull(
       T reference, String errorMessageTemplate, Object... errorMessageArgs) {
-    if (reference == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, errorMessageArgs));
-    }
-    return reference;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, char p1) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, int p1) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, long p1) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, Object p1) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, char p1, char p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, char p1, int p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, char p1, long p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, char p1, Object p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, int p1, char p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, int p1, int p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, int p1, long p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, int p1, Object p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, long p1, char p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, long p1, int p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(T obj, String errorMessageTemplate, long p1, long p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, long p1, Object p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, Object p1, char p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, Object p1, int p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, Object p1, long p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj, String errorMessageTemplate, Object p1, Object p2) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj,
-      String errorMessageTemplate,
-      Object p1,
-      Object p2,
-      Object p3) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2, p3));
-    }
-    return obj;
-  }
-
-  /**
-   * Ensures that an object reference passed as a parameter to the calling method is not null.
-   *
-   * <p>See {@link #checkNotNull(Object, String, Object...)} for details.
-   *
-   * @since 20.0 (varargs overload since 2.0)
-   */
-
-  public static <T> T checkNotNull(
-      T obj,
-      String errorMessageTemplate,
-      Object p1,
-      Object p2,
-      Object p3,
-      Object p4) {
-    if (obj == null) {
-      throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2, p3, p4));
-    }
-    return obj;
+    return checkNotNull(reference,
+        () -> new NullPointerException(lenientFormat(errorMessageTemplate, errorMessageArgs)));
   }
 
   /**
@@ -1311,6 +293,37 @@ public final class Preconditions {
     }
     // end < start
     return lenientFormat("end index (%s) must not be less than start index (%s)", end, start);
+  }
+
+  public static <E extends RuntimeException> void checkState(boolean expression,
+      Supplier<E> runtimeExceptionSupplier) {
+    if (!expression) {
+      throw runtimeExceptionSupplier.get();
+    }
+  }
+
+  /**
+   * インデックスが不正でないことを表明します。
+   *
+   * @param argName {@code null} であってはならない引数の名前
+   * @param argValue インデックスの値
+   * @param arraySize インデックスが参照する配列の長さ
+   * @throws VIllegalArgumentException 引数が配列のインデックスとして不正な場合場合。
+   */
+  public static void checkArgumentArrayIndex(final String argName,
+      final int argValue, final int arraySize) {
+
+    if (argValue < 0) {
+      throw new VIllegalArgumentException(
+          argName,
+          "EUTL0014",
+          asArray(argName));
+    }
+    if (argValue >= arraySize) {
+      throw new VIllegalArgumentException(argName, "EUTL0015", asArray(
+          argName,
+          arraySize));
+    }
   }
 
 }
