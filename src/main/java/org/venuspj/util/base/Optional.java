@@ -1,7 +1,7 @@
 package org.venuspj.util.base;
 
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 import java.util.Iterator;

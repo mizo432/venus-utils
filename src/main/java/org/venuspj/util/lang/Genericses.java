@@ -11,8 +11,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.venuspj.util.base.ArrayPreconditions;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.ArrayPreconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.collect.Collections3;
 import org.venuspj.util.exception.NullArgumentException;
 

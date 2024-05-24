@@ -1,4 +1,4 @@
-package org.venuspj.util.strings2;
+package org.venuspj.util.primitives;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

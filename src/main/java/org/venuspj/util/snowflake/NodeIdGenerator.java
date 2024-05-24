@@ -1,8 +1,8 @@
-package org.venuspj.util.entity.generator;
+package org.venuspj.util.snowflake;
 
 import java.net.UnknownHostException;
 import java.util.Objects;
-import org.venuspj.util.io.ipadress.IpAddressProvider;
+import org.venuspj.util.ipadress.IpAddressProvider;
 import org.venuspj.util.primitives.application.ApplicationInfo;
 
 public class NodeIdGenerator {

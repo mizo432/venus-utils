@@ -1,12 +1,12 @@
 package org.venuspj.util.collect;
 
-import static org.venuspj.util.base.Preconditions.checkArgument;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.objects2.Objects2;
 
 public final class Iterators {

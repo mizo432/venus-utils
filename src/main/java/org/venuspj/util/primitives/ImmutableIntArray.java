@@ -1,8 +1,8 @@
 package org.venuspj.util.primitives;
 
 
-import static org.venuspj.util.base.Preconditions.checkArgument;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,7 +16,7 @@ import java.util.Spliterators;
 import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import org.jetbrains.annotations.NotNull;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 
 /**
  * An immutable array of {@code int} values, with an API resembling {@link List}.

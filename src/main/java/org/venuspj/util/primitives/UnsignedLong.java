@@ -1,8 +1,8 @@
 package org.venuspj.util.primitives;
 
 
-import static org.venuspj.util.base.Preconditions.checkArgument;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.io.Serializable;
 import java.math.BigInteger;

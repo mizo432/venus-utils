@@ -3,7 +3,7 @@ package org.venuspj.util.beans.converter;
 import org.venuspj.util.beans.Converter;
 import org.venuspj.util.convert.BooleanConversions;
 import org.venuspj.util.convert.StringConversions;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 public class BooleanConverter implements Converter<Boolean> {
 

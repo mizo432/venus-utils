@@ -2,6 +2,7 @@ package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
+import java.io.Serial;
 import java.lang.reflect.Method;
 
 /**
@@ -9,6 +10,7 @@ import java.lang.reflect.Method;
  */
 public class MethodNotStaticRuntimeException extends VRuntimeException {
 
+  @Serial
   private static final long serialVersionUID = 7186052234464152208L;
 
   private final Class<?> targetClass;

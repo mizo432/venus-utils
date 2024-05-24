@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import org.venuspj.util.io.ResourceBundles;
 import org.venuspj.util.misc.Disposables;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 /**
  * メッセージコードと引数からメッセージを組み立てるクラスです。

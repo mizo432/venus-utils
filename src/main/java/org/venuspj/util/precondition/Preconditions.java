@@ -1,8 +1,8 @@
-package org.venuspj.util.base;
+package org.venuspj.util.precondition;
 
 
 import static org.venuspj.util.collect.Arrays2.asArray;
-import static org.venuspj.util.strings2.Strings2.lenientFormat;
+import static org.venuspj.util.primitives.Strings2.lenientFormat;
 
 import java.util.function.Supplier;
 import org.venuspj.util.exception.VIllegalArgumentException;

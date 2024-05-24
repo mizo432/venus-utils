@@ -1,6 +1,6 @@
 package org.venuspj.util.collect;
 
-import static org.venuspj.util.base.Preconditions.checkPositionIndex;
+import static org.venuspj.util.precondition.Preconditions.checkPositionIndex;
 
 import java.util.NoSuchElementException;
 

@@ -1,6 +1,6 @@
 package org.venuspj.util.base;
 
-import static org.venuspj.util.base.Preconditions.checkState;
+import static org.venuspj.util.precondition.Preconditions.checkState;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -65,6 +65,6 @@ abstract class AbstractIterator<T> implements Iterator<T> {
   @Override
   public final void remove() {
     throw new UnsupportedOperationException();
-    
+
   }
 }

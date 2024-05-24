@@ -1,6 +1,6 @@
 package org.venuspj.util.beans.impl;
 
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.beans.ParameterizedClassDesc;
 import org.venuspj.util.exception.NullArgumentException;
 

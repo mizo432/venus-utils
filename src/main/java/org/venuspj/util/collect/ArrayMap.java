@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.exception.VIllegalStateException;
 import org.venuspj.util.exception.VNoSuchElementException;
 

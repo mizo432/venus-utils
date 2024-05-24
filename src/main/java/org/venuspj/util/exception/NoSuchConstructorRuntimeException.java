@@ -2,6 +2,7 @@ package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
+import java.io.Serial;
 import java.lang.reflect.Constructor;
 import org.venuspj.util.lang.Methods;
 
@@ -10,6 +11,7 @@ import org.venuspj.util.lang.Methods;
  */
 public class NoSuchConstructorRuntimeException extends VRuntimeException {
 
+  @Serial
   private static final long serialVersionUID = 8688818589925114466L;
 
   private final Class<?> targetClass;

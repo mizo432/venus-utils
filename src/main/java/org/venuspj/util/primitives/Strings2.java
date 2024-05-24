@@ -1,7 +1,7 @@
-package org.venuspj.util.strings2;
+package org.venuspj.util.primitives;
 
 import static java.util.logging.Level.WARNING;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.objects2.Objects2.isNull;
 
@@ -37,7 +37,7 @@ public final class Strings2 {
 
   public static boolean isNotEmpty(String aSrt) {
     return !isEmpty(aSrt);
-    
+
   }
 
   /**

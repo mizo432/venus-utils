@@ -11,23 +11,22 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- *
+ * このクラスは、Lists2クラスのユニットテストを含んでいます。
  */
-public class Lists2Test {
-// private static final Logger LOGGER = LoggerFactory.getLogger(Lists2Test.class);
+class Lists2Test {
 
   @Nested
   class GetPageTest {
 
     @Test
-    public void testGetPageReturnsEmptyWhenSourceListSizeLessThanFromIndex() {
+    void testGetPageReturnsEmptyWhenSourceListSizeLessThanFromIndex() {
       List<String> sourceList = newArrayList("one", "two", "three");
       List<String> actual = Lists2.getPage(sourceList, 5, 2);
       assertThat(actual).isEmpty();
     }
 
     @Test
-    public void testGetPageReturnsSubListFromGivenPageNumberAndPageSize() {
+    void testGetPageReturnsSubListFromGivenPageNumberAndPageSize() {
       List<String> sourceList = newArrayList("one", "two", "three", "four", "five", "six");
       List<String> actual = Lists2.getPage(sourceList, 2, 2);
       List<String> expected = newArrayList("three", "four");
@@ -35,7 +34,7 @@ public class Lists2Test {
     }
 
     @Test
-    public void testGetPageReturnsRemainingListItemsWhenPageSizeGreaterThanRemainingItems() {
+    void testGetPageReturnsRemainingListItemsWhenPageSizeGreaterThanRemainingItems() {
       List<String> sourceList = newArrayList("one", "two", "three", "four", "five", "six");
       List<String> actual = Lists2.getPage(sourceList, 2, 5);
       List<String> expected = newArrayList("six");
@@ -48,7 +47,7 @@ public class Lists2Test {
   class NewArrayListTest {
 
     @Test
-    public void testRemovingNothingWhenListHasNothing() throws Exception {
+    void testRemovingNothingWhenListHasNothing() {
       List<String> sourceList = newArrayList("nothing", "nothing", "nothing");
       List<String> actual = Lists2.removeNothing(sourceList);
       assertThat(actual)
@@ -57,20 +56,21 @@ public class Lists2Test {
           .isEqualTo(0);
     }
 
+
     @Test
-    public void testRemovingNothingWhenListHasSomething() throws Exception {
+    void testRemovingNothingWhenListHasSomething() {
       List<String> sourceList = newArrayList("nothing", "something", "nothing");
       List<String> actual = Lists2.removeNothing(sourceList);
       assertThat(actual)
           .isNotNull();
       assertThat(actual.size())
           .isEqualTo(1);
-      assertThat(actual.get(0))
+      assertThat(actual.getFirst())
           .isEqualTo("something");
     }
 
     @Test
-    public void testNewArrayListNoArgs() throws Exception {
+    void testNewArrayListNoArgs() {
       List<Object> actual = newArrayList();
       assertThat(actual)
           .isNotNull();
@@ -79,7 +79,7 @@ public class Lists2Test {
     }
 
     @Test
-    public void testNewArrayListArgs() throws Exception {
+    void testNewArrayListArgs() {
       List<Integer> actual = newArrayList(1, 2, 3);
       assertThat(actual)
           .isNotNull();
@@ -94,7 +94,7 @@ public class Lists2Test {
     }
 
     @Test
-    public void testNewArrayListWithCapacity() throws Exception {
+    void testNewArrayListWithCapacity() {
       List<Object> actual = Lists2.newArrayListWithCapacity(10);
       assertThat(actual)
           .isNotNull();
@@ -105,7 +105,7 @@ public class Lists2Test {
   }
 
   @Test
-  public void testNewArrayListWithCapacityWithNegative() {
+  void testNewArrayListWithCapacityWithNegative() {
     boolean exceptionThrown = false;
     try {
       Lists2.newArrayListWithCapacity(-1);
@@ -120,7 +120,7 @@ public class Lists2Test {
   class TransformTest {
 
     @Test
-    public void transformTestWithStrings() {
+    void transformTestWithStrings() {
       List<String> inputList = newArrayList("a", "b", "c");
       List<String> actual = Lists2.transform(inputList, String::toUpperCase);
       List<String> expected = newArrayList("A", "B", "C");
@@ -129,7 +129,7 @@ public class Lists2Test {
     }
 
     @Test
-    public void transformTestWithIntegers() {
+    void transformTestWithIntegers() {
       List<Integer> inputList = newArrayList(1, 2, 3);
       List<Integer> actual = Lists2.transform(inputList, number -> number * 2);
       List<Integer> expected = newArrayList(2, 4, 6);
@@ -139,17 +139,16 @@ public class Lists2Test {
   }
 
   @Test
-  public void unmodifiableListCreatesUnmodifiableList() {
+  void unmodifiableListCreatesUnmodifiableList() {
     List<String> list = newArrayList("a", "b", "c");
     List<String> unmodifiableList = Lists2.unmodifiableList(list);
 
-    assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> {
-      unmodifiableList.add("d");
-    });
+    assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(
+        () -> unmodifiableList.add("d"));
   }
 
   @Test
-  public void unmodifiableListReflectsOriginalListChanges() {
+  void unmodifiableListReflectsOriginalListChanges() {
     List<String> list = newArrayList("a", "b", "c");
     List<String> unmodifiableList = Lists2.unmodifiableList(list);
 
@@ -159,9 +158,64 @@ public class Lists2Test {
   }
 
   @Test
-  public void unmodifiableListDoesNotAllowNull() {
-    assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
-      Lists2.unmodifiableList(null);
-    });
+  void unmodifiableListDoesNotAllowNull() {
+    assertThatExceptionOfType(NullPointerException.class).isThrownBy(
+        () -> Lists2.unmodifiableList(null));
+  }
+
+  @Nested
+  class IntersectionTest {
+
+    @Test
+    void testIntersectionWithNoCommonElements() {
+      List<String> list1 = newArrayList("one", "two", "three");
+      List<String> list2 = newArrayList("four", "five", "six");
+      List<String> actual = Lists2.intersection(list1, list2);
+      assertThat(actual).isEmpty();
+    }
+
+    @Test
+    void testIntersectionWithSomeCommonElements() {
+      List<String> list1 = newArrayList("one", "two", "three");
+      List<String> list2 = newArrayList("two", "three", "four");
+      List<String> actual = Lists2.intersection(list1, list2);
+      assertThat(actual).containsOnly("two", "three");
+    }
+
+    @Test
+    void testIntersectionWithAllCommonElements() {
+      List<String> list1 = newArrayList("one", "two", "three");
+      List<String> list2 = newArrayList("one", "two", "three");
+      List<String> actual = Lists2.intersection(list1, list2);
+      assertThat(actual).containsOnly("one", "two", "three");
+    }
+  }
+
+  @Nested
+  class DifferenceTest {
+
+    @Test
+    void testDifferenceWithNoCommonElements() {
+      List<String> list1 = newArrayList("one", "two", "three");
+      List<String> list2 = newArrayList("four", "five", "six");
+      List<String> actual = Lists2.difference(list1, list2);
+      assertThat(actual).contains("one", "two", "three");
+    }
+
+    @Test
+    void testDifferenceWithSomeCommonElements() {
+      List<String> list1 = newArrayList("one", "two", "three");
+      List<String> list2 = newArrayList("two", "three", "four");
+      List<String> actual = Lists2.difference(list1, list2);
+      assertThat(actual).contains("one", "four");
+    }
+
+    @Test
+    void testDifferenceWithAllCommonElements() {
+      List<String> list1 = newArrayList("one", "two", "three");
+      List<String> list2 = newArrayList("one", "two", "three");
+      List<String> actual = Lists2.difference(list1, list2);
+      assertThat(actual).isEmpty();
+    }
   }
 }

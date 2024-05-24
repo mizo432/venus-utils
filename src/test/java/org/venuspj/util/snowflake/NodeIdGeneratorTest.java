@@ -1,9 +1,9 @@
-package org.venuspj.util.entity.generator;
+package org.venuspj.util.snowflake;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-import org.venuspj.util.io.ipadress.StaticIpAddressProvider;
+import org.venuspj.util.ipadress.StaticIpAddressProvider;
 
 class NodeIdGeneratorTest {
 

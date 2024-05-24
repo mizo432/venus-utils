@@ -4,13 +4,11 @@ module venus.utils.main {
   requires java.desktop;
   requires java.sql;
   requires org.slf4j;
-  exports org.venuspj.util.annotations;
   exports org.venuspj.util.base;
   exports org.venuspj.util.beans;
   exports org.venuspj.util.convert;
   exports org.venuspj.util.collect;
   exports org.venuspj.util.builder;
-  exports org.venuspj.util.entity.generator;
   exports org.venuspj.util.exception;
   exports org.venuspj.util.dateProvider;
   exports org.venuspj.util.primitives;
@@ -23,6 +21,8 @@ module venus.utils.main {
   exports org.venuspj.util.uuidProvider;
   exports org.venuspj.util.text;
   exports org.venuspj.util.beans.factory;
-  exports org.venuspj.util.io.ipadress;
+  exports org.venuspj.util.ipadress;
   exports org.venuspj.util.taple;
+  exports org.venuspj.util.snowflake;
+  exports org.venuspj.util.precondition;
 }

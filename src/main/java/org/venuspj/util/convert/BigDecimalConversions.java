@@ -2,7 +2,7 @@ package org.venuspj.util.convert;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 /**
  * {@link BigDecimal}用の変換ユーティリティです。

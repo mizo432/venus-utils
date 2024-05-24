@@ -2,7 +2,10 @@ package org.venuspj.util.collect;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.venuspj.util.primitives.Ints;
@@ -141,5 +144,83 @@ class Sets2Test {
 
     // Assert
     assertThat(result).isEqualTo(Integer.MAX_VALUE);
+  }
+
+  @Test
+  void intersection_setsWithCommonElements() {
+    // Arrange
+    Set<String> set1 = Sets2.newHashSet("a", "b", "c");
+    Set<String> set2 = Sets2.newHashSet("b", "c", "d");
+
+    // Act
+    Set<String> result = Sets2.intersection(set1, set2);
+
+    // Assert
+    assertThat(result).containsExactlyInAnyOrder("b", "c");
+  }
+
+  @Test
+  void intersection_setsWithoutCommonElements() {
+    // Arrange
+    Set<String> set1 = Sets2.newHashSet("a", "b", "c");
+    Set<String> set2 = Sets2.newHashSet("d", "e", "f");
+
+    // Act
+    Set<String> result = Sets2.intersection(set1, set2);
+
+    // Assert
+    assertThat(result).isEmpty();
+  }
+
+  @Test
+  void intersection_emptySets() {
+    // Arrange
+    Set<String> set1 = new HashSet<>();
+    Set<String> set2 = new HashSet<>();
+
+    // Act
+    Set<String> result = Sets2.intersection(set1, set2);
+
+    // Assert
+    assertThat(result).isEmpty();
+  }
+
+  @Test
+  void difference_setsWithDifferentElements() {
+    // Arrange
+    List<String> list1 = Arrays.asList("a", "b", "c");
+    List<String> list2 = Arrays.asList("b", "c", "d");
+
+    // Act
+    Set<String> result = Sets2.difference(list1, list2);
+
+    // Assert
+    assertThat(result).contains("a");
+  }
+
+  @Test
+  void difference_setsWithIdenticalElements() {
+    // Arrange
+    List<String> list1 = Arrays.asList("a", "b", "c");
+    List<String> list2 = Arrays.asList("a", "b", "c");
+
+    // Act
+    Set<String> result = Sets2.difference(list1, list2);
+
+    // Assert
+    assertThat(result).isEmpty();
+  }
+
+  @Test
+  void difference_emptySets() {
+    // Arrange
+    List<String> list1 = new ArrayList<>();
+    List<String> list2 = new ArrayList<>();
+
+    // Act
+    Set<String> result = Sets2.difference(list1, list2);
+
+    // Assert
+    assertThat(result).isEmpty();
   }
 }

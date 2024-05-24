@@ -1,4 +1,4 @@
-package org.venuspj.util.entity.generator;
+package org.venuspj.util.snowflake;
 
 import org.venuspj.util.dateProvider.DateProvider;
 

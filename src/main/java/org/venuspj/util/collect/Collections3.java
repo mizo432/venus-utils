@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.Stack;
@@ -37,6 +38,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 /**
  *
@@ -44,6 +48,31 @@ import java.util.concurrent.SynchronousQueue;
 public final class Collections3 {
 
   private Collections3() {
+
+  }
+
+  /**
+   * 与えられた述語に基づいて、指定されたコレクションの要素をフィルタリングします。
+   *
+   * @param collection フィルタリングするコレクション
+   * @param includePredicate 結果のコレクションに要素を含めるかどうかを決定するために使用される述語
+   * @param <E> コレクションの要素の型
+   * @return includePredicateを満たす要素のみを含む新しいコレクション
+   */
+  public static <E> Collection<E> include(Collection<E> collection, Predicate<E> includePredicate) {
+    return collection.stream().filter(includePredicate).toList();
+  }
+
+  /**
+   * excludePredicateに基づいて指定されたコレクションから要素をフィルタリングします。
+   *
+   * @param <E> コレクション内の要素の型
+   * @param collection フィルタリングされるべき要素のコレクション
+   * @param excludePredicate 除外すべき要素を決定するための述語
+   * @return excludePredicateを満足する要素を除いた新たなコレクション
+   */
+  public static <E> Collection<E> exclude(Collection<E> collection, Predicate<E> excludePredicate) {
+    return collection.stream().filter(excludePredicate.negate()).toList();
 
   }
 
@@ -1328,5 +1357,55 @@ public final class Collections3 {
 
   public static <T> boolean addAll(Collection<T> c, T[] elements) {
     return Collections.addAll(c, elements);
+  }
+
+  /**
+   * 二つのコレクションの要素の交差点を含む新しいコレクションを返します。
+   *
+   * @param <E> コレクション内の要素の型
+   * @param c1 最初のコレクション
+   * @param c2 二つ目のコレクション
+   * @return c1とc2の要素の交差点を含む新しいコレクション
+   */
+  public static <E> Collection<E> intersection(Collection<? extends E> c1,
+      Collection<? extends E> c2) {
+    return c1.stream()
+        .distinct()
+        .filter(c2::contains)
+        .collect(Collectors.toSet());
+  }
+
+  /**
+   * 二つのコレクションの差集合を返します。
+   *
+   * @param c1 最初のコレクション
+   * @param c2 二番目のコレクション
+   * @param <E> コレクションの要素の型
+   * @return c1またはc2に存在し、両方には存在しない要素を含む新しいコレクション
+   */
+  public static <E> Collection<E> getDifference(@NotNull Collection<? extends E> c1,
+      @NotNull Collection<? extends E> c2) {
+    final Set<E> intersection = new HashSet<>(intersection(c1, c2));
+    Set<E> resultSet = new HashSet<>();
+
+    resultSet.addAll(getNonIntersectingElements(c1, intersection));
+    resultSet.addAll(getNonIntersectingElements(c2, intersection));
+
+    return resultSet;
+  }
+
+  /**
+   * 与えられたコレクションから、交差セットに存在しない要素を含む新しいコレクションを返します。
+   *
+   * @param collection 要素を取得するためのコレクション
+   * @param intersection 交差する要素のセット
+   * @param <E> コレクションと交差セットの要素のタイプ
+   * @return 交差しない要素を含む新しいコレクション
+   */
+  private static <E> Collection<E> getNonIntersectingElements(Collection<? extends E> collection,
+      Set<E> intersection) {
+    return collection.stream()
+        .filter(element -> !intersection.contains(element))
+        .collect(Collectors.toSet());
   }
 }

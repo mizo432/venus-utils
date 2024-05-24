@@ -2,6 +2,7 @@ package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
+import java.io.Serial;
 import org.venuspj.util.lang.Methods;
 
 /**
@@ -9,6 +10,7 @@ import org.venuspj.util.lang.Methods;
  */
 public class NoSuchMethodRuntimeException extends VRuntimeException {
 
+  @Serial
   private static final long serialVersionUID = -5673845060079098617L;
 
   private final Class<?> targetClass;

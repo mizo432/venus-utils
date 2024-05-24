@@ -1,9 +1,9 @@
 package org.venuspj.util.collect;
 
-import static org.venuspj.util.base.NumberPreconditions.checkPositive;
-import static org.venuspj.util.base.NumberPreconditions.checkPositiveOrZero;
-import static org.venuspj.util.base.Preconditions.checkElementIndex;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.NumberPreconditions.checkPositive;
+import static org.venuspj.util.precondition.NumberPreconditions.checkPositiveOrZero;
+import static org.venuspj.util.precondition.Preconditions.checkElementIndex;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,9 +20,9 @@ import java.util.RandomAccess;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
-import org.venuspj.util.base.Preconditions;
 import org.venuspj.util.math.IntMath;
 import org.venuspj.util.objects2.Objects2;
+import org.venuspj.util.precondition.Preconditions;
 
 
 /**
@@ -277,11 +277,21 @@ public class Lists2 {
     return new TwoPlusArrayList<>(first, second, rest);
   }
 
-  public static <T> T firstItemOfIndex(List<T> objects) {
-    if (objects.isEmpty()) {
-      throw new IndexOutOfBoundsException();
-    }
-    return objects.get(0);
+  public static <T> T getFirst(List<T> list) {
+    return list.getFirst();
+
+  }
+
+  /**
+   * 与えられたリストの最後の要素を返します。
+   *
+   * @param <I> リスト内の要素の型
+   * @param list 最後の要素を取得するリスト
+   * @return 与えられたリストの最後の要素
+   */
+  public static <I> I getLast(@NotNull List<I> list) {
+    return list.getLast();
+
   }
 
   /**
@@ -374,6 +384,35 @@ public class Lists2 {
     checkNotNull(function);
     return collection.stream().map(function).collect(Collectors.toList());
   }
+
+  /**
+   * 与えられた2つのリストの交差部分を含む新しいArrayListを返します。
+   *
+   * @param l1 最初のリスト
+   * @param l2 2番目のリスト
+   * @param <E> リスト内の要素のタイプ
+   * @return 2つのリストの交差部分を含む新しいArrayList
+   */
+  public static <E> ArrayList<E> intersection(List<E> l1,
+      List<E> l2) {
+    Collection<E> intersection = Collections3.intersection(l1, l2);
+    return newArrayList(intersection.iterator());
+  }
+
+  /**
+   * 2つのリストの差分を含む新しいArrayListを返す。
+   *
+   * @param <E> リストに含まれる要素の型
+   * @param l1 最初のリスト
+   * @param l2 二番目のリスト
+   * @return 2つのリストの差分を含む新しいArrayList
+   */
+  public static <E> ArrayList<E> difference(@NotNull List<E> l1,
+      @NotNull List<E> l2) {
+    Collection<E> difference = Collections3.getDifference(l1, l2);
+    return newArrayList(difference.iterator());
+  }
+
 
 }
 

@@ -6,6 +6,7 @@ import java.util.ServiceConfigurationError;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import org.venuspj.util.precondition.Preconditions;
 
 /**
  * Methods factored out so that they can be emulated differently in GWT.

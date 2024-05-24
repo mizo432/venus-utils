@@ -1,6 +1,6 @@
 package org.venuspj.util.lang;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Arrays2.asArray;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
-import org.venuspj.util.base.StringPreconditions;
+import org.venuspj.util.precondition.ArrayPreconditions.StringPreconditions;
 import org.venuspj.util.exception.ClassNotFoundRuntimeException;
 import org.venuspj.util.exception.EmptyArgumentException;
 import org.venuspj.util.exception.IllegalAccessRuntimeException;
@@ -26,7 +26,7 @@ import org.venuspj.util.exception.NoSuchConstructorRuntimeException;
 import org.venuspj.util.exception.NoSuchFieldRuntimeException;
 import org.venuspj.util.exception.NoSuchMethodRuntimeException;
 import org.venuspj.util.exception.NullArgumentException;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 /**
  * {@link Class}用のユーティリティクラスです。

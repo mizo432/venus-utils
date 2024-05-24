@@ -1,6 +1,6 @@
 package org.venuspj.util.beans;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.util.Map;
 

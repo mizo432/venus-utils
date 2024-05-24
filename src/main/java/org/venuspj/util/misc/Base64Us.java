@@ -2,7 +2,7 @@ package org.venuspj.util.misc;
 
 import java.util.Arrays;
 import org.venuspj.util.collect.Arrays2;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 /**
  * Base64を扱うためのユーティリティクラスです。

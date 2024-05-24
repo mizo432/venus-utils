@@ -1,18 +1,22 @@
-package org.venuspj.util.base;
+package org.venuspj.util.precondition;
 
+import java.util.List;
 import java.util.function.Supplier;
+import org.jetbrains.annotations.NotNull;
 
-public class ArrayPreconditions {
+public class ListPreconditions {
 
-  public static <E extends RuntimeException> void checkLength(Object[] referenceArray, int index,
+  public static <E extends RuntimeException> void checkSize(@NotNull List<?> referenceList,
+      int index,
       Supplier<E> runtimeExceptionSupplier) {
     NumberPreconditions.checkPositiveOrZero(index,
         () -> new IllegalArgumentException("indexにマイナスの値が設定されています。"));
 
-    if (index >= referenceArray.length) {
+    if (index >= referenceList.size()) {
       throw runtimeExceptionSupplier.get();
     }
 
 
   }
+
 }

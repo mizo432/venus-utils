@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Maps2.newHashMap;
 import static org.venuspj.util.objects2.Objects2.toStringHelper;
-import static org.venuspj.util.strings2.Strings2.EMPTY_STRING_ARRAY;
+import static org.venuspj.util.primitives.Strings2.EMPTY_STRING_ARRAY;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

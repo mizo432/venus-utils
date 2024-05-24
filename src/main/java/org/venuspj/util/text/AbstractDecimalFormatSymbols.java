@@ -5,7 +5,7 @@ import static org.venuspj.util.collect.Collections3.newConcurrentHashMap;
 import java.util.Locale;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.exception.NullArgumentException;
 
 /**
@@ -42,5 +42,5 @@ public abstract class AbstractDecimalFormatSymbols {
     }
     return symbols;
   }
-  
+
 }

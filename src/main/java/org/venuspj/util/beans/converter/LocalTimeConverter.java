@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import org.venuspj.util.beans.Converter;
 import org.venuspj.util.convert.LocalTimeConversions;
 import org.venuspj.util.convert.StringConversions;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 public class LocalTimeConverter implements Converter<LocalTime> {
 

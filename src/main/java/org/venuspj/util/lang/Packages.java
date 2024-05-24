@@ -1,14 +1,14 @@
 package org.venuspj.util.lang;
 
 import static org.venuspj.util.collect.Sets2.newHashSet;
-import static org.venuspj.util.strings2.Strings2.replace;
-import static org.venuspj.util.strings2.Strings2.trimTextAtStart;
+import static org.venuspj.util.primitives.Strings2.replace;
+import static org.venuspj.util.primitives.Strings2.trimTextAtStart;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 
 public class Packages {
 

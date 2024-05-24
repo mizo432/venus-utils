@@ -5,7 +5,7 @@ import static java.lang.Math.copySign;
 import static java.lang.Math.getExponent;
 import static java.lang.Math.log;
 import static java.lang.Math.rint;
-import static org.venuspj.util.base.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
 import static org.venuspj.util.math.MathPreconditions.checkInRange;
 import static org.venuspj.util.math.MathPreconditions.checkNonNegative;
 import static org.venuspj.util.math.MathPreconditions.checkRoundingUnnecessary;

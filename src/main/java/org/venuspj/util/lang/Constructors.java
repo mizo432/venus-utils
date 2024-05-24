@@ -3,7 +3,7 @@ package org.venuspj.util.lang;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.exception.IllegalAccessRuntimeException;
 import org.venuspj.util.exception.InstantiationRuntimeException;
 import org.venuspj.util.exception.InvocationTargetRuntimeException;

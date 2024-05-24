@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Map;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.ConstructorDesc;
 import org.venuspj.util.beans.FieldDesc;

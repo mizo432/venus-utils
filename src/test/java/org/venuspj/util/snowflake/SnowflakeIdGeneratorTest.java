@@ -1,4 +1,4 @@
-package org.venuspj.util.entity.generator;
+package org.venuspj.util.snowflake;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +20,7 @@ class SnowflakeIdGeneratorTest {
 
     //then
     assertThat(actualId).isEqualTo(473883048166178816L);
-    StaticDateTimeProvider.initialize();
+    StaticDateTimeProvider.clear();
   }
 
 }

@@ -1,6 +1,6 @@
 package org.venuspj.util.lang;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

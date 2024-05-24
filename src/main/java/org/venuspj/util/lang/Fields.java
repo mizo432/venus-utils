@@ -5,7 +5,7 @@ import static org.venuspj.util.collect.Arrays2.asArray;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.exception.IllegalAccessRuntimeException;
 import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VIllegalArgumentException;

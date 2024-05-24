@@ -24,7 +24,7 @@ import org.venuspj.util.convert.LocalDateConversions;
 import org.venuspj.util.convert.LocalTimeConversions;
 import org.venuspj.util.convert.MonthDayConversions;
 import org.venuspj.util.convert.YearMonthConversions;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 /**
  * JavaBeansやMapに対して操作を行う抽象クラスです。

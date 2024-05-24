@@ -1,6 +1,6 @@
 package org.venuspj.util.collect;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.lang.reflect.Array;
 

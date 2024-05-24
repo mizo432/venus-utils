@@ -2,6 +2,7 @@ package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
+import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
 
 
@@ -10,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class InvocationTargetRuntimeException extends VRuntimeException {
 
+  @Serial
   private static final long serialVersionUID = 7760491787158046906L;
 
   private final Class<?> targetClass;

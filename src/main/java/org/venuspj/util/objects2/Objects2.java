@@ -1,6 +1,6 @@
 package org.venuspj.util.objects2;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Lists2.newArrayList;
 import static org.venuspj.util.collect.Lists2.newArrayListWithCapacity;
 import static org.venuspj.util.collect.Sets2.newHashSet;
@@ -31,7 +31,7 @@ import java.util.Set;
 import java.util.UUID;
 import org.venuspj.util.collect.Sets2;
 import org.venuspj.util.lang.Classes;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 public class Objects2 {
 

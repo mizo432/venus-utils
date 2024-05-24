@@ -3,7 +3,7 @@ package org.venuspj.util.beans.impl;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.beans.BeanDesc;
 import org.venuspj.util.beans.MethodDesc;
 import org.venuspj.util.beans.ParameterizedClassDesc;

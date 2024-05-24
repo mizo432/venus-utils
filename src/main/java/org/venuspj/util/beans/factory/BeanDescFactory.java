@@ -1,6 +1,6 @@
 package org.venuspj.util.beans.factory;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 import static org.venuspj.util.collect.Collections3.newConcurrentHashMap;
 import static org.venuspj.util.collect.Collections3.putIfAbsent;
 

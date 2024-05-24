@@ -1,8 +1,8 @@
 package org.venuspj.util.base;
 
-import static org.venuspj.util.base.Preconditions.checkArgument;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
-import static org.venuspj.util.base.Preconditions.checkPositionIndex;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkPositionIndex;
 
 import java.util.Arrays;
 import java.util.BitSet;

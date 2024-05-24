@@ -1,4 +1,4 @@
-package org.venuspj.util.base;
+package org.venuspj.util.precondition;
 
 import java.util.Map;
 import java.util.function.Supplier;

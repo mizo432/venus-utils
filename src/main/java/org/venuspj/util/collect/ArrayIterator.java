@@ -1,7 +1,7 @@
 package org.venuspj.util.collect;
 
 import java.util.Iterator;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.exception.NullArgumentException;
 import org.venuspj.util.exception.VNoSuchElementException;
 import org.venuspj.util.exception.VUnsupportedOperationException;

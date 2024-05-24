@@ -3,7 +3,7 @@ package org.venuspj.util.base;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

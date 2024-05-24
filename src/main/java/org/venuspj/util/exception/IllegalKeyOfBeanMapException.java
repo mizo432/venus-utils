@@ -2,6 +2,7 @@ package org.venuspj.util.exception;
 
 import static org.venuspj.util.collect.Arrays2.asArray;
 
+import java.io.Serial;
 import java.util.Map;
 
 /**
@@ -9,6 +10,7 @@ import java.util.Map;
  */
 public class IllegalKeyOfBeanMapException extends VIllegalArgumentException {
 
+  @Serial
   private static final long serialVersionUID = 3456740832476626338L;
 
   /**

@@ -8,8 +8,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import org.venuspj.util.base.Preconditions;
-import org.venuspj.util.base.StringPreconditions;
+import org.venuspj.util.precondition.Preconditions;
+import org.venuspj.util.precondition.ArrayPreconditions.StringPreconditions;
 import org.venuspj.util.exception.EmptyArgumentException;
 import org.venuspj.util.exception.NullArgumentException;
 

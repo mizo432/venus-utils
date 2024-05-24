@@ -2,7 +2,7 @@ package org.venuspj.util.math;
 
 import static java.lang.Double.NaN;
 import static java.lang.Double.isNaN;
-import static org.venuspj.util.base.Preconditions.checkState;
+import static org.venuspj.util.precondition.Preconditions.checkState;
 import static org.venuspj.util.primitives.Doubles.ensureNonNegative;
 import static org.venuspj.util.primitives.Doubles.isFinite;
 

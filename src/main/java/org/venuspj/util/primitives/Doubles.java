@@ -7,7 +7,7 @@ import static java.lang.Double.doubleToRawLongBits;
 import static java.lang.Double.isNaN;
 import static java.lang.Double.longBitsToDouble;
 import static java.lang.Math.getExponent;
-import static org.venuspj.util.base.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
 
 import java.math.BigInteger;
 import org.jetbrains.annotations.VisibleForTesting;

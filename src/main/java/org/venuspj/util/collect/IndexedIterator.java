@@ -1,7 +1,7 @@
 package org.venuspj.util.collect;
 
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.util.Iterator;
 import org.jetbrains.annotations.NotNull;

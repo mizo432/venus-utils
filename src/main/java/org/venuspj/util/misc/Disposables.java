@@ -1,6 +1,6 @@
 package org.venuspj.util.misc;
 
-import static org.venuspj.util.base.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
 
 import java.beans.Introspector;
 import java.util.Deque;

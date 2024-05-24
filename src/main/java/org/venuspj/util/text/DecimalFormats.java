@@ -2,7 +2,7 @@ package org.venuspj.util.text;
 
 import java.text.DecimalFormat;
 import java.util.Locale;
-import org.venuspj.util.base.Preconditions;
+import org.venuspj.util.precondition.Preconditions;
 import org.venuspj.util.exception.NullArgumentException;
 
 /**

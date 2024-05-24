@@ -5,7 +5,7 @@ import java.text.ParseException;
 import org.venuspj.util.beans.Converter;
 import org.venuspj.util.beans.EmptyRuntimeException;
 import org.venuspj.util.exception.ParseRuntimeException;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 
 /**
  * 数値用のコンバータです。
@@ -51,7 +51,7 @@ public class NumberConverter implements Converter<Number> {
 
   public boolean isTarget(Class<?> clazz) {
     return Number.class.isAssignableFrom(clazz);
-    
+
   }
 
 }

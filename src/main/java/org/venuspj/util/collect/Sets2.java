@@ -3,22 +3,22 @@ package org.venuspj.util.collect;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import org.venuspj.util.beans.BeanDesc;
-import org.venuspj.util.beans.PropertyDesc;
-import org.venuspj.util.beans.factory.BeanDescFactory;
+import org.jetbrains.annotations.NotNull;
+import org.venuspj.util.base.Function;
 import org.venuspj.util.primitives.Ints;
 
 /**
- * The Sets2 class provides utility methods for creating HashSet objects.
+ * Sets2クラスは、HashSetオブジェクトを作成するためのユーティリティメソッドを提供します。
  */
 public final class Sets2 {
 
   /**
-   * Creates a new, empty HashSet.
+   * 新しい、空のHashSetを作成します。
    *
-   * @param <T> the type of elements in the set
-   * @return a new, empty HashSet
+   * @param <T> セット内の要素の型
+   * @return 新しい、空のHashSet
    */
   public static <T> Set<T> newHashSet() {
     return new HashSet<>();
@@ -26,56 +26,65 @@ public final class Sets2 {
   }
 
   /**
-   * Creates a new HashSet with the specified initial capacity.
+   * 指定された初期容量で新しいHashSetを作成します。
    *
-   * @param initialCapacity the initial capacity of the HashSet
-   * @param <T> the type of elements in the set
-   * @return a new HashSet with the specified initial capacity
+   * @param initialCapacity HashSetの初期容量
+   * @param <T> セット内の要素の型
+   * @return 指定された初期容量を持つ新しいHashSet
    */
   public static <T> Set<T> newHashSet(int initialCapacity) {
     return new HashSet<>(initialCapacity);
   }
 
+  /**
+   * 新しいHashSetを作成し、指定したオブジェクトを追加します。
+   *
+   * @param objects HashSetに追加するオブジェクト。
+   * @param <T> オブジェクトの型。
+   * @return 指定したオブジェクトを含む新しいHashSet。
+   */
   @SafeVarargs
-  public static <T> Set<T> newHashSet(T... objects) {
-    Set<T> result = newHashSet(objects.length);
+  public static <T> HashSet<T> newHashSet(T... objects) {
+    HashSet<T> result = newHashSetWithExpectedSize(objects.length);
     result.addAll(Arrays.asList(objects));
     return result;
   }
 
-  public static <T, P> Set<P> newHashSet(T[] objects, String propertyName) {
-    Set<P> result = newHashSet();
-
-    if (Arrays2.isEmpty(objects)) {
+  /**
+   * 与えられたコレクションから要素を取り出して新たなHashSetを作成します。
+   *
+   * @param <P> HashSetの要素の型
+   * @param collection HashSetに追加される要素があるコレクション
+   * @return 与えられたコレクションから要素を追加した新しいHashSet
+   */
+  public static <P> HashSet<P> newHashSet(Collection<? extends P> collection) {
+    HashSet<P> result = newHashSetWithExpectedSize(collection.size());
+    if (collection.isEmpty()) {
       return result;
     }
-    return newHashSet(Arrays.asList(objects), propertyName);
+    result.addAll(collection);
+    return result;
 
   }
 
   /**
-   * オブジェクトのコレクションから特定のプロパティ値を含む新しいSetを作成します。
+   * 与えられたコレクションから要素を抽出し、提供された関数を使用して新たなHashSetを作成します。
    *
-   * @param objects オブジェクトのコレクション
-   * @param propertyName 値を抽出するプロパティの名前
-   * @param <T> コレクション内のオブジェクトの型
-   * @param <P> Setに配置されるプロパティ値の型
-   * @return 特定のプロパティ値を含む新しいSet
+   * @param <T> 入力コレクションの要素の型。
+   * @param <P> 結果のHashSetの要素の型。
+   * @param collection 要素を抽出するコレクション。
+   * @param elementFunction コレクションの各要素に適用する関数。
+   * @return コレクションの各要素にelementFunctionを適用する結果の要素を含む新たなHashSet。
    */
-  public static <T, P> Set<P> newHashSet(Collection<T> objects, String propertyName) {
-    Set<P> result = newHashSet();
+  public static <T, P> HashSet<P> newHashSet(Collection<? extends T> collection,
+      Function<? super T, ? extends P> elementFunction) {
+    HashSet<P> result = newHashSetWithExpectedSize(collection.size());
 
-    if (objects.isEmpty()) {
+    if (collection.isEmpty()) {
       return result;
     }
+    return newHashSet(collection.stream().map(elementFunction).toList());
 
-    BeanDesc beanDesc = BeanDescFactory.getBeanDesc(
-        Collections3.firstItemOfIndex(objects).getClass());
-    PropertyDesc propertyDesc = beanDesc.getPropertyDesc(propertyName);
-    for (T object : objects) {
-      result.add(propertyDesc.getValue(object));
-    }
-    return result;
   }
 
   /**
@@ -85,7 +94,7 @@ public final class Sets2 {
    * @param <E> セット内の要素の型
    * @return 指定された想定サイズの新しいHashSet
    */
-  public static <E> Set<E> newHashSetWithExpectedSize(int initialCapacity) {
+  public static <E> HashSet<E> newHashSetWithExpectedSize(int initialCapacity) {
     return new HashSet<>(capacity(initialCapacity));
   }
 
@@ -98,6 +107,35 @@ public final class Sets2 {
       return (int) ((float) expectedSize / 0.75F + 1.0F);
     }
     return Integer.MAX_VALUE; // any large value
+  }
+
+  /**
+   * Computes the intersection of two collections: one represented as a Set and the other as a
+   * List.
+   *
+   * @param <E> the type of elements in the collections
+   * @param s1 the first collection represented as a Set
+   * @param s2 the second collection represented as a List
+   * @return a new HashSet containing the elements that are in both collections
+   */
+  public static <E> HashSet<E> intersection(@NotNull Set<E> s1,
+      @NotNull Set<E> s2) {
+    Collection<E> intersection = Collections3.intersection(s1, s2);
+    return newHashSet(intersection);
+  }
+
+  /**
+   * 2つのリストの差分を含む新しいArrayListを返す。
+   *
+   * @param <E> リストに含まれる要素の型
+   * @param l1 最初のリスト
+   * @param l2 二番目のリスト
+   * @return 2つのリストの差分を含む新しいArrayList
+   */
+  public static <E> HashSet<E> difference(@NotNull List<E> l1,
+      @NotNull List<E> l2) {
+    Collection<E> difference = Collections3.getDifference(l1, l2);
+    return newHashSet(difference);
   }
 
 }

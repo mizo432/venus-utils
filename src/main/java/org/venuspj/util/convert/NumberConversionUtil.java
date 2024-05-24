@@ -3,7 +3,7 @@ package org.venuspj.util.convert;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Locale;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 import org.venuspj.util.text.AbstractDecimalFormatSymbols;
 
 /**

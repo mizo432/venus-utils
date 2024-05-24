@@ -1,7 +1,7 @@
 package org.venuspj.util.convert;
 
 import java.text.SimpleDateFormat;
-import org.venuspj.util.strings2.Strings2;
+import org.venuspj.util.primitives.Strings2;
 import org.venuspj.util.text.DecimalFormats;
 
 /**

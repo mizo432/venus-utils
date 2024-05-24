@@ -1,9 +1,9 @@
 package org.venuspj.util.primitives;
 
-import static org.venuspj.util.base.Preconditions.checkArgument;
-import static org.venuspj.util.base.Preconditions.checkElementIndex;
-import static org.venuspj.util.base.Preconditions.checkNotNull;
-import static org.venuspj.util.base.Preconditions.checkPositionIndexes;
+import static org.venuspj.util.precondition.Preconditions.checkArgument;
+import static org.venuspj.util.precondition.Preconditions.checkElementIndex;
+import static org.venuspj.util.precondition.Preconditions.checkNotNull;
+import static org.venuspj.util.precondition.Preconditions.checkPositionIndexes;
 
 import java.io.Serial;
 import java.io.Serializable;

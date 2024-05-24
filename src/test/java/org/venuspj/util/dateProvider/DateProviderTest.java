@@ -3,6 +3,7 @@ package org.venuspj.util.dateProvider;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.MonthDay;
 import java.time.YearMonth;
 import org.assertj.core.api.Java6Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,13 @@ public class DateProviderTest {
   @Test
   public void currentYearMonth() throws Exception {
     YearMonth actual = DateProvider.currentYearMonth();
+    Java6Assertions.assertThat(actual).isNotNull();
+    LOGGER.debug("actual:" + actual);
+  }
+
+  @Test
+  public void currentMonthDay() throws Exception {
+    MonthDay actual = DateProvider.currentMonthDay();
     Java6Assertions.assertThat(actual).isNotNull();
     LOGGER.debug("actual:" + actual);
   }

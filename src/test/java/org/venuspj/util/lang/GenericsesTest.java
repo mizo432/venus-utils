@@ -29,7 +29,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //   See https://diff.blue/R013 to resolve this issue.
 
@@ -52,7 +52,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: clazz is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$1(Genericses.java:35)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:35)
     //   See https://diff.blue/R013 to resolve this issue.
 
@@ -156,7 +156,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getElementTypeOfCollection(Genericses.java:161)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -201,7 +201,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getElementTypeOfList(Genericses.java:177)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -246,7 +246,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getElementTypeOfSet(Genericses.java:193)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -291,7 +291,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getKeyTypeOfMap(Genericses.java:209)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -336,7 +336,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getValueTypeOfMap(Genericses.java:225)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -526,7 +526,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getActualElementClassOfCollection(Genericses.java:405)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -585,7 +585,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getActualElementClassOfList(Genericses.java:429)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -642,7 +642,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getActualElementClassOfSet(Genericses.java:453)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -699,7 +699,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getActualKeyClassOfMap(Genericses.java:477)
     //   See https://diff.blue/R013 to resolve this issue.
@@ -756,7 +756,7 @@ class GenericsesTest {
     //   test threw
     //   java.lang.NullPointerException: type is null
     //       at org.venuspj.util.lang.Genericses.lambda$isTypeOf$0(Genericses.java:34)
-    //       at org.venuspj.util.base.Preconditions.checkNotNull(Preconditions.java:42)
+    //       at org.venuspj.util.precondition.Preconditions.checkNotNull(Preconditions.java:42)
     //       at org.venuspj.util.lang.Genericses.isTypeOf(Genericses.java:34)
     //       at org.venuspj.util.lang.Genericses.getActualValueClassOfMap(Genericses.java:501)
     //   See https://diff.blue/R013 to resolve this issue.
